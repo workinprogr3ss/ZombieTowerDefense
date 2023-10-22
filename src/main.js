@@ -1,4 +1,4 @@
-import MenuScene from '../src/scenes/MenuScene.js'
+import MenuScene from './js/scenes/MenuScene.js'
 
 var config = {
     type: Phaser.AUTO,
