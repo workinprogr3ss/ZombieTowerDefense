@@ -1,0 +1,15 @@
+# Node specifics
+node_modules/
+package-lock.json
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE specifics
+.vscode/
+.idea/
+
+# Build directories (if any)
+/dist
+/build
