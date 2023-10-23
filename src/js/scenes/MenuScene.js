@@ -1,35 +1,34 @@
-class MenuScene extends Phaser.Scene {
+import BaseScene from './BaseScene.js';
 
+class MenuScene extends BaseScene {
+    
     constructor() {
         super('MenuScene');
+
+        this.menu = [
+            {scene: 'LevelSelectScene', text: 'New Game'},
+            {scene: 'LoadSaveScene', text: 'Load Game'},
+            {scene: 'SettingsScene', text: 'Settings'}
+        ];
     }
 
+    
     preload() {
-
+        //this.load.tilemapTiledJSON('map', 'src/assets/maps/menu.json');
+        //this.load.image('tiles-1', 'src/assets/images/tilesets/tileSet1.png');
     }
 
     create() {
-        this.add.text(300, 200, 'Menu Scene', {fontSize: '32px', fill: '#FFFFFF'});
-        const newGameButton = this.add.text(300, 250, 'New Game', {fontSize: '24px', fill: '#FFFFFF'})
-            .setInteractive();
-        newGameButton.on('pointerover', () => {
-            newGameButton.setStyle({fill: '#ff0'})
-        });
-        newGameButton.on('pointerout', () => {
-            newGameButton.setStyle({fill: '#FFFFFF'})
-        })
-        newGameButton.on('pointerdown', () => {
-            this.scene.start('LevelSelectScene')
-        });
+        //const map = this.make.tilemap({key: 'map'});
+        //const tileset1 = map.addTilesetImage('Zombie Apocalypse Tileset Reference', 'tiles-1');
+        //map.createLayer('Tile Layer 1', tileset1);
 
-        this.add.text(300, 300, 'Load Game', {fontSize: '24px', fill: '#FFFFFF'});
-        this.add.text(300, 350, 'Settings', {fontSize: '24px', fill: '#FFFFFF'});
+        this.add.text(400, 200, 'Post-Pandemic Perimeter', {fontSize: '36px', fill: '#FFFFFF'})
+            .setOrigin(0.5);
+
+        // Creates Menu
+        this.createLinks(this.menu, (menuItem) => this.createEvents(menuItem));
     }
-
-    update() {
-
-    }
-
 }
 
 export default MenuScene;
