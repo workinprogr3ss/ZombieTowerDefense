@@ -7,6 +7,7 @@ class LevelSelectScene extends BaseScene {
 
         this.menu = [
             {scene: 'EasyLevelScene', text: 'The Easy Level'},
+            {scene: 'DemoLevelScene', text: 'The Demo Level'},
             {scene: 'MenuScene', text: 'Back'}
         ];
     }
