@@ -26,7 +26,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
 moveAlongPath(path) {
     this. follower = { t: 0, vec: new Phaser.Math.Vector2() };
 
-    // Set up a tween to move the follwoer along the path
+    // Set up a tween to move the follower along the path
     this.scene.tweens.add({
         targets: this.follower,
         t: 1,

@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "easystarjs": "^0.4.4",
     "phaser": "^3.60.0"
   }
 }
