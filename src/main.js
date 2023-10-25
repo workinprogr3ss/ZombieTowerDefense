@@ -3,6 +3,7 @@ import LevelSelectScene from './js/scenes/LevelSelectScene.js';
 import LoadSaveScene from './js/scenes/LoadSaveScene.js';
 import SettingsScene from './js/scenes/SettingsScene.js';
 import EasyLevelScene from './js/scenes/EasyLevelScene.js';
+import DemoLevelScene from './js/scenes/DemoScene.js';
 
 var config = {
     type: Phaser.AUTO,
@@ -13,7 +14,8 @@ var config = {
         new LevelSelectScene, 
         new LoadSaveScene,
         new SettingsScene,
-        new EasyLevelScene
+        new EasyLevelScene,
+        new DemoLevelScene
     ]
 };
 
