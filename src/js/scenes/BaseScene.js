@@ -14,8 +14,10 @@ class BaseScene extends Phaser.Scene {
                 .setInteractive()
                 .setOrigin(0.5);
             spacing += 50;
-            createEvents(menuItem);
-        })
+            if (menuItem.status) {
+                createEvents(menuItem);
+            }
+        });
     }
 
     // Creates Interactions for Menu Items
