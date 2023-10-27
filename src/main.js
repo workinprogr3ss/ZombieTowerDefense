@@ -1,8 +1,11 @@
+//Menu Scenes
 import MenuScene from './js/scenes/MenuScene.js';
 import LevelSelectScene from './js/scenes/LevelSelectScene.js';
 import LoadSaveScene from './js/scenes/LoadSaveScene.js';
 import SaveGameScene from './js/scenes/SaveGameScene.js';
 import SettingsScene from './js/scenes/SettingsScene.js';
+
+//Game Scenes
 import EasyLevelScene from './js/scenes/EasyLevelScene.js';
 import DemoLevelScene from './js/scenes/DemoScene.js';
 
