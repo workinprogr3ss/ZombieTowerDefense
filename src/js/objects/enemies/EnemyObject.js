@@ -10,21 +10,21 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         this.speed = speed || 1;
         this.state = 'normal'; // or 'damaged' or 'dead'
 
-        // Enable physics
-        scene.physics.world.enable(this);
+        //// Enable physics
+        //scene.physics.world.enable(this);
 
-        // Intialize physics properties
-        this.body.velocity.x = 0;
-        this.body.velocity.y = 0;
-        this.body.drag.set(0.99);
-
-        // Set the enemy to be interactive
-        this.setInteractive();
+        //// Intialize physics properties
+        //this.body.velocity.x = 0;
+        //this.body.velocity.y = 0;
+        //this.body.drag.set(0.99);
+        
+        //// Set the enemy to be interactive
+        //this.setInteractive();
 }
 
 // Update the enemy's position
 moveAlongPath(path) {
-    this. follower = { t: 0, vec: new Phaser.Math.Vector2() };
+    this.follower = { t: 0, vec: new Phaser.Math.Vector2() };
 
     // Set up a tween to move the follower along the path
     this.scene.tweens.add({
