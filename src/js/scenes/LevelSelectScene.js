@@ -9,7 +9,7 @@ class LevelSelectScene extends Phaser.Scene {
         //this.load.spritesheet('levelOneButton', 'src/assets/images/icons/levelOneButton.png', {frameWidth: 128, frameHeight: 48});
         //this.load.spritesheet('levelTwoButton', 'src/assets/images/icons/levelTwoButton.png', {frameWidth: 128, frameHeight: 48});
         //this.load.spritesheet('levelThreeButton', 'src/assets/images/icons/levelThreeButton.png', {frameWidth: 128, frameHeight: 48});
-        //this.load.spritesheet('saveButton', 'src/assets/images/icons/saveButton.png', {frameWidth: 128, frameHeight: 48});
+        this.load.spritesheet('saveButton', 'src/assets/images/icons/saveButton.png', {frameWidth: 96, frameHeight: 36});
         this.load.spritesheet('backButton', 'src/assets/images/icons/backButton.png', {frameWidth: 128, frameHeight: 48});
     }
 
@@ -22,10 +22,12 @@ class LevelSelectScene extends Phaser.Scene {
 
         //Create Buttons
         const demoLevelButton = this.add.sprite(400, 300, 'demoLevelButton');
-        const backButton = this.add.sprite(400, 350, 'backButton');
+        const saveButton = this.add.sprite(400, 350, 'saveButton');
+        const backButton = this.add.sprite(400, 400, 'backButton');
         
         //Call to Set Button Interactions
         this.setButtonInteractions(demoLevelButton, 'DemoLevelScene');
+        this.setButtonInteractions(saveButton,);
         this.setButtonInteractions(backButton, 'MenuScene');
 
     }
