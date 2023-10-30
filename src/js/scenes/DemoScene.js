@@ -9,12 +9,17 @@ class DemoLevelScene extends Phaser.Scene {
         super({ key: 'DemoLevelScene' });
     }
 
-    // load the Demo_Level map
-    preload() {
+    //load the Demo_Level map
+    preload(){
+        // Load the tilemap and tileset image
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
         this.load.tilemapTiledJSON('demomap', 'src/assets/maps/DemoMap.json');
-        this.load.spritesheet('zombies', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png', {frameWidth: 16, frameHeight: 16})
-        
+        // Load spritesheets for Walker Zombie
+        this.load.spritesheet('walkerZombieRight', 'src/assets/images/spritesheets/zombieWalkRight.png', {frameWidth: 16, frameHeight: 16});
+        this.load.spritesheet('walkerZombieLeft', 'src/assets/images/spritesheets/zombieWalkLeft.png', {frameWidth: 16, frameHeight: 16});
+        this.load.spritesheet('walkerZombieUp', 'src/assets/images/spritesheets/zombieWalkUp.png', {frameWidth: 16, frameHeight: 16});
+        this.load.spritesheet('walkerZombieDown', 'src/assets/images/spritesheets/zombieWalkDown.png', {frameWidth: 16, frameHeight: 16});
+
         // (Randy)
         this.load.image('tower_hotspot', 'src/assets/images/towers/blue.png');
         this.load.image('tower_ui', 'src/assets/images/towers/menu.png');
@@ -60,10 +65,22 @@ class DemoLevelScene extends Phaser.Scene {
         });
         console.log("Grid:", grid);  // Debugging line
 
-        // Find a path
+        // Path Coordinates
+        const startX = 1 * 16;
+        const startY = 5 * 16;
+        const endX = 32 * 16;
+        const endY = 48 * 16;
+
+        const startTileX = startX / 16; // Converts the world coordinate to tile coordinate
+        const startTileY = startY / 16;
+        console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);
+
+        const endTileX = endX / 16;
+        const endTileY = endY / 16;
+        console.log(`Target destination tile is (${endTileX}, ${endTileY})`);
 
         // Spawning a zombie
-        const zombie = new WalkerZombie(this, 0, 0, 'zombies', 100, 2);
+        const zombie = new WalkerZombie(this, startX, startY, 'walkerZombieRight', 100, 2);
     }
 
     update () {
