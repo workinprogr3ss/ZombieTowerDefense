@@ -4,6 +4,8 @@ import { findPath } from "../utils/PathfindingUtil.js";
 
 import Tower1 from "../objects/towers/Tower1.js"
 
+import Tower1 from "../objects/towers/Tower1.js"
+
 class DemoLevelScene extends Phaser.Scene {
     constructor() {
         super({ key: 'DemoLevelScene' });
@@ -14,16 +16,18 @@ class DemoLevelScene extends Phaser.Scene {
         // Load the tilemap and tileset image
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
         this.load.tilemapTiledJSON('demomap', 'src/assets/maps/DemoMap.json');
+
+        // (Randy)
+        this.load.image('tower_hotspot', 'src/assets/images/towers/blue.png');
+        this.load.image('tower_ui', 'src/assets/images/towers/menu.png');
+        this.load.image('tower1', 'src/assets/images/towers/tower1.png');
+
         // Load spritesheets for Walker Zombie
         this.load.spritesheet('walkerZombieRight', 'src/assets/images/spritesheets/zombieWalkRight.png', {frameWidth: 16, frameHeight: 16});
         this.load.spritesheet('walkerZombieLeft', 'src/assets/images/spritesheets/zombieWalkLeft.png', {frameWidth: 16, frameHeight: 16});
         this.load.spritesheet('walkerZombieUp', 'src/assets/images/spritesheets/zombieWalkUp.png', {frameWidth: 16, frameHeight: 16});
         this.load.spritesheet('walkerZombieDown', 'src/assets/images/spritesheets/zombieWalkDown.png', {frameWidth: 16, frameHeight: 16});
 
-        // (Randy)
-        this.load.image('tower_hotspot', 'src/assets/images/towers/blue.png');
-        this.load.image('tower_ui', 'src/assets/images/towers/menu.png');
-        this.load.image('tower1', 'src/assets/images/towers/tower1.png');
     }
 
     create() {
@@ -34,6 +38,20 @@ class DemoLevelScene extends Phaser.Scene {
         console.log('Tileset:', tileset);  // Debugging line
         const walkableLayer = map.createLayer('Walkable Layer', tileset);
         console.log('Walkable Layer:', walkableLayer);  // Debugging line
+
+        // Towers-(Randy)------------------------------------------------
+        const tower_hotspot = this.add.sprite(400, 304, 'tower_hotspot').setInteractive();
+        tower_hotspot.setScale(0.05);
+        const tower_ui = this.add.sprite(180, 560, 'tower_ui');
+        tower_ui.setScale(0.5, 0.3);
+
+        const tower1_select = this.add.sprite(60, 560, 'tower1').setInteractive();
+        tower1_select.setScale(0.15);
+
+        tower1_select.on('pointerdown', () => {
+            this.createNewSprite();
+        });
+        // Towers-(Randy)------------------------------------------------
 
         // Towers-(Randy)------------------------------------------------
         const tower_hotspot = this.add.sprite(400, 304, 'tower_hotspot').setInteractive();
@@ -70,7 +88,6 @@ class DemoLevelScene extends Phaser.Scene {
         const startY = 5 * 16;
         const endX = 48 * 16;
         const endY = 32 * 16;
-
         // Tile Coordinates for pathfinding
         // Converts the world coordinate to tile coordinate
         const startTileX = startX / 16;
@@ -109,6 +126,7 @@ class DemoLevelScene extends Phaser.Scene {
         // Play walker zombie right animation
         zombie.anims.play('walkZombieRight', true);
     }
+    
 
     update () {
 
