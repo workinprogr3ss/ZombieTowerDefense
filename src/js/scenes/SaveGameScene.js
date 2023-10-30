@@ -1,6 +1,4 @@
-import BaseScene from './BaseScene.js';
-
-class SaveGameScene extends BaseScene {
+class SaveGameScene extends Phaser.Scene {
 
     constructor() {
         super('SaveGameScene');

@@ -1,14 +1,24 @@
-class LoadSaveScene extends Phaser.Scene {
+import BaseScene from './BaseScene.js';
+
+class LoadSaveScene extends BaseScene {
 
     constructor() {
         super('LoadSaveScene');
     }
 
     preload() {
-        this.load.spritesheet('backButton', 'src/assets/images/icons/backButton.png', {frameWidth: 128, frameHeight: 48});
+        this.backgroundPreload();
+
+        this.load.image('loadSaveMenu', 'src/assets/images/icons/loadSaveMenu.png');
+        this.load.spritesheet('loadSave1', 'src/assets/images/icons/loadSave1.png', {frameWidth: 208, frameHeight: 36});
+        this.load.spritesheet('loadSave2', 'src/assets/images/icons/loadSave2.png', {frameWidth: 208, frameHeight: 36});
+        this.load.spritesheet('loadSave3', 'src/assets/images/icons/loadSave3.png', {frameWidth: 208, frameHeight: 36});
+        this.load.spritesheet('backButton', 'src/assets/images/icons/backButton.png', {frameWidth: 96, frameHeight: 36});
     }
 
     create() {
+        this.backgroundCreate();
+
         //On press
         //Check Local Storage for Data
         this.registry.set('playerData', {
@@ -18,11 +28,16 @@ class LoadSaveScene extends Phaser.Scene {
         });
         //Go to LevelSelect
 
-        this.add.text(400, 200, 'Load Save Scene', {fontSize: '36px', fill: '#FFFFFF'})
+        this.add.image(400, 300, 'loadSaveMenu').setOrigin(0.5);
+        const loadSave1 = this.add.sprite(400, 250, 'loadSave1')
+            .setOrigin(0.5);
+        const loadSave2 = this.add.sprite(400, 300, 'loadSave2')
+            .setOrigin(0.5);
+        const loadSave3 = this.add.sprite(400, 350, 'loadSave3')
             .setOrigin(0.5);
 
         //Create Buttons
-        const backButton = this.add.sprite(400, 300, 'backButton');
+        const backButton = this.add.sprite(400, 425, 'backButton');
         
         //Call to Set Button Interactions
         this.setButtonInteractions(backButton, 'MenuScene');
@@ -30,7 +45,7 @@ class LoadSaveScene extends Phaser.Scene {
 
     //Sets Button Interactions
     setButtonInteractions(button, scene) {
-        button.setInteractive().setOrigin(0.5);
+        button.setInteractive({cursor: 'pointer'}).setOrigin(0.5);
 
         button.on('pointerover', () => {
             button.setFrame(2);

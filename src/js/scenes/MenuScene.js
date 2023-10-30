@@ -1,12 +1,13 @@
-class MenuScene extends Phaser.Scene {
+import BaseScene from './BaseScene.js';
+
+class MenuScene extends BaseScene {
     
     constructor() {
         super('MenuScene');
     }
     
     preload() {
-        this.load.tilemapTiledJSON('menuBackground', 'src/assets/maps/menuBackground.json');
-        this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
+        this.backgroundPreload();
 
         this.load.spritesheet('newGameButton', 'src/assets/images/icons/newGameButton.png', {frameWidth: 128, frameHeight: 48});
         this.load.spritesheet('loadGameButton', 'src/assets/images/icons/loadGameButton.png', {frameWidth: 128, frameHeight: 48});
@@ -14,12 +15,7 @@ class MenuScene extends Phaser.Scene {
     }
 
     create() {
-        const map = this.make.tilemap({key: 'menuBackground'});
-        const tileSet = map.addTilesetImage('ZombieApocalypseTilesetReferenceFixed', 'ZombieApocalypseTilesetReferenceFixed');
-        map.createLayer('Ground', tileSet);
-        map.createLayer('Buildings', tileSet);
-        map.createLayer('Fences', tileSet);
-        map.createLayer('Accessories', tileSet);
+        this.backgroundCreate();
 
         //Create Buttons
         const newGameButton = this.add.sprite(400, 300, 'newGameButton');
@@ -45,7 +41,7 @@ class MenuScene extends Phaser.Scene {
 
     //Sets Button Interactions
     setButtonInteractions(button, scene) {
-        button.setInteractive().setOrigin(0.5);
+        button.setInteractive({cursor: 'pointer'}).setOrigin(0.5);
 
         button.on('pointerover', () => {
             button.setFrame(2);
