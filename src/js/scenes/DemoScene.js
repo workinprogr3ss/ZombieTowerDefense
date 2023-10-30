@@ -65,22 +65,49 @@ class DemoLevelScene extends Phaser.Scene {
         });
         console.log("Grid:", grid);  // Debugging line
 
-        // Path Coordinates
+        // World Coorindates for spawning enemies
         const startX = 1 * 16;
         const startY = 5 * 16;
-        const endX = 32 * 16;
-        const endY = 48 * 16;
+        const endX = 48 * 16;
+        const endY = 32 * 16;
 
-        const startTileX = startX / 16; // Converts the world coordinate to tile coordinate
+        // Tile Coordinates for pathfinding
+        // Converts the world coordinate to tile coordinate
+        const startTileX = startX / 16;
         const startTileY = startY / 16;
-        console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);
-
         const endTileX = endX / 16;
         const endTileY = endY / 16;
-        console.log(`Target destination tile is (${endTileX}, ${endTileY})`);
+        
+        // Debugging lines
+        console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);
+        console.log(`Target destination tile is (${endTileX}, ${endTileY})`); 
+        //Pathfinding Debugging
+        console.log("Grid dimensions:", grid.length, grid[0]?.length);
+        console.log("Start Tile: ", grid[startTileY][startTileX]);
+        console.log("End Tile: ", grid[endTileY][endTileX]);
+
+        // Find the path
+        const path = findPath(grid, startTileX, startTileY, endTileX, endTileY,  (path, error) => {
+            if (error) {
+                console.log("Error finding path:", error);
+            } else {
+                console.log("Path found:", path);
+            }
+        });
 
         // Spawning a zombie
         const zombie = new WalkerZombie(this, startX, startY, 'walkerZombieRight', 100, 2);
+
+        // Animate a walker zombie right
+        this.anims.create({
+            key: 'walkZombieRight',
+            frames: this.anims.generateFrameNumbers('walkerZombieRight', { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+
+        // Play walker zombie right animation
+        zombie.anims.play('walkZombieRight', true);
     }
 
     update () {
