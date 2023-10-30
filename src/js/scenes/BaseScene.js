@@ -6,32 +6,18 @@ class BaseScene extends Phaser.Scene {
         super(key);
     }
 
-    // Creates Menu Items
-    createLinks(menu, createEvents) {
-        let spacing = 100;
-        menu.forEach(menuItem => {
-            menuItem.menuObj = this.add.text(400, 250 + spacing, menuItem.text, {fontSize: '24px', fill: '#FFFFFF'})
-                .setInteractive()
-                .setOrigin(0.5);
-            spacing += 50;
-            if (menuItem.status) {
-                createEvents(menuItem);
-            }
-        });
+    backgroundPreload() {
+        this.load.tilemapTiledJSON('menuBackground', 'src/assets/maps/menuBackground.json');
+        this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
     }
 
-    // Creates Interactions for Menu Items
-    createEvents(menuItem) {
-        const menuObj = menuItem.menuObj;
-        menuObj.on('pointerover', () => {
-            menuObj.setStyle({fill: '#ff0'});
-        })
-        menuObj.on('pointerout', () => {
-            menuObj.setStyle({fill: '#FFFFFF'});
-        })
-        menuObj.on('pointerup', () => {
-            this.scene.start(`${menuItem.scene}`);
-        })  
+    backgroundCreate() {
+        const map = this.make.tilemap({key: 'menuBackground'});
+        const tileSet = map.addTilesetImage('ZombieApocalypseTilesetReferenceFixed', 'ZombieApocalypseTilesetReferenceFixed');
+        map.createLayer('Ground', tileSet);
+        map.createLayer('Buildings', tileSet);
+        map.createLayer('Fences', tileSet);
+        map.createLayer('Accessories', tileSet);
     }
 }
 

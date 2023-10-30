@@ -1,19 +1,24 @@
-class SettingsScene extends Phaser.Scene {
+import BaseScene from './BaseScene.js';
+
+class SettingsScene extends BaseScene {
     constructor() {
         super('SettingsScene');
     }
 
     preload() {
-        this.load.spritesheet('backButton', 'src/assets/images/icons/backButton.png', {frameWidth: 128, frameHeight: 48});
+        this.backgroundPreload();
+
+        this.load.image('settingsMenu', 'src/assets/images/icons/settingsMenu.png');
+        this.load.spritesheet('backButton', 'src/assets/images/icons/backButton.png', {frameWidth: 96, frameHeight: 36});
     }
 
     create() {
+        this.backgroundCreate();
 
-        this.add.text(400, 200, 'Settings Scene', {fontSize: '36px', fill: '#FFFFFF'})
-            .setOrigin(0.5);
+        this.add.image(400, 300, 'settingsMenu').setOrigin(0.5);
 
         //Create Buttons
-        const backButton = this.add.sprite(400, 300, 'backButton');
+        const backButton = this.add.sprite(400, 425, 'backButton');
         
         //Call to Set Button Interactions
         this.setButtonInteractions(backButton, 'MenuScene');
@@ -21,7 +26,7 @@ class SettingsScene extends Phaser.Scene {
 
     //Sets Button Interactions
     setButtonInteractions(button, scene) {
-        button.setInteractive().setOrigin(0.5);
+        button.setInteractive({cursor: 'pointer'}).setOrigin(0.5);
 
         button.on('pointerover', () => {
             button.setFrame(2);
