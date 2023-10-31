@@ -21,7 +21,7 @@ class DemoLevelScene extends Phaser.Scene {
     preload(){
         // Load the tilemap and tileset image
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
-        this.load.tilemapTiledJSON('demomap', 'src/assets/maps/DemoMap.json');
+        this.load.tilemapTiledJSON('demomap', 'src/assets/maps/DemoMapWithProps.json');
 
         // (Randy)
         this.load.image('tower_hotspot', 'src/assets/images/towers/blue.png');
@@ -40,12 +40,15 @@ class DemoLevelScene extends Phaser.Scene {
         console.log('Tileset:', tileset);  // Debugging line
         const walkableLayer = map.createLayer('Walkable Layer', tileset);
         console.log('Walkable Layer:', walkableLayer);  // Debugging line
+        map.createLayer('Prop Layer', tileset);
+        map.createLayer('Tower Layer', tileset);
+        
 
         // Towers-(Randy)------------------------------------------------
         const tower_hotspot = this.add.sprite(400, 304, 'tower_hotspot').setInteractive();
         tower_hotspot.setScale(0.05);
-        const tower_ui = this.add.sprite(180, 560, 'tower_ui');
-        tower_ui.setScale(0.5, 0.3);
+        const tower_ui = this.add.sprite(100, 560, 'tower_ui');
+        tower_ui.setScale(0.2, 0.2);
 
         const tower1_select = this.add.sprite(60, 560, 'tower1').setInteractive();
         tower1_select.setScale(0.15);
@@ -74,7 +77,7 @@ class DemoLevelScene extends Phaser.Scene {
         // World Coorindates for spawning enemies
         const startX = 1 * 16;
         const startY = 5 * 16;
-        const endX = 48 * 16;
+        const endX = 47 * 16;
         const endY = 32 * 16;
         // Tile Coordinates for pathfinding
         const startTileX = startX / 16;

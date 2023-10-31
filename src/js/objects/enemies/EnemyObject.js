@@ -53,15 +53,19 @@ moveAlongPath(scene, path) {
     const nextX = nextPoint.x * 16;
     const nextY = nextPoint.y * 16;
 
+    // Speed Calculations
+    const distance = Phaser.Math.Distance.Between(this.x, this.y, nextX, nextY);
+    const duration = (distance / this.speed) * 250; // 1000ms per 1s
+
     scene.tweens.add({
         targets: this,  // Targeting 'this' GameObject
         x: nextX,
         y: nextY,
         ease: 'Linear',
-        duration: 500,  // 500ms to reach the next point
+        duration: duration,
         onComplete: () => {
             // Recursive call to move to the next point
-            this.moveAlongPath(scene, path);
+            setTimeout(() => this.moveAlongPath(scene, path), 10);
         }
     });
 }
