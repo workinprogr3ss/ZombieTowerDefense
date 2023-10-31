@@ -3,13 +3,14 @@ import Enemy from "../objects/enemies/EnemyObject.js";
 import WalkerZombie from "../objects/enemies/WalkerZombie.js";
 import RunnerZombie from "../objects/enemies/RunnerZombie.js";
 import TankZombie from "../objects/enemies/TankZombie.js";
+import SpitterZombie from "../objects/enemies/SpitterZombie.js";
 
 // Towers Objects
 import Tower1 from "../objects/towers/Tower1.js"
 
 // Utility Functions
 import { findPath } from "../utils/PathfindingUtil.js";
-import { loadZombieSpritesheets } from "../utils/AssetLoader.js";
+import { loadZombieSpritesheets } from "../utils/spritesheetLoader.js";
 
 class DemoLevelScene extends Phaser.Scene {
     constructor() {
@@ -90,7 +91,11 @@ class DemoLevelScene extends Phaser.Scene {
         console.log("End Tile: ", grid[endTileY][endTileX]);
 
         // Spawning a zombie
-        const zombie = new WalkerZombie(this, startX, startY, 'walkerZombieRight', 100, 2);
+        const walkerZombie = new WalkerZombie(this, startX, startY, 'Right');
+        const tankZombie = new TankZombie(this, startX, startY, 'Right');
+        const runnerZombie = new RunnerZombie(this, startX, startY, 'Right');
+        const spitterZombie = new SpitterZombie(this, startX, startY, 'Right');
+
 
         // Find the path (asynchronous)
         findPath(grid, startTileX, startTileY, endTileX, endTileY,  (path, error) => {
@@ -103,20 +108,12 @@ class DemoLevelScene extends Phaser.Scene {
             // Move the zombie along the path
             // Had to move inside the find the path due to the asynchronous nature of the function
             if (path) {
-                zombie.moveAlongPath(this, path);
+                walkerZombie.moveAlongPath(this, path);
+                tankZombie.moveAlongPath(this, path);
+                runnerZombie.moveAlongPath(this, path);
+                spitterZombie.moveAlongPath(this, path);
             }
         });
-
-        // Animate a walker zombie right
-        this.anims.create({
-            key: 'walkZombieRight',
-            frames: this.anims.generateFrameNumbers('walkerZombieRight', { start: 0, end: 2 }),
-            frameRate: 5,
-            repeat: -1
-        });
-
-        // Play walker zombie right animation
-        zombie.anims.play('walkZombieRight', true);
     }
     
 
