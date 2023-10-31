@@ -97,6 +97,7 @@ class DemoLevelScene extends Phaser.Scene {
             }
 
             // Move the zombie along the path
+            // Had to move inside the find the path due to the asynchronous nature of the function
             if (path) {
                 zombie.moveAlongPath(this, path);
             }

@@ -10,7 +10,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         this.speed = speed || 1;
         this.state = 'normal'; // or 'damaged' or 'dead'
 
-        //// Enable physics
+        // Enable physics
         //scene.physics.world.enable(this);
 
         //// Intialize physics properties
@@ -18,7 +18,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         //this.body.velocity.y = 0;
         //this.body.drag.set(0.99);
         
-        //// Set the enemy to be interactive
+        // Set the enemy to be interactive
         //this.setInteractive();
 }
 
@@ -32,8 +32,6 @@ moveAlongPath(scene, path) {
     // Shift off the first point, as that's the starting point
     const nextPoint = path.shift();
 
-    console.log("Test.")
-
     // Convert tile coordinates to world coordinates
     const nextX = nextPoint.x * 16;
     const nextY = nextPoint.y * 16;
@@ -42,7 +40,7 @@ moveAlongPath(scene, path) {
         targets: this,  // Targeting 'this' GameObject
         x: nextX,
         y: nextY,
-        ease: 'Linear',  // Use linear easing
+        ease: 'Linear',
         duration: 500,  // 500ms to reach the next point
         onComplete: () => {
             // Recursive call to move to the next point
