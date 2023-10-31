@@ -23,24 +23,30 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
 }
 
 // Update the enemy's position
-moveAlongPath(path) {
-    this.follower = { t: 0, vec: new Phaser.Math.Vector2() };
+moveAlongPath(scene, path) {
+    if (!path || path.length === 0) {
+        console.log("No path provided for enemy to move.");
+        return;
+    }
+    
+    // Shift off the first point, as that's the starting point
+    const nextPoint = path.shift();
 
-    // Set up a tween to move the follower along the path
-    this.scene.tweens.add({
-        targets: this.follower,
-        t: 1,
-        ease: 'Linear',
-        duration: this.speed,
-        repeat: -1,
-        yoyo: false,
-        repeat: 0,
-        onUpdate: () => {
-            // Get the new coordinates
-            path.getPoint(this.follower.t, this.follower.vec);
+    console.log("Test.")
 
-            // Update the position of the enemy sprite
-            this.setPosition(this.follower.vec.x, this.follower.vec.y);
+    // Convert tile coordinates to world coordinates
+    const nextX = nextPoint.x * 16;
+    const nextY = nextPoint.y * 16;
+
+    scene.tweens.add({
+        targets: this,  // Targeting 'this' GameObject
+        x: nextX,
+        y: nextY,
+        ease: 'Linear',  // Use linear easing
+        duration: 500,  // 500ms to reach the next point
+        onComplete: () => {
+            // Recursive call to move to the next point
+            this.moveAlongPath(scene, path);
         }
     });
 }

@@ -4,8 +4,6 @@ import { findPath } from "../utils/PathfindingUtil.js";
 
 import Tower1 from "../objects/towers/Tower1.js"
 
-import Tower1 from "../objects/towers/Tower1.js"
-
 class DemoLevelScene extends Phaser.Scene {
     constructor() {
         super({ key: 'DemoLevelScene' });
@@ -79,25 +77,30 @@ class DemoLevelScene extends Phaser.Scene {
         const endTileX = endX / 16;
         const endTileY = endY / 16;
         
-        // Debugging lines
+        // Spawning Debugging
         console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);
         console.log(`Target destination tile is (${endTileX}, ${endTileY})`); 
-        //Pathfinding Debugging
+        // Pathfinding Debugging
         console.log("Grid dimensions:", grid.length, grid[0]?.length);
         console.log("Start Tile: ", grid[startTileY][startTileX]);
         console.log("End Tile: ", grid[endTileY][endTileX]);
 
-        // Find the path
-        const path = findPath(grid, startTileX, startTileY, endTileX, endTileY,  (path, error) => {
+        // Spawning a zombie
+        const zombie = new WalkerZombie(this, startX, startY, 'walkerZombieRight', 100, 2);
+
+        // Find the path (asynchronous)
+        findPath(grid, startTileX, startTileY, endTileX, endTileY,  (path, error) => {
             if (error) {
                 console.log("Error finding path:", error);
             } else {
                 console.log("Path found:", path);
             }
-        });
 
-        // Spawning a zombie
-        const zombie = new WalkerZombie(this, startX, startY, 'walkerZombieRight', 100, 2);
+            // Move the zombie along the path
+            if (path) {
+                zombie.moveAlongPath(this, path);
+            }
+        });
 
         // Animate a walker zombie right
         this.anims.create({
