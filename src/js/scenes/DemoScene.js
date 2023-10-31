@@ -1,8 +1,15 @@
+// Enemy Objects
 import Enemy from "../objects/enemies/EnemyObject.js";
 import WalkerZombie from "../objects/enemies/WalkerZombie.js";
-import { findPath } from "../utils/PathfindingUtil.js";
+import RunnerZombie from "../objects/enemies/RunnerZombie.js";
+import TankZombie from "../objects/enemies/TankZombie.js";
 
+// Towers Objects
 import Tower1 from "../objects/towers/Tower1.js"
+
+// Utility Functions
+import { findPath } from "../utils/PathfindingUtil.js";
+import { loadZombieSpritesheets } from "../utils/AssetLoader.js";
 
 class DemoLevelScene extends Phaser.Scene {
     constructor() {
@@ -20,11 +27,8 @@ class DemoLevelScene extends Phaser.Scene {
         this.load.image('tower_ui', 'src/assets/images/towers/menu.png');
         this.load.image('tower1', 'src/assets/images/towers/tower1.png');
 
-        // Load spritesheets for Walker Zombie
-        this.load.spritesheet('walkerZombieRight', 'src/assets/images/spritesheets/zombieWalkRight.png', {frameWidth: 16, frameHeight: 16});
-        this.load.spritesheet('walkerZombieLeft', 'src/assets/images/spritesheets/zombieWalkLeft.png', {frameWidth: 16, frameHeight: 16});
-        this.load.spritesheet('walkerZombieUp', 'src/assets/images/spritesheets/zombieWalkUp.png', {frameWidth: 16, frameHeight: 16});
-        this.load.spritesheet('walkerZombieDown', 'src/assets/images/spritesheets/zombieWalkDown.png', {frameWidth: 16, frameHeight: 16});
+        // Load spritesheets for zombies
+        loadZombieSpritesheets(this);
     }
 
     create() {
