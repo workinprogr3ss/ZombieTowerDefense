@@ -9,16 +9,22 @@ class DemoLevelScene extends Phaser.Scene {
         super({ key: 'DemoLevelScene' });
     }
 
-    // load the Demo_Level map
-    preload() {
+    //load the Demo_Level map
+    preload(){
+        // Load the tilemap and tileset image
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
         this.load.tilemapTiledJSON('demomap', 'src/assets/maps/DemoMap.json');
-        this.load.spritesheet('zombies', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png', {frameWidth: 16, frameHeight: 16})
-        
+
         // (Randy)
         this.load.image('tower_hotspot', 'src/assets/images/towers/blue.png');
         this.load.image('tower_ui', 'src/assets/images/towers/menu.png');
         this.load.image('tower1', 'src/assets/images/towers/tower1.png');
+
+        // Load spritesheets for Walker Zombie
+        this.load.spritesheet('walkerZombieRight', 'src/assets/images/spritesheets/zombieWalkRight.png', {frameWidth: 16, frameHeight: 16});
+        this.load.spritesheet('walkerZombieLeft', 'src/assets/images/spritesheets/zombieWalkLeft.png', {frameWidth: 16, frameHeight: 16});
+        this.load.spritesheet('walkerZombieUp', 'src/assets/images/spritesheets/zombieWalkUp.png', {frameWidth: 16, frameHeight: 16});
+        this.load.spritesheet('walkerZombieDown', 'src/assets/images/spritesheets/zombieWalkDown.png', {frameWidth: 16, frameHeight: 16});
     }
 
     create() {
@@ -60,11 +66,55 @@ class DemoLevelScene extends Phaser.Scene {
         });
         console.log("Grid:", grid);  // Debugging line
 
-        // Find a path
+        // World Coorindates for spawning enemies
+        const startX = 1 * 16;
+        const startY = 5 * 16;
+        const endX = 48 * 16;
+        const endY = 32 * 16;
+        // Tile Coordinates for pathfinding
+        const startTileX = startX / 16;
+        const startTileY = startY / 16;
+        const endTileX = endX / 16;
+        const endTileY = endY / 16;
+        
+        // Spawning Debugging
+        console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);
+        console.log(`Target destination tile is (${endTileX}, ${endTileY})`); 
+        // Pathfinding Debugging
+        console.log("Grid dimensions:", grid.length, grid[0]?.length);
+        console.log("Start Tile: ", grid[startTileY][startTileX]);
+        console.log("End Tile: ", grid[endTileY][endTileX]);
 
         // Spawning a zombie
-        const zombie = new WalkerZombie(this, 0, 0, 'zombies', 100, 2);
+        const zombie = new WalkerZombie(this, startX, startY, 'walkerZombieRight', 100, 2);
+
+        // Find the path (asynchronous)
+        findPath(grid, startTileX, startTileY, endTileX, endTileY,  (path, error) => {
+            if (error) {
+                console.log("Error finding path:", error);
+            } else {
+                console.log("Path found:", path);
+            }
+
+            // Move the zombie along the path
+            // Had to move inside the find the path due to the asynchronous nature of the function
+            if (path) {
+                zombie.moveAlongPath(this, path);
+            }
+        });
+
+        // Animate a walker zombie right
+        this.anims.create({
+            key: 'walkZombieRight',
+            frames: this.anims.generateFrameNumbers('walkerZombieRight', { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+
+        // Play walker zombie right animation
+        zombie.anims.play('walkZombieRight', true);
     }
+    
 
     update () {
 
