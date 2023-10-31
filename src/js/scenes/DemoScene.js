@@ -102,15 +102,15 @@ class DemoLevelScene extends Phaser.Scene {
 
         // Spawning Zombies
         const walkerZombie = new WalkerZombie(this, startX, startY, 'Right');
-        const tankZombie = new TankZombie(this, startX, startY, 'Right');
-        const runnerZombie = new RunnerZombie(this, startX, startY, 'Right');
-        const spitterZombie = new SpitterZombie(this, startX, startY, 'Right');
+        //const tankZombie = new TankZombie(this, startX, startY, 'Right');
+        //const runnerZombie = new RunnerZombie(this, startX, startY, 'Right');
+        //const spitterZombie = new SpitterZombie(this, startX, startY, 'Right');
 
         // Add zombies to the container
         this.zombies.add(walkerZombie);
-        this.zombies.add(tankZombie);
-        this.zombies.add(runnerZombie);
-        this.zombies.add(spitterZombie);
+        //this.zombies.add(tankZombie);
+        //this.zombies.add(runnerZombie);
+        //this.zombies.add(spitterZombie);
 
         // Find the path (asynchronous)
         findPath(grid, startTileX, startTileY, endTileX, endTileY,  (path, error) => {
@@ -124,9 +124,9 @@ class DemoLevelScene extends Phaser.Scene {
             // Had to move inside the find the path due to the asynchronous nature of the function
             if (path) {
                 walkerZombie.moveAlongPath(this, path);
-                tankZombie.moveAlongPath(this, path);
-                runnerZombie.moveAlongPath(this, path);
-                spitterZombie.moveAlongPath(this, path);
+                //tankZombie.moveAlongPath(this, path);
+                //runnerZombie.moveAlongPath(this, path);
+                //spitterZombie.moveAlongPath(this, path);
             }
         });
     }

@@ -69,6 +69,7 @@ moveAlongPath(scene, path) {
 }
 
 update() {
+    console.log(`Current: (${this.x}, ${this.y}), Target: (${this.nextX}, ${this.nextY})`);
     // Check if the enemy has reached its next target position
     if (Phaser.Math.Distance.Between(this.x, this.y, this.nextX, this.nextY) < 1) {
         this.body.stop();
