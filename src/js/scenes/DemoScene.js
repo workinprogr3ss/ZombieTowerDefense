@@ -36,6 +36,8 @@ class DemoLevelScene extends Phaser.Scene {
         // Create the map
         const map = this.make.tilemap({key: 'demomap'});
         const tileset = map.addTilesetImage('ZombieApocalypseTilesetReferenceFixed', 'ZombieApocalypseTilesetReferenceFixed');
+        
+        // Load Layers
         const walkableLayer = map.createLayer('Walkable Layer', tileset);
         const propLayer = map.createLayer('Prop Layer', tileset);
         const towerLayer = map.createLayer('Tower Layer', tileset);
@@ -71,7 +73,7 @@ class DemoLevelScene extends Phaser.Scene {
             };
 
             //Set the grid value of whether the tile is walkable or not
-            grid[y][x] = tile.index === 634 ? 1 : 0; // 1 is non-walkable, 0 is walkable
+            grid[y][x] = tile.index === 634 ? 1 : 0; // 1 is non-walkable, 0 is walkable, 634 is the index of the non-walkable tile
         });
         console.log("Grid:", grid);  // Debugging line
 
@@ -95,12 +97,20 @@ class DemoLevelScene extends Phaser.Scene {
         console.log("Start Tile: ", grid[startTileY][startTileX]);
         console.log("End Tile: ", grid[endTileY][endTileX]);
 
-        // Spawning a zombie
+        // Zombie container
+        this.zombies = this.physics.add.group();
+
+        // Spawning Zombies
         const walkerZombie = new WalkerZombie(this, startX, startY, 'Right');
         const tankZombie = new TankZombie(this, startX, startY, 'Right');
         const runnerZombie = new RunnerZombie(this, startX, startY, 'Right');
         const spitterZombie = new SpitterZombie(this, startX, startY, 'Right');
 
+        // Add zombies to the container
+        this.zombies.add(walkerZombie);
+        this.zombies.add(tankZombie);
+        this.zombies.add(runnerZombie);
+        this.zombies.add(spitterZombie);
 
         // Find the path (asynchronous)
         findPath(grid, startTileX, startTileY, endTileX, endTileY,  (path, error) => {
@@ -123,7 +133,10 @@ class DemoLevelScene extends Phaser.Scene {
     
 
     update () {
-
+        // Update the zombies
+        this.zombies.getChildren().forEach((zombie) => {
+            zombie.update();
+        });
     }
 
     // create new sprites

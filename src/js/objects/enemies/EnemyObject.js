@@ -1,4 +1,4 @@
-export default class Enemy extends Phaser.GameObjects.Sprite {
+export default class Enemy extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture, initalDirection, health, speed) {
         super(scene, x, y, texture);
     
@@ -15,6 +15,14 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
 
         // Set the intial direction
         this.setDirection(initalDirection);
+
+        // Enable physics
+        scene.physics.world.enable(this);
+
+        // Store positions for pathing
+        this.nextX = null;
+        this.nextY = null;
+        this.currentPath = null;
 }
 
 // Method to initialize animations
@@ -45,29 +53,27 @@ moveAlongPath(scene, path) {
         console.log("No path provided for enemy to move.");
         return;
     }
+
+    // Store the path
+    this.currentPath = path;
     
     // Shift off the first point, as that's the starting point
     const nextPoint = path.shift();
 
     // Convert tile coordinates to world coordinates
-    const nextX = nextPoint.x * 16;
-    const nextY = nextPoint.y * 16;
+    this.nextX = nextPoint.x * 16;
+    this.nextY = nextPoint.y * 16;
 
-    // Speed Calculations
-    const distance = Phaser.Math.Distance.Between(this.x, this.y, nextX, nextY);
-    const duration = (distance / this.speed) * 250; // 1000ms per 1s
+    // Move using physics engine
+    this.scene.physics.moveTo(this, this.nextX, this.nextY, this.speed);
+}
 
-    scene.tweens.add({
-        targets: this,  // Targeting 'this' GameObject
-        x: nextX,
-        y: nextY,
-        ease: 'Linear',
-        duration: duration,
-        onComplete: () => {
-            // Recursive call to move to the next point
-            setTimeout(() => this.moveAlongPath(scene, path), 10);
-        }
-    });
+update() {
+    // Check if the enemy has reached its next target position
+    if (Phaser.Math.Distance.Between(this.x, this.y, this.nextX, this.nextY) < 1) {
+        this.body.stop();
+        this.moveAlongPath(this.scene, this.currentPath);
+    }
 }
 
 // Method to reduce health

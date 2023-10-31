@@ -19,7 +19,13 @@ var config = {
         new SaveGameScene,
         new SettingsScene,
         new DemoLevelScene
-    ]
+    ],
+    physics: {
+        default: 'arcade',
+        arcade: {
+            debug: false
+        }
+    }
 };
 
 new Phaser.Game(config);
