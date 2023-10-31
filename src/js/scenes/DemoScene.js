@@ -35,14 +35,15 @@ class DemoLevelScene extends Phaser.Scene {
     create() {
         // Create the map
         const map = this.make.tilemap({key: 'demomap'});
-        console.log('Map:', map);  // Debugging line
         const tileset = map.addTilesetImage('ZombieApocalypseTilesetReferenceFixed', 'ZombieApocalypseTilesetReferenceFixed');
-        console.log('Tileset:', tileset);  // Debugging line
         const walkableLayer = map.createLayer('Walkable Layer', tileset);
-        console.log('Walkable Layer:', walkableLayer);  // Debugging line
-        map.createLayer('Prop Layer', tileset);
-        map.createLayer('Tower Layer', tileset);
+        const propLayer = map.createLayer('Prop Layer', tileset);
+        const towerLayer = map.createLayer('Tower Layer', tileset);
         
+        // Debugging map and tileset creation
+        console.log('Map:', map);  // Debugging line
+        console.log('Tileset:', tileset);  // Debugging line
+        console.log('Walkable Layer:', walkableLayer);  // Debugging line
 
         // Towers-(Randy)------------------------------------------------
         const tower_hotspot = this.add.sprite(400, 304, 'tower_hotspot').setInteractive();
@@ -74,16 +75,17 @@ class DemoLevelScene extends Phaser.Scene {
         });
         console.log("Grid:", grid);  // Debugging line
 
+        // Tile Coordinates for pathfinding (in grid)
+        const startTileX = 1
+        const startTileY = 5
+        const endTileX = 47
+        const endTileY = 32
+        
         // World Coorindates for spawning enemies
-        const startX = 1 * 16;
-        const startY = 5 * 16;
-        const endX = 47 * 16;
-        const endY = 32 * 16;
-        // Tile Coordinates for pathfinding
-        const startTileX = startX / 16;
-        const startTileY = startY / 16;
-        const endTileX = endX / 16;
-        const endTileY = endY / 16;
+        const startX = startTileX * 16; 
+        const startY = startTileY * 16;
+        const endX = endTileX * 16;
+        const endY = endTileY * 16;
         
         // Spawning Debugging
         console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);
@@ -107,7 +109,7 @@ class DemoLevelScene extends Phaser.Scene {
             } else {
                 console.log("Path found:", path);
             }
-
+            
             // Move the zombie along the path
             // Had to move inside the find the path due to the asynchronous nature of the function
             if (path) {
