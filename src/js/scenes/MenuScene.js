@@ -23,7 +23,7 @@ class MenuScene extends BaseScene {
         const settingsButton = this.add.sprite(400, 400, 'settingsButton');
         
         //Call to Set Button Interactions
-        this.setButtonInteractions(newGameButton, 'LevelSelectScene');
+        this.setButtonInteractions(newGameButton, 'PreLevelSelectScene');
         this.setButtonInteractions(loadGameButton, 'LoadSaveScene');
         this.setButtonInteractions(settingsButton, 'SettingsScene');
 
@@ -36,6 +36,8 @@ class MenuScene extends BaseScene {
             levelOne: true,
             levelTwo: false,
             levelThree: false,
+            saveSlot: null,
+            completed: 1
         });
     }
 

@@ -1,5 +1,6 @@
 //Menu Scenes
 import MenuScene from './js/scenes/MenuScene.js';
+import PreLevelSelectScene from './js/scenes/PreLevelSelectScene.js';
 import LevelSelectScene from './js/scenes/LevelSelectScene.js';
 import LoadSaveScene from './js/scenes/LoadSaveScene.js';
 import SaveGameScene from './js/scenes/SaveGameScene.js';
@@ -14,6 +15,7 @@ var config = {
     height: 608,
     scene: [
         new MenuScene, 
+        new PreLevelSelectScene,
         new LevelSelectScene, 
         new LoadSaveScene,
         new SaveGameScene,

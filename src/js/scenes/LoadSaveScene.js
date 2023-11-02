@@ -4,6 +4,10 @@ class LoadSaveScene extends BaseScene {
 
     constructor() {
         super('LoadSaveScene');
+
+        this.saveSlot1 = {};
+        this.saveSlot2 = {};
+        this.saveSlot3 = {};
     }
 
     preload() {
@@ -19,32 +23,51 @@ class LoadSaveScene extends BaseScene {
     create() {
         this.backgroundCreate();
 
-        //On press
-        //Check Local Storage for Data
-        this.registry.set('playerData', {
-            levelOne: true,
-            levelTwo: true,
-            levelThree: true,
-        });
-        //Go to LevelSelect
+        if (localStorage.getItem('saveSlot1')) {
+            this.saveSlot1 = JSON.parse(localStorage.getItem('saveSlot1'));
+        }
+        if (localStorage.getItem('saveSlot2')) {
+            this.saveSlot2 = JSON.parse(localStorage.getItem('saveSlot2'));
+        }
+        if (localStorage.getItem('saveSlot3')) {
+            this.saveSlot3 = JSON.parse(localStorage.getItem('saveSlot3'));
+        }
 
         this.add.image(400, 300, 'loadSaveMenu').setOrigin(0.5);
+
+        //Create Buttons
         const loadSave1 = this.add.sprite(400, 250, 'loadSave1')
+            .setOrigin(0.5);
+        this.add.text(475, 250, `${this.saveSlot1.completed}/3`, {
+            fontSize: '20px',
+            fill: '#000000'
+        })
             .setOrigin(0.5);
         const loadSave2 = this.add.sprite(400, 300, 'loadSave2')
             .setOrigin(0.5);
+        this.add.text(475, 300, `${this.saveSlot2.completed}/3`, {
+            fontSize: '20px', 
+            fill: '#000000'
+        })
+            .setOrigin(0.5);
         const loadSave3 = this.add.sprite(400, 350, 'loadSave3')
             .setOrigin(0.5);
-
-        //Create Buttons
+        this.add.text(475, 350, `${this.saveSlot3.completed}/3`, {
+            fontSize: '20px', 
+            fill: '#000000'
+        })
+            .setOrigin(0.5);
         const backButton = this.add.sprite(400, 425, 'backButton');
         
         //Call to Set Button Interactions
-        this.setButtonInteractions(backButton, 'MenuScene');
+        this.setButtonInteractions(loadSave1, 'PreLevelSelectScene', this.saveSlot1, 1);
+        this.setButtonInteractions(loadSave2, 'PreLevelSelectScene', this.saveSlot2, 2);
+        this.setButtonInteractions(loadSave3, 'PreLevelSelectScene', this.saveSlot3, 3);
+        this.setButtonInteractions(backButton, 'MenuScene', null);
     }
 
     //Sets Button Interactions
-    setButtonInteractions(button, scene) {
+    setButtonInteractions(button, scene, data) {
         button.setInteractive({cursor: 'pointer'}).setOrigin(0.5);
 
         button.on('pointerover', () => {
@@ -60,7 +83,16 @@ class LoadSaveScene extends BaseScene {
         })    
 
         button.on('pointerup', () => {
-            this.scene.start(scene);
+            if (data) {
+                this.registry.set('playerData', {
+                    levelOne: data.levelOne,
+                    levelTwo: data.levelTwo,
+                    levelThree: data.levelThree,
+                    saveSlot: data.saveSlot,
+                    completed: data.completed,
+                });
+            }   
+            this.scene.start(scene)
         })     
     }
 }
