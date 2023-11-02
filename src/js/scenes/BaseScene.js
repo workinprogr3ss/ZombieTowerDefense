@@ -19,6 +19,8 @@ class BaseScene extends Phaser.Scene {
         map.createLayer('Fences', tileSet);
         map.createLayer('Accessories', tileSet);
     }
+
+    
 }
 
 export default BaseScene;
