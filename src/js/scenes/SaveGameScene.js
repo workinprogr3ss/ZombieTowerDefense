@@ -4,6 +4,8 @@ class SaveGameScene extends BaseScene {
 
     constructor() {
         super('SaveGameScene');
+
+        this.check = true;
     }
 
     preload() {
@@ -55,46 +57,63 @@ class SaveGameScene extends BaseScene {
             .setOrigin(0.5);
         const backButton = this.add.sprite(400, 425, 'backButton');
 
+        //Call to Set Button Interactions (Button, Scene, Data, StartingFrame, Unlock)
         this.setButtonInteractions(loadSave1, 'LevelSelectScene', 'saveSlot1', 1);
         this.setButtonInteractions(loadSave2, 'LevelSelectScene', 'saveSlot2', 2);
         this.setButtonInteractions(loadSave3, 'LevelSelectScene', 'saveSlot3', 3);
-        this.setButtonInteractions(backButton, 'LevelSelectScene', null);
+        this.setButtonInteractions(backButton, 'LevelSelectScene', null, 0, true);
     }
 
-    setButtonInteractions(button, scene, saveSlot, saveSlotNumber) {
-        button.setInteractive({cursor: 'pointer'}).setOrigin(0.5);
-
-        button.on('pointerover', () => {
-            button.setFrame(2);
-        })        
-
-        button.on('pointerout', () => {
-            button.setFrame(0);
-        })   
-
-        button.on('pointerdown', () => {
-            button.setFrame(1);
-        })    
-
-        button.on('pointerup', () => {
-            localStorage.setItem(saveSlot, JSON.stringify({
-                levelOne: this.registry.get('playerData').levelOne,
-                levelTwo: this.registry.get('playerData').levelTwo,
-                levelThree: this.registry.get('playerData').levelThree,
-                saveSlot: saveSlotNumber,
-                completed: this.countCompleted()
-            }))
-            this.scene.start(scene)
-        })     
-    }
-
-    countCompleted() {
-        let completed = 0;
-        if (this.registry.get('playerData').levelOne) completed += 1;
-        if (this.registry.get('playerData').levelTwo) completed += 1;
-        if (this.registry.get('playerData').levelThree) completed += 1;
-        return completed
-    }
+    //setButtonInteractions(button, scene, saveSlot, saveSlotNumber) {
+    //    button.setInteractive({cursor: 'pointer'}).setOrigin(0.5);
+//
+    //    button.on('pointerover', () => {
+    //        button.setFrame(2);
+    //    })        
+//
+    //    button.on('pointerout', () => {
+    //        button.setFrame(0);
+    //    })   
+//
+    //    button.on('pointerdown', () => {
+    //        button.setFrame(1);
+    //    })    
+//
+    //    button.on('pointerup', () => {
+    //        if (this.registry.get('playerData').completed > 1) {
+    //            this.check = this.checkOverride();
+    //        } else {
+    //            this.check = true;
+    //        }
+//
+    //        if (this.check) {
+    //            this.setSave(saveSlot, scene, saveSlotNumber);
+    //        } 
+    //    })     
+    //}
+//
+    //setSave(saveSlot, scene, saveSlotNumber) {
+    //    localStorage.setItem(saveSlot, JSON.stringify({
+    //        levelOne: this.registry.get('playerData').levelOne,
+    //        levelTwo: this.registry.get('playerData').levelTwo,
+    //        levelThree: this.registry.get('playerData').levelThree,
+    //        saveSlot: saveSlotNumber,
+    //        completed: this.countCompleted()
+    //    }))
+    //    this.scene.start(scene)
+    //}
+//
+    //checkOverride() {
+    //    console.log("TEST");
+    //}
+//
+    //countCompleted() {
+    //    let completed = 0;
+    //    if (this.registry.get('playerData').levelOne) completed += 1;
+    //    if (this.registry.get('playerData').levelTwo) completed += 1;
+    //    if (this.registry.get('playerData').levelThree) completed += 1;
+    //    return completed
+    //}
 }
 
 export default SaveGameScene;

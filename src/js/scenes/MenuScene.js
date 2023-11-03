@@ -7,14 +7,17 @@ class MenuScene extends BaseScene {
     }
     
     preload() {
+        //Load Background Image
         this.backgroundPreload();
 
+        //Load Buttons
         this.load.spritesheet('newGameButton', 'src/assets/images/icons/newGameButton.png', {frameWidth: 128, frameHeight: 48});
         this.load.spritesheet('loadGameButton', 'src/assets/images/icons/loadGameButton.png', {frameWidth: 128, frameHeight: 48});
         this.load.spritesheet('settingsButton', 'src/assets/images/icons/settingsButton.png', {frameWidth: 128, frameHeight: 48});
     }
 
     create() {
+        //Create Background Image
         this.backgroundCreate();
 
         //Create Buttons
@@ -22,16 +25,16 @@ class MenuScene extends BaseScene {
         const loadGameButton = this.add.sprite(400, 350, 'loadGameButton');
         const settingsButton = this.add.sprite(400, 400, 'settingsButton');
         
-        //Call to Set Button Interactions
-        this.setButtonInteractions(newGameButton, 'PreLevelSelectScene');
-        this.setButtonInteractions(loadGameButton, 'LoadSaveScene');
-        this.setButtonInteractions(settingsButton, 'SettingsScene');
+        //Call to Set Button Interactions (Button, Scene, Data, StartingFrame, Unlock)
+        this.setButtonInteractions(newGameButton, 'PreLevelSelectScene', null, 0, true);
+        this.setButtonInteractions(loadGameButton, 'LoadSaveScene', null, 0, true);
+        this.setButtonInteractions(settingsButton, 'SettingsScene', null, 0, true);
 
         //Game Title
         this.add.text(400, 200, 'Post-Pandemic Perimeter', {fontSize: '36px', fill: '#FFFFFF'})
             .setOrigin(0.5);
 
-        //Create PlayerData Registry
+        //Create Default PlayerData Registry
         this.registry.set('playerData', {
             levelOne: true,
             levelTwo: false,
@@ -39,27 +42,34 @@ class MenuScene extends BaseScene {
             saveSlot: null,
             completed: 1
         });
-    }
 
-    //Sets Button Interactions
-    setButtonInteractions(button, scene) {
-        button.setInteractive({cursor: 'pointer'}).setOrigin(0.5);
+        //Test Data
+        localStorage.setItem('saveSlot1', JSON.stringify({
+            levelOne: true,
+            levelTwo: false,
+            levelThree: false,
+            saveSlot: 1,
+            completed: 1,
+            active: false
+        }));
 
-        button.on('pointerover', () => {
-            button.setFrame(2);
-        })        
+        localStorage.setItem('saveSlot2', JSON.stringify({
+            levelOne: true,
+            levelTwo: true,
+            levelThree: false,
+            saveSlot: 2,
+            completed: 1,
+            active: false,
+        }))
 
-        button.on('pointerout', () => {
-            button.setFrame(0);
-        })   
-
-        button.on('pointerdown', () => {
-            button.setFrame(1);
-        })    
-
-        button.on('pointerup', () => {
-            this.scene.start(scene);
-        })     
+        localStorage.setItem('saveSlot3', JSON.stringify({
+            levelOne: true,
+            levelTwo: false,
+            levelThree: false,
+            saveSlot: 3,
+            completed: 1,
+            active: false
+        }))
     }
 }
 

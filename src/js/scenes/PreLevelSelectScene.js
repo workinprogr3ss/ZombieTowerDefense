@@ -27,6 +27,7 @@ class PreLevelSelectScene extends BaseScene {
 
     create() {
 
+        //Check for completion of levels
         if (this.registry.get('playerData').levelTwo) {
             this.levelProgress.levelTwoStartingFrame = 1
             this.levelProgress.levelTwoUnlock = true
