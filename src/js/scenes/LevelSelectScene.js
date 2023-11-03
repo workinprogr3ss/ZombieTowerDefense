@@ -23,33 +23,13 @@ class LevelSelectScene extends BaseScene {
         const saveButton = this.add.sprite(460, 425, 'saveButton').setOrigin(0.5);
         const backButton = this.add.sprite(340, 425, 'backButton').setOrigin(0.5);
         
-        //Call to Set Button Interactions
-        this.setButtonInteractions(demoLevelButton, 'DemoLevelScene', 0, true);
+        //Call to Set Button Interactions (Button, Scene, Data, StartingFrame, Unlock)
+        this.setButtonInteractions(demoLevelButton, 'DemoLevelScene', null, 0, true);
         this.setButtonInteractions(levelOne, 'MenuScene', 0, true);
-        this.setButtonInteractions(levelTwo, 'MenuScene', levelProgress.levelTwoStartingFrame, levelProgress.levelTwoUnlock);
-        this.setButtonInteractions(levelThree, 'MenuScene', levelProgress.levelThreeStartingFrame, levelProgress.levelThreeUnlock);
-        this.setButtonInteractions(saveButton, 'SaveGameScene', 0, true);
-        this.setButtonInteractions(backButton, 'MenuScene', 0, true);
-    }
-
-    //Sets Button Interactions
-    setButtonInteractions(button, scene, startingFrame, unlock) {
-        button.setInteractive({cursor: 'pointer'});
-
-        if (unlock) {
-            button.on('pointerover', () => {
-                button.setFrame(startingFrame + 2);
-            })        
-            button.on('pointerout', () => {
-                button.setFrame(startingFrame);
-            })   
-            button.on('pointerdown', () => {
-                button.setFrame(startingFrame + 1);
-            })    
-            button.on('pointerup', () => {
-                this.scene.start(scene);
-            }) 
-        }    
+        this.setButtonInteractions(levelTwo, 'MenuScene', null, levelProgress.levelTwoStartingFrame, levelProgress.levelTwoUnlock);
+        this.setButtonInteractions(levelThree, 'MenuScene', null, levelProgress.levelThreeStartingFrame, levelProgress.levelThreeUnlock);
+        this.setButtonInteractions(saveButton, 'SaveGameScene', null, 0, true);
+        this.setButtonInteractions(backButton, 'MenuScene', null, 0, true);
     }
 }
 
