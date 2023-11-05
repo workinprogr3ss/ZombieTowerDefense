@@ -10,7 +10,7 @@ class SaveGameScene extends BaseScene {
         //Load Background Image
         this.backgroundPreload();
 
-        //Load Menu Backgroundsand Buttons
+        //Load Menu Backgrounds and Buttons
         this.load.image('SaveGameMenu', 'src/assets/images/icons/SaveGameMenu.png');
         this.load.image('overrideMenu', 'src/assets/images/icons/overrideMenu.png');
         this.load.spritesheet('yes', 'src/assets/images/icons/yes.png', {frameWidth: 80, frameHeight: 36});
