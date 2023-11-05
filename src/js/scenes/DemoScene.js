@@ -11,10 +11,12 @@ import Tower1 from "../objects/towers/Tower1.js"
 // Utility Functions
 import { findPath } from "../utils/PathfindingUtil.js";
 import { loadZombieSpritesheets } from "../utils/spritesheetLoader.js";
+import GridService from "../utils/GridUtil.js";
 
 class DemoLevelScene extends Phaser.Scene {
     constructor() {
         super({ key: 'DemoLevelScene' });
+        this.grid = null; // Utilize GridService to create the grid
     }
 
     //load the Demo_Level map
@@ -38,7 +40,7 @@ class DemoLevelScene extends Phaser.Scene {
         const tileset = map.addTilesetImage('ZombieApocalypseTilesetReferenceFixed', 'ZombieApocalypseTilesetReferenceFixed');
         
         // Load Layers
-        const walkableLayer = map.createLayer('Walkable Layer', tileset);
+        const walkableLayer = map.createLayer('Walkable Layer', tileset); // Used for pathfinding
         const propLayer = map.createLayer('Prop Layer', tileset);
         const towerLayer = map.createLayer('Tower Layer', tileset);
         
@@ -61,22 +63,6 @@ class DemoLevelScene extends Phaser.Scene {
         });
         // Towers-(Randy)------------------------------------------------
 
-        // Create the grid for A* pathfinding
-        let grid = [];
-        walkableLayer.forEachTile((tile) => {
-            const x = tile.x;
-            const y = tile.y;
-            
-            // Initialize this row if needed
-            if (!grid[y]) {
-                grid[y] = [];
-            };
-
-            //Set the grid value of whether the tile is walkable or not
-            grid[y][x] = tile.index === 634 ? 1 : 0; // 1 is non-walkable, 0 is walkable, 634 is the index of the non-walkable tile
-        });
-        console.log("Grid:", grid);  // Debugging line
-
         // Tile Coordinates for pathfinding (in grid)
         const startTileX = 1
         const startTileY = 5
@@ -88,50 +74,40 @@ class DemoLevelScene extends Phaser.Scene {
         const startY = startTileY * 16;
         const endX = endTileX * 16;
         const endY = endTileY * 16;
+
+        // Create the grid for pathfinding
+        this.grid = new GridService(this, walkableLayer); 
         
         // Spawning Debugging
         console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);
         console.log(`Target destination tile is (${endTileX}, ${endTileY})`); 
         // Pathfinding Debugging
-        console.log("Grid dimensions:", grid.length, grid[0]?.length);
-        console.log("Start Tile: ", grid[startTileY][startTileX]);
-        console.log("End Tile: ", grid[endTileY][endTileX]);
+        console.log("Grid dimensions:", this.grid.grid.length, this.grid.grid[0]?.length);
+        console.log("Start Tile: ", this.grid.grid[startTileY][startTileX]);
+        console.log("End Tile: ", this.grid.grid[endTileY][endTileX]);
 
         // Zombie container
         this.zombies = this.physics.add.group();
 
         // Spawning Zombies
         const walkerZombie = new WalkerZombie(this, startX, startY, 'Right');
-        //const tankZombie = new TankZombie(this, startX, startY, 'Right');
-        //const runnerZombie = new RunnerZombie(this, startX, startY, 'Right');
-        //const spitterZombie = new SpitterZombie(this, startX, startY, 'Right');
+        const tankZombie = new TankZombie(this, startX, startY, 'Right');
+        const runnerZombie = new RunnerZombie(this, startX, startY, 'Right');
+        const spitterZombie = new SpitterZombie(this, startX, startY, 'Right');
+
+        // Calculate paths
+        walkerZombie.calculatePath(startTileX, startTileY, endTileX, endTileY);
+        tankZombie.calculatePath(startTileX, startTileY, endTileX, endTileY);
+        runnerZombie.calculatePath(startTileX, startTileY, endTileX, endTileY);
+        spitterZombie.calculatePath(startTileX, startTileY, endTileX, endTileY);
 
         // Add zombies to the container
         this.zombies.add(walkerZombie);
-        //this.zombies.add(tankZombie);
-        //this.zombies.add(runnerZombie);
-        //this.zombies.add(spitterZombie);
-
-        // Find the path (asynchronous)
-        findPath(grid, startTileX, startTileY, endTileX, endTileY,  (path, error) => {
-            if (error) {
-                console.log("Error finding path:", error);
-            } else {
-                console.log("Path found:", path);
-            }
-            
-            // Move the zombie along the path
-            // Had to move inside the find the path due to the asynchronous nature of the function
-            if (path) {
-                walkerZombie.moveAlongPath(this, path);
-                //tankZombie.moveAlongPath(this, path);
-                //runnerZombie.moveAlongPath(this, path);
-                //spitterZombie.moveAlongPath(this, path);
-            }
-        });
+        this.zombies.add(tankZombie);
+        this.zombies.add(runnerZombie);
+        this.zombies.add(spitterZombie);
     }
     
-
     update () {
         // Update the zombies
         this.zombies.getChildren().forEach((zombie) => {

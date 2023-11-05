@@ -1,3 +1,5 @@
+import { findPath } from '../../utils/PathfindingUtil.js';
+
 export default class Enemy extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture, initalDirection, health, speed) {
         super(scene, x, y, texture);
@@ -22,7 +24,7 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         // Store positions for pathing
         this.nextX = null;
         this.nextY = null;
-        this.currentPath = null;
+        this.path = null;
 }
 
 // Method to initialize animations
@@ -43,22 +45,33 @@ initalizeAnimations(scene, texture) {
     });
 }
 
+// Method to set the direction of the enemy
 setDirection(direction) {
     this.anims.play(`${this.texture.key}${direction}`, true);
 }
 
-// Update the enemy's position
-moveAlongPath(scene, path) {
-    if (!path || path.length === 0) {
+// Method to calculate the path to the target
+calculatePath(startX, startY, targetX, targetY) {
+    findPath(this.scene.grid.getGrid(), startX, startY, targetX, targetY,  (path, error) => {
+        if (error) {
+            console.log("Error finding path:", error);
+        } else {
+            console.log("Path found:", path);
+            this.path = path;
+            this.followPath();
+        }
+    });
+}
+
+// Method to move the enemy along a path
+followPath() {
+    if (!this.path || this.path.length === 0) {
         console.log("No path provided for enemy to move.");
         return;
     }
-
-    // Store the path
-    this.currentPath = path;
     
     // Shift off the first point, as that's the starting point
-    const nextPoint = path.shift();
+    const nextPoint = this.path.shift();
 
     // Convert tile coordinates to world coordinates
     this.nextX = nextPoint.x * 16;
@@ -68,13 +81,18 @@ moveAlongPath(scene, path) {
     this.scene.physics.moveTo(this, this.nextX, this.nextY, this.speed);
 }
 
+// Method to update the enemy's position
 update() {
-    console.log(`Current: (${this.x}, ${this.y}), Target: (${this.nextX}, ${this.nextY})`);
+    //console.log(`Current: (${this.x}, ${this.y}), Target: (${this.nextX}, ${this.nextY})`);
     // Check if the enemy has reached its next target position
     if (Phaser.Math.Distance.Between(this.x, this.y, this.nextX, this.nextY) < 1) {
         this.body.stop();
-        this.moveAlongPath(this.scene, this.currentPath);
+        this.followPath();
     }
+}
+
+updatPath() {
+    this.calculatePath(this.targetX, this.targetY);
 }
 
 // Method to reduce health
