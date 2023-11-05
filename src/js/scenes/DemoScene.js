@@ -8,15 +8,19 @@ import SpitterZombie from "../objects/enemies/SpitterZombie.js";
 // Towers Objects
 import Tower1 from "../objects/towers/Tower1.js"
 
+// Managers
+import WaveManager from "../managers/waveManager.js";
+
 // Utility Functions
 import { findPath } from "../utils/PathfindingUtil.js";
-import { loadZombieSpritesheets } from "../utils/spritesheetLoader.js";
+import { loadZombieSpritesheets } from "../utils/SpritesheetUtil.js";
 import GridService from "../utils/GridUtil.js";
 
 class DemoLevelScene extends Phaser.Scene {
     constructor() {
         super({ key: 'DemoLevelScene' });
         this.grid = null; // Utilize GridService to create the grid
+        this.zombies = null; // Zombie container
     }
 
     //load the Demo_Level map
@@ -87,25 +91,12 @@ class DemoLevelScene extends Phaser.Scene {
         console.log("End Tile: ", this.grid.grid[endTileY][endTileX]);
 
         // Zombie container
-        this.zombies = this.physics.add.group();
+        this.zombies = this.physics.add.group(); // Zombie container
+        this.waveManager = new WaveManager(this);
+        console.log("Wave Manager:", this.waveManager);
+        this.waveManager.startNextWave();
 
-        // Spawning Zombies
-        const walkerZombie = new WalkerZombie(this, startX, startY, 'Right');
-        const tankZombie = new TankZombie(this, startX, startY, 'Right');
-        const runnerZombie = new RunnerZombie(this, startX, startY, 'Right');
-        const spitterZombie = new SpitterZombie(this, startX, startY, 'Right');
-
-        // Calculate paths
-        walkerZombie.calculatePath(startTileX, startTileY, endTileX, endTileY);
-        tankZombie.calculatePath(startTileX, startTileY, endTileX, endTileY);
-        runnerZombie.calculatePath(startTileX, startTileY, endTileX, endTileY);
-        spitterZombie.calculatePath(startTileX, startTileY, endTileX, endTileY);
-
-        // Add zombies to the container
-        this.zombies.add(walkerZombie);
-        this.zombies.add(tankZombie);
-        this.zombies.add(runnerZombie);
-        this.zombies.add(spitterZombie);
+        // Need to add triggers for spawning the next wave
     }
     
     update () {
@@ -113,6 +104,9 @@ class DemoLevelScene extends Phaser.Scene {
         this.zombies.getChildren().forEach((zombie) => {
             zombie.update();
         });
+
+        // Update the wave manager
+        this.waveManager.update();
     }
 
     // create new sprites
