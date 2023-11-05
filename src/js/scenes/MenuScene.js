@@ -14,6 +14,7 @@ class MenuScene extends BaseScene {
         this.load.spritesheet('newGameButton', 'src/assets/images/icons/newGameButton.png', {frameWidth: 128, frameHeight: 48});
         this.load.spritesheet('loadGameButton', 'src/assets/images/icons/loadGameButton.png', {frameWidth: 128, frameHeight: 48});
         this.load.spritesheet('settingsButton', 'src/assets/images/icons/settingsButton.png', {frameWidth: 128, frameHeight: 48});
+        this.load.spritesheet('creditsButton', 'src/assets/images/icons/creditsButton.png', {frameWidth: 128, frameHeight: 36});
     }
 
     create() {
@@ -24,11 +25,13 @@ class MenuScene extends BaseScene {
         const newGameButton = this.add.sprite(400, 300, 'newGameButton');
         const loadGameButton = this.add.sprite(400, 350, 'loadGameButton');
         const settingsButton = this.add.sprite(400, 400, 'settingsButton');
+        const creditsButton = this.add.sprite(400, 450, 'creditsButton');
         
-        //Call to Set Button Interactions (Button, Scene, Data, StartingFrame, Unlock)
-        this.setButtonInteractions(newGameButton, 'PreLevelSelectScene', null, 0, true);
-        this.setButtonInteractions(loadGameButton, 'LoadSaveScene', null, 0, true);
-        this.setButtonInteractions(settingsButton, 'SettingsScene', null, 0, true);
+        //Call to Set Button Interactions
+        this.setButtonInteractions(newGameButton, 'PreLevelSelectScene', null, 0, true, null);
+        this.setButtonInteractions(loadGameButton, 'LoadSaveScene', null, 0, true, null);
+        this.setButtonInteractions(settingsButton, 'SettingsScene', null, 0, true, null);
+        this.setButtonInteractions(creditsButton, 'CreditsScene', null, 0, true, null);
 
         //Game Title
         this.add.text(400, 200, 'Post-Pandemic Perimeter', {fontSize: '36px', fill: '#FFFFFF'})
@@ -42,34 +45,6 @@ class MenuScene extends BaseScene {
             saveSlot: null,
             completed: 1
         });
-
-        //Test Data
-        localStorage.setItem('saveSlot1', JSON.stringify({
-            levelOne: true,
-            levelTwo: false,
-            levelThree: false,
-            saveSlot: 1,
-            completed: 1,
-            active: false
-        }));
-
-        localStorage.setItem('saveSlot2', JSON.stringify({
-            levelOne: true,
-            levelTwo: true,
-            levelThree: false,
-            saveSlot: 2,
-            completed: 1,
-            active: false,
-        }))
-
-        localStorage.setItem('saveSlot3', JSON.stringify({
-            levelOne: true,
-            levelTwo: false,
-            levelThree: false,
-            saveSlot: 3,
-            completed: 1,
-            active: false
-        }))
     }
 }
 
