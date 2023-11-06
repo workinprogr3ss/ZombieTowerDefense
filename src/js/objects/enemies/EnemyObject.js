@@ -18,6 +18,7 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         // Play animation
         this.anims.play(`${texture}`, true);
 
+        // Used to store current direction
         this.currentDirection = initialDirection;
 
         // Set the intial direction
@@ -39,7 +40,7 @@ initializeAnimations(scene, texture) {
 
     directions.forEach((direction) => {
         const key = `${zombieType}${direction}`;
-        console.log(`Initializing animation: ${key}`)
+        //console.log(`Initializing animation: ${key}`)
 
         if (!scene.anims.exists(key)) {
             scene.anims.create({
@@ -67,13 +68,14 @@ checkZombieType() {
 
 // Method to set the direction of the enemy
 setDirection(direction) {
-    console.log(`Setting direction to ${direction}`);
+    //console.log(`Setting direction to ${direction}`);
     const zombieType = this.checkZombieType();
     const newAnimKey = `${zombieType}${direction}`;
-    console.log("New animation key:", newAnimKey)
+    //console.log("New animation key:", newAnimKey)
 
     // Only change the animation if the direction has actually changed
     if (this.currentDirection !== direction) {
+        // Only play the animation if it's not already playing
         if (this.anims.currentAnim.key !== newAnimKey){
             this.anims.play(newAnimKey, true);
         }

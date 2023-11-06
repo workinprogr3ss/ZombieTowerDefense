@@ -10,6 +10,7 @@ import CreditsScene from './js/scenes/CreditsScene.js';
 
 //Game Scenes
 import DemoLevelScene from './js/scenes/DemoScene.js';
+import MediumLevelScene from './js/scenes/MediumLevelScene.js';
 
 var config = {
     type: Phaser.AUTO,
@@ -24,7 +25,8 @@ var config = {
         new OverrideScene,
         new SettingsScene,
         new CreditsScene,
-        new DemoLevelScene
+        new DemoLevelScene,
+        new MediumLevelScene
     ],
     physics: {
         default: 'arcade',
