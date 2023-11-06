@@ -94,9 +94,6 @@ class DemoLevelScene extends Phaser.Scene {
         this.zombies = this.physics.add.group(); // Zombie container
         this.waveManager = new WaveManager(this);
         console.log("Wave Manager:", this.waveManager);
-        this.waveManager.startNextWave();
-
-        // Need to add triggers for spawning the next wave
     }
     
     update () {

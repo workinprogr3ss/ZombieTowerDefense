@@ -8,15 +8,15 @@ export default class WaveManager {
     constructor(scene) {
         this.scene = scene;
         this.currentWave = 0;
-        this.waves = this.initializeWaves();
-        this.isWaveActive = false;
         this.nextSpawnTime = 0;
+        this.waves = this.initializeWaves();
         this.zombies = {
             walker: WalkerZombie,
             runner: RunnerZombie,
             tank: TankZombie,
             spitter: SpitterZombie,
         };
+        
         // Tile Coordinates for pathfinding (in grid)
         this.startTileX = 1;
         this.startTileY = 5;
@@ -28,84 +28,68 @@ export default class WaveManager {
         this.startY = this.startTileY * 16;
         this.endX = this.endTileX * 16;
         this.endY = this.endTileY * 16;
+
     }
 
     initializeWaves() {
         // Define the waves
         return [
             { // Wave 1
-                enemies: ['walker', 'walker', 'walker'],
+                enemies: ['walker', 'walker', 'walker', 'walker', 'walker'],
                 spawnInterval: 1000, // 1 second
             },
             { // Wave 2
-                enemies: ['walker', 'walker', 'tank'],
+                enemies: ['walker', 'walker', 'walker', 'walker', 'tank'],
                 spawnInterval: 1000, // 1 second
             },
             { // Wave 3
-                enemies: ['walker', 'runner', 'tank'],
+                enemies: ['walker', 'walker', 'runner', 'runner', 'tank'],
                 spawnInterval: 1000, // 1 second
             },
             { // Wave 4
-                enemies: ['runner', 'runner', 'runner'],
+                enemies: ['runner', 'runner', 'runner',  'runner', 'runner'],
                 spawnInterval: 1000, // 1 second
             },
             { // Wave 5
-                enemies: ['tank', 'tank', 'tank'],
+                enemies: ['tank', 'tank', 'tank', 'tank', 'tank'],
                 spawnInterval: 1000, // 1 second
             },
             { // Wave 6
-                enemies: ['walker', 'walker', 'walker'],
+                enemies: ['walker', 'walker', 'walker', 'walker', 'walker', 'walker', 'walker', 'walker', 'walker', 'walker'],
                 spawnInterval: 1000, // 1 second
             },
             { // Wave 7
-                enemies: ['walker', 'walker', 'walker'],
+                enemies: ['walker', 'walker', 'runner', 'runner', 'walker', 'walker', 'walker', 'walker', 'runner', 'runner'],
                 spawnInterval: 1000, // 1 second
             },
             { // Wave 8
-                enemies: ['walker', 'walker', 'walker'],
+                enemies: ['tank', 'tank', 'tank', 'tank', 'tank'],
                 spawnInterval: 1000, // 1 second
             },
             { // Wave 9
-                enemies: ['walker', 'walker', 'walker'],
+                enemies: ['walker', 'walker', 'runner', 'runner', 'tank', 'walker', 'walker', 'runner', 'runner', 'tank'],
                 spawnInterval: 1000, // 1 second
             },
             { // Wave 10
-                enemies: ['walker', 'walker', 'walker'],
+                enemies: ['spitter'],
                 spawnInterval: 1000, // 1 second
             },
         ];
     }
 
     startNextWave() {
-        // Start the next wave
-        console.log("Starting next wave");
-        this.currentWave++;
-        this.isWaveActive = true;
-        this.nextSpawnTime = this.scene.time.now + this.waves[this.currentWave].spawnInterval;
-    }
-
-    update() {
-        // Check if the wave is active
-        if (!this.isWaveActive) {
-            return;
-        }
-
-        // Check if it's time to spawn the next enemy
-        if (this.scene.time.now > this.nextSpawnTime) {
-            this.spawnEnemy();
-            this.nextSpawnTime = this.scene.time.now + this.waves[this.currentWave].spawnInterval;
+        // Increment the wave counter if we're not past the last wave
+        if (this.currentWave < this.waves.length - 1) {
+            this.currentWave++;
+            this.nextSpawnTime = this.scene.time.now; // Reset the spawn timer for the new wave
+        } else {
+            // All waves are complete, handle game completion
         }
     }
 
     spawnEnemy() {
-        // Check if there are any enemies left to spawn
-        if (this.waves[this.currentWave].enemies.length === 0) {
-            this.isWaveActive = false;
-            return;
-        }
-
-        console.log("Spawning enemy");
         // Get the next enemy to spawn
+        console.log("Spawning enemy");
         const enemyType = this.waves[this.currentWave].enemies.shift();
         const enemyClass = this.zombies[enemyType];
         const enemy = new enemyClass(this.scene, this.startX, this.startY, 'Right');
@@ -113,5 +97,26 @@ export default class WaveManager {
         
         // Add the enemy to the scene
         this.scene.zombies.add(enemy);
+
+        this.nextSpawnTime = this.scene.time.now + this.waves[this.currentWave].spawnInterval; // Set the time for the next spawn
+
+    }
+    
+    update() {
+        // If we're past the last wave, do nothing
+        if (this.currentWave >= this.waves.length) {
+            return;
+        }
+
+        // If it's time to spawn the next enemy and there are enemies left in the current wave
+        if (this.scene.time.now > this.nextSpawnTime && this.waves[this.currentWave].enemies.length > 0) {
+            this.spawnEnemy();
+        }
+
+        // If there are no more enemies to spawn and no active enemies left, the wave is complete
+        //&& this.scene.zombies.countActive(true) === 0 ; for when there are no active enemies left
+        if (this.waves[this.currentWave].enemies.length === 0) {
+            this.startNextWave();
+        }
     }
 } 
