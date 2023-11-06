@@ -22,8 +22,8 @@ class SettingsScene extends BaseScene {
         //Create Buttons
         const backButton = this.add.sprite(400, 425, 'backButton');
         
-        //Call to Set Button Interactions (Button, Scene, Data, StartingFrame, Unlock)
-        this.setButtonInteractions(backButton, 'MenuScene', null, 0, true);
+        //Call to Set Button Interactions (button, scene, data, startingFrame, unlock, source)
+        this.setButtonInteractions(backButton, 'MenuScene', null, 0, true, null);
     }
 }
 

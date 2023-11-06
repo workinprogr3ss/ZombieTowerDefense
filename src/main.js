@@ -4,7 +4,9 @@ import PreLevelSelectScene from './js/scenes/PreLevelSelectScene.js';
 import LevelSelectScene from './js/scenes/LevelSelectScene.js';
 import LoadSaveScene from './js/scenes/LoadSaveScene.js';
 import SaveGameScene from './js/scenes/SaveGameScene.js';
+import OverrideScene from './js/scenes/OverrideScene.js';
 import SettingsScene from './js/scenes/SettingsScene.js';
+import CreditsScene from './js/scenes/CreditsScene.js';
 
 //Game Scenes
 import DemoLevelScene from './js/scenes/DemoScene.js';
@@ -19,7 +21,9 @@ var config = {
         new LevelSelectScene, 
         new LoadSaveScene,
         new SaveGameScene,
+        new OverrideScene,
         new SettingsScene,
+        new CreditsScene,
         new DemoLevelScene
     ],
     physics: {
