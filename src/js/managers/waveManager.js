@@ -5,7 +5,7 @@ import TankZombie from "../objects/enemies/TankZombie.js";
 import SpitterZombie from "../objects/enemies/SpitterZombie.js";
 
 export default class WaveManager {
-    constructor(scene) {
+    constructor(scene, startTileX, startTileY, endTileX, endTileY) {
         this.scene = scene;
         this.currentWave = 0;
         this.nextSpawnTime = 0;
@@ -18,10 +18,10 @@ export default class WaveManager {
         };
         
         // Tile Coordinates for pathfinding (in grid)
-        this.startTileX = 1;
-        this.startTileY = 5;
-        this.endTileX = 47;
-        this.endTileY = 32;
+        this.startTileX = startTileX;
+        this.startTileY = startTileY;
+        this.endTileX = endTileX;
+        this.endTileY = endTileY;
         
         // World Coorindates for spawning enemies
         this.startX = this.startTileX * 16; 

@@ -39,7 +39,7 @@ initializeAnimations(scene, texture) {
 
     directions.forEach((direction) => {
         const key = `${zombieType}${direction}`;
-        console.log(`Initializing animation: ${key}`)
+        //console.log(`Initializing animation: ${key}`)
 
         if (!scene.anims.exists(key)) {
             scene.anims.create({
@@ -67,10 +67,10 @@ checkZombieType() {
 
 // Method to set the direction of the enemy
 setDirection(direction) {
-    console.log(`Setting direction to ${direction}`);
+    //console.log(`Setting direction to ${direction}`);
     const zombieType = this.checkZombieType();
     const newAnimKey = `${zombieType}${direction}`;
-    console.log("New animation key:", newAnimKey)
+    //console.log("New animation key:", newAnimKey)
 
     // Only change the animation if the direction has actually changed
     if (this.currentDirection !== direction) {

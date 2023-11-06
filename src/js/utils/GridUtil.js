@@ -1,7 +1,8 @@
 export default class GridService {
-  constructor(scene, layer) {
+  constructor(scene, layer, nonWalkableTileIndex) {
     this.scene = scene;
     this.walkableLayer = layer;
+    this.nonWalkableTileIndex = nonWalkableTileIndex;
     this.grid = this.createGrid();
   }
 
@@ -17,7 +18,7 @@ export default class GridService {
         grid[y] = [];
       }
 
-      grid[y][x] = tile.index === 634 ? 1 : 0; // 1 is non-walkable, 0 is walkable, 634 is the index of the non-walkable tile
+      grid[y][x] = tile.index === this.nonWalkableTileIndex ? 1 : 0; // 1 is non-walkable, 0 is walkable, 634 is the index of the non-walkable tile
     });
     
     console.log("Grid:", grid);  // Debugging line

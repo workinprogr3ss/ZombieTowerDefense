@@ -16,9 +16,9 @@ import { findPath } from "../utils/PathfindingUtil.js";
 import { loadZombieSpritesheets } from "../utils/SpritesheetUtil.js";
 import GridService from "../utils/GridUtil.js";
 
-class DemoLevelScene extends Phaser.Scene {
+class MediumLevelScene extends Phaser.Scene {
     constructor() {
-        super({ key: 'DemoLevelScene' });
+        super({ key: 'MediumLevelScene' });
         this.grid = null; // Utilize GridService to create the grid
         this.zombies = null; // Zombie container
     }
@@ -27,12 +27,7 @@ class DemoLevelScene extends Phaser.Scene {
     preload(){
         // Load the tilemap and tileset image
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
-        this.load.tilemapTiledJSON('demomap', 'src/assets/maps/DemoMapWithProps.json');
-
-        // (Randy)
-        this.load.image('tower_hotspot', 'src/assets/images/towers/blue.png');
-        this.load.image('tower_ui', 'src/assets/images/towers/menu.png');
-        this.load.image('tower1', 'src/assets/images/towers/tower1.png');
+        this.load.tilemapTiledJSON('mediummap', 'src/assets/maps/MediumLevel.json');
 
         // Load spritesheets for zombies
         loadZombieSpritesheets(this);
@@ -40,39 +35,25 @@ class DemoLevelScene extends Phaser.Scene {
 
     create() {
         // Create the map
-        const map = this.make.tilemap({key: 'demomap'});
+        const map = this.make.tilemap({key: 'mediummap'});
         const tileset = map.addTilesetImage('ZombieApocalypseTilesetReferenceFixed', 'ZombieApocalypseTilesetReferenceFixed');
         
         // Load Layers
         const walkableLayer = map.createLayer('Walkable Layer', tileset); // Used for pathfinding
         const propLayer = map.createLayer('Prop Layer', tileset);
         const towerLayer = map.createLayer('Tower Layer', tileset);
+        const buildingLayer = map.createLayer('Buildings Layer', tileset);
         
         // Debugging map and tileset creation
         console.log('Map:', map);  // Debugging line
         console.log('Tileset:', tileset);  // Debugging line
         console.log('Walkable Layer:', walkableLayer);  // Debugging line
 
-        // Towers-(Randy)------------------------------------------------
-        const tower_hotspot = this.add.sprite(400, 304, 'tower_hotspot').setInteractive();
-        tower_hotspot.setScale(0.05);
-        const tower_ui = this.add.sprite(100, 560, 'tower_ui');
-        tower_ui.setScale(0.2, 0.2);
-
-        const tower1_select = this.add.sprite(60, 560, 'tower1').setInteractive();
-        tower1_select.setScale(0.15);
-
-        tower1_select.on('pointerdown', () => {
-            this.createNewSprite();
-        });
-        // Towers-(Randy)------------------------------------------------
-
         // Tile Coordinates for pathfinding (in grid)
-        const startTileX = 1
-        const startTileY = 5
+        const startTileX = 2
+        const startTileY = 35
         const endTileX = 47
-        const endTileY = 32
-        
+        const endTileY = 2
         
         // World Coorindates for spawning enemies
         const startX = startTileX * 16; 
@@ -81,7 +62,7 @@ class DemoLevelScene extends Phaser.Scene {
         const endY = endTileY * 16;
 
         // Create the grid for pathfinding
-        this.grid = new GridService(this, walkableLayer, 634); 
+        this.grid = new GridService(this, walkableLayer, 545); 
         
         // Spawning Debugging
         console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);
@@ -106,20 +87,6 @@ class DemoLevelScene extends Phaser.Scene {
         // Update the wave manager
         this.waveManager.update();
     }
-
-    // create new sprites
-    createNewSprite() {
-        const tower1 = this.add.sprite(60, 560, 'tower1').setInteractive();
-        tower1.setScale(0.15);
-        
-        // make the towers draggable
-        this.input.setDraggable(tower1);
-
-        this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
-            gameObject.x = dragX;
-            gameObject.y = dragY;
-        });
-    }
 }
 
-export default DemoLevelScene;
+export default MediumLevelScene;
