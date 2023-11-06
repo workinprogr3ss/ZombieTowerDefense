@@ -1,7 +1,7 @@
 import { findPath } from '../../utils/PathfindingUtil.js';
 
 export default class Enemy extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, texture, initalDirection, health, speed) {
+    constructor(scene, x, y, texture, initialDirection, health, speed) {
         super(scene, x, y, texture);
     
         // Add this sprite to the scene
@@ -13,10 +13,15 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.state = 'normal'; // or 'damaged' or 'dead'
 
         // Initialize animations
-        this.initalizeAnimations(scene, texture);
+        this.initializeAnimations(scene, texture);
+
+        // Play animation
+        this.anims.play(`${texture}`, true);
+
+        this.currentDirection = initialDirection;
 
         // Set the intial direction
-        this.setDirection(initalDirection);
+        this.setDirection(initialDirection);
 
         // Enable physics
         scene.physics.world.enable(this);
@@ -28,16 +33,18 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
 }
 
 // Method to initialize animations
-initalizeAnimations(scene, texture) {
+initializeAnimations(scene, texture) {
     const directions = ['Right','Left', 'Up', 'Down'];
+    const zombieType = this.checkZombieType();
 
     directions.forEach((direction) => {
-        const key = `${texture}${direction}`;
+        const key = `${zombieType}${direction}`;
+        console.log(`Initializing animation: ${key}`)
 
         if (!scene.anims.exists(key)) {
             scene.anims.create({
                 key: key,
-                frames: scene.anims.generateFrameNumbers(texture, { start: 0, end: 2 }),
+                frames: scene.anims.generateFrameNumbers(key, { start: 0, end: 2 }),
                 frameRate: 5,
                 repeat: -1
             });
@@ -45,9 +52,33 @@ initalizeAnimations(scene, texture) {
     });
 }
 
+// Method to check the type of zombie
+checkZombieType() {
+    if (this.texture.key[0] == 'w') {
+        return 'walkerZombie';
+    } else if (this.texture.key[0] == 'r') {
+        return 'runnerZombie';
+    } else if (this.texture.key[0] == 't') {
+        return 'tankZombie';
+    } else if (this.texture.key[0] == 's') {
+        return 'spitterZombie';
+    }
+}
+
 // Method to set the direction of the enemy
 setDirection(direction) {
-    this.anims.play(`${this.texture.key}${direction}`, true);
+    console.log(`Setting direction to ${direction}`);
+    const zombieType = this.checkZombieType();
+    const newAnimKey = `${zombieType}${direction}`;
+    console.log("New animation key:", newAnimKey)
+
+    // Only change the animation if the direction has actually changed
+    if (this.currentDirection !== direction) {
+        if (this.anims.currentAnim.key !== newAnimKey){
+            this.anims.play(newAnimKey, true);
+        }
+        this.currentDirection = direction; // Update the current direction
+    }
 }
 
 // Method to calculate the path to the target
@@ -77,20 +108,33 @@ followPath() {
     this.nextX = nextPoint.x * 16;
     this.nextY = nextPoint.y * 16;
 
+    
     // Move using physics engine
     this.scene.physics.moveTo(this, this.nextX, this.nextY, this.speed);
 }
 
 // Method to update the enemy's position
 update() {
-    //console.log(`Current: (${this.x}, ${this.y}), Target: (${this.nextX}, ${this.nextY})`);
     // Check if the enemy has reached its next target position
     if (Phaser.Math.Distance.Between(this.x, this.y, this.nextX, this.nextY) < 1) {
         this.body.stop();
         this.followPath();
+    } else {
+        // Determine the direction based on the current velocity or the difference between the current and next positions
+        const deltaX = this.nextX - this.x;
+        const deltaY = this.nextY - this.y;
+
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            // Moving more horizontally
+            this.setDirection(deltaX > 0 ? 'Right' : 'Left');
+        } else {
+            // Moving more vertically
+            this.setDirection(deltaY > 0 ? 'Down' : 'Up');
+        }
     }
 }
 
+// Method to update the path
 updatPath() {
     this.calculatePath(this.targetX, this.targetY);
 }
