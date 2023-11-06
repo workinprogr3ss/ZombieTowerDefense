@@ -18,6 +18,7 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         // Play animation
         this.anims.play(`${texture}`, true);
 
+        // Used to store current direction
         this.currentDirection = initialDirection;
 
         // Set the intial direction
@@ -74,6 +75,7 @@ setDirection(direction) {
 
     // Only change the animation if the direction has actually changed
     if (this.currentDirection !== direction) {
+        // Only play the animation if it's not already playing
         if (this.anims.currentAnim.key !== newAnimKey){
             this.anims.play(newAnimKey, true);
         }
