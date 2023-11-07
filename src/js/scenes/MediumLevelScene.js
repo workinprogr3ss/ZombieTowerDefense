@@ -15,7 +15,7 @@ class MediumLevelScene extends Phaser.Scene {
         this.grid = null; // Utilize GridService to create the grid
         this.zombies = null; // Zombie container
         this.context = this; // Used for pause menu
-        this.PlayerHealthManager = new PlayerHealthManager(this); // Player health
+        this.playerHealthManager = new PlayerHealthManager(this); // Player health
         this.playerHealthText = null;
     }
 
