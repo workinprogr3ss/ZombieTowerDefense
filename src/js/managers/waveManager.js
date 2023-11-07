@@ -92,7 +92,7 @@ export default class WaveManager {
         console.log("Spawning enemy");
         const enemyType = this.waves[this.currentWave].enemies.shift();
         const enemyClass = this.zombies[enemyType];
-        const enemy = new enemyClass(this.scene, this.startX, this.startY, 'Right');        // uses global coordinates
+        const enemy = new enemyClass(this.scene, this.startX, this.startY);        // uses global coordinates
         enemy.calculatePath(this.startTileX, this.startTileY, this.endTileX, this.endTileY) // uses tile coordinates
         
         // Add the enemy to the scene

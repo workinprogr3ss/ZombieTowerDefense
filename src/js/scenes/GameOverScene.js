@@ -3,6 +3,10 @@ class GameOverScene extends Phaser.Scene {
       super({ key: 'GameOverScene' });
     }
 
+    init(data) {
+        this.level = data.level;
+    }
+
     create() {
       // Add game over text
       this.add.text(this.scale.width / 2, this.scale.height / 2, 'GAME OVER', { fontSize: '48px', fill: '#fff' }).setOrigin(0.5);
@@ -16,7 +20,7 @@ class GameOverScene extends Phaser.Scene {
   
       restartButton.on('pointerup', () => {
         // Restart the game here
-        this.scene.start('DemoLevelScene');
+        this.scene.start(this.level);
       });
   
       // Add a button to go back to the main menu
