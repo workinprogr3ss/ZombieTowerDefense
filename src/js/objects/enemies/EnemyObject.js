@@ -1,7 +1,7 @@
 import { findPath } from '../../utils/PathfindingUtil.js';
 
 export default class Enemy extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, texture, initialDirection, health, speed) {
+    constructor(scene, x, y, texture, initialDirection, health, speed, damage) {
         super(scene, x, y, texture);
     
         // Add this sprite to the scene
@@ -10,6 +10,7 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         // Initalize properties
         this.health = health || 100;
         this.speed = speed || 1;
+        this.damage = damage || 10;
         this.state = 'normal'; // or 'damaged' or 'dead'
 
         // Initialize animations
@@ -30,6 +31,8 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         // Store positions for pathing
         this.nextX = null;
         this.nextY = null;
+        this.targetTileX = null;
+        this.targetTileY = null;
         this.path = null;
 }
 
@@ -72,8 +75,8 @@ setDirection(direction) {
     const newAnimKey = `${zombieType}${direction}`;
     
     // Debugging
-    //console.log(`Setting direction to ${direction}`);
-    //console.log("New animation key:", newAnimKey)
+    // console.log(`Setting direction to ${direction}`);
+    // console.log("New animation key:", newAnimKey)
 
     // Only change the animation if the direction has actually changed
     if (this.currentDirection !== direction) {
@@ -87,7 +90,12 @@ setDirection(direction) {
 }
 
 // Method to calculate the path to the target (A* pathfinding)
+// Uses tile coordinates
 calculatePath(startX, startY, targetX, targetY) {
+    // Store the target coordinates
+    this.targetTileX = targetX;
+    this.targetTileY = targetY;
+
     findPath(this.scene.grid.getGrid(), startX, startY, targetX, targetY,  (path, error) => {
         if (error) {
             console.log("Error finding path:", error);
@@ -119,6 +127,10 @@ followPath() {
 
 // Method to update the enemy's position
 update() {
+    // Check if the enemy has reached the end of the path
+    if (this.reachedEnd()) {
+        return;
+    }
     // Check if the enemy has reached its next target position
     if (Phaser.Math.Distance.Between(this.x, this.y, this.nextX, this.nextY) < 1) {
         this.body.stop();
@@ -149,6 +161,23 @@ reduceHealth(damage) {
     if (this.health <= 0) {
         this.destroy();
     }
+}
+
+
+// Method to check if the enemy has reached the end of the path
+// If so destroy the enemy and return true
+reachedEnd() {
+    // Convert saved tile coordinates to world coordinates
+    const targetX = this.targetTileX * 16;
+    const targetY = this.targetTileY * 16;
+
+    // Check if the enemy has reached the end of the path
+    if (Phaser.Math.Distance.Between(this.x, this.y, targetX, targetY) < 1) {
+        this.scene.playerHealthManager.reducePlayerHealth(this.damage);
+        this.destroy();
+        return true;
+    }
+    return false;
 }
 
 // Add more methods here...

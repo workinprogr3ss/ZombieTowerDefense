@@ -2,18 +2,20 @@
 import Tower1 from "../objects/towers/Tower1.js"
 
 // Managers
-import WaveManager from "../managers/waveManager.js";
+import WaveManager from "../managers/WaveManager.js";
 
 // Utility Functions
 import { loadZombieSpritesheets } from "../utils/SpritesheetUtil.js";
 import GridService from "../utils/GridUtil.js";
+import PlayerHealthManager from "../managers/PlayerHealthManager.js";
 
 class MediumLevelScene extends Phaser.Scene {
     constructor() {
         super({ key: 'MediumLevelScene' });
         this.grid = null; // Utilize GridService to create the grid
         this.zombies = null; // Zombie container
-        this.context = this;
+        this.context = this; // Used for pause menu
+        this.PlayerHealthManager = new PlayerHealthManager(this); // Player health
     }
 
     //load the Demo_Level map
@@ -80,7 +82,10 @@ class MediumLevelScene extends Phaser.Scene {
         pauseButton.on('pointerup', () => {
             this.scene.launch('PauseScene', {context: this.context, scene: 'MediumLevelScene'});
             this.scene.bringToTop('PauseScene')
-        }); 
+        });
+
+        // Reset the player health when the scene is created
+        this.playerHealthManager.currentHealth = this.playerHealthManager.maxHealth;
     }
     
     update () {
@@ -91,6 +96,10 @@ class MediumLevelScene extends Phaser.Scene {
 
         // Update the wave manager
         this.waveManager.update();
+
+        // Debugging
+        console.log(this.zombies)
+        console.log(this.playerHealthManager.currentHealth);
     }
 }
 
