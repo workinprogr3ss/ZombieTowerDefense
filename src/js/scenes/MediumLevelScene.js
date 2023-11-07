@@ -7,7 +7,7 @@ import WaveManager from "../managers/WaveManager.js";
 // Utility Functions
 import { loadZombieSpritesheets } from "../utils/SpritesheetUtil.js";
 import GridService from "../utils/GridUtil.js";
-import PlayerHealthManager from "../managers/PlayerHealthManager.js";
+import DisplayManager from "../managers/DisplayManager.js";
 
 class MediumLevelScene extends Phaser.Scene {
     constructor() {
@@ -15,8 +15,8 @@ class MediumLevelScene extends Phaser.Scene {
         this.grid = null; // Utilize GridService to create the grid
         this.zombies = null; // Zombie container
         this.context = this; // Used for pause menu
-        this.playerHealthManager = new PlayerHealthManager(this); // Player health
-        this.playerHealthText = null;
+        
+        this.displayManager = new DisplayManager(this); // Display Manager
     }
 
     //load the Medium map
@@ -72,30 +72,12 @@ class MediumLevelScene extends Phaser.Scene {
         console.log("Start Tile: ", this.grid.grid[startTileY][startTileX]);
         console.log("End Tile: ", this.grid.grid[endTileY][endTileX]);
 
-        // Zombie container
+        // Zombie Container
         this.zombies = this.physics.add.group(); // Zombie container
         this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY);
         console.log("Wave Manager:", this.waveManager);
 
-        //Pause Button
-        const pauseButton = this.add.image(760,30, 'pauseButton').setInteractive({cursor: 'pointer'}).setOrigin(0.5);
-        pauseButton.on('pointerdown', () => {pauseButton.setFrame(1)});
-        pauseButton.on('pointerout', () => {pauseButton.setFrame(0)});
-        pauseButton.on('pointerup', () => {
-            this.scene.launch('PauseScene', {context: this.context, scene: 'MediumLevelScene'});
-            this.scene.bringToTop('PauseScene')
-        });
-
-        // Player Health Text
-        this.playerHealthText = this.add.text(10, 10, `Health: ${this.playerHealthManager.currentHealth}`, {fill: '#ffffff'})
-        
-        // Reset the player health when the scene is created
-        this.playerHealthManager.currentHealth = this.playerHealthManager.maxHealth;
-
-        // Event listener for updating the player health text
-        this.events.on('updateHealthBar', (newHealth) => {
-            this.playerHealthText.setText(`Health: ${newHealth}`);
-        });
+        this.displayManager.create('MediumLevelScene');
     }
     
     update () {
@@ -109,7 +91,6 @@ class MediumLevelScene extends Phaser.Scene {
 
         // Debugging
         console.log(this.zombies)
-        console.log(this.playerHealthManager.currentHealth);
     }
 }
 

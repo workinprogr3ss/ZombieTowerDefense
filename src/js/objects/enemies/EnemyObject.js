@@ -1,7 +1,7 @@
 import { findPath } from '../../utils/PathfindingUtil.js';
 
 export default class Enemy extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, texture, initialDirection, health, speed, damage) {
+    constructor(scene, x, y, texture, initialDirection, health, speed, damage, value) {
         super(scene, x, y, texture);
     
         // Add this sprite to the scene
@@ -11,6 +11,7 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.health = health || 100;
         this.speed = speed || 1;
         this.damage = damage || 10;
+        this.value = value || 100;
         this.state = 'normal'; // or 'damaged' or 'dead'
 
         // Initialize animations
@@ -37,12 +38,14 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
 }
 
 // Method to initialize animations
-initializeAnimations(scene, texture) {
+initializeAnimations(scene) {
     const directions = ['Right','Left', 'Up', 'Down'];
     const zombieType = this.checkZombieType();
 
     directions.forEach((direction) => {
         const key = `${zombieType}${direction}`;
+        
+        // Debugging
         //console.log(`Initializing animation: ${key}`)
 
         if (!scene.anims.exists(key)) {
@@ -173,7 +176,7 @@ reachedEnd() {
 
     // Check if the enemy has reached the end of the path
     if (Phaser.Math.Distance.Between(this.x, this.y, targetX, targetY) < 1) {
-        this.scene.playerHealthManager.reducePlayerHealth(this.damage);
+        this.scene.displayManager.playerHealthManager.reducePlayerHealth(this.damage);
         this.destroy();
         return true;
     }
