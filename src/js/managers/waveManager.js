@@ -98,8 +98,8 @@ export default class WaveManager {
         // Add the enemy to the scene
         this.scene.zombies.add(enemy);
 
-        this.nextSpawnTime = this.scene.time.now + this.waves[this.currentWave].spawnInterval; // Set the time for the next spawn
-
+        // Set the time for the next spawn
+        this.nextSpawnTime = this.scene.time.now + this.waves[this.currentWave].spawnInterval;
     }
     
     update() {

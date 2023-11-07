@@ -68,9 +68,11 @@ checkZombieType() {
 
 // Method to set the direction of the enemy
 setDirection(direction) {
-    //console.log(`Setting direction to ${direction}`);
     const zombieType = this.checkZombieType();
     const newAnimKey = `${zombieType}${direction}`;
+    
+    // Debugging
+    //console.log(`Setting direction to ${direction}`);
     //console.log("New animation key:", newAnimKey)
 
     // Only change the animation if the direction has actually changed
@@ -79,11 +81,12 @@ setDirection(direction) {
         if (this.anims.currentAnim.key !== newAnimKey){
             this.anims.play(newAnimKey, true);
         }
-        this.currentDirection = direction; // Update the current direction
+        // Update the current direction
+        this.currentDirection = direction;
     }
 }
 
-// Method to calculate the path to the target
+// Method to calculate the path to the target (A* pathfinding)
 calculatePath(startX, startY, targetX, targetY) {
     findPath(this.scene.grid.getGrid(), startX, startY, targetX, targetY,  (path, error) => {
         if (error) {
@@ -109,7 +112,6 @@ followPath() {
     // Convert tile coordinates to world coordinates
     this.nextX = nextPoint.x * 16;
     this.nextY = nextPoint.y * 16;
-
     
     // Move using physics engine
     this.scene.physics.moveTo(this, this.nextX, this.nextY, this.speed);

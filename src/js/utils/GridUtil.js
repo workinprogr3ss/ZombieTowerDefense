@@ -18,13 +18,15 @@ export default class GridService {
         grid[y] = [];
       }
 
-      grid[y][x] = tile.index === this.nonWalkableTileIndex ? 1 : 0; // 1 is non-walkable, 0 is walkable, 634 is the index of the non-walkable tile
+      grid[y][x] = tile.index === this.nonWalkableTileIndex ? 1 : 0; // 1 is non-walkable, 0 is walkable
     });
     
-    console.log("Grid:", grid);  // Debugging line
+    // Debugging line
+    console.log("Grid:", grid);
     return grid;
   }
 
+  // Method to return the grid
   getGrid() {
     return this.grid;
   }
