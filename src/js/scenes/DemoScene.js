@@ -21,6 +21,7 @@ class DemoLevelScene extends Phaser.Scene {
         super({ key: 'DemoLevelScene' });
         this.grid = null; // Utilize GridService to create the grid
         this.zombies = null; // Zombie container
+        this.context = this;
     }
 
     //load the Demo_Level map
@@ -37,6 +38,9 @@ class DemoLevelScene extends Phaser.Scene {
 
         // Load spritesheets for zombies
         loadZombieSpritesheets(this);
+
+        // Pause Menu Items
+        this.load.spritesheet('pauseButton', 'src/assets/images/icons/pauseButton.png', {frameWidth: 34, frameHeight: 34});
     }
 
     create() {
@@ -87,6 +91,15 @@ class DemoLevelScene extends Phaser.Scene {
         this.zombies = this.physics.add.group(); // Zombie container
         this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY);
         console.log("Wave Manager:", this.waveManager);
+
+        //Pause Button
+        const pauseButton = this.add.image(760,30, 'pauseButton').setInteractive({cursor: 'pointer'}).setOrigin(0.5);
+        pauseButton.on('pointerdown', () => {pauseButton.setFrame(1)});
+        pauseButton.on('pointerout', () => {pauseButton.setFrame(0)});
+        pauseButton.on('pointerup', () => {
+            this.scene.launch('PauseScene', {context: this.context, scene: 'DemoLevelScene'});
+            this.scene.bringToTop('PauseScene')
+        }); 
     }
     
     update () {
