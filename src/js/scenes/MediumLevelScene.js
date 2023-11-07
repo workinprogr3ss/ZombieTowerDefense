@@ -1,30 +1,25 @@
-// Enemy Objects
-import Enemy from "../objects/enemies/EnemyObject.js";
-import WalkerZombie from "../objects/enemies/WalkerZombie.js";
-import RunnerZombie from "../objects/enemies/RunnerZombie.js";
-import TankZombie from "../objects/enemies/TankZombie.js";
-import SpitterZombie from "../objects/enemies/SpitterZombie.js";
-
 // Towers Objects
 import Tower1 from "../objects/towers/Tower1.js"
 
 // Managers
-import WaveManager from "../managers/waveManager.js";
+import WaveManager from "../managers/WaveManager.js";
 
 // Utility Functions
-import { findPath } from "../utils/PathfindingUtil.js";
 import { loadZombieSpritesheets } from "../utils/SpritesheetUtil.js";
 import GridService from "../utils/GridUtil.js";
+import PlayerHealthManager from "../managers/PlayerHealthManager.js";
 
 class MediumLevelScene extends Phaser.Scene {
     constructor() {
         super({ key: 'MediumLevelScene' });
         this.grid = null; // Utilize GridService to create the grid
         this.zombies = null; // Zombie container
-        this.context = this;
+        this.context = this; // Used for pause menu
+        this.playerHealthManager = new PlayerHealthManager(this); // Player health
+        this.playerHealthText = null;
     }
 
-    //load the Demo_Level map
+    //load the Medium map
     preload(){
         // Load the tilemap and tileset image
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
@@ -71,6 +66,7 @@ class MediumLevelScene extends Phaser.Scene {
         // Spawning Debugging
         console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);
         console.log(`Target destination tile is (${endTileX}, ${endTileY})`); 
+        
         // Pathfinding Debugging
         console.log("Grid dimensions:", this.grid.grid.length, this.grid.grid[0]?.length);
         console.log("Start Tile: ", this.grid.grid[startTileY][startTileX]);
@@ -88,7 +84,18 @@ class MediumLevelScene extends Phaser.Scene {
         pauseButton.on('pointerup', () => {
             this.scene.launch('PauseScene', {context: this.context, scene: 'MediumLevelScene'});
             this.scene.bringToTop('PauseScene')
-        }); 
+        });
+
+        // Player Health Text
+        this.playerHealthText = this.add.text(10, 10, `Health: ${this.playerHealthManager.currentHealth}`, {fill: '#ffffff'})
+        
+        // Reset the player health when the scene is created
+        this.playerHealthManager.currentHealth = this.playerHealthManager.maxHealth;
+
+        // Event listener for updating the player health text
+        this.events.on('updateHealthBar', (newHealth) => {
+            this.playerHealthText.setText(`Health: ${newHealth}`);
+        });
     }
     
     update () {
@@ -99,6 +106,10 @@ class MediumLevelScene extends Phaser.Scene {
 
         // Update the wave manager
         this.waveManager.update();
+
+        // Debugging
+        console.log(this.zombies)
+        console.log(this.playerHealthManager.currentHealth);
     }
 }
 

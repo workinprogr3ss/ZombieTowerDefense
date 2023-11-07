@@ -8,6 +8,7 @@ import OverrideScene from './js/scenes/OverrideScene.js';
 import SettingsScene from './js/scenes/SettingsScene.js';
 import CreditsScene from './js/scenes/CreditsScene.js';
 import PauseScene from './js/scenes/PauseScene.js';
+import GameOverScene from './js/scenes/GameOverScene.js';
 
 //Game Scenes
 import DemoLevelScene from './js/scenes/DemoScene.js';
@@ -25,6 +26,7 @@ var config = {
         new SaveGameScene,
         new OverrideScene,
         new SettingsScene,
+        new GameOverScene,
         new CreditsScene,
         new PauseScene,
         new DemoLevelScene,
