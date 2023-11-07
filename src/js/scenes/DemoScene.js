@@ -1,10 +1,3 @@
-// Enemy Objects
-import Enemy from "../objects/enemies/EnemyObject.js";
-import WalkerZombie from "../objects/enemies/WalkerZombie.js";
-import RunnerZombie from "../objects/enemies/RunnerZombie.js";
-import TankZombie from "../objects/enemies/TankZombie.js";
-import SpitterZombie from "../objects/enemies/SpitterZombie.js";
-
 // Towers Objects
 import Tower1 from "../objects/towers/Tower1.js"
 
@@ -12,7 +5,6 @@ import Tower1 from "../objects/towers/Tower1.js"
 import WaveManager from "../managers/waveManager.js";
 
 // Utility Functions
-import { findPath } from "../utils/PathfindingUtil.js";
 import { loadZombieSpritesheets } from "../utils/SpritesheetUtil.js";
 import GridService from "../utils/GridUtil.js";
 
