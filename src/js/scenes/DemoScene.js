@@ -103,6 +103,7 @@ class DemoLevelScene extends Phaser.Scene {
         // Reset the player health when the scene is created
         this.playerHealthManager.currentHealth = this.playerHealthManager.maxHealth;
 
+        // Event listener for updating the player health text
         this.events.on('updateHealthBar', (newHealth) => {
             this.playerHealthText.setText(`Health: ${newHealth}`);
         });

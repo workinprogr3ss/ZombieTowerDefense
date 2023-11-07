@@ -16,9 +16,10 @@ class MediumLevelScene extends Phaser.Scene {
         this.zombies = null; // Zombie container
         this.context = this; // Used for pause menu
         this.PlayerHealthManager = new PlayerHealthManager(this); // Player health
+        this.playerHealthText = null;
     }
 
-    //load the Demo_Level map
+    //load the Medium map
     preload(){
         // Load the tilemap and tileset image
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
@@ -65,6 +66,7 @@ class MediumLevelScene extends Phaser.Scene {
         // Spawning Debugging
         console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);
         console.log(`Target destination tile is (${endTileX}, ${endTileY})`); 
+        
         // Pathfinding Debugging
         console.log("Grid dimensions:", this.grid.grid.length, this.grid.grid[0]?.length);
         console.log("Start Tile: ", this.grid.grid[startTileY][startTileX]);
@@ -84,8 +86,16 @@ class MediumLevelScene extends Phaser.Scene {
             this.scene.bringToTop('PauseScene')
         });
 
+        // Player Health Text
+        this.playerHealthText = this.add.text(10, 10, `Health: ${this.playerHealthManager.currentHealth}`, {fill: '#ffffff'})
+        
         // Reset the player health when the scene is created
         this.playerHealthManager.currentHealth = this.playerHealthManager.maxHealth;
+
+        // Event listener for updating the player health text
+        this.events.on('updateHealthBar', (newHealth) => {
+            this.playerHealthText.setText(`Health: ${newHealth}`);
+        });
     }
     
     update () {

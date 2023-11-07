@@ -25,7 +25,7 @@ class GameOverScene extends Phaser.Scene {
   
       mainMenuButton.on('pointerdown', () => {
         // Go back to the main menu scene
-        this.scene.start('MenuScene'); // Replace 'MenuScene' with your actual main menu scene key
+        this.scene.start('MenuScene');
       });
     }
   }
