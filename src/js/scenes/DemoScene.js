@@ -29,10 +29,11 @@ class DemoLevelScene extends Phaser.Scene {
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
         this.load.tilemapTiledJSON('demomap', 'src/assets/maps/DemoMapWithProps.json');
 
-        // (Randy)
+        // Load the tile related stuff
         this.load.image('tower_hotspot', 'src/assets/images/towers/blue.png');
-        this.load.image('tower_ui', 'src/assets/images/towers/menu.png');
         this.load.image('tower1', 'src/assets/images/towers/tower1.png');
+        this.load.image('tower2', 'src/assets/images/towers/tower2.png');
+        this.load.image('tower3', 'src/assets/images/towers/tower3.png');
 
         // Load spritesheets for zombies
         loadZombieSpritesheets(this);
@@ -46,7 +47,6 @@ class DemoLevelScene extends Phaser.Scene {
         // Load Layers
         const walkableLayer = map.createLayer('Walkable Layer', tileset); // Used for pathfinding
         const propLayer = map.createLayer('Prop Layer', tileset);
-        const towerLayer = map.createLayer('Tower Layer', tileset);
         
         // Debugging map and tileset creation
         console.log('Map:', map);  // Debugging line
@@ -54,16 +54,9 @@ class DemoLevelScene extends Phaser.Scene {
         console.log('Walkable Layer:', walkableLayer);  // Debugging line
 
         // Towers-(Randy)------------------------------------------------
-        const tower_hotspot = this.add.sprite(400, 304, 'tower_hotspot').setInteractive();
-        tower_hotspot.setScale(0.05);
-        const tower_ui = this.add.sprite(100, 560, 'tower_ui');
-        tower_ui.setScale(0.2, 0.2);
-
-        const tower1_select = this.add.sprite(60, 560, 'tower1').setInteractive();
-        tower1_select.setScale(0.15);
-
-        tower1_select.on('pointerdown', () => {
-            this.createNewSprite();
+        const hotSpotLayer = map.getObjectLayer('HotSpot Layer');
+        hotSpotLayer.objects.forEach(object => {
+            this.createHotSpot(object);
         });
         // Towers-(Randy)------------------------------------------------
 
@@ -72,7 +65,6 @@ class DemoLevelScene extends Phaser.Scene {
         const startTileY = 5
         const endTileX = 47
         const endTileY = 32
-        
         
         // World Coorindates for spawning enemies
         const startX = startTileX * 16; 
@@ -107,17 +99,57 @@ class DemoLevelScene extends Phaser.Scene {
         this.waveManager.update();
     }
 
-    // create new sprites
-    createNewSprite() {
-        const tower1 = this.add.sprite(60, 560, 'tower1').setInteractive();
-        tower1.setScale(0.15);
-        
-        // make the towers draggable
-        this.input.setDraggable(tower1);
+    // create hotspot
+    createHotSpot(object) {
+        const tower = this.add.sprite(object.x, object.y, 'tower_hotspot');
+        tower.setScale(0.02);
+        tower.setInteractive();
+        tower.on('pointerdown', () => {
+            const popUpMenu = this.add.group();
+            popUpMenu.setVisible(false);
 
-        this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
-            gameObject.x = dragX;
-            gameObject.y = dragY;
+            const menuBackground = this.add.rectangle(105, 540, 200, 140, 0x333333);
+            popUpMenu.add(menuBackground);
+            menuBackground.setDepth(0);
+
+            const menuItem1 = this.add.text(10, 490, 'Sniper Tower', {fill: '#ffffff'});
+            const menuItem2 = this.add.text(10, 520, 'Missile Tower', {fill: '#ffffff'});
+            const menuItem3 = this.add.text(10, 550, 'Flamethrower Tower', {fill: '#ffffff'});
+            const menuExit = this.add.text(10, 580, "Cancel", {fill: '#ffffff'});
+
+            popUpMenu.add(menuItem1);
+            popUpMenu.add(menuItem2);
+            popUpMenu.add(menuItem3);
+            popUpMenu.add(menuExit);
+
+            menuItem1.setInteractive();
+            menuItem2.setInteractive();
+            menuItem3.setInteractive();
+            menuExit.setInteractive();
+
+            popUpMenu.setVisible(true);
+
+            menuItem1.on('pointerdown', () => {
+                tower.setTexture('tower1');
+                tower.setScale(0.1);
+                popUpMenu.setVisible(false);
+            });
+
+            menuItem2.on('pointerdown', () => {
+                tower.setTexture('tower2');
+                tower.setScale(0.15);
+                popUpMenu.setVisible(false);
+            });
+
+            menuItem3.on('pointerdown', () => {
+                tower.setTexture('tower3');
+                tower.setScale(0.2);
+                popUpMenu.setVisible(false);
+            });
+
+            menuExit.on('pointerdown', () => {
+                popUpMenu.setVisible(false);
+            });
         });
     }
 }
