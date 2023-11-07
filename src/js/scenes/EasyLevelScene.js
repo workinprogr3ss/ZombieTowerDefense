@@ -16,10 +16,6 @@ class EasyLevelScene extends Phaser.Scene {
         const tileset = map.addTilesetImage("color_tiles1", "color_tiles");
         const layer = map.createLayer("TopLayer", tileset, 0, 0);
     }
-
-    update() {
-
-    }
 }
 
 export default EasyLevelScene;

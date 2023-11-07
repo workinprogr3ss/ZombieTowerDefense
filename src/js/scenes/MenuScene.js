@@ -10,6 +10,8 @@ class MenuScene extends BaseScene {
         //Load Background Image
         this.backgroundPreload();
 
+        this.load.image('title', 'src/assets/images/icons/TitleBackground.png');
+
         //Load Buttons
         this.load.spritesheet('newGameButton', 'src/assets/images/icons/newGameButton.png', {frameWidth: 128, frameHeight: 48});
         this.load.spritesheet('loadGameButton', 'src/assets/images/icons/loadGameButton.png', {frameWidth: 128, frameHeight: 48});
@@ -22,10 +24,10 @@ class MenuScene extends BaseScene {
         this.backgroundCreate();
 
         //Create Buttons
-        const newGameButton = this.add.sprite(400, 300, 'newGameButton');
-        const loadGameButton = this.add.sprite(400, 350, 'loadGameButton');
-        const settingsButton = this.add.sprite(400, 400, 'settingsButton');
-        const creditsButton = this.add.sprite(400, 450, 'creditsButton');
+        const newGameButton = this.add.sprite(400, 380, 'newGameButton');
+        const loadGameButton = this.add.sprite(400, 430, 'loadGameButton');
+        const settingsButton = this.add.sprite(400, 480, 'settingsButton');
+        const creditsButton = this.add.sprite(400, 530, 'creditsButton');
         
         //Call to Set Button Interactions
         this.setButtonInteractions(newGameButton, 'PreLevelSelectScene', null, 0, true, null);
@@ -34,8 +36,7 @@ class MenuScene extends BaseScene {
         this.setButtonInteractions(creditsButton, 'CreditsScene', null, 0, true, null);
 
         //Game Title
-        this.add.text(400, 200, 'Post-Pandemic Perimeter', {fontSize: '36px', fill: '#FFFFFF'})
-            .setOrigin(0.5);
+        this.add.image(400,300, 'title').setOrigin(0.5);
 
         //Create Default PlayerData Registry
         this.registry.set('playerData', {
