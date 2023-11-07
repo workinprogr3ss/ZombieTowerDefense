@@ -14,7 +14,7 @@ class GameOverScene extends Phaser.Scene {
       let restartButton = this.add.text(this.scale.width / 2, this.scale.height / 2 + 120, 'Restart', { fontSize: '32px', fill: '#0f0' }).setOrigin(0.5);
       restartButton.setInteractive();
   
-      restartButton.on('pointerdown', () => {
+      restartButton.on('pointerup', () => {
         // Restart the game here
         this.scene.start('DemoLevelScene');
       });
@@ -23,7 +23,7 @@ class GameOverScene extends Phaser.Scene {
       let mainMenuButton = this.add.text(this.scale.width / 2, this.scale.height / 2 + 180, 'Main Menu', { fontSize: '32px', fill: '#0f0' }).setOrigin(0.5);
       mainMenuButton.setInteractive();
   
-      mainMenuButton.on('pointerdown', () => {
+      mainMenuButton.on('pointerup', () => {
         // Go back to the main menu scene
         this.scene.start('MenuScene');
       });
