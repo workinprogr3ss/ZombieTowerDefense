@@ -53,5 +53,10 @@ export default class DisplayManager {
             this.scene.scene.bringToTop('PauseScene')
         });
 
+        //Key Bindings
+        //this.input.keyboard.on('keydown_P', () => {
+        //    this.scene.scene.launch('PauseScene', {context: this.scene.context, scene: sceneName});
+        //    this.scene.scene.bringToTop('PauseScene')
+        //});
     }
 }

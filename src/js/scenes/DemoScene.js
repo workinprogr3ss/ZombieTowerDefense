@@ -31,6 +31,9 @@ class DemoLevelScene extends Phaser.Scene {
         this.load.image('tower2', 'src/assets/images/towers/tower2.png');
         this.load.image('tower3', 'src/assets/images/towers/tower3.png');
 
+        // Load Player HUD
+        this.load.image('playerHUD', 'src/assets/images/icons/playerHUD.png');
+
         // Load spritesheets for zombies
         loadZombieSpritesheets(this);
 
