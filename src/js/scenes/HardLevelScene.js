@@ -20,7 +20,7 @@ class HardLevelScene extends Phaser.Scene {
     preload(){
         // Load the tilemap and tileset image
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
-        this.load.tilemapTiledJSON('hardlevelmap', 'src/assets/maps/HardLevel.json');
+        this.load.tilemapTiledJSON('hardmap', 'src/assets/maps/HardLevel.json');
 
         // Load the tile related stuff
         this.load.image('tower_hotspot', 'src/assets/images/towers/blue.png');
@@ -40,7 +40,7 @@ class HardLevelScene extends Phaser.Scene {
 
     create() {
         // Create the map
-        const map = this.make.tilemap({key: 'hardlevelmap'});
+        const map = this.make.tilemap({key: 'hardmap'});
         const tileset = map.addTilesetImage('ZombieApocalypseTilesetReferenceFixed', 'ZombieApocalypseTilesetReferenceFixed');
         
         // Load Layers
