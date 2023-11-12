@@ -28,6 +28,9 @@ class MediumLevelScene extends Phaser.Scene {
         // Load spritesheets for zombies
         loadZombieSpritesheets(this);
 
+        // Load Player HUD
+        this.load.image('playerHUD', 'src/assets/images/icons/playerHUD.png');
+
         // Pause Menu Items
         this.load.spritesheet('pauseButton', 'src/assets/images/icons/pauseButton.png', {frameWidth: 34, frameHeight: 34});
     }
