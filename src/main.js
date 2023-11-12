@@ -13,6 +13,7 @@ import GameOverScene from './js/scenes/GameOverScene.js';
 //Game Scenes
 import DemoLevelScene from './js/scenes/DemoScene.js';
 import MediumLevelScene from './js/scenes/MediumLevelScene.js';
+import HardLevelScene from './js/scenes/HardLevelScene.js';
 
 var config = {
     type: Phaser.AUTO,
@@ -30,7 +31,8 @@ var config = {
         new CreditsScene,
         new PauseScene,
         new DemoLevelScene,
-        new MediumLevelScene
+        new MediumLevelScene,
+        new HardLevelScene
     ],
     physics: {
         default: 'arcade',
