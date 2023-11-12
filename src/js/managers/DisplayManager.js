@@ -14,13 +14,13 @@ export default class DisplayManager {
     create(sceneName) {
 
         //Player HUD
-        this.scene.add.image(411, 5, 'playerHUD').setOrigin(0);
+        this.scene.add.image(0, 0, 'playerHUD').setOrigin(0);
 
         // Reset the player health when the scene is created
         this.playerHealthManager.currentHealth = this.playerHealthManager.maxHealth;
 
         // Player Health Text
-        this.playerHealthText = this.scene.add.text(470, 30, `${this.playerHealthManager.currentHealth}`, {
+        this.playerHealthText = this.scene.add.text(566, 577, `${this.playerHealthManager.currentHealth}`, {
             fill: '#000000',
             fontSize: '22px',
         }).setOrigin(0, 0.5);
@@ -34,7 +34,7 @@ export default class DisplayManager {
         this.playerCurrencyManager.currentCurrency = 0;
     
         // Player Currency Text
-        this.playerCurrencyText = this.scene.add.text(630, 30, `${this.playerCurrencyManager.currentCurrency}`, {
+        this.playerCurrencyText = this.scene.add.text(662, 577, `${this.playerCurrencyManager.currentCurrency}`, {
             fill: '#000000',
             fontSize: '22px',
         }).setOrigin(0, 0.5);
@@ -45,7 +45,7 @@ export default class DisplayManager {
         });
 
         //Pause Button
-        const pauseButton = this.scene.add.image(763, 29, 'pauseButton').setInteractive({cursor: 'pointer'}).setOrigin(0.5);
+        const pauseButton = this.scene.add.image(771, 575, 'pauseButton').setInteractive({cursor: 'pointer'}).setOrigin(0.5);
         pauseButton.on('pointerdown', () => {pauseButton.setFrame(1)});
         pauseButton.on('pointerout', () => {pauseButton.setFrame(0)});
         pauseButton.on('pointerup', () => {
