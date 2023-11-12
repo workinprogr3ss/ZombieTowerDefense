@@ -40,17 +40,23 @@ class BaseScene extends Phaser.Scene {
     }
 
     checkStorage() {
-        if (JSON.parse(localStorage.getItem('saveSlot1')).active) {
-            this.saveSlot1 = JSON.parse(localStorage.getItem('saveSlot1'));
-            this.slot1Text = `${this.saveSlot1.completed}/3`
+        if (JSON.parse(localStorage.getItem('saveSlot1')) != null) {
+            if (JSON.parse(localStorage.getItem('saveSlot1')).active) {
+                this.saveSlot1 = JSON.parse(localStorage.getItem('saveSlot1'));
+                this.slot1Text = `${this.saveSlot1.completed}/3`
+            }
         }
-        if (JSON.parse(localStorage.getItem('saveSlot2')).active) {
-            this.saveSlot2 = JSON.parse(localStorage.getItem('saveSlot2'));
-            this.slot2Text = `${this.saveSlot2.completed}/3`
+        if (JSON.parse(localStorage.getItem('saveSlot2')) != null) {
+            if (JSON.parse(localStorage.getItem('saveSlot2')).active) {
+                this.saveSlot2 = JSON.parse(localStorage.getItem('saveSlot2'));
+                this.slot2Text = `${this.saveSlot2.completed}/3`
+            }
         }
-        if (JSON.parse(localStorage.getItem('saveSlot3')).active) {
-            this.saveSlot3 = JSON.parse(localStorage.getItem('saveSlot3'));
-            this.slot3Text = `${this.saveSlot3.completed}/3`
+        if (JSON.parse(localStorage.getItem('saveSlot3')) != null) {
+            if (JSON.parse(localStorage.getItem('saveSlot3')).active) {
+                this.saveSlot3 = JSON.parse(localStorage.getItem('saveSlot3'));
+                this.slot3Text = `${this.saveSlot3.completed}/3`
+            }
         }
     }
 

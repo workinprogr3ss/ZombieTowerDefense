@@ -38,6 +38,8 @@ class MenuScene extends BaseScene {
         //Game Title
         this.add.image(400,300, 'title').setOrigin(0.5);
 
+        
+
         //Create Default PlayerData Registry
         this.registry.set('playerData', {
             levelOne: true,
