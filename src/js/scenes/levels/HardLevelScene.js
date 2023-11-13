@@ -1,3 +1,6 @@
+// Towers Objects
+import Tower1 from "../../objects/towers/Tower1.js"
+
 // Managers
 import WaveManager from "../../managers/waveManager.js";
 
@@ -23,7 +26,7 @@ class HardLevelScene extends Phaser.Scene {
         this.load.tilemapTiledJSON('hardmap', 'src/assets/maps/HardLevel.json');
 
         // Load the tile related stuff
-        this.load.image('tower_hotspot', 'src/assets/images/towers/blue.png');
+        this.load.image('tower_hotspot', 'src/assets/images/towers/hotspot.png');
         this.load.image('tower1', 'src/assets/images/towers/tower1.png');
         this.load.image('tower2', 'src/assets/images/towers/tower2.png');
         this.load.image('tower3', 'src/assets/images/towers/tower3.png');
