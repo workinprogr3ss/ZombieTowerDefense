@@ -477,7 +477,7 @@
         {
          "columns":45,
          "firstgid":1,
-         "image":"..\/VisualStudioCodeProjects\/ZombieTowerDefense\/ZombieTowerDefense\/src\/assets\/images\/tilesets\/ZombieApocalypseTilesetReferenceFixed.png",
+         "image":"ZombieApocalypseTilesetReferenceFixed.png",
          "imageheight":288,
          "imagewidth":720,
          "margin":0,
@@ -488,8 +488,17 @@
          "tilewidth":16
         }, 
         {
+         "columns":45,
          "firstgid":811,
-         "source":"ZombieApocalypseTilesetReferenceFixed.tsx"
+         "image":"ZombieApocalypseTilesetReferenceFixed.png",
+         "imageheight":288,
+         "imagewidth":720,
+         "margin":0,
+         "name":"ZombieApocalypseTilesetReferenceFixed",
+         "spacing":0,
+         "tilecount":810,
+         "tileheight":16,
+         "tilewidth":16
         }],
  "tilewidth":16,
  "type":"map",
