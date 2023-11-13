@@ -27,7 +27,7 @@ class LevelSelectScene extends BaseScene {
         
         //Call to Set Button Interactions (button, scene, data, startingFrame, unlock, source)
         //this.setButtonInteractions(demoLevelButton, 'DemoLevelScene', null, 0, true, null);
-        this.setButtonInteractions(levelOne, 'DemoLevelScene', null, 0, true, null);
+        this.setButtonInteractions(levelOne, 'EasyLevelScene', null, 0, true, null);
         this.setButtonInteractions(levelTwo, 'MediumLevelScene', null, levelProgress.levelTwoStartingFrame, levelProgress.levelTwoUnlock, null);
         this.setButtonInteractions(levelThree, 'HardLevelScene', null, levelProgress.levelThreeStartingFrame, levelProgress.levelThreeUnlock, null);
         this.setButtonInteractions(saveButton, 'SaveGameScene', null, 0, true, null);
