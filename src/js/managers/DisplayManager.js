@@ -1,13 +1,22 @@
 import PlayerHealthManager from "../managers/PlayerHealthManager.js";
 import PlayerCurrencyManager from "../managers/PlayerCurrencyManager.js";
+import EnemyCountManager from "../managers/EnemyCountManager.js";
 
 export default class DisplayManager {
     constructor (scene) {
         this.scene = scene;
+        
+        // Player Health Manager
         this.playerHealthManager = new PlayerHealthManager(scene);
         this.playerHealthText = null;
+        
+        // Player Currency Manager
         this.playerCurrencyManager = new PlayerCurrencyManager(scene);
         this.playerCurrencyText = null;
+        
+        // Enemy Count Manager
+        this.enemyCountManager = new EnemyCountManager(scene);
+        this.enemyCountText = null;
     }
 
 
@@ -15,6 +24,20 @@ export default class DisplayManager {
 
         //Player HUD
         this.scene.add.image(0, 0, 'playerHUD').setOrigin(0);
+
+        // Reset the enemy count when the scene is created
+        this.enemyCountManager.currentEnemyCount = 0;
+
+        // Enemy Count Text
+        this.enemyCountText = this.scene.add.text(470, 575, `${this.enemyCountManager.currentEnemyCount}`, {
+            fill: '#000000',
+            fontSize: '22px',
+        }).setOrigin(0, 0.5);
+
+        // Event listener for updating the enemy count text
+        this.scene.events.on('updateEnemyCountDisplay', (newEnemyCount) => {
+            this.enemyCountText.setText(`${newEnemyCount}`);
+        });
 
         // Reset the player health when the scene is created
         this.playerHealthManager.currentHealth = this.playerHealthManager.maxHealth;

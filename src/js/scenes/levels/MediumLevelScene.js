@@ -93,7 +93,7 @@ class MediumLevelScene extends Phaser.Scene {
         this.waveManager.update();
 
         // Debugging
-        console.log(this.zombies)
+        //console.log(this.zombies.children.entries)
     }
 }
 

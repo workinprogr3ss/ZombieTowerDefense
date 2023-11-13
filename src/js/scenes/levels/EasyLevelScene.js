@@ -106,7 +106,7 @@ class EasyLevelScene extends Phaser.Scene {
         this.waveManager.update();
 
         // Debugging
-        console.log(this.zombies.children.entries)
+        //console.log(this.zombies.children.entries)
     }
 
     // create hotspot
