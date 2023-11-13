@@ -2,7 +2,7 @@
 import Tower1 from "../../objects/towers/Tower1.js"
 
 // Managers
-import WaveManager from "../../managers/WaveManager.js";
+import WaveManager from "../../managers/waveManager.js";
 
 // Utility Functions
 import { loadZombieSpritesheets } from "../../utils/SpritesheetUtil.js";
@@ -23,7 +23,7 @@ class EasyLevelScene extends Phaser.Scene {
     preload(){
         // Load the tilemap and tileset image
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
-        this.load.tilemapTiledJSON('easymap', 'src/assets/maps/DemoMapWithProps.json');
+        this.load.tilemapTiledJSON('easymap', 'src/assets/maps/EasyLevel.json');
 
         // Load the tile related stuff
         this.load.image('tower_hotspot', 'src/assets/images/towers/hotspot.png');
