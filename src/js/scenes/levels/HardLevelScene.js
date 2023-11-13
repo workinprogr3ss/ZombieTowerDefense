@@ -1,5 +1,5 @@
 // Managers
-import WaveManager from "../../managers/WaveManager.js";
+import WaveManager from "../../managers/waveManager.js";
 
 // Utility Functions
 import { loadZombieSpritesheets } from "../../utils/SpritesheetUtil.js";
