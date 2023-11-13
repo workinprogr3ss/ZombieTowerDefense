@@ -1,13 +1,13 @@
 // Towers Objects
-import Tower1 from "../objects/towers/Tower1.js"
+import Tower1 from "../../objects/towers/Tower1.js"
 
 // Managers
-import WaveManager from "../managers/WaveManager.js";
+import WaveManager from "../../managers/WaveManager.js";
 
 // Utility Functions
-import { loadZombieSpritesheets } from "../utils/SpritesheetUtil.js";
-import GridService from "../utils/GridUtil.js";
-import DisplayManager from "../managers/DisplayManager.js";
+import { loadZombieSpritesheets } from "../../utils/SpritesheetUtil.js";
+import GridService from "../../utils/GridUtil.js";
+import DisplayManager from "../../managers/DisplayManager.js";
 
 class MediumLevelScene extends Phaser.Scene {
     constructor() {

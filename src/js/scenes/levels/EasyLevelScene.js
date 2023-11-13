@@ -1,26 +1,29 @@
+// Towers Objects
+import Tower1 from "../../objects/towers/Tower1.js"
+
 // Managers
-import WaveManager from "../managers/WaveManager.js";
+import WaveManager from "../../managers/WaveManager.js";
 
 // Utility Functions
-import { loadZombieSpritesheets } from "../utils/SpritesheetUtil.js";
-import GridService from "../utils/GridUtil.js";
-import DisplayManager from "../managers/DisplayManager.js";
+import { loadZombieSpritesheets } from "../../utils/SpritesheetUtil.js";
+import GridService from "../../utils/GridUtil.js";
+import DisplayManager from "../../managers/DisplayManager.js";
 
-class HardLevelScene extends Phaser.Scene {
+class EasyLevelScene extends Phaser.Scene {
     constructor() {
-        super({ key: 'HardLevelScene' });
+        super({ key: 'EasyLevelScene' });
         this.grid = null; // Utilize GridService to create the grid
         this.zombies = null; // Zombie container
         this.context = this; // Used for pause menu
-        
+
         this.displayManager = new DisplayManager(this); // Display Manager
     }
 
-    //load the Hard map
+    //load the Demo_Level map
     preload(){
         // Load the tilemap and tileset image
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
-        this.load.tilemapTiledJSON('hardmap', 'src/assets/maps/HardLevel.json');
+        this.load.tilemapTiledJSON('easymap', 'src/assets/maps/DemoMapWithProps.json');
 
         // Load the tile related stuff
         this.load.image('tower_hotspot', 'src/assets/images/towers/blue.png');
@@ -33,21 +36,18 @@ class HardLevelScene extends Phaser.Scene {
 
         // Load Player HUD
         this.load.image('playerHUD', 'src/assets/images/icons/playerHUD.png');
-
+        
         // Pause Menu Items
         this.load.spritesheet('pauseButton', 'src/assets/images/icons/pauseButton.png', {frameWidth: 34, frameHeight: 34});
     }
 
     create() {
         // Create the map
-        const map = this.make.tilemap({key: 'hardmap'});
+        const map = this.make.tilemap({key: 'easymap'});
         const tileset = map.addTilesetImage('ZombieApocalypseTilesetReferenceFixed', 'ZombieApocalypseTilesetReferenceFixed');
         
         // Load Layers
         const walkableLayer = map.createLayer('Walkable Layer', tileset); // Used for pathfinding
-        const roadLayer = map.createLayer('Road Layer', tileset);
-        const buildingLayer = map.createLayer('Building Layer', tileset);
-        const grassLayer = map.createLayer('Grass Layer', tileset);
         const propLayer = map.createLayer('Prop Layer', tileset);
         
         // Debugging map and tileset creation
@@ -55,18 +55,18 @@ class HardLevelScene extends Phaser.Scene {
         console.log('Tileset:', tileset);  // Debugging line
         console.log('Walkable Layer:', walkableLayer);  // Debugging line
 
-         // Towers-(Randy)------------------------------------------------
-         const towerLayer= map.getObjectLayer('Tower Layer');
-         towerLayer.objects.forEach(object => {
-             this.createHotSpot(object);
-         });
-         // Towers-(Randy)------------------------------------------------
+        // Towers-(Randy)------------------------------------------------
+        const hotSpotLayer = map.getObjectLayer('HotSpot Layer');
+        hotSpotLayer.objects.forEach(object => {
+            this.createHotSpot(object);
+        });
+        // Towers-(Randy)------------------------------------------------
 
         // Tile Coordinates for pathfinding (in grid)
-        const startTileX = 2
-        const startTileY = 3
-        const endTileX = 2
-        const endTileY = 34
+        const startTileX = 1
+        const startTileY = 5
+        const endTileX = 47
+        const endTileY = 32
         
         // World Coorindates for spawning enemies
         const startX = startTileX * 16; 
@@ -75,7 +75,8 @@ class HardLevelScene extends Phaser.Scene {
         const endY = endTileY * 16;
 
         // Create the grid for pathfinding
-        this.grid = new GridService(this, walkableLayer, 545); 
+        // 634 is non-walkable tile index (see DemoMapWithProps.json)
+        this.grid = new GridService(this, walkableLayer, 634); 
         
         // Spawning Debugging
         console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);
@@ -91,7 +92,8 @@ class HardLevelScene extends Phaser.Scene {
         this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY);
         console.log("Wave Manager:", this.waveManager);
 
-        this.displayManager.create('HardLevelScene');
+        // Display Manager
+        this.displayManager.create('DemoLevelScene');
     }
     
     update () {
@@ -100,11 +102,11 @@ class HardLevelScene extends Phaser.Scene {
             zombie.update();
         });
 
-        // Update the wave manager
+        // Update the Wave Manager
         this.waveManager.update();
 
         // Debugging
-        console.log(this.zombies)
+        console.log(this.zombies.children.entries)
     }
 
     // create hotspot
@@ -162,4 +164,4 @@ class HardLevelScene extends Phaser.Scene {
     }
 }
 
-export default HardLevelScene;
+export default EasyLevelScene;
