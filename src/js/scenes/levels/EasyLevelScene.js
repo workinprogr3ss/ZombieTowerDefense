@@ -93,7 +93,7 @@ class EasyLevelScene extends Phaser.Scene {
         console.log("Wave Manager:", this.waveManager);
 
         // Display Manager
-        this.displayManager.create('DemoLevelScene');
+        this.displayManager.create('EasyLevelScene');
     }
     
     update () {
