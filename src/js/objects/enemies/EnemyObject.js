@@ -103,7 +103,7 @@ calculatePath(startX, startY, targetX, targetY) {
         if (error) {
             console.log("Error finding path:", error);
         } else {
-            console.log("Path found:", path);
+            //console.log("Path found:", path);
             this.path = path;
             this.followPath();
         }

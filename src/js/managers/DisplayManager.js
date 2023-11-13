@@ -1,6 +1,7 @@
 import PlayerHealthManager from "../managers/PlayerHealthManager.js";
 import PlayerCurrencyManager from "../managers/PlayerCurrencyManager.js";
 import EnemyCountManager from "../managers/EnemyCountManager.js";
+import WaveTimerManager from "../managers/WaveTimerManager.js";
 
 export default class DisplayManager {
     constructor (scene) {
@@ -17,6 +18,14 @@ export default class DisplayManager {
         // Enemy Count Manager
         this.enemyCountManager = new EnemyCountManager(scene);
         this.enemyCountText = null;
+
+        // Wave Timer Text
+        this.waveTimerManager = new WaveTimerManager(scene);
+        this.waveTimerText = null;
+
+        // Score Manager
+        this.scoreManager = new ScoreManager(scene);
+        this.scoreText = null;
     }
 
 
@@ -24,6 +33,19 @@ export default class DisplayManager {
 
         //Player HUD
         this.scene.add.image(0, 0, 'playerHUD').setOrigin(0);
+
+        // Wave Timer Manager
+        // Reset the wave timer when the scene is created
+        this.scene.waveManager.waveTimer = 0;
+
+        // Wave Timer Text
+        this.waveTimerText = this.scene.add.text(this.scene.scale.width / 2, 20, '00:00', {
+            fill: '#ffffff',
+            fontSize: '22px',
+        }).setOrigin(0, 0.5);
+
+        // Update the wave timer text every second
+
 
         // Enemy Count Manager
         // Reset the enemy count when the scene is created
