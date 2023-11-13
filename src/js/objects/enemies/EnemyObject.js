@@ -154,7 +154,7 @@ update() {
 }
 
 // Method to update the path
-updatPath() {
+updatePath() {
     this.calculatePath(this.targetX, this.targetY);
 }
 

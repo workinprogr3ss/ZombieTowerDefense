@@ -25,6 +25,7 @@ export default class DisplayManager {
         //Player HUD
         this.scene.add.image(0, 0, 'playerHUD').setOrigin(0);
 
+        // Enemy Count Manager
         // Reset the enemy count when the scene is created
         this.enemyCountManager.currentEnemyCount = 0;
 
@@ -39,6 +40,7 @@ export default class DisplayManager {
             this.enemyCountText.setText(`${newEnemyCount}`);
         });
 
+        // Player Health Manager
         // Reset the player health when the scene is created
         this.playerHealthManager.currentHealth = this.playerHealthManager.maxHealth;
 
@@ -53,6 +55,7 @@ export default class DisplayManager {
             this.playerHealthText.setText(`${newHealth}`);
         });
 
+        // Player Currency Manager
         // Reset the player currency when the scene is created
         this.playerCurrencyManager.currentCurrency = 0;
     
