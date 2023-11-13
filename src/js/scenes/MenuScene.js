@@ -41,8 +41,8 @@ class MenuScene extends BaseScene {
         //Create Default PlayerData Registry
         this.registry.set('playerData', {
             levelOne: true,
-            levelTwo: false,
-            levelThree: false,
+            levelTwo: true,
+            levelThree: true,
             saveSlot: null,
             completed: 1
         });

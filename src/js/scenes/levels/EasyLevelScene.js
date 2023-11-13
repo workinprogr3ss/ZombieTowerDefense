@@ -1,17 +1,17 @@
 // Towers Objects
-import Tower1 from "../objects/towers/Tower1.js"
+import Tower1 from "../../objects/towers/Tower1.js"
 
 // Managers
-import WaveManager from "../managers/WaveManager.js";
+import WaveManager from "../../managers/WaveManager.js";
 
 // Utility Functions
-import { loadZombieSpritesheets } from "../utils/SpritesheetUtil.js";
-import GridService from "../utils/GridUtil.js";
-import DisplayManager from "../managers/DisplayManager.js";
+import { loadZombieSpritesheets } from "../../utils/SpritesheetUtil.js";
+import GridService from "../../utils/GridUtil.js";
+import DisplayManager from "../../managers/DisplayManager.js";
 
-class DemoLevelScene extends Phaser.Scene {
+class EasyLevelScene extends Phaser.Scene {
     constructor() {
-        super({ key: 'DemoLevelScene' });
+        super({ key: 'EasyLevelScene' });
         this.grid = null; // Utilize GridService to create the grid
         this.zombies = null; // Zombie container
         this.context = this; // Used for pause menu
@@ -23,7 +23,7 @@ class DemoLevelScene extends Phaser.Scene {
     preload(){
         // Load the tilemap and tileset image
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
-        this.load.tilemapTiledJSON('demomap', 'src/assets/maps/DemoMapWithProps.json');
+        this.load.tilemapTiledJSON('easymap', 'src/assets/maps/DemoMapWithProps.json');
 
         // Load the tile related stuff
         this.load.image('tower_hotspot', 'src/assets/images/towers/blue.png');
@@ -31,19 +31,19 @@ class DemoLevelScene extends Phaser.Scene {
         this.load.image('tower2', 'src/assets/images/towers/tower2.png');
         this.load.image('tower3', 'src/assets/images/towers/tower3.png');
 
-        // Load Player HUD
-        this.load.image('playerHUD', 'src/assets/images/icons/playerHUD.png');
-
         // Load spritesheets for zombies
         loadZombieSpritesheets(this);
 
+        // Load Player HUD
+        this.load.image('playerHUD', 'src/assets/images/icons/playerHUD.png');
+        
         // Pause Menu Items
         this.load.spritesheet('pauseButton', 'src/assets/images/icons/pauseButton.png', {frameWidth: 34, frameHeight: 34});
     }
 
     create() {
         // Create the map
-        const map = this.make.tilemap({key: 'demomap'});
+        const map = this.make.tilemap({key: 'easymap'});
         const tileset = map.addTilesetImage('ZombieApocalypseTilesetReferenceFixed', 'ZombieApocalypseTilesetReferenceFixed');
         
         // Load Layers
@@ -93,7 +93,7 @@ class DemoLevelScene extends Phaser.Scene {
         console.log("Wave Manager:", this.waveManager);
 
         // Display Manager
-        this.displayManager.create('DemoLevelScene');
+        this.displayManager.create('EasyLevelScene');
     }
     
     update () {
@@ -164,4 +164,4 @@ class DemoLevelScene extends Phaser.Scene {
     }
 }
 
-export default DemoLevelScene;
+export default EasyLevelScene;

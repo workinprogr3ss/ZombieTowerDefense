@@ -14,7 +14,7 @@ class LevelSelectScene extends BaseScene {
         this.add.image(400, 300, 'levelSelectMenu').setOrigin(0.5);
 
         //Create Buttons
-        const demoLevelButton = this.add.sprite(400, 200, 'demoLevelButton').setOrigin(0.5);
+        //const demoLevelButton = this.add.sprite(400, 200, 'demoLevelButton').setOrigin(0.5);
         const levelOne = this.add.sprite(400, 250, 'levelOne').setOrigin(0.5);
         const levelTwo = this.add.sprite(400, 300, 'levelTwo')
             .setOrigin(0.5)
@@ -26,10 +26,10 @@ class LevelSelectScene extends BaseScene {
         const backButton = this.add.sprite(340, 425, 'backButton').setOrigin(0.5);
         
         //Call to Set Button Interactions (button, scene, data, startingFrame, unlock, source)
-        this.setButtonInteractions(demoLevelButton, 'DemoLevelScene', null, 0, true, null);
-        this.setButtonInteractions(levelOne, 'MediumLevelScene', null, 0, true, null);
-        this.setButtonInteractions(levelTwo, 'MenuScene', null, levelProgress.levelTwoStartingFrame, levelProgress.levelTwoUnlock, null);
-        this.setButtonInteractions(levelThree, 'MenuScene', null, levelProgress.levelThreeStartingFrame, levelProgress.levelThreeUnlock, null);
+        //this.setButtonInteractions(demoLevelButton, 'DemoLevelScene', null, 0, true, null);
+        this.setButtonInteractions(levelOne, 'EasyLevelScene', null, 0, true, null);
+        this.setButtonInteractions(levelTwo, 'MediumLevelScene', null, levelProgress.levelTwoStartingFrame, levelProgress.levelTwoUnlock, null);
+        this.setButtonInteractions(levelThree, 'HardLevelScene', null, levelProgress.levelThreeStartingFrame, levelProgress.levelThreeUnlock, null);
         this.setButtonInteractions(saveButton, 'SaveGameScene', null, 0, true, null);
         this.setButtonInteractions(backButton, 'MenuScene', null, 0, true, null);
     }
