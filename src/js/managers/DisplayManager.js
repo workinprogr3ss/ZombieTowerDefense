@@ -20,7 +20,7 @@ export default class DisplayManager {
         this.playerHealthManager.currentHealth = this.playerHealthManager.maxHealth;
 
         // Player Health Text
-        this.playerHealthText = this.scene.add.text(566, 577, `${this.playerHealthManager.currentHealth}`, {
+        this.playerHealthText = this.scene.add.text(566, 575, `${this.playerHealthManager.currentHealth}`, {
             fill: '#000000',
             fontSize: '22px',
         }).setOrigin(0, 0.5);
@@ -34,7 +34,7 @@ export default class DisplayManager {
         this.playerCurrencyManager.currentCurrency = 0;
     
         // Player Currency Text
-        this.playerCurrencyText = this.scene.add.text(662, 577, `${this.playerCurrencyManager.currentCurrency}`, {
+        this.playerCurrencyText = this.scene.add.text(662, 575, `${this.playerCurrencyManager.currentCurrency}`, {
             fill: '#000000',
             fontSize: '22px',
         }).setOrigin(0, 0.5);

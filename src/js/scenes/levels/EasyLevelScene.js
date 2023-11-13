@@ -26,7 +26,7 @@ class EasyLevelScene extends Phaser.Scene {
         this.load.tilemapTiledJSON('easymap', 'src/assets/maps/DemoMapWithProps.json');
 
         // Load the tile related stuff
-        this.load.image('tower_hotspot', 'src/assets/images/towers/blue.png');
+        this.load.image('tower_hotspot', 'src/assets/images/towers/hotspot.png');
         this.load.image('tower1', 'src/assets/images/towers/tower1.png');
         this.load.image('tower2', 'src/assets/images/towers/tower2.png');
         this.load.image('tower3', 'src/assets/images/towers/tower3.png');
@@ -112,8 +112,7 @@ class EasyLevelScene extends Phaser.Scene {
     // create hotspot
     createHotSpot(object) {
         const tower = this.add.sprite(object.x, object.y, 'tower_hotspot');
-        tower.setScale(0.02);
-        tower.setInteractive();
+        tower.setInteractive({cursor: 'pointer'});
         tower.on('pointerdown', () => {
             const popUpMenu = this.add.group();
             popUpMenu.setVisible(false);
