@@ -33,7 +33,7 @@ class MenuScene extends BaseScene {
         this.setButtonInteractions(newGameButton, 'PreLevelSelectScene', null, 0, true, null);
         this.setButtonInteractions(loadGameButton, 'LoadSaveScene', null, 0, true, null);
         this.setButtonInteractions(settingsButton, 'SettingsScene', null, 0, true, null);
-        this.setButtonInteractions(creditsButton, 'CreditsScene', null, 0, true, null);
+        this.setButtonInteractions(creditsButton, 'CreditsScene', null, 0, true, null);3
 
         //Game Title
         this.add.image(400,300, 'title').setOrigin(0.5);

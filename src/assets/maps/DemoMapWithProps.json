@@ -46,7 +46,7 @@
          "name":"Walkable Layer",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":50,
          "x":0,
          "y":0
@@ -95,7 +95,7 @@
          "name":"Prop Layer",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":50,
          "x":0,
          "y":0
@@ -115,7 +115,7 @@
                  "visible":true,
                  "width":16,
                  "x":320,
-                 "y":80
+                 "y":64.352773826458
                 }, 
                 {
                  "gid":193,
@@ -175,7 +175,7 @@
                  "visible":true,
                  "width":16,
                  "x":720,
-                 "y":240
+                 "y":222.930298719772
                 }, 
                 {
                  "gid":193,
@@ -187,7 +187,7 @@
                  "visible":true,
                  "width":16,
                  "x":624,
-                 "y":240
+                 "y":221.507823613087
                 }, 
                 {
                  "gid":193,
@@ -199,7 +199,7 @@
                  "visible":true,
                  "width":16,
                  "x":448,
-                 "y":240
+                 "y":222.930298719772
                 }, 
                 {
                  "gid":193,
@@ -211,7 +211,7 @@
                  "visible":true,
                  "width":16,
                  "x":256,
-                 "y":240
+                 "y":227.197724039829
                 }, 
                 {
                  "gid":193,
@@ -222,8 +222,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":96,
-                 "y":240
+                 "x":94.5775248933144,
+                 "y":222.930298719772
                 }, 
                 {
                  "gid":193,
@@ -270,8 +270,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":176,
-                 "y":400
+                 "x":174.577524893314,
+                 "y":385.775248933144
                 }, 
                 {
                  "gid":193,
@@ -283,7 +283,7 @@
                  "visible":true,
                  "width":16,
                  "x":304,
-                 "y":400
+                 "y":384.352773826458
                 }, 
                 {
                  "gid":193,
@@ -306,8 +306,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":544,
-                 "y":400
+                 "x":545.422475106686,
+                 "y":382.930298719772
                 }, 
                 {
                  "gid":193,
@@ -331,7 +331,7 @@
                  "visible":true,
                  "width":16,
                  "x":720,
-                 "y":400
+                 "y":382.930298719772
                 }],
          "opacity":1,
          "properties":[
@@ -361,7 +361,7 @@
          "margin":0,
          "name":"ZombieApocalypseTilesetReferenceFixed",
          "spacing":0,
-         "tilecount":810,
+         "tilecount":0,
          "tileheight":16,
          "tilewidth":16
         }],
