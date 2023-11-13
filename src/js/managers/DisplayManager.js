@@ -27,7 +27,7 @@ export default class DisplayManager {
     
         // Event listener for updating the player health text
         this.scene.events.on('updateHealthBar', (newHealth) => {
-            this.playerHealthText.setText(`Health: ${newHealth}`);
+            this.playerHealthText.setText(`${newHealth}`);
         });
 
         // Reset the player currency when the scene is created
@@ -41,7 +41,7 @@ export default class DisplayManager {
     
         // Event listener for updating the player currency text
         this.scene.events.on('updateCurrencyDisplay', (newCurrency) => {
-            this.playerCurrencyText.setText(`Currency: ${newCurrency}`);
+            this.playerCurrencyText.setText(`${newCurrency}`);
         });
 
         //Pause Button
