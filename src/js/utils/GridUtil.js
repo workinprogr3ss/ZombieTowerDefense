@@ -22,7 +22,7 @@ export default class GridService {
     });
     
     // Debugging line
-    console.log("Grid:", grid);
+    // console.log("Grid:", grid);
     return grid;
   }
 
