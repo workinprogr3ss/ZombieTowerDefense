@@ -1,13 +1,32 @@
 import PlayerHealthManager from "../managers/PlayerHealthManager.js";
 import PlayerCurrencyManager from "../managers/PlayerCurrencyManager.js";
+import EnemyCountManager from "../managers/EnemyCountManager.js";
+import WaveTimerManager from "../managers/WaveTimerManager.js";
+import ScoreManager from "../managers/ScoreManager.js";
 
 export default class DisplayManager {
     constructor (scene) {
         this.scene = scene;
+        
+        // Player Health Manager
         this.playerHealthManager = new PlayerHealthManager(scene);
         this.playerHealthText = null;
+        
+        // Player Currency Manager
         this.playerCurrencyManager = new PlayerCurrencyManager(scene);
         this.playerCurrencyText = null;
+        
+        // Enemy Count Manager
+        this.enemyCountManager = new EnemyCountManager(scene);
+        this.enemyCountText = null;
+
+        // Wave Timer Text
+        this.waveTimerManager = new WaveTimerManager(scene);
+        this.waveTimerText = null;
+
+        // Score Manager
+        this.scoreManager = new ScoreManager(scene);
+        this.scoreText = null;
     }
 
 
@@ -16,6 +35,35 @@ export default class DisplayManager {
         //Player HUD
         this.scene.add.image(0, 0, 'playerHUD').setOrigin(0);
 
+        // Wave Timer Manager
+        // Reset the wave timer when the scene is created
+        this.scene.waveManager.waveTimer = 0;
+
+        // Wave Timer Text
+        this.waveTimerText = this.scene.add.text(this.scene.scale.width / 2, 20, '00:00', {
+            fill: '#ffffff',
+            fontSize: '22px',
+        }).setOrigin(0, 0.5);
+
+        // Update the wave timer text every second
+
+
+        // Enemy Count Manager
+        // Reset the enemy count when the scene is created
+        this.enemyCountManager.currentEnemyCount = 0;
+
+        // Enemy Count Text
+        this.enemyCountText = this.scene.add.text(470, 575, `${this.enemyCountManager.currentEnemyCount}`, {
+            fill: '#000000',
+            fontSize: '22px',
+        }).setOrigin(0, 0.5);
+
+        // Event listener for updating the enemy count text
+        this.scene.events.on('updateEnemyCountDisplay', (newEnemyCount) => {
+            this.enemyCountText.setText(`${newEnemyCount}`);
+        });
+
+        // Player Health Manager
         // Reset the player health when the scene is created
         this.playerHealthManager.currentHealth = this.playerHealthManager.maxHealth;
 
@@ -27,9 +75,10 @@ export default class DisplayManager {
     
         // Event listener for updating the player health text
         this.scene.events.on('updateHealthBar', (newHealth) => {
-            this.playerHealthText.setText(`Health: ${newHealth}`);
+            this.playerHealthText.setText(`${newHealth}`);
         });
 
+        // Player Currency Manager
         // Reset the player currency when the scene is created
         this.playerCurrencyManager.currentCurrency = 0;
     
@@ -41,7 +90,7 @@ export default class DisplayManager {
     
         // Event listener for updating the player currency text
         this.scene.events.on('updateCurrencyDisplay', (newCurrency) => {
-            this.playerCurrencyText.setText(`Currency: ${newCurrency}`);
+            this.playerCurrencyText.setText(`${newCurrency}`);
         });
 
         //Pause Button

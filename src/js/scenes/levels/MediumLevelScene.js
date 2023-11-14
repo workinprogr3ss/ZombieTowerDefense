@@ -50,7 +50,7 @@ class MediumLevelScene extends Phaser.Scene {
         const walkableLayer = map.createLayer('Walkable Layer', tileset); // Used for pathfinding
         const buildingLayer = map.createLayer('Buildings Layer', tileset);
         const propLayer = map.createLayer('Prop Layer', tileset);
-        const towerLayer = map.createLayer('Tower Layer', tileset);
+        //const towerLayer = map.createLayer('Tower Layer', tileset);
         
         // Debugging map and tileset creation
         console.log('Map:', map);  // Debugging line
@@ -105,7 +105,7 @@ class MediumLevelScene extends Phaser.Scene {
         this.waveManager.update();
 
         // Debugging
-        console.log(this.zombies)
+        //console.log(this.zombies.children.entries)
     }
 }
 
