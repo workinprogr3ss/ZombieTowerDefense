@@ -9,6 +9,8 @@ export default class WaveManager {
         this.scene = scene;
         this.currentWave = 0;
         this.nextSpawnTime = 0;
+        this.waveDelay = 30000; // 30 seconds
+        this.lastWaveEndTime = 0;
         this.waves = this.initializeWaves();
         this.zombies = {
             walker: WalkerZombie,
@@ -82,6 +84,7 @@ export default class WaveManager {
         if (this.currentWave < this.waves.length - 1) {
             this.currentWave++;
             this.nextSpawnTime = this.scene.time.now; // Reset the spawn timer for the new wave
+            this.lastWaveEndTime = this.scene.time.now; // Update the end time of the wave
         } else {
             // All waves are complete, handle game completion
         }
@@ -89,7 +92,7 @@ export default class WaveManager {
 
     spawnEnemy() {
         // Get the next enemy to spawn
-        //console.log("Spawning enemy");
+        // console.log("Spawning enemy");
         const enemyType = this.waves[this.currentWave].enemies.shift();
         const enemyClass = this.zombies[enemyType];
         const enemy = new enemyClass(this.scene, this.startX, this.startY);        // uses global coordinates
@@ -97,6 +100,9 @@ export default class WaveManager {
         
         // Add the enemy to the scene
         this.scene.zombies.add(enemy);
+
+        // Add the enemy to the enemy count
+        this.scene.displayManager.enemyCountManager.addEnemy(1);
 
         // Set the time for the next spawn
         this.nextSpawnTime = this.scene.time.now + this.waves[this.currentWave].spawnInterval;
@@ -115,7 +121,7 @@ export default class WaveManager {
 
         // If there are no more enemies to spawn and no active enemies left, the wave is complete
         //&& this.scene.zombies.countActive(true) === 0 ; for when there are no active enemies left
-        if (this.waves[this.currentWave].enemies.length === 0) {
+        if ((this.waves[this.currentWave].enemies.length === 0) && (this.scene.time.now > this.lastWaveEndTime + this.waveDelay)) {
             this.startNextWave();
         }
     }
