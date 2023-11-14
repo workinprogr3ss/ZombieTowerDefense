@@ -1,13 +1,118 @@
 body {
-    background-color: #241e1e;
+    background-color: #E2DED0;
+    margin: 0;
+    min-width: 608px;
 }
 
+/*-----------------------------------------*/
+
+#gridContainer {
+    display: grid;
+    font-family: 'VT323', monospace;
+    grid-template:
+        "navbar navbar navbar"
+        "zombies canvas towers" 
+        "divider divider divider"
+        "devs devs devs" / 1fr 1fr 1fr
+}
+
+@media only screen and (max-width: 1400px) {
+    #gridContainer {
+        display: grid;
+        grid-template:
+            "navbar navbar"
+            "canvas canvas"
+            "zombies towers"
+            "divider divider"
+            "devs devs" / 1fr 1fr
+    }
+}
+
+/*-----------------------------------------*/
+
+#navBar {
+    grid-area: navbar;
+    background: #241e1e;
+    height: 80px;
+    margin: 0px;
+    border-bottom: 2px solid #E0A59E;
+    opacity: 0.95;
+}
+
+#navBar img {
+    position: relative;
+    top: 15px;
+    width: 50px;
+    height: 50px;
+    left: 30px;
+}
+
+#navBar span {
+    z-index: 0;
+    position: relative;
+    padding-left: 60px;
+    font-size: 30px;
+    letter-spacing: 2px;
+    color: white;
+    font-family: 'VT323', monospace;
+}
+
+/*-----------------------------------------*/
+
 canvas {
-    display: block;
-    margin: 0;
+    grid-area: canvas;
+    min-width: 800px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #E0A59E;
+}
+
+/*-----------------------------------------*/
+
+#zombies {
+    grid-area: zombies;
+    padding: 25px;
+    text-align: right;
+}
+
+/*-----------------------------------------*/
+
+#towers {
+    grid-area: towers;
+    text-align: left;
+    padding: 25px;
+}
+
+/*-----------------------------------------*/
+
+.divider {
+    grid-area: divider;
+    width: 100%;
+    text-align: center;
+    font-size: 36px;
+    letter-spacing: 10px;
+}
+
+/*-----------------------------------------*/
+
+#about {
+    grid-area: about;
+}
+
+/*-----------------------------------------*/
+
+#developers {
+    grid-area: devs;
+}
+
+/*-----------------------------------------*/
+
+#footer {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 1px solid #878b94;
+    bottom: 0;
+    height: 80px;
+    width: 100%;
+    background-color: #E0A59E;
 }
