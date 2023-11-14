@@ -177,6 +177,7 @@ reachedEnd() {
     // Check if the enemy has reached the end of the path
     if (Phaser.Math.Distance.Between(this.x, this.y, targetX, targetY) < 1) {
         this.scene.displayManager.playerHealthManager.reducePlayerHealth(this.damage);
+        this.scene.displayManager.enemyCountManager.reduceEnemy(1);
         this.destroy();
         return true;
     }
