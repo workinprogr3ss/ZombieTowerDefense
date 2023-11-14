@@ -101,9 +101,9 @@ calculatePath(startX, startY, targetX, targetY) {
 
     findPath(this.scene.grid.getGrid(), startX, startY, targetX, targetY,  (path, error) => {
         if (error) {
-            console.log("Error finding path:", error);
+            //console.log("Error finding path:", error);
         } else {
-            console.log("Path found:", path);
+            //console.log("Path found:", path);
             this.path = path;
             this.followPath();
         }
@@ -113,7 +113,7 @@ calculatePath(startX, startY, targetX, targetY) {
 // Method to move the enemy along a path
 followPath() {
     if (!this.path || this.path.length === 0) {
-        console.log("No path provided for enemy to move.");
+        //console.log("No path provided for enemy to move.");
         return;
     }
     
