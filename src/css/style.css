@@ -77,30 +77,6 @@ canvas {
     font-weight: 500;
 }
 
-#WalkerText {
-    position: absolute;
-    top: 120px;
-    right: 140px;
-}
-
-#RunnerText {
-    position: absolute;
-    top: 235px;
-    right: 140px;
-}
-
-#TankText {
-    position: absolute;
-    top: 345px;
-    right: 160px;
-}
-
-#SpitterText {
-    position: absolute;
-    top: 460px;
-    right: 135px;
-}
-
 /*-----------------------------------------*/
 
 #towers {
