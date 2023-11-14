@@ -2,7 +2,7 @@
 import { createHotSpot } from "./HotSpot.js";
 
 // Managers
-import WaveManager from "../../managers/waveManager.js";
+import WaveManager from "../../managers/WaveManager.js";
 
 // Utility Functions
 import { loadSpritesheets } from "../../utils/SpritesheetUtil.js";
@@ -106,62 +106,6 @@ class EasyLevelScene extends Phaser.Scene {
 
         // Debugging
         //console.log(this.zombies.children.entries)
-<<<<<<< HEAD
-    }
-
-    // create hotspot
-    createHotSpot(object) {
-        const tower = this.add.sprite(object.x, object.y, 'tower_hotspot');
-        tower.setInteractive({cursor: 'pointer'});
-        tower.on('pointerdown', () => {
-            const popUpMenu = this.add.group();
-            popUpMenu.setVisible(false);
-
-            const menuBackground = this.add.rectangle(105, 540, 200, 140, 0x333333);
-            popUpMenu.add(menuBackground);
-            menuBackground.setDepth(0);
-
-            const menuItem1 = this.add.text(10, 490, 'Sniper Tower', {fill: '#ffffff'});
-            const menuItem2 = this.add.text(10, 520, 'Missile Tower', {fill: '#ffffff'});
-            const menuItem3 = this.add.text(10, 550, 'Flamethrower Tower', {fill: '#ffffff'});
-            const menuExit = this.add.text(10, 580, "Cancel", {fill: '#ffffff'});
-
-            popUpMenu.add(menuItem1);
-            popUpMenu.add(menuItem2);
-            popUpMenu.add(menuItem3);
-            popUpMenu.add(menuExit);
-
-            menuItem1.setInteractive();
-            menuItem2.setInteractive();
-            menuItem3.setInteractive();
-            menuExit.setInteractive();
-
-            popUpMenu.setVisible(true);
-
-            menuItem1.on('pointerdown', () => {
-                tower.setTexture('tower1');
-                tower.setScale(0.1);
-                popUpMenu.setVisible(false);
-            });
-
-            menuItem2.on('pointerdown', () => {
-                tower.setTexture('tower2');
-                tower.setScale(0.15);
-                popUpMenu.setVisible(false);
-            });
-
-            menuItem3.on('pointerdown', () => {
-                tower.setTexture('tower3');
-                tower.setScale(0.2);
-                popUpMenu.setVisible(false);
-            });
-
-            menuExit.on('pointerdown', () => {
-                popUpMenu.setVisible(false);
-            });
-        });
-=======
->>>>>>> main
     }
 }
 

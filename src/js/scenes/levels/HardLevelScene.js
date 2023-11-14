@@ -1,12 +1,8 @@
 // Towers Objects
-<<<<<<< HEAD
-import Tower1 from "../../objects/towers/Tower1.js"
-=======
 import { createHotSpot } from "./HotSpot.js";
->>>>>>> main
 
 // Managers
-import WaveManager from "../../managers/waveManager.js";
+import WaveManager from "../../managers/WaveManager.js";
 
 // Utility Functions
 import { loadSpritesheets } from "../../utils/SpritesheetUtil.js";
@@ -29,15 +25,6 @@ class HardLevelScene extends Phaser.Scene {
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
         this.load.tilemapTiledJSON('hardmap', 'src/assets/maps/HardLevel.json');
 
-<<<<<<< HEAD
-        // Load the tile related stuff
-        this.load.image('tower_hotspot', 'src/assets/images/towers/hotspot.png');
-        this.load.image('tower1', 'src/assets/images/towers/tower1.png');
-        this.load.image('tower2', 'src/assets/images/towers/tower2.png');
-        this.load.image('tower3', 'src/assets/images/towers/tower3.png');
-
-=======
->>>>>>> main
         // Load spritesheets for zombies
         loadSpritesheets(this);
 
