@@ -35,6 +35,7 @@ export function createHotSpot(object, scene) {
             tower.destroy();
             const sniperTower = new SniperTower(scene, object.x, object.y);
             scene.add.existing(sniperTower);
+            scene.towers.push(sniperTower);
             sniperTower.setScale(0.1);
             popUpMenu.setVisible(false);
         });
