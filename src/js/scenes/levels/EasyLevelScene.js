@@ -13,7 +13,11 @@ class EasyLevelScene extends Phaser.Scene {
     constructor() {
         super({ key: 'EasyLevelScene' });
         this.grid = null; // Utilize GridService to create the grid
+        
+        // Objects
         this.zombies = null; // Zombie container
+        this.towers = []; // Zombie container
+
         this.context = this; // Used for pause menu
 
         this.displayManager = new DisplayManager(this); // Display Manager
@@ -106,6 +110,14 @@ class EasyLevelScene extends Phaser.Scene {
 
         // Debugging
         //console.log(this.zombies.children.entries)
+
+        for (const zombie of this.zombies.children.entries) {
+            console.log(zombie.health)
+        }
+
+        this.towers.forEach((tower) => {
+            tower.attack(this.zombies.children.entries);
+        });
     }
 }
 
