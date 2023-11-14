@@ -5,15 +5,32 @@
     <title>Post-Pandemic Perimeter</title>
     <link rel="icon" type="image/x-icon" href="src\assets\images\icons\zombie.ico">
     <link rel="stylesheet" href="src\css\style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/easystarjs@0.4.4/bin/easystar-0.4.4.min.js"></script>    
     <style type="text/css">
-        body {
-            margin: 0;
-        }
     </style>
 </head>
-<body>
+<body id="gridContainer">
+    <div id="navBar">
+        <img src="src\assets\images\icons\Logo.png">
+        <span>Post-Pandemic Perimeter</span>
+    </div>
+    <div id="zombies">
+        <img src="src\assets\images\icons\Enemies.png">
+        <div id="WalkerText">Walker Zombie</div>
+        <div id="RunnerText">Runner Zombie</div>
+        <div id="TankText">Tank Zombie</div>
+        <div id="SpitterText">Spitter Zombie</div>
+    </div>
+    <div id="towers">
+        <img src="src\assets\images\icons\Towers.png">
+    </div>
+    <div id="developers">
+    </div>
+    <div id="footer"></div>
     <script type="module" src="./src/main.js"></script>
 </body>
 </html>
