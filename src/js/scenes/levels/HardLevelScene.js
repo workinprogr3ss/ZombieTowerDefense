@@ -1,11 +1,15 @@
 // Towers Objects
+<<<<<<< HEAD
 import Tower1 from "../../objects/towers/Tower1.js"
+=======
+import { createHotSpot } from "./HotSpot.js";
+>>>>>>> main
 
 // Managers
 import WaveManager from "../../managers/waveManager.js";
 
 // Utility Functions
-import { loadZombieSpritesheets } from "../../utils/SpritesheetUtil.js";
+import { loadSpritesheets } from "../../utils/SpritesheetUtil.js";
 import GridService from "../../utils/GridUtil.js";
 import DisplayManager from "../../managers/DisplayManager.js";
 
@@ -25,14 +29,23 @@ class HardLevelScene extends Phaser.Scene {
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
         this.load.tilemapTiledJSON('hardmap', 'src/assets/maps/HardLevel.json');
 
+<<<<<<< HEAD
         // Load the tile related stuff
         this.load.image('tower_hotspot', 'src/assets/images/towers/hotspot.png');
         this.load.image('tower1', 'src/assets/images/towers/tower1.png');
         this.load.image('tower2', 'src/assets/images/towers/tower2.png');
         this.load.image('tower3', 'src/assets/images/towers/tower3.png');
 
+=======
+>>>>>>> main
         // Load spritesheets for zombies
-        loadZombieSpritesheets(this);
+        loadSpritesheets(this);
+
+        // Load towers
+        this.load.image('hotspot', 'src/assets/images/towers/hotspot.png');
+        this.load.image('sniper_tower', 'src/assets/images/towers/sniper_tower.png');
+        this.load.image('missile_tower', 'src/assets/images/towers/missile_tower.png');
+        this.load.image('flamethrower_tower', 'src/assets/images/towers/flamethrower_tower.png');
 
         // Load Player HUD
         this.load.image('playerHUD', 'src/assets/images/icons/playerHUD.png');
@@ -58,12 +71,11 @@ class HardLevelScene extends Phaser.Scene {
         console.log('Tileset:', tileset);  // Debugging line
         console.log('Walkable Layer:', walkableLayer);  // Debugging line
 
-         // Towers-(Randy)------------------------------------------------
-         const towerLayer= map.getObjectLayer('Tower Layer');
-         towerLayer.objects.forEach(object => {
-             this.createHotSpot(object);
-         });
-         // Towers-(Randy)------------------------------------------------
+        // Create Tower HotSpots
+        const hotSpotLayer = map.getObjectLayer('HotSpot Layer');
+        hotSpotLayer.objects.forEach(object => {
+            createHotSpot(object, this);
+        });
 
         // Tile Coordinates for pathfinding (in grid)
         const startTileX = 2
@@ -108,60 +120,6 @@ class HardLevelScene extends Phaser.Scene {
 
         // Debugging
         //console.log(this.zombies.children.entries)
-    }
-
-    // create hotspot
-    createHotSpot(object) {
-        const tower = this.add.sprite(object.x, object.y, 'tower_hotspot');
-        tower.setScale(0.02);
-        tower.setInteractive();
-        tower.on('pointerdown', () => {
-            const popUpMenu = this.add.group();
-            popUpMenu.setVisible(false);
-
-            const menuBackground = this.add.rectangle(105, 540, 200, 140, 0x333333);
-            popUpMenu.add(menuBackground);
-            menuBackground.setDepth(0);
-
-            const menuItem1 = this.add.text(10, 490, 'Sniper Tower', {fill: '#ffffff'});
-            const menuItem2 = this.add.text(10, 520, 'Missile Tower', {fill: '#ffffff'});
-            const menuItem3 = this.add.text(10, 550, 'Flamethrower Tower', {fill: '#ffffff'});
-            const menuExit = this.add.text(10, 580, "Cancel", {fill: '#ffffff'});
-
-            popUpMenu.add(menuItem1);
-            popUpMenu.add(menuItem2);
-            popUpMenu.add(menuItem3);
-            popUpMenu.add(menuExit);
-
-            menuItem1.setInteractive();
-            menuItem2.setInteractive();
-            menuItem3.setInteractive();
-            menuExit.setInteractive();
-
-            popUpMenu.setVisible(true);
-
-            menuItem1.on('pointerdown', () => {
-                tower.setTexture('tower1');
-                tower.setScale(0.1);
-                popUpMenu.setVisible(false);
-            });
-
-            menuItem2.on('pointerdown', () => {
-                tower.setTexture('tower2');
-                tower.setScale(0.15);
-                popUpMenu.setVisible(false);
-            });
-
-            menuItem3.on('pointerdown', () => {
-                tower.setTexture('tower3');
-                tower.setScale(0.2);
-                popUpMenu.setVisible(false);
-            });
-
-            menuExit.on('pointerdown', () => {
-                popUpMenu.setVisible(false);
-            });
-        });
     }
 }
 

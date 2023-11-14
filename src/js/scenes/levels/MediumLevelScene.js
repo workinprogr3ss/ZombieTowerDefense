@@ -1,11 +1,11 @@
 // Towers Objects
-import Tower1 from "../../objects/towers/Tower1.js"
+import { createHotSpot } from "./HotSpot.js";
 
 // Managers
 import WaveManager from "../../managers/waveManager.js";
 
 // Utility Functions
-import { loadZombieSpritesheets } from "../../utils/SpritesheetUtil.js";
+import { loadSpritesheets } from "../../utils/SpritesheetUtil.js";
 import GridService from "../../utils/GridUtil.js";
 import DisplayManager from "../../managers/DisplayManager.js";
 
@@ -26,7 +26,13 @@ class MediumLevelScene extends Phaser.Scene {
         this.load.tilemapTiledJSON('mediummap', 'src/assets/maps/MediumLevel.json');
 
         // Load spritesheets for zombies
-        loadZombieSpritesheets(this);
+        loadSpritesheets(this);
+
+        // Load towers
+        this.load.image('hotspot', 'src/assets/images/towers/hotspot.png');
+        this.load.image('sniper_tower', 'src/assets/images/towers/sniper_tower.png');
+        this.load.image('missile_tower', 'src/assets/images/towers/missile_tower.png');
+        this.load.image('flamethrower_tower', 'src/assets/images/towers/flamethrower_tower.png');
 
         // Load Player HUD
         this.load.image('playerHUD', 'src/assets/images/icons/playerHUD.png');
@@ -50,6 +56,12 @@ class MediumLevelScene extends Phaser.Scene {
         console.log('Map:', map);  // Debugging line
         console.log('Tileset:', tileset);  // Debugging line
         console.log('Walkable Layer:', walkableLayer);  // Debugging line
+
+        // Create Tower HotSpots
+        const hotSpotLayer = map.getObjectLayer('HotSpot Layer');
+        hotSpotLayer.objects.forEach(object => {
+            createHotSpot(object, this);
+        });
 
         // Tile Coordinates for pathfinding (in grid)
         const startTileX = 2

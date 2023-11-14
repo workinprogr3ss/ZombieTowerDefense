@@ -1,11 +1,11 @@
 // Towers Objects
-import Tower1 from "../../objects/towers/Tower1.js"
+import { createHotSpot } from "./HotSpot.js";
 
 // Managers
 import WaveManager from "../../managers/waveManager.js";
 
 // Utility Functions
-import { loadZombieSpritesheets } from "../../utils/SpritesheetUtil.js";
+import { loadSpritesheets } from "../../utils/SpritesheetUtil.js";
 import GridService from "../../utils/GridUtil.js";
 import DisplayManager from "../../managers/DisplayManager.js";
 
@@ -25,14 +25,14 @@ class EasyLevelScene extends Phaser.Scene {
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
         this.load.tilemapTiledJSON('easymap', 'src/assets/maps/EasyLevel.json');
 
-        // Load the tile related stuff
-        this.load.image('tower_hotspot', 'src/assets/images/towers/hotspot.png');
-        this.load.image('tower1', 'src/assets/images/towers/tower1.png');
-        this.load.image('tower2', 'src/assets/images/towers/tower2.png');
-        this.load.image('tower3', 'src/assets/images/towers/tower3.png');
+        // Load spritesheets
+        loadSpritesheets(this);
 
-        // Load spritesheets for zombies
-        loadZombieSpritesheets(this);
+        // Load towers
+        this.load.image('hotspot', 'src/assets/images/towers/hotspot.png');
+        this.load.image('sniper_tower', 'src/assets/images/towers/sniper_tower.png');
+        this.load.image('missile_tower', 'src/assets/images/towers/missile_tower.png');
+        this.load.image('flamethrower_tower', 'src/assets/images/towers/flamethrower_tower.png');
 
         // Load Player HUD
         this.load.image('playerHUD', 'src/assets/images/icons/playerHUD.png');
@@ -51,16 +51,15 @@ class EasyLevelScene extends Phaser.Scene {
         const propLayer = map.createLayer('Prop Layer', tileset);
         
         // Debugging map and tileset creation
-        console.log('Map:', map);  // Debugging line
-        console.log('Tileset:', tileset);  // Debugging line
-        console.log('Walkable Layer:', walkableLayer);  // Debugging line
+        //console.log('Map:', map);  // Debugging line
+        //console.log('Tileset:', tileset);  // Debugging line
+        //console.log('Walkable Layer:', walkableLayer);  // Debugging line
 
-        // Towers-(Randy)------------------------------------------------
+        // Create Tower HotSpots
         const hotSpotLayer = map.getObjectLayer('HotSpot Layer');
         hotSpotLayer.objects.forEach(object => {
-            this.createHotSpot(object);
+            createHotSpot(object, this);
         });
-        // Towers-(Randy)------------------------------------------------
 
         // Tile Coordinates for pathfinding (in grid)
         const startTileX = 1
@@ -79,18 +78,18 @@ class EasyLevelScene extends Phaser.Scene {
         this.grid = new GridService(this, walkableLayer, 634); 
         
         // Spawning Debugging
-        console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);
-        console.log(`Target destination tile is (${endTileX}, ${endTileY})`); 
+        //console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);
+        //console.log(`Target destination tile is (${endTileX}, ${endTileY})`); 
         
         // Pathfinding Debugging
-        console.log("Grid dimensions:", this.grid.grid.length, this.grid.grid[0]?.length);
-        console.log("Start Tile: ", this.grid.grid[startTileY][startTileX]);
-        console.log("End Tile: ", this.grid.grid[endTileY][endTileX]);
+        //console.log("Grid dimensions:", this.grid.grid.length, this.grid.grid[0]?.length);
+        //console.log("Start Tile: ", this.grid.grid[startTileY][startTileX]);
+        //console.log("End Tile: ", this.grid.grid[endTileY][endTileX]);
 
         // Zombie Container
         this.zombies = this.physics.add.group(); // Zombie container
         this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY);
-        console.log("Wave Manager:", this.waveManager);
+        //console.log("Wave Manager:", this.waveManager);
 
         // Display Manager
         this.displayManager.create('EasyLevelScene');
@@ -107,6 +106,7 @@ class EasyLevelScene extends Phaser.Scene {
 
         // Debugging
         //console.log(this.zombies.children.entries)
+<<<<<<< HEAD
     }
 
     // create hotspot
@@ -160,6 +160,8 @@ class EasyLevelScene extends Phaser.Scene {
                 popUpMenu.setVisible(false);
             });
         });
+=======
+>>>>>>> main
     }
 }
 
