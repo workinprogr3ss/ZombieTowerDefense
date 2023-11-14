@@ -23,7 +23,7 @@ class HardLevelScene extends Phaser.Scene {
     preload(){
         // Load the tilemap and tileset image
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
-        this.load.tilemapTiledJSON('hardmap', 'src/assets/maps/HardLevel.json');
+        this.load.tilemapTiledJSON('hardmap', 'src/assets/maps/NewHardLevel.json');
 
         // Load spritesheets for zombies
         loadSpritesheets(this);
