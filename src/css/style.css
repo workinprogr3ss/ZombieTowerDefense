@@ -12,6 +12,7 @@ body {
     grid-template:
         "navbar navbar navbar"
         "zombies canvas towers" 
+        "divider divider divider"
         "devs devs devs" / 1fr 1fr 1fr
 }
 
@@ -21,7 +22,8 @@ body {
         grid-template:
             "navbar navbar"
             "canvas canvas"
-            "zombies towers" 
+            "zombies towers"
+            "divider divider"
             "devs devs" / 1fr 1fr
     }
 }
@@ -39,13 +41,15 @@ body {
 
 #navBar img {
     position: relative;
-    top: 20px;
+    top: 15px;
+    width: 50px;
+    height: 50px;
     left: 30px;
 }
 
 #navBar span {
+    z-index: 0;
     position: relative;
-    top: 10px;
     padding-left: 60px;
     font-size: 30px;
     letter-spacing: 2px;
@@ -71,10 +75,6 @@ canvas {
     grid-area: zombies;
     padding: 25px;
     text-align: right;
-    position: relative;
-    letter-spacing: 1px;
-    font-size: 20px;
-    font-weight: 500;
 }
 
 /*-----------------------------------------*/
@@ -83,6 +83,22 @@ canvas {
     grid-area: towers;
     text-align: left;
     padding: 25px;
+}
+
+/*-----------------------------------------*/
+
+.divider {
+    grid-area: divider;
+    width: 100%;
+    text-align: center;
+    font-size: 36px;
+    letter-spacing: 10px;
+}
+
+/*-----------------------------------------*/
+
+#about {
+    grid-area: about;
 }
 
 /*-----------------------------------------*/
