@@ -2,7 +2,7 @@
 import { createHotSpot } from "./HotSpot.js";
 
 // Managers
-import WaveManager from "../../managers/waveManager.js";
+import WaveManager from "../../managers/WaveManager.js";
 
 // Utility Functions
 import { loadSpritesheets } from "../../utils/SpritesheetUtil.js";
@@ -50,7 +50,7 @@ class MediumLevelScene extends Phaser.Scene {
         const walkableLayer = map.createLayer('Walkable Layer', tileset); // Used for pathfinding
         const buildingLayer = map.createLayer('Buildings Layer', tileset);
         const propLayer = map.createLayer('Prop Layer', tileset);
-        const towerLayer = map.createLayer('Tower Layer', tileset);
+        //const towerLayer = map.createLayer('Tower Layer', tileset);
         
         // Debugging map and tileset creation
         console.log('Map:', map);  // Debugging line

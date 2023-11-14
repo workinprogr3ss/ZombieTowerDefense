@@ -250,7 +250,7 @@
         {
          "draworder":"topdown",
          "id":4,
-         "name":"Tower Layer",
+         "name":"HotSpot Layer",
          "objects":[
                 {
                  "height":30,
