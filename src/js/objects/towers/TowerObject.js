@@ -2,10 +2,10 @@ export default class Tower extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, damage, range, speed) {
         super(scene, x, y, texture);
 
-        this.damage = damage || 20;
+        this.damage = damage || 100;
         this.range = range || 200;
-        this.speed = speed || 500;
-        this.lastAttackTime = 0;
+        this.speed = speed || 5000;
+        this.canAttack = true;
 
         // Graphics to draw the range
         this.rangeGraphics = scene.add.graphics({ lineStyle: {width: 1, color:"#ff0000"} });
@@ -25,7 +25,13 @@ export default class Tower extends Phaser.GameObjects.Sprite {
     }
 
     attack(zombies) {
-        if (this.scene.time.now > this.lastAttackTime + this.speed) {
+        if (this.canAttack) {
+            
+            console.log("shoot");
+
+            // attack delay
+            this.canAttack = false;
+            
             let closestZombie = null;
             let closestDistance = Infinity;
 
@@ -42,6 +48,10 @@ export default class Tower extends Phaser.GameObjects.Sprite {
             if (closestZombie) {
                 closestZombie.reduceHealth(this.damage);
             }
+
+            setTimeout(() => {
+                this.canAttack = true;
+            }, this.speed);
         }
      }
 }

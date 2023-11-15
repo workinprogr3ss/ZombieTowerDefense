@@ -112,7 +112,7 @@ class EasyLevelScene extends Phaser.Scene {
         //console.log(this.zombies.children.entries)
 
         for (const zombie of this.zombies.children.entries) {
-            console.log(zombie.health)
+            //console.log(zombie.health)
         }
 
         this.towers.forEach((tower) => {
