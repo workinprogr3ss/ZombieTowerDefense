@@ -203,6 +203,9 @@ reachedEnd() {
     if (Phaser.Math.Distance.Between(this.x, this.y, targetX, targetY) < 1) {
         this.scene.displayManager.playerHealthManager.reducePlayerHealth(this.damage);
         this.destroy();
+        if (this.healthBar) {
+            this.healthBar.destroy();
+        }  
         return true;
     }
     return false;

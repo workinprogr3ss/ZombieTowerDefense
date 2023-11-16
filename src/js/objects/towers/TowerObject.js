@@ -32,18 +32,8 @@ export default class Tower extends Phaser.GameObjects.Sprite {
             // attack delay
             this.canAttack = false;
             
-            let closestZombie = null;
-            let closestDistance = Infinity;
-
-            for (const zombie of zombies) {
-                if (this.enemyInRange(zombie)) {
-                    const distance = Phaser.Math.Distance.Between(this.x, this.y, zombie.x, zombie.y);
-                    if (distance < closestDistance) {
-                        closestZombie = zombie;
-                        closestDistance = distance;
-                    }
-                }
-            }
+            // find closest zombie
+            const closestZombie = this.findClosetZombie(zombies);
 
             if (closestZombie) {
                 closestZombie.reduceHealth(this.damage);
@@ -53,5 +43,41 @@ export default class Tower extends Phaser.GameObjects.Sprite {
                 this.canAttack = true;
             }, this.speed);
         }
-     }
+    }
+
+    rotateTower(zombie) {
+        let targetX = zombie.x;
+        let targetY = zombie.y;
+
+        // Calculate the angle towards the target
+        let angle = Phaser.Math.Angle.Between(this.x, this.y, targetX, targetY);
+
+        // Set the turret roation to face the target
+        const offset = Math.PI / 2;
+        this.rotation = angle + offset;
+    }
+
+    findClosetZombie(zombies) {
+        let closestZombie = null;
+        let closestDistance = Infinity;
+
+        for (const zombie of zombies) {
+            if (this.enemyInRange(zombie)) {
+                const distance = Phaser.Math.Distance.Between(this.x, this.y, zombie.x, zombie.y);
+                if (distance < closestDistance) {
+                    closestZombie = zombie;
+                    closestDistance = distance;
+                }
+            }
+        }
+
+        return closestZombie;
+    }
+
+    update() { 
+    let closestZombie = this.findClosetZombie(this.scene.zombies.children.entries);
+    if (closestZombie) {
+        this.rotateTower(closestZombie);
+    }
+}
 }

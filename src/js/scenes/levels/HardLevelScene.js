@@ -13,9 +13,13 @@ class HardLevelScene extends Phaser.Scene {
     constructor() {
         super({ key: 'HardLevelScene' });
         this.grid = null; // Utilize GridService to create the grid
-        this.zombies = null; // Zombie container
-        this.context = this; // Used for pause menu
         
+        // Objects
+        this.zombies = null; // Zombie container
+        this.towers = []; // Zombie container
+
+        this.context = this; // Used for pause menu
+
         this.displayManager = new DisplayManager(this); // Display Manager
     }
 
@@ -33,6 +37,12 @@ class HardLevelScene extends Phaser.Scene {
         this.load.image('sniper_tower', 'src/assets/images/towers/sniper_tower.png');
         this.load.image('missile_tower', 'src/assets/images/towers/missile_tower.png');
         this.load.image('flamethrower_tower', 'src/assets/images/towers/flamethrower_tower.png');
+
+        // Load testing tower
+        this.load.image('tower_base', 'src/assets/images/towers/testing/PNG/Tower.png');
+        this.load.image('cannon_1', 'src/assets/images/towers/testing/PNG/Cannon.png');
+        this.load.image('missile_1', 'src/assets/images/towers/testing/PNG/Missile_Launcher.png');
+        this.load.image('machine_gun_1', 'src/assets/images/towers/testing/PNG/MG.png');
 
         // Load Player HUD
         this.load.image('playerHUD', 'src/assets/images/icons/playerHUD.png');
@@ -109,6 +119,11 @@ class HardLevelScene extends Phaser.Scene {
 
         // Update the Wave Timer Manager
         this.displayManager.waveTimerManager.update(delta);
+
+        this.towers.forEach((tower) => {
+            tower.attack(this.zombies.children.entries);
+            tower.update();
+        });
 
         // Debugging
         //console.log(this.zombies.children.entries)
