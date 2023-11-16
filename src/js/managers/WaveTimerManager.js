@@ -4,11 +4,13 @@ export default class WaveTimerManager {
         this.waveTimer = 30; // Starting time for each wave
     }
 
+    // Unused
     addTime(amount) {
         this.waveTimer += amount;
         this.updateWaveTimerDisplay();
     }
 
+    // Unused
     reduceTime(amount) {
         this.waveTimer -= amount;
         this.waveTimer = Math.max(this.waveTimer, 0); // Prevents wave timer from going below 0

@@ -97,6 +97,7 @@ class EasyLevelScene extends Phaser.Scene {
 
         // Display Manager
         this.displayManager.create('EasyLevelScene');
+        this.displayManager.waveTimerManager.resetTimer();
     }
     
     update (time, delta) {

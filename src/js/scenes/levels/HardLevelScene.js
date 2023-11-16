@@ -93,7 +93,9 @@ class HardLevelScene extends Phaser.Scene {
         this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY);
         //console.log("Wave Manager:", this.waveManager);
 
+        // Display Manager
         this.displayManager.create('HardLevelScene');
+        this.displayManager.waveTimerManager.resetTimer()
     }
     
     update (time, delta) {

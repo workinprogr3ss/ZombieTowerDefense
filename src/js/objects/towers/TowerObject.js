@@ -8,8 +8,8 @@ export default class Tower extends Phaser.GameObjects.Sprite {
         this.canAttack = true;
 
         // Graphics to draw the range
-        this.rangeGraphics = scene.add.graphics({ lineStyle: {width: 1, color:"#ff0000"} });
-        this.drawRange();
+        //this.rangeGraphics = scene.add.graphics({ lineStyle: {width: 1, color:"#ff0000"} });
+        //this.drawRange();
 
         scene.add.existing(this);
     }

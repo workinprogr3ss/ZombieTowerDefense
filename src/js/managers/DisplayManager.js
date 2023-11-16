@@ -33,7 +33,7 @@ export default class DisplayManager {
 
         // Wave Timer Manager
         // Reset the wave timer when the scene is created
-        this.scene.waveManager.waveTimer = 0;
+        this.scene.waveManager.waveTimer = 30;
 
         // Wave Timer Text
         this.waveTimerText = this.scene.add.text(470, 575, `${this.waveTimerManager.waveTimer}`, {
@@ -92,18 +92,3 @@ export default class DisplayManager {
         //});
     }
 }
-
-        //// Enemy Count Manager
-        //// Reset the enemy count when the scene is created
-        //this.enemyCountManager.currentEnemyCount = 0;
-//
-        //// Enemy Count Text
-        //this.enemyCountText = this.scene.add.text(470, 575, `${this.enemyCountManager.currentEnemyCount}`, {
-        //    fill: '#000000',
-        //    fontSize: '22px',
-        //}).setOrigin(0, 0.5);
-//
-        //// Event listener for updating the enemy count text
-        //this.scene.events.on('updateEnemyCountDisplay', (newEnemyCount) => {
-        //    this.enemyCountText.setText(`${newEnemyCount}`);
-        //});

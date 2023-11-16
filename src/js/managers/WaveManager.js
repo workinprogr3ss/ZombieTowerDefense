@@ -33,7 +33,7 @@ export default class WaveManager {
 
     }
 
-    initializeWaves() {
+    initializeWaves(levelname) {
         // Define the waves
         return [
             { // Wave 1
@@ -49,7 +49,7 @@ export default class WaveManager {
                 spawnInterval: 1000, // 1 second
             },
             { // Wave 4
-                enemies: ['runner', 'runner', 'runner',  'runner', 'runner'],
+                enemies: ['runner', 'runner', 'runner',  'runner', 'runner', 'runner', 'runner', 'runner',  'runner', 'runner'],
                 spawnInterval: 1000, // 1 second
             },
             { // Wave 5
@@ -65,7 +65,7 @@ export default class WaveManager {
                 spawnInterval: 1000, // 1 second
             },
             { // Wave 8
-                enemies: ['tank', 'tank', 'tank', 'tank', 'tank'],
+                enemies: ['tank', 'tank', 'tank', 'tank', 'tank', 'runner', 'runner', 'runner', 'runner', 'runner', 'runner'],
                 spawnInterval: 1000, // 1 second
             },
             { // Wave 9
@@ -73,7 +73,7 @@ export default class WaveManager {
                 spawnInterval: 1000, // 1 second
             },
             { // Wave 10
-                enemies: ['spitter'],
+                enemies: ['walker', 'walker', 'runner', 'runner', 'tank', 'walker', 'walker', 'spitter', 'spitter', 'spitter'],
                 spawnInterval: 1000, // 1 second
             },
         ];

@@ -53,9 +53,9 @@ class MediumLevelScene extends Phaser.Scene {
         //const towerLayer = map.createLayer('Tower Layer', tileset);
         
         // Debugging map and tileset creation
-        console.log('Map:', map);  // Debugging line
-        console.log('Tileset:', tileset);  // Debugging line
-        console.log('Walkable Layer:', walkableLayer);  // Debugging line
+        //console.log('Map:', map);  // Debugging line
+        //console.log('Tileset:', tileset);  // Debugging line
+        //console.log('Walkable Layer:', walkableLayer);  // Debugging line
 
         // Create Tower HotSpots
         const hotSpotLayer = map.getObjectLayer('HotSpot Layer');
@@ -79,20 +79,22 @@ class MediumLevelScene extends Phaser.Scene {
         this.grid = new GridService(this, walkableLayer, 545); 
         
         // Spawning Debugging
-        console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);
-        console.log(`Target destination tile is (${endTileX}, ${endTileY})`); 
+        //console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);
+        //console.log(`Target destination tile is (${endTileX}, ${endTileY})`); 
         
         // Pathfinding Debugging
-        console.log("Grid dimensions:", this.grid.grid.length, this.grid.grid[0]?.length);
-        console.log("Start Tile: ", this.grid.grid[startTileY][startTileX]);
-        console.log("End Tile: ", this.grid.grid[endTileY][endTileX]);
+        //console.log("Grid dimensions:", this.grid.grid.length, this.grid.grid[0]?.length);
+        //console.log("Start Tile: ", this.grid.grid[startTileY][startTileX]);
+        //console.log("End Tile: ", this.grid.grid[endTileY][endTileX]);
 
         // Zombie Container
         this.zombies = this.physics.add.group(); // Zombie container
         this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY);
-        console.log("Wave Manager:", this.waveManager);
+        //console.log("Wave Manager:", this.waveManager);
 
+        // Display Manager
         this.displayManager.create('MediumLevelScene');
+        this.displayManager.waveTimerManager.resetTimer()
     }
     
     update (time, delta) {
