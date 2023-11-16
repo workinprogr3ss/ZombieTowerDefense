@@ -8,6 +8,7 @@ import WaveManager from "../../managers/WaveManager.js";
 import { loadSpritesheets } from "../../utils/SpritesheetUtil.js";
 import GridService from "../../utils/GridUtil.js";
 import DisplayManager from "../../managers/DisplayManager.js";
+import { loadImages } from "../../utils/ImageLoaderUtil.js";
 
 class MediumLevelScene extends Phaser.Scene {
     constructor() {
@@ -32,21 +33,8 @@ class MediumLevelScene extends Phaser.Scene {
         // Load spritesheets for zombies
         loadSpritesheets(this);
 
-        // Load towers
-        this.load.image('hotspot', 'src/assets/images/towers/hotspot.png');
-        this.load.image('sniper_tower', 'src/assets/images/towers/sniper_tower.png');
-        this.load.image('missile_tower', 'src/assets/images/towers/missile_tower.png');
-        this.load.image('flamethrower_tower', 'src/assets/images/towers/flamethrower_tower.png');
-
-        // Load testing tower
-        this.load.image('tower_base', 'src/assets/images/towers/testing/PNG/Tower.png');
-        this.load.image('cannon_1', 'src/assets/images/towers/testing/PNG/Cannon.png');
-        this.load.image('missile_1', 'src/assets/images/towers/testing/PNG/Missile_Launcher.png');
-        this.load.image('machine_gun_1', 'src/assets/images/towers/testing/PNG/MG.png');
-
-        // Load Player HUD
-        this.load.image('playerHUD', 'src/assets/images/icons/playerHUD.png');
-
+        loadImages(this);
+    
         // Pause Menu Items
         this.load.spritesheet('pauseButton', 'src/assets/images/icons/pauseButton.png', {frameWidth: 34, frameHeight: 34});
     }
@@ -99,7 +87,7 @@ class MediumLevelScene extends Phaser.Scene {
 
         // Zombie Container
         this.zombies = this.physics.add.group(); // Zombie container
-        this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY);
+        this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY, 2);
         //console.log("Wave Manager:", this.waveManager);
 
         // Display Manager

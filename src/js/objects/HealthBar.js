@@ -6,7 +6,7 @@ export default class HealthBar {
         this.y = y;
         this.value = health;
         this.maxValue = health;
-        this.p = 16 / this.maxValue;
+        this.p = 16 / this.maxValue; // percentage of bar that is filled
 
         scene.add.existing(this.bar);
         this.draw();
@@ -30,7 +30,7 @@ export default class HealthBar {
             this.bar.fillStyle(0x00ff00);
         }
 
-        var d = Math.floor(this.p * this.value);
+        var d = Math.floor(this.p * this.value); // width of the health bar
 
         this.bar.fillRect(this.x + 2, this.y + 2, d, 4);
     }
