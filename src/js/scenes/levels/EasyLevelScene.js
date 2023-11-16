@@ -99,7 +99,7 @@ class EasyLevelScene extends Phaser.Scene {
         this.displayManager.create('EasyLevelScene');
     }
     
-    update () {
+    update (time, delta) {
         // Update the zombies
         this.zombies.getChildren().forEach((zombie) => {
             zombie.update();
@@ -108,16 +108,15 @@ class EasyLevelScene extends Phaser.Scene {
         // Update the Wave Manager
         this.waveManager.update();
 
-        // Debugging
-        //console.log(this.zombies.children.entries)
-
-        for (const zombie of this.zombies.children.entries) {
-            //console.log(zombie.health)
-        }
+        // Update the Wave Timer Manager
+        this.displayManager.waveTimerManager.update(delta);
 
         this.towers.forEach((tower) => {
             tower.attack(this.zombies.children.entries);
         });
+
+        // Debugging
+        //console.log(this.zombies.children.entries)
     }
 }
 

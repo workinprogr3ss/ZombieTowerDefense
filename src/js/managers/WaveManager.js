@@ -9,8 +9,8 @@ export default class WaveManager {
         this.scene = scene;
         this.currentWave = 0;
         this.nextSpawnTime = 0;
-        this.waveDelay = 30000; // 30 seconds
-        this.lastWaveEndTime = 0;
+        //this.waveDelay = 30000; // 30 seconds between waves
+        //this.lastWaveEndTime = 0;
         this.waves = this.initializeWaves();
         this.zombies = {
             walker: WalkerZombie,
@@ -84,7 +84,8 @@ export default class WaveManager {
         if (this.currentWave < this.waves.length - 1) {
             this.currentWave++;
             this.nextSpawnTime = this.scene.time.now; // Reset the spawn timer for the new wave
-            this.lastWaveEndTime = this.scene.time.now; // Update the end time of the wave
+            //this.lastWaveEndTime = this.scene.time.now; // Update the end time of the wave
+            this.scene.displayManager.waveTimerManager.resetTimer(); // Reset the wave timer
         } else {
             // All waves are complete, handle game completion
         }
@@ -102,7 +103,7 @@ export default class WaveManager {
         this.scene.zombies.add(enemy);
 
         // Add the enemy to the enemy count
-        this.scene.displayManager.enemyCountManager.addEnemy(1);
+        //this.scene.displayManager.enemyCountManager.addEnemy(1);
 
         // Set the time for the next spawn
         this.nextSpawnTime = this.scene.time.now + this.waves[this.currentWave].spawnInterval;
@@ -121,8 +122,9 @@ export default class WaveManager {
 
         // If there are no more enemies to spawn and no active enemies left, the wave is complete
         //&& this.scene.zombies.countActive(true) === 0 ; for when there are no active enemies left
-        if ((this.waves[this.currentWave].enemies.length === 0) && (this.scene.time.now > this.lastWaveEndTime + this.waveDelay)) {
+        if ((this.waves[this.currentWave].enemies.length === 0) && (0 >= this.scene.displayManager.waveTimerManager.waveTimer)) {
             this.startNextWave();
+            this.scene.displayManager.waveTimerManager.resetTimer();
         }
     }
 } 

@@ -95,7 +95,7 @@ class MediumLevelScene extends Phaser.Scene {
         this.displayManager.create('MediumLevelScene');
     }
     
-    update () {
+    update (time, delta) {
         // Update the zombies
         this.zombies.getChildren().forEach((zombie) => {
             zombie.update();
@@ -103,6 +103,9 @@ class MediumLevelScene extends Phaser.Scene {
 
         // Update the wave manager
         this.waveManager.update();
+
+        // Update the Wave Timer Manager
+        this.displayManager.waveTimerManager.update(delta);
 
         // Debugging
         //console.log(this.zombies.children.entries)
