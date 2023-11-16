@@ -173,8 +173,22 @@ reduceHealth(damage) {
     this.health -= damage;
     this.healthBar.updateHealth(this.health);
     if (this.health <= 0) {
+        // Add value to player currency
+        this.addValue();
+        
+        // Destroy the health bar
+        if (this.healthBar) {
+            this.healthBar.destroy();
+        }   
+        
+        // Destroy the enemy
         this.destroy();
     }
+}
+
+// Method to add value to player currency
+addValue() {
+    this.scene.displayManager.playerCurrencyManager.addCurrency(this.value);
 }
 
 
