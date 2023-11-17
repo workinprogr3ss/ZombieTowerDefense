@@ -33,25 +33,33 @@ export function createHotSpot(object, scene) {
 
         menuItem1.on('pointerdown', () => {
             tower.destroy();
+            const towerBase = scene.add.sprite(object.x, object.y, 'tower_base');
+            towerBase.setScale(0.15);
             const sniperTower = new SniperTower(scene, object.x, object.y);
             scene.add.existing(sniperTower);
             scene.towers.push(sniperTower);
-            sniperTower.setScale(0.1);
+            sniperTower.setScale(0.15);
             popUpMenu.setVisible(false);
         });
 
         menuItem2.on('pointerdown', () => {
             tower.destroy();
+            const towerBase = scene.add.sprite(object.x, object.y, 'tower_base');
+            towerBase.setScale(0.15);
             const missileTower = new MissileTower(scene, object.x, object.y);
             scene.add.existing(missileTower);
+            scene.towers.push(missileTower);
             missileTower.setScale(0.15);
             popUpMenu.setVisible(false);
         });
 
         menuItem3.on('pointerdown', () => {
             tower.destroy();
+            const towerBase = scene.add.sprite(object.x, object.y, 'tower_base');
+            towerBase.setScale(0.15);
             const flamethrowerTower = new FlamethrowerTower(scene, object.x, object.y);
             scene.add.existing(flamethrowerTower);
+            scene.towers.push(flamethrowerTower);
             flamethrowerTower.setScale(0.2);
             popUpMenu.setVisible(false);
         });

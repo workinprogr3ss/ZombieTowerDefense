@@ -7,6 +7,10 @@ import ScoreManager from "../managers/ScoreManager.js";
 export default class DisplayManager {
     constructor (scene) {
         this.scene = scene;
+
+        // Wave Timer Text
+        this.waveTimerManager = new WaveTimerManager(scene);
+        this.waveTimerText = null;
         
         // Player Health Manager
         this.playerHealthManager = new PlayerHealthManager(scene);
@@ -15,14 +19,6 @@ export default class DisplayManager {
         // Player Currency Manager
         this.playerCurrencyManager = new PlayerCurrencyManager(scene);
         this.playerCurrencyText = null;
-        
-        // Enemy Count Manager
-        this.enemyCountManager = new EnemyCountManager(scene);
-        this.enemyCountText = null;
-
-        // Wave Timer Text
-        this.waveTimerManager = new WaveTimerManager(scene);
-        this.waveTimerText = null;
 
         // Score Manager
         this.scoreManager = new ScoreManager(scene);
@@ -37,30 +33,17 @@ export default class DisplayManager {
 
         // Wave Timer Manager
         // Reset the wave timer when the scene is created
-        this.scene.waveManager.waveTimer = 0;
+        this.scene.waveManager.waveTimer = 30;
 
         // Wave Timer Text
-        this.waveTimerText = this.scene.add.text(this.scene.scale.width / 2, 20, '00:00', {
-            fill: '#ffffff',
-            fontSize: '22px',
-        }).setOrigin(0, 0.5);
-
-        // Update the wave timer text every second
-
-
-        // Enemy Count Manager
-        // Reset the enemy count when the scene is created
-        this.enemyCountManager.currentEnemyCount = 0;
-
-        // Enemy Count Text
-        this.enemyCountText = this.scene.add.text(470, 575, `${this.enemyCountManager.currentEnemyCount}`, {
+        this.waveTimerText = this.scene.add.text(470, 575, `${this.waveTimerManager.waveTimer}`, {
             fill: '#000000',
             fontSize: '22px',
         }).setOrigin(0, 0.5);
 
-        // Event listener for updating the enemy count text
-        this.scene.events.on('updateEnemyCountDisplay', (newEnemyCount) => {
-            this.enemyCountText.setText(`${newEnemyCount}`);
+        // Update the wave timer text every second
+        this.scene.events.on('updateWaveTimerDisplay', (newWaveTimer) => {
+            this.waveTimerText.setText(`${newWaveTimer}`);
         });
 
         // Player Health Manager

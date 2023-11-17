@@ -8,6 +8,7 @@ import WaveManager from "../../managers/WaveManager.js";
 import { loadSpritesheets } from "../../utils/SpritesheetUtil.js";
 import GridService from "../../utils/GridUtil.js";
 import DisplayManager from "../../managers/DisplayManager.js";
+import { loadImages } from "../../utils/ImageLoaderUtil.js";
 
 class EasyLevelScene extends Phaser.Scene {
     constructor() {
@@ -32,14 +33,7 @@ class EasyLevelScene extends Phaser.Scene {
         // Load spritesheets
         loadSpritesheets(this);
 
-        // Load towers
-        this.load.image('hotspot', 'src/assets/images/towers/hotspot.png');
-        this.load.image('sniper_tower', 'src/assets/images/towers/sniper_tower.png');
-        this.load.image('missile_tower', 'src/assets/images/towers/missile_tower.png');
-        this.load.image('flamethrower_tower', 'src/assets/images/towers/flamethrower_tower.png');
-
-        // Load Player HUD
-        this.load.image('playerHUD', 'src/assets/images/icons/playerHUD.png');
+        loadImages(this);
         
         // Pause Menu Items
         this.load.spritesheet('pauseButton', 'src/assets/images/icons/pauseButton.png', {frameWidth: 34, frameHeight: 34});
@@ -92,14 +86,15 @@ class EasyLevelScene extends Phaser.Scene {
 
         // Zombie Container
         this.zombies = this.physics.add.group(); // Zombie container
-        this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY);
+        this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY, 1);
         //console.log("Wave Manager:", this.waveManager);
 
         // Display Manager
         this.displayManager.create('EasyLevelScene');
+        this.displayManager.waveTimerManager.resetTimer();
     }
     
-    update () {
+    update (time, delta) {
         // Update the zombies
         this.zombies.getChildren().forEach((zombie) => {
             zombie.update();
@@ -108,16 +103,16 @@ class EasyLevelScene extends Phaser.Scene {
         // Update the Wave Manager
         this.waveManager.update();
 
-        // Debugging
-        //console.log(this.zombies.children.entries)
-
-        for (const zombie of this.zombies.children.entries) {
-            //console.log(zombie.health)
-        }
+        // Update the Wave Timer Manager
+        this.displayManager.waveTimerManager.update(delta);
 
         this.towers.forEach((tower) => {
             tower.attack(this.zombies.children.entries);
+            tower.update();
         });
+
+        // Debugging
+        //console.log(this.zombies.children.entries)
     }
 }
 

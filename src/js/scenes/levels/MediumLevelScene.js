@@ -8,14 +8,19 @@ import WaveManager from "../../managers/WaveManager.js";
 import { loadSpritesheets } from "../../utils/SpritesheetUtil.js";
 import GridService from "../../utils/GridUtil.js";
 import DisplayManager from "../../managers/DisplayManager.js";
+import { loadImages } from "../../utils/ImageLoaderUtil.js";
 
 class MediumLevelScene extends Phaser.Scene {
     constructor() {
         super({ key: 'MediumLevelScene' });
         this.grid = null; // Utilize GridService to create the grid
-        this.zombies = null; // Zombie container
-        this.context = this; // Used for pause menu
         
+        // Objects
+        this.zombies = null; // Zombie container
+        this.towers = []; // Zombie container
+
+        this.context = this; // Used for pause menu
+
         this.displayManager = new DisplayManager(this); // Display Manager
     }
 
@@ -28,15 +33,8 @@ class MediumLevelScene extends Phaser.Scene {
         // Load spritesheets for zombies
         loadSpritesheets(this);
 
-        // Load towers
-        this.load.image('hotspot', 'src/assets/images/towers/hotspot.png');
-        this.load.image('sniper_tower', 'src/assets/images/towers/sniper_tower.png');
-        this.load.image('missile_tower', 'src/assets/images/towers/missile_tower.png');
-        this.load.image('flamethrower_tower', 'src/assets/images/towers/flamethrower_tower.png');
-
-        // Load Player HUD
-        this.load.image('playerHUD', 'src/assets/images/icons/playerHUD.png');
-
+        loadImages(this);
+    
         // Pause Menu Items
         this.load.spritesheet('pauseButton', 'src/assets/images/icons/pauseButton.png', {frameWidth: 34, frameHeight: 34});
     }
@@ -53,9 +51,9 @@ class MediumLevelScene extends Phaser.Scene {
         //const towerLayer = map.createLayer('Tower Layer', tileset);
         
         // Debugging map and tileset creation
-        console.log('Map:', map);  // Debugging line
-        console.log('Tileset:', tileset);  // Debugging line
-        console.log('Walkable Layer:', walkableLayer);  // Debugging line
+        //console.log('Map:', map);  // Debugging line
+        //console.log('Tileset:', tileset);  // Debugging line
+        //console.log('Walkable Layer:', walkableLayer);  // Debugging line
 
         // Create Tower HotSpots
         const hotSpotLayer = map.getObjectLayer('HotSpot Layer');
@@ -79,23 +77,25 @@ class MediumLevelScene extends Phaser.Scene {
         this.grid = new GridService(this, walkableLayer, 545); 
         
         // Spawning Debugging
-        console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);
-        console.log(`Target destination tile is (${endTileX}, ${endTileY})`); 
+        //console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);
+        //console.log(`Target destination tile is (${endTileX}, ${endTileY})`); 
         
         // Pathfinding Debugging
-        console.log("Grid dimensions:", this.grid.grid.length, this.grid.grid[0]?.length);
-        console.log("Start Tile: ", this.grid.grid[startTileY][startTileX]);
-        console.log("End Tile: ", this.grid.grid[endTileY][endTileX]);
+        //console.log("Grid dimensions:", this.grid.grid.length, this.grid.grid[0]?.length);
+        //console.log("Start Tile: ", this.grid.grid[startTileY][startTileX]);
+        //console.log("End Tile: ", this.grid.grid[endTileY][endTileX]);
 
         // Zombie Container
         this.zombies = this.physics.add.group(); // Zombie container
-        this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY);
-        console.log("Wave Manager:", this.waveManager);
+        this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY, 2);
+        //console.log("Wave Manager:", this.waveManager);
 
+        // Display Manager
         this.displayManager.create('MediumLevelScene');
+        this.displayManager.waveTimerManager.resetTimer()
     }
     
-    update () {
+    update (time, delta) {
         // Update the zombies
         this.zombies.getChildren().forEach((zombie) => {
             zombie.update();
@@ -103,6 +103,15 @@ class MediumLevelScene extends Phaser.Scene {
 
         // Update the wave manager
         this.waveManager.update();
+
+        // Update the Wave Timer Manager
+        this.displayManager.waveTimerManager.update(delta);
+
+        this.towers.forEach((tower) => {
+            tower.attack(this.zombies.children.entries);
+            tower.update();
+        });
+
 
         // Debugging
         //console.log(this.zombies.children.entries)

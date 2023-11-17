@@ -2,6 +2,8 @@ import Tower from './TowerObject.js';
 
 export default class SniperTower extends Tower {
     constructor(scene, x, y) {
-        super(scene, x, y, 'sniper_tower', 100, 200, 5000);
+        //(scene, x, y, texture, damage, range, speed)
+        // speed is the delay between attacks in milliseconds
+        super(scene, x, y, 'cannon_1', 'cannon_projectile', 20, 200, 3000);
     }
 }

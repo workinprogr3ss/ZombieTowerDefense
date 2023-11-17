@@ -1,4 +1,5 @@
 import { findPath } from '../../utils/PathfindingUtil.js';
+import HealthBar from '../HealthBar.js';
 
 export default class Enemy extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture, initialDirection, health, speed, damage, value) {
@@ -35,6 +36,9 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.targetTileX = null;
         this.targetTileY = null;
         this.path = null;
+
+        // Health Bar
+        this.healthBar = new HealthBar(scene, this.x - 10, this.y - 20, this.health);
 }
 
 // Method to initialize animations
@@ -130,6 +134,12 @@ followPath() {
 
 // Method to update the enemy's position
 update() {
+    // Update the health bar
+    this.healthBar.x = this.x - 10;
+    this.healthBar.y = this.y - 20;
+
+    this.healthBar.updateHealth(this.health);
+
     // Check if the enemy has reached the end of the path
     if (this.reachedEnd()) {
         return;
@@ -161,9 +171,24 @@ updatePath() {
 // Method to reduce health
 reduceHealth(damage) {
     this.health -= damage;
+    this.healthBar.updateHealth(this.health);
     if (this.health <= 0) {
+        // Add value to player currency
+        this.addValue();
+        
+        // Destroy the health bar
+        if (this.healthBar) {
+            this.healthBar.destroy();
+        }   
+        
+        // Destroy the enemy
         this.destroy();
     }
+}
+
+// Method to add value to player currency
+addValue() {
+    this.scene.displayManager.playerCurrencyManager.addCurrency(this.value);
 }
 
 
@@ -178,6 +203,9 @@ reachedEnd() {
     if (Phaser.Math.Distance.Between(this.x, this.y, targetX, targetY) < 1) {
         this.scene.displayManager.playerHealthManager.reducePlayerHealth(this.damage);
         this.destroy();
+        if (this.healthBar) {
+            this.healthBar.destroy();
+        }  
         return true;
     }
     return false;
