@@ -17,7 +17,7 @@ export default class Projectile extends Phaser.GameObjects.Sprite {
     }
 
     fire(towerX, towerY, zombieX, zombieY) {
-        console.log("fire")
+        //console.log("fire")
 
         //Move projectile to the target
         this.scene.physics.moveTo(this, zombieX, zombieY, this.speed);

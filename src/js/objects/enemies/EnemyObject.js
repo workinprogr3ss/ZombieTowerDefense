@@ -182,6 +182,7 @@ reduceHealth(damage) {
         }   
         
         // Destroy the enemy
+        
         this.destroy();
     }
 }
