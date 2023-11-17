@@ -39,10 +39,9 @@ export default class Tower extends Phaser.GameObjects.Sprite {
             const closestZombie = this.findClosetZombie(zombies);
 
             // create projectile
-            //let projectile = new Projectile(this.scene, this.x, this.y, this.projectileTexture);
-
             if (closestZombie) {
-                //projectile.fire(closestZombie.x, closestZombie.y);
+                let projectile = new Projectile(this.scene, this.x, this.y, closestZombie.x, closestZombie.y, this.projectileTexture);
+                projectile.fire(this.x, this.y, closestZombie.x, closestZombie.y);
                 closestZombie.reduceHealth(this.damage);
             }
 
@@ -50,6 +49,7 @@ export default class Tower extends Phaser.GameObjects.Sprite {
                 this.canAttack = true;
             }, this.speed);
         }
+
     }
 
     rotateTower(zombie) {
