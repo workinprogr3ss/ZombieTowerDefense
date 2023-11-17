@@ -12,8 +12,8 @@ export function loadImages(scene) {
     scene.load.image('machine_gun_1', 'src/assets/images/towers/testing/PNG/MG.png');
 
     // Load Projectiles
-    scene.load.image('cannon_projectile', 'src/assets/images/towers/testing/PNG/Bullet_Cannon.png');
-    scene.load.image('missile_projectile', 'src/assets/images/towers/testing/PNG/Missile.png');
+    scene.load.spritesheet('cannon_projectile', 'src/assets/images/towers/testing/PNG/Bullet_Cannon.png', {frameWidth: 16, frameHeight: 16});
+    scene.load.spritesheet('missile_projectile', 'src/assets/images/towers/testing/PNG/Missile.png', {frameWidth: 32, frameHeight: 32});
     scene.load.image('machine_gun_projectile', 'src/assets/images/towers/testing/PNG/Bullet_MG.png');
 
     // Load Player HUD

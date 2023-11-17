@@ -63,7 +63,7 @@ export default class DisplayManager {
 
         // Player Currency Manager
         // Reset the player currency when the scene is created
-        this.playerCurrencyManager.currentCurrency = 0;
+        this.playerCurrencyManager.currentCurrency = 350;
     
         // Player Currency Text
         this.playerCurrencyText = this.scene.add.text(662, 575, `${this.playerCurrencyManager.currentCurrency}`, {
