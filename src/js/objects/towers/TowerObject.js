@@ -10,6 +10,8 @@ export default class Tower extends Phaser.GameObjects.Sprite {
 
         this.projectileTexture = projectileTexture;
 
+        this.towerType = this.checkTowerType();
+
         // Graphics to draw the range
         //this.rangeGraphics = scene.add.graphics({ lineStyle: {width: 1, color:"#ff0000"} });
         //this.drawRange();
@@ -43,7 +45,9 @@ export default class Tower extends Phaser.GameObjects.Sprite {
                 let projectile = new Projectile(this.scene, this.x, this.y, closestZombie.x, closestZombie.y, this.projectileTexture);
                 projectile.fire(this.x, this.y, closestZombie.x, closestZombie.y);
                 closestZombie.reduceHealth(this.damage);
-                this.scene.audioManager.playSniperShootAudio();
+                // play audio
+                this.scene.audioManager.playTowerShootAudio(this.towerType);
+                this.scene.audioManager.playZombieHitAudio();
             }
 
             setTimeout(() => {
@@ -83,9 +87,21 @@ export default class Tower extends Phaser.GameObjects.Sprite {
     }
 
     update() { 
-    let closestZombie = this.findClosetZombie(this.scene.zombies.children.entries);
-    if (closestZombie) {
-        this.rotateTower(closestZombie);
+        let closestZombie = this.findClosetZombie(this.scene.zombies.children.entries);
+        if (closestZombie) {
+            this.rotateTower(closestZombie);
+        }
     }
-}
+
+    checkTowerType() {
+        if (this.texture.key == 'missile_tower_1'){
+            return 'missile';
+        }
+        else if (this.texture.key == 'sniper_tower_1'){
+            return 'sniper';
+        } 
+        else if (this.texture.key == 'flame_tower_1') {
+            return 'flame'; 
+        }
+    }
 }

@@ -24,7 +24,7 @@ export default class AudioManager {
         
         //Load Tower Audio
         this.scene.load.audio('sniperShoot', 'src/assets/sounds/effects/towers/sniper_tower.wav')
-        this.scene.load.audio('rocketShoot', 'src/assets/sounds/effects/towers/rocket_tower.mp3')
+        this.scene.load.audio('missileShoot', 'src/assets/sounds/effects/towers/rocket_tower.mp3')
         this.scene.load.audio('flameShoot', 'src/assets/sounds/effects/towers/flame_tower.wav')
     }
     
@@ -59,6 +59,18 @@ export default class AudioManager {
     }
 
     // Zombies
+    playZombieAudio(zombieType){
+        if (zombieType == 'walker'){
+            this.playWalkerZombieAudio()
+        }
+        else if (zombieType == 'tank'){
+            this.playTankZombieAudio()
+        }
+        else if (zombieType == 'runner'){
+            this.playRunnerZombieAudio()
+        }
+    }
+
     playWalkerZombieAudio(){
         this.scene.sound.play('walkerZombie')
     }
@@ -76,15 +88,30 @@ export default class AudioManager {
     }
 
     // Towers
+    playTowerShootAudio(towerType){
+        if (towerType == 'sniper'){
+            this.playSniperShootAudio()
+        }
+        else if (towerType == 'missile'){
+            this.playMissileShootAudio()
+        }
+        else if (towerType == 'flame'){
+            this.playFlameShootAudio()
+        }
+    }
+
     playSniperShootAudio(){
+        //console.log("play sniper audio")
         this.scene.sound.play('sniperShoot')
     }
 
-    playRocketShootAudio(){
-        this.scene.sound.play('rocketShoot')
+    playMissileShootAudio(){
+        //console.log("play missile audio")
+        this.scene.sound.play('missileShoot')
     }
 
     playFlameShootAudio(){
+        //console.log("play flame audio")
         this.scene.sound.play('flameShoot')
     }
 }
