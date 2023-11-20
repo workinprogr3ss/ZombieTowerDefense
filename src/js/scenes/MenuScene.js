@@ -53,9 +53,9 @@ class MenuScene extends BaseScene {
             completed: 1
         });
 
-        //Play Music
+        //Play Audio
         this.audioManager.playBackgroundAudio();
-        this.audioManager.playNewsAudio();
+        //this.audioManager.playNewsAudio();
     }
 }
 

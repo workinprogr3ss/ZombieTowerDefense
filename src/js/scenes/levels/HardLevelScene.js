@@ -3,12 +3,13 @@ import { createHotSpot } from "./HotSpot.js";
 
 // Managers
 import WaveManager from "../../managers/WaveManager.js";
+import DisplayManager from "../../managers/DisplayManager.js";
+import AudioManager from "../../managers/AudioManager.js";
 
 // Utility Functions
 import { loadSpritesheets } from "../../utils/SpritesheetUtil.js";
-import GridService from "../../utils/GridUtil.js";
-import DisplayManager from "../../managers/DisplayManager.js";
 import { loadImages } from "../../utils/ImageLoaderUtil.js";
+import GridService from "../../utils/GridUtil.js";
 
 class HardLevelScene extends Phaser.Scene {
     constructor() {
@@ -17,11 +18,13 @@ class HardLevelScene extends Phaser.Scene {
         
         // Objects
         this.zombies = null; // Zombie container
-        this.towers = []; // Zombie container
+        this.towers = []; // Tower container
 
         this.context = this; // Used for pause menu
 
+        // Managers
         this.displayManager = new DisplayManager(this); // Display Manager
+        this.audioManager = new AudioManager(this); // Audio Manager
     }
 
     //load the Hard map
@@ -30,10 +33,12 @@ class HardLevelScene extends Phaser.Scene {
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
         this.load.tilemapTiledJSON('hardmap', 'src/assets/maps/NewHardLevel.json');
 
-        // Load spritesheets for zombies
+        // Load visual assets
         loadSpritesheets(this);
-
         loadImages(this);
+
+        // Load audio assets
+        this.audioManager.loadAudio();
         
         // Pause Menu Items
         this.load.spritesheet('pauseButton', 'src/assets/images/icons/pauseButton.png', {frameWidth: 34, frameHeight: 34});

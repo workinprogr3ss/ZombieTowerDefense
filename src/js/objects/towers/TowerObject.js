@@ -43,6 +43,7 @@ export default class Tower extends Phaser.GameObjects.Sprite {
                 let projectile = new Projectile(this.scene, this.x, this.y, closestZombie.x, closestZombie.y, this.projectileTexture);
                 projectile.fire(this.x, this.y, closestZombie.x, closestZombie.y);
                 closestZombie.reduceHealth(this.damage);
+                this.scene.audioManager.playSniperShootAudio();
             }
 
             setTimeout(() => {

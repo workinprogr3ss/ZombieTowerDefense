@@ -1,5 +1,6 @@
 // Base scene for common functions and scripts used in multiple scenes
 
+import AudioManager from "../managers/AudioManager.js";
 class BaseScene extends Phaser.Scene {
 
     constructor(key) {
@@ -105,8 +106,13 @@ class BaseScene extends Phaser.Scene {
                         active: true
                     }))
                     this.scene.start(scene);
-                }  
-                this.scene.start(scene)
+                }
+                //if (source == 'level') {
+                //    this.scene.audioManager.stopBackgroundAudio();
+                //    this.scene.audioManager.stopNewsAudio();
+                //    this.scene.start(scene);
+                //}
+                this.scene.start(scene);
             })     
         }
     }

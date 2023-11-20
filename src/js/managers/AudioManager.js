@@ -23,7 +23,9 @@ export default class AudioManager {
         this.scene.load.audio('zombieHit', 'src/assets/sounds/effects/zombies/zombie_hit.wav')
         
         //Load Tower Audio
-
+        this.scene.load.audio('sniperShoot', 'src/assets/sounds/effects/towers/sniper_tower.wav')
+        this.scene.load.audio('rocketShoot', 'src/assets/sounds/effects/towers/rocket_tower.mp3')
+        this.scene.load.audio('flameShoot', 'src/assets/sounds/effects/towers/flame_tower.wav')
     }
     
     playBackgroundAudio(){
@@ -35,7 +37,10 @@ export default class AudioManager {
     }
 
     stopBackgroundAudio(){
-        this.backgroundAudio.stop()
+        if (this.backgroundAudioPlaying) {
+            this.backgroundAudio.stop()
+            this.backgroundAudioPlaying = false
+        }
     }
 
     playNewsAudio(){
@@ -47,6 +52,39 @@ export default class AudioManager {
     }
 
     stopNewsAudio(){
-        this.newsAudio.stop()
+        if(this.newsAudioPlaying){
+            this.newsAudio.stop()
+            this.newsAudioPlaying = false
+        }
+    }
+
+    // Zombies
+    playWalkerZombieAudio(){
+        this.scene.sound.play('walkerZombie')
+    }
+
+    playTankZombieAudio(){
+        this.scene.sound.play('tankZombie')
+    }
+
+    playRunnerZombieAudio(){
+        this.scene.sound.play('runnerZombie')
+    }
+
+    playZombieHitAudio(){
+        this.scene.sound.play('zombieHit')
+    }
+
+    // Towers
+    playSniperShootAudio(){
+        this.scene.sound.play('sniperShoot')
+    }
+
+    playRocketShootAudio(){
+        this.scene.sound.play('rocketShoot')
+    }
+
+    playFlameShootAudio(){
+        this.scene.sound.play('flameShoot')
     }
 }

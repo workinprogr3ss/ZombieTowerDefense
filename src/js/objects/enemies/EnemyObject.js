@@ -39,6 +39,8 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
 
         // Health Bar
         this.healthBar = new HealthBar(scene, this.x - 10, this.y - 20, this.health);
+
+        this.zombieType = this.checkZombieType();
 }
 
 // Method to initialize animations
@@ -78,8 +80,7 @@ checkZombieType() {
 
 // Method to set the direction of the enemy
 setDirection(direction) {
-    const zombieType = this.checkZombieType();
-    const newAnimKey = `${zombieType}${direction}`;
+    const newAnimKey = `${this.zombieType}${direction}`;
     
     // Debugging
     // console.log(`Setting direction to ${direction}`);
