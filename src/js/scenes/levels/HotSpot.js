@@ -4,7 +4,7 @@ import FlamethrowerTower from "../../objects/towers/FlamethrowerTower.js"
 
 export function createHotSpot(object, scene, displayManager) {
 
-    const tower = scene.add.sprite(object.x, object.y, 'hotspot');
+    const tower = scene.add.sprite(object.x, object.y, 'hotspot').setOrigin(0.5);
     tower.setInteractive({cursor: 'pointer'});
     tower.on('pointerdown', () => {
         //console.log(displayManager.playerCurrencyManager.currentCurrency)
@@ -36,7 +36,7 @@ export function createHotSpot(object, scene, displayManager) {
         menuItem1.on('pointerdown', () => {
             if (displayManager.playerCurrencyManager.currentCurrency >= 100) {
                 tower.destroy();
-                const towerBase = scene.add.sprite(object.x, object.y, 'tower_base');
+                const towerBase = scene.add.sprite(object.x, object.y, 'tower_base').setOrigin(0.5);
                 towerBase.setScale(0.15);
                 const sniperTower = new SniperTower(scene, object.x, object.y);
                 scene.add.existing(sniperTower);
