@@ -9,8 +9,6 @@ export default class WaveManager {
     this.scene = scene;
     this.currentWave = 0;
     this.nextSpawnTime = 0;
-    //this.waveDelay = 30000; // 30 seconds between waves
-    //this.lastWaveEndTime = 0;
     this.waves = this.initializeWaves(level);
     this.zombies = {
       walker: WalkerZombie,
@@ -147,9 +145,6 @@ export default class WaveManager {
             "tank",
             "walker",
             "walker",
-            "spitter",
-            "spitter",
-            "spitter",
           ],
           spawnInterval: 1000, // 1 second
         },
@@ -309,9 +304,6 @@ export default class WaveManager {
             "tank",
             "walker",
             "walker",
-            "spitter",
-            "spitter",
-            "spitter",
             "tank",
             "walker",
             "walker",
@@ -487,23 +479,16 @@ export default class WaveManager {
             "tank",
             "walker",
             "walker",
-            "spitter",
-            "spitter",
-            "spitter",
             "runner",
             "runner",
             "tank",
             "walker",
             "walker",
-            "spitter",
-            "spitter",
             "runner",
             "runner",
             "tank",
             "walker",
-            "walker",
-            "spitter",
-            "spitter",
+            "walker"
           ],
           spawnInterval: 1000, // 1 second
         },
@@ -538,6 +523,9 @@ export default class WaveManager {
 
     // Add the enemy to the scene
     this.scene.zombies.add(enemy);
+
+    // Play the spawn sound
+    this.scene.audioManager.playZombieAudio(enemyType);
 
     // Add the enemy to the enemy count
     //this.scene.displayManager.enemyCountManager.addEnemy(1);
