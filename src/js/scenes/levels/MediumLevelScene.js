@@ -58,7 +58,7 @@ class MediumLevelScene extends Phaser.Scene {
         // Create Tower HotSpots
         const hotSpotLayer = map.getObjectLayer('HotSpot Layer');
         hotSpotLayer.objects.forEach(object => {
-            createHotSpot(object, this);
+            createHotSpot(object, this, this.displayManager);
         });
 
         // Tile Coordinates for pathfinding (in grid)

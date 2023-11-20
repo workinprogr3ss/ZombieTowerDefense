@@ -27,8 +27,8 @@ class BaseScene extends Phaser.Scene {
         const map = this.make.tilemap({key: 'menuBackground'});
         const tileSet = map.addTilesetImage('ZombieApocalypseTilesetReferenceFixed', 'ZombieApocalypseTilesetReferenceFixed');
         map.createLayer('Ground', tileSet);
-        map.createLayer('Foliage', tileSet);
         map.createLayer('Buildings', tileSet);
+        map.createLayer('Foliage', tileSet);
         map.createLayer('Fences', tileSet);
         map.createLayer('Accessories', tileSet);
     }

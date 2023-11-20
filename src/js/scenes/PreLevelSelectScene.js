@@ -7,9 +7,9 @@ class PreLevelSelectScene extends BaseScene {
 
         this.levelProgress = {
             levelTwoStartingFrame: 0,
-            levelTwoUnlock: true,
+            levelTwoUnlock: false,
             levelThreeStartingFrame: 0,
-            levelThreeUnlock: true
+            levelThreeUnlock: false
         }
     }
 

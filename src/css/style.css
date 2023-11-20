@@ -9,7 +9,9 @@ body {
     height: 100%;
 }
 
-/*-----------------------------------------*/
+/*----------------------------------------------------------------------------------*/
+/* IDs
+/*----------------------------------------------------------------------------------*/
 
 #gridContainer {
     display: grid;
@@ -17,7 +19,10 @@ body {
     grid-template:
         "navbar navbar navbar"
         "zombies canvas towers" 
-        "divider divider divider" 
+        "divider1 divider1 divider1" 
+        "devs devs devs"
+        "divider2 divider2 divider2" 
+        "about about about"
         "footer footer footer" / 1fr 1fr 1fr
 }
 
@@ -28,7 +33,10 @@ body {
             "navbar navbar"
             "canvas canvas"
             "zombies towers"
-            "divider divider" 
+            "divider1 divider1"
+            "devs devs"
+            "divider2 divider2"
+            "about about"
             "footer footer" / 1fr 1fr
     }
 }
@@ -44,11 +52,10 @@ body {
     opacity: 0.95;
 }
 
-#navBar img {
+#navBar input {
+    z-index: 1;
     position: relative;
     top: 15px;
-    width: 50px;
-    height: 50px;
     left: 30px;
 }
 
@@ -60,18 +67,6 @@ body {
     letter-spacing: 2px;
     color: white;
     font-family: 'VT323', monospace;
-}
-
-/*-----------------------------------------*/
-
-canvas {
-    grid-area: canvas;
-    min-width: 800px;
-    margin-top: 50px;
-    margin-bottom: 25px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 2px solid #E0A59E;
 }
 
 /*-----------------------------------------*/
@@ -92,25 +87,26 @@ canvas {
 
 /*-----------------------------------------*/
 
-.divider {
-    grid-area: divider;
-    width: 100%;
-    text-align: center;
-    font-size: 36px;
-    letter-spacing: 10px;
-    height: 100px;
-}
-
-/*-----------------------------------------*/
-
 #about {
     grid-area: about;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px;
+    background-color: white;
+    border-radius: 15px;
 }
 
 /*-----------------------------------------*/
 
 #developers {
     grid-area: devs;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px;
+    background-color: white;
+    border-radius: 15px;
 }
 
 /*-----------------------------------------*/
@@ -120,4 +116,144 @@ canvas {
     height: 60px;
     width: 100%;
     background-color: #E0A59E;
+}
+
+/*----------------------------------------------------------------------------------*/
+/* Tags
+/*----------------------------------------------------------------------------------*/
+
+canvas {
+    grid-area: canvas;
+    min-width: 800px;
+    margin-top: 50px;
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #E0A59E;
+}
+
+/*-----------------------------------------*/
+
+hr {
+    width: 90%;
+    border: 0px;
+    border-bottom: 3px solid #E0A59E;
+}
+
+/*-----------------------------------------*/
+
+p {
+    margin-left: 10%;
+    margin-right: 5%;
+    font-size: 22px;
+}
+
+/*-----------------------------------------*/
+
+li {
+    margin-left: 10%;
+    margin-right: 5%;
+    font-size: 22px;
+    opacity: 0.95;
+}
+
+table {
+    margin-left: 10%;
+    border-collapse: collapse;
+}
+
+td {
+    vertical-align: middle;
+    padding: 5px;
+}
+
+/*----------------------------------------------------------------------------------*/
+/* Classes 
+/*----------------------------------------------------------------------------------*/
+
+.sectionHeader {
+    margin-left: 10%;
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+/*-----------------------------------------*/
+
+.divider1 {
+    padding: 50px;
+    grid-area: divider1;
+    width: 90%;
+    text-align: center;
+    font-size: 36px;
+    letter-spacing: 10px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*-----------------------------------------*/
+
+.divider2 {
+    padding: 50px;
+    grid-area: divider2;
+    width: 90%;
+    text-align: center;
+    font-size: 36px;
+    letter-spacing: 10px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*-----------------------------------------*/
+
+.accentDivider {
+    color: #75210e;
+    font-size: 25px;
+}
+
+/*-----------------------------------------*/
+.devImageTD {
+    width: 50px;
+}
+
+/*-----------------------------------------*/
+
+.devImage {
+    height: 60px;
+    width: 60px;
+}
+
+/*-----------------------------------------*/
+
+.devDescription {
+    padding: 10px;
+    font-size: 22px;
+}
+
+/*-----------------------------------------*/
+
+.devRole {
+    font-size: 20px;
+    opacity: 0.9;
+}
+
+/*-----------------------------------------*/
+
+.socials {
+    padding: 5px;
+    cursor: pointer;
+}
+
+/*-----------------------------------------*/
+
+.socials img {
+    width: 25px;
+    height: 25px;
+}
+
+/*-----------------------------------------*/
+
+.socials img:hover {
+    scale: 1.3;
 }
