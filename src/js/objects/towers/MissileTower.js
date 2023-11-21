@@ -77,6 +77,10 @@ export default class MissileTower extends Tower {
                 projectile.fire(this.x, this.y, closestZombie.x, closestZombie.y);
                 closestZombie.reduceHealth(this.damage);
 
+                // play audio
+                this.scene.audioManager.playTowerShootAudio(this.towerType);
+                this.scene.audioManager.playZombieHitAudio();
+
                 // aoe damage
                 this.damageOtherZombies(closestZombie, zombies);
             }

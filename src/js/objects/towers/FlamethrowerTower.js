@@ -76,6 +76,10 @@ export default class FlamethrowerTower extends Tower {
                 let projectile = new Projectile(this.scene, this.x, this.y, closestZombie.x, closestZombie.y, this.projectileTexture);
                 projectile.fire(this.x, this.y, closestZombie.x, closestZombie.y);
                 closestZombie.reduceHealth(this.damage);
+
+                // play audio
+                this.scene.audioManager.playTowerShootAudio(this.towerType);
+                this.scene.audioManager.playZombieHitAudio();
                 
                 // Gives zombie burn status
                 closestZombie.burn = true;

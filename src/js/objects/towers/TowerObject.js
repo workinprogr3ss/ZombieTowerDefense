@@ -106,12 +106,15 @@ export default class Tower extends Phaser.GameObjects.Sprite {
 
     checkTowerType() {
         if (this.texture.key == 'missile_tower_1'){
+            //console.log("missile tower")
             return 'missile';
         }
         else if (this.texture.key == 'sniper_tower_1'){
+            //console.log('sniper tower')
             return 'sniper';
         } 
         else if (this.texture.key == 'flame_tower_1') {
+            //console.log('flame tower')
             return 'flame'; 
         }
     }
