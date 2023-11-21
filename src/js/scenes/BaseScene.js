@@ -62,7 +62,7 @@ class BaseScene extends Phaser.Scene {
     }
 
     //Sets Button Interactions
-    setButtonInteractions(button, scene, data, startingFrame, unlock, source, slot) {
+    setButtonInteractions(button, scene, data, startingFrame, unlock, source, slot, audio) {
         button.setInteractive({cursor: 'pointer'}).setOrigin(0.5);
 
         if (unlock) {
@@ -107,12 +107,7 @@ class BaseScene extends Phaser.Scene {
                     }))
                     this.scene.start(scene);
                 }
-                //if (source == 'level') {
-                //    this.scene.audioManager.stopBackgroundAudio();
-                //    this.scene.audioManager.stopNewsAudio();
-                //    this.scene.start(scene);
-                //}
-                this.scene.start(scene);
+                this.scene.start(scene, audio);
             })     
         }
     }

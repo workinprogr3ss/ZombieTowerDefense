@@ -1,4 +1,4 @@
-export { PreloadMenuGraphics } from "../utils/PreloadMenuGraphics.js";
+export { PreloadMenuGraphics } from "../utils/PreloadGraphics.js";
 //export { CreateMenuBackground } from "../utils/CreateMenuBackground.js";
 //export { CreateMainMenuButtons } from "../utils/CreateMenuButtons.js";
 //export { CreateLevelSelectMenuButtons } from "../utils/CreateMenuButtons.js";
