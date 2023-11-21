@@ -8,17 +8,19 @@ export function createHotSpot(object, scene, displayManager) {
     tower.setInteractive({cursor: 'pointer'});
     tower.on('pointerdown', () => {
         //console.log(displayManager.playerCurrencyManager.currentCurrency)
+        tower.setVisible(false);
         const popUpMenu = scene.add.group();
         popUpMenu.setVisible(false);
 
-        const menuBackground = scene.add.rectangle(105, 540, 350, 140, 0x333333);
+        const menuBackground = scene.add.rectangle(object.x, object.y, 260, 120, 0x333333);
         popUpMenu.add(menuBackground);
         menuBackground.setDepth(0);
+        menuBackground.setAlpha(0.5);
 
-        const menuItem1 = scene.add.text(10, 490, 'Sniper Tower - $100', {fill: '#ffffff'});
-        const menuItem2 = scene.add.text(10, 520, 'Missile Tower - $200', {fill: '#ffffff'});
-        const menuItem3 = scene.add.text(10, 550, 'Flamethrower Tower - $150', {fill: '#ffffff'});
-        const menuExit = scene.add.text(10, 580, "Cancel", {fill: '#ffffff'});
+        const menuItem1 = scene.add.text(object.x - 125, object.y - 55, 'Sniper Tower - $100', {fill: '#ffffff'});
+        const menuItem2 = scene.add.text(object.x - 125, object.y - 25, 'Missile Tower - $200', {fill: '#ffffff'});
+        const menuItem3 = scene.add.text(object.x - 125, object.y + 5, 'Flamethrower Tower - $150', {fill: '#ffffff'});
+        const menuExit = scene.add.text(object.x - 125, object.y + 35, "Cancel   Cancel   Cancel", {fill: '#ffffff'});
 
         popUpMenu.add(menuItem1);
         popUpMenu.add(menuItem2);
@@ -44,6 +46,9 @@ export function createHotSpot(object, scene, displayManager) {
                 sniperTower.setScale(0.15);
                 displayManager.playerCurrencyManager.reduceCurrency(100);
             }
+            else {
+                tower.setVisible(true);
+            }
             popUpMenu.setVisible(false);
         });
 
@@ -58,6 +63,9 @@ export function createHotSpot(object, scene, displayManager) {
                 scene.towers.push(missileTower);
                 missileTower.setScale(0.15);
                 displayManager.playerCurrencyManager.reduceCurrency(200);
+            }
+            else {
+                tower.setVisible(true);
             }
             popUpMenu.setVisible(false);
         });
@@ -74,12 +82,16 @@ export function createHotSpot(object, scene, displayManager) {
                 flamethrowerTower.setScale(0.2);
                 displayManager.playerCurrencyManager.reduceCurrency(150);
             }
+            else {
+                tower.setVisible(true);
+            }
             popUpMenu.setVisible(false);
         });
 
         menuExit.on('pointerdown', () => {
             popUpMenu.setVisible(false);
+            tower.setVisible(true);
         });
-    })
 
+    });
 }

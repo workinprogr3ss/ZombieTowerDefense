@@ -1,25 +1,40 @@
 import Projectile from "./Projectile.js";
+
 export default class Tower extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, projectileTexture, damage, range, speed) {
         super(scene, x, y, texture);
 
+        this.x = x;
+        this.y = y;
         this.damage = damage || 100;
         this.range = range || 200;
         this.speed = speed || 5000;
         this.canAttack = true;
 
+        this.rangeGraphics;
         this.projectileTexture = projectileTexture;
 
-        // Graphics to draw the range
-        //this.rangeGraphics = scene.add.graphics({ lineStyle: {width: 1, color:"#ff0000"} });
-        //this.drawRange();
-
         scene.add.existing(this);
+
+        this.setInteractive();
+
+        // Shows tower range
+        this.on('pointerover', () => {
+            this.drawRange(scene);
+        });
+        this.on('pointerout', () => {
+            this.rangeGraphics.destroy();
+        });
     }
 
-    drawRange() {
-        this.rangeGraphics.clear(); // Clear previous drawings
-        this.rangeGraphics.strokeCircle(this.x, this.y, this.range);
+    drawRange(scene) {
+        // Graphics to draw the range
+        this.rangeGraphics = scene.add.graphics();
+        this.rangeGraphics.fillStyle(0xffffff, 1);
+        this.rangeGraphics.fillCircle(this.x, this.y, this.range);
+        
+        // Make the range transluscent 
+        this.rangeGraphics.setAlpha(0.1);
     }
 
     enemyInRange(zombie) {
@@ -29,9 +44,6 @@ export default class Tower extends Phaser.GameObjects.Sprite {
 
     attack(zombies) {
         if (this.canAttack) {
-            
-            console.log("shoot");
-
             // attack delay
             this.canAttack = false;
             
