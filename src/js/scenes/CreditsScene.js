@@ -1,4 +1,8 @@
+//Scene Functions
 import BaseScene from './BaseScene.js';
+
+//Utility Functions
+import { PreloadCreditsGraphics } from '../utils/PreloadGraphics.js';
 
 class CreditsScene extends BaseScene {
 
@@ -7,13 +11,8 @@ class CreditsScene extends BaseScene {
     }
 
     preload() {
-        //Load Background Image
-        this.backgroundPreload();
-
-        //Load Menu Backgrounds and Buttons
-        this.load.image('creditsMenu', 'src/assets/images/icons/creditsMenu.png');
-        this.load.spritesheet('backButton', 'src/assets/images/icons/backButton.png', {frameWidth: 96, frameHeight: 36});
-    
+        //Load Credits Graphics
+        PreloadCreditsGraphics(this);
     }
 
     create() {
@@ -24,9 +23,9 @@ class CreditsScene extends BaseScene {
         this.add.image(400, 300, 'creditsMenu').setOrigin(0.5);
 
         //Create Back Button
-        const backButton = this.add.sprite(400, 425, 'backButton');
+        const backButton = this.add.sprite(400, 450, 'backButton');
 
-        //Call to Set Button Interactions 
+        //Call to Set Button Interactions (button, scene, data, startingFrame, unlock, source, slot, audio)
         this.setButtonInteractions(backButton, 'MenuScene', null, 0, true);
     }
 }

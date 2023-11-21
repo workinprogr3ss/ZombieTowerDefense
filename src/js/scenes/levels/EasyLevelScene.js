@@ -45,8 +45,8 @@ class EasyLevelScene extends Phaser.Scene {
     }
 
     create(audioManager) {
-        //audioManager.stopBackgroundAudio();
-        //audioManager.stopNewsAudio();
+        audioManager.stopBackgroundAudio();
+        audioManager.stopNewsAudio();
 
         // Create the map
         const map = this.make.tilemap({key: 'easymap'});

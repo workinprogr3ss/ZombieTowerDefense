@@ -1,4 +1,8 @@
+//Scene Functions
 import BaseScene from './BaseScene.js';
+
+//Utility Functions
+import { PreloadLevelSelectGraphics } from '../utils/PreloadGraphics.js';
 
 class PreLevelSelectScene extends BaseScene {
 
@@ -15,14 +19,8 @@ class PreLevelSelectScene extends BaseScene {
     }
 
     preload() {
-        this.backgroundPreload();
-
-        this.load.image('levelSelectMenu', 'src/assets/images/icons/levelSelectMenu.png');
-        this.load.spritesheet('levelOne', 'src/assets/images/icons/levelOne.png', {frameWidth: 128, frameHeight: 36});
-        this.load.spritesheet('levelTwo', 'src/assets/images/icons/levelTwo.png', {frameWidth: 128, frameHeight: 36});
-        this.load.spritesheet('levelThree', 'src/assets/images/icons/levelThree.png', {frameWidth: 128, frameHeight: 36});
-        this.load.spritesheet('saveButton', 'src/assets/images/icons/saveButton.png', {frameWidth: 96, frameHeight: 36});
-        this.load.spritesheet('backButton', 'src/assets/images/icons/backButton.png', {frameWidth: 96, frameHeight: 36});
+        //Load Level Select Graphics
+        PreloadLevelSelectGraphics(this);
     }
 
     create(audioManager) {

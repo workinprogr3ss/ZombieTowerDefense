@@ -1,4 +1,8 @@
+//Scene Functions
 import BaseScene from './BaseScene.js';
+
+//Utility Functions
+import { PreloadLoadSaveGraphics } from '../utils/PreloadGraphics.js';
 
 class LoadSaveScene extends BaseScene {
 
@@ -7,20 +11,11 @@ class LoadSaveScene extends BaseScene {
     }
 
     preload() {
-        //Load Background Image
-        this.backgroundPreload();
-
-        //Load Menu Background
-        this.load.image('loadSaveMenu', 'src/assets/images/icons/loadSaveMenu.png');
-
-        //Load Save Slot Buttons
-        this.saveButtonPreload();
-
-        //Back Button
-        this.load.spritesheet('backButton', 'src/assets/images/icons/backButton.png', {frameWidth: 96, frameHeight: 36});
+        //Load Settings Graphics
+        PreloadLoadSaveGraphics(this);
     }
 
-    create() {
+    create(audioManager) {
         //Create Background Image
         this.backgroundCreate();
 
@@ -42,10 +37,10 @@ class LoadSaveScene extends BaseScene {
 
         const backButton = this.add.sprite(400, 425, 'backButton');
         
-        //Call to Set Button Interactions (Button, Scene, Data, StartingFrame, Unlock)
-        this.setButtonInteractions(loadSave1, 'PreLevelSelectScene', this.saveSlot1, 0, true, 'loadScene');
-        this.setButtonInteractions(loadSave2, 'PreLevelSelectScene', this.saveSlot2, 0, true, 'loadScene');
-        this.setButtonInteractions(loadSave3, 'PreLevelSelectScene', this.saveSlot3, 0, true, 'loadScene');
+        //Call to Set Button Interactions (button, scene, data, startingFrame, unlock, source, slot, audio)
+        this.setButtonInteractions(loadSave1, 'PreLevelSelectScene', this.saveSlot1, 0, true, 'loadScene', null, audioManager);
+        this.setButtonInteractions(loadSave2, 'PreLevelSelectScene', this.saveSlot2, 0, true, 'loadScene', null, audioManager);
+        this.setButtonInteractions(loadSave3, 'PreLevelSelectScene', this.saveSlot3, 0, true, 'loadScene', null, audioManager);
         this.setButtonInteractions(backButton, 'MenuScene', null, 0, true);
     }
 }

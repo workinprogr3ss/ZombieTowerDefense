@@ -1,4 +1,8 @@
+//Scene Functions
 import BaseScene from './BaseScene.js';
+
+//Utility Functions
+import { PreloadSettingsGraphics } from '../utils/PreloadGraphics.js';
 
 class SettingsScene extends BaseScene {
     constructor() {
@@ -6,12 +10,8 @@ class SettingsScene extends BaseScene {
     }
 
     preload() {
-        //Load Background Image
-        this.backgroundPreload();
-
-        //Load Buttons
-        this.load.image('settingsMenu', 'src/assets/images/icons/settingsMenu.png');
-        this.load.spritesheet('backButton', 'src/assets/images/icons/backButton.png', {frameWidth: 96, frameHeight: 36});
+        //Load Settings Graphics
+        PreloadSettingsGraphics(this);
     }
 
     create() {
@@ -22,7 +22,7 @@ class SettingsScene extends BaseScene {
         //Create Buttons
         const backButton = this.add.sprite(400, 425, 'backButton');
         
-        //Call to Set Button Interactions (button, scene, data, startingFrame, unlock, source)
+        //Call to Set Button Interactions (button, scene, data, startingFrame, unlock, source, slot, audio)
         this.setButtonInteractions(backButton, 'MenuScene', null, 0, true, null);
     }
 }

@@ -19,11 +19,6 @@ class BaseScene extends Phaser.Scene {
         };
     }
 
-    backgroundPreload() {
-        this.load.tilemapTiledJSON('menuBackground', 'src/assets/maps/menuBackground.json');
-        this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
-    }
-
     backgroundCreate() {
         const map = this.make.tilemap({key: 'menuBackground'});
         const tileSet = map.addTilesetImage('ZombieApocalypseTilesetReferenceFixed', 'ZombieApocalypseTilesetReferenceFixed');
@@ -32,12 +27,6 @@ class BaseScene extends Phaser.Scene {
         map.createLayer('Foliage', tileSet);
         map.createLayer('Fences', tileSet);
         map.createLayer('Accessories', tileSet);
-    }
-
-    saveButtonPreload() {
-        this.load.spritesheet('loadSave1', 'src/assets/images/icons/loadSave1.png', {frameWidth: 208, frameHeight: 36});
-        this.load.spritesheet('loadSave2', 'src/assets/images/icons/loadSave2.png', {frameWidth: 208, frameHeight: 36});
-        this.load.spritesheet('loadSave3', 'src/assets/images/icons/loadSave3.png', {frameWidth: 208, frameHeight: 36});
     }
 
     checkStorage() {
@@ -88,7 +77,7 @@ class BaseScene extends Phaser.Scene {
                         completed: data.completed,
                     });
                     if (data.active) {
-                        this.scene.start(scene)
+                        this.scene.start(scene, audio)
                     }
                     return
                 } 

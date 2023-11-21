@@ -35,7 +35,7 @@ class MenuScene extends BaseScene {
         
         //Call to Set Button Interactions (button, scene, data, startingFrame, unlock, source, slot, audio)
         this.setButtonInteractions(newGameButton, 'PreLevelSelectScene', null, 0, true, null, null , this.audioManager);
-        this.setButtonInteractions(loadGameButton, 'LoadSaveScene', null, 0, true, null);
+        this.setButtonInteractions(loadGameButton, 'LoadSaveScene', null, 0, true, null, null, this.audioManager);
         this.setButtonInteractions(settingsButton, 'SettingsScene', null, 0, true, null);
         this.setButtonInteractions(creditsButton, 'CreditsScene', null, 0, true, null);
 

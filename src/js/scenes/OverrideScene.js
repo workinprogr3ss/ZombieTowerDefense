@@ -1,4 +1,8 @@
+//Scene Functions
 import BaseScene from './BaseScene.js';
+
+//Utility Functions
+import { PreloadOverrideGraphics } from '../utils/PreloadGraphics.js';
 
 class OverrideScene extends BaseScene {
 
@@ -7,18 +11,8 @@ class OverrideScene extends BaseScene {
     }
 
     preload() {
-        //Load Background Image
-        this.backgroundPreload();
-
-        //Load Background Menu and Buttons
-        this.load.image('SaveGameMenuBG', 'src/assets/images/icons/SaveGameMenu.png');
-        this.load.spritesheet('loadSave1BG', 'src/assets/images/icons/loadSave1.png', {frameWidth: 208, frameHeight: 36});
-        this.load.spritesheet('loadSave3BG', 'src/assets/images/icons/loadSave3.png', {frameWidth: 208, frameHeight: 36});
-
-        //Load Menu Background and Buttons
-        this.load.image('overrideMenu', 'src/assets/images/icons/overrideMenu.png');
-        this.load.spritesheet('yes', 'src/assets/images/icons/yes.png', {frameWidth: 80, frameHeight: 36});
-        this.load.spritesheet('no', 'src/assets/images/icons/no.png', {frameWidth: 80, frameHeight: 36});
+        //Load Override Graphics
+        PreloadOverrideGraphics(this);
      }
 
     create(slot) {
