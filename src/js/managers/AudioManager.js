@@ -101,17 +101,17 @@ export default class AudioManager {
     }
 
     playSniperShootAudio(){
-        //console.log("play sniper audio")
+        console.log("play sniper audio")
         this.scene.sound.play('sniperShoot')
     }
 
     playMissileShootAudio(){
-        //console.log("play missile audio")
+        console.log("play missile audio")
         this.scene.sound.play('missileShoot')
     }
 
     playFlameShootAudio(){
-        //console.log("play flame audio")
+        console.log("play flame audio")
         this.scene.sound.play('flameShoot')
     }
 }
