@@ -14,6 +14,11 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.damage = damage || 10;
         this.value = value || 100;
         this.state = 'normal'; // or 'damaged' or 'dead'
+        
+        // Tracks burn damage
+        this.burn = false;
+        this.burnDamage = 0;
+        this.burnDelay = true;
 
         // Initialize animations
         this.initializeAnimations(scene, texture);
@@ -139,6 +144,17 @@ update() {
     this.healthBar.x = this.x - 10;
     this.healthBar.y = this.y - 20;
 
+    // Burn damage
+    if (this.burnDelay && this.burn) {
+        this.burnDelay = false;
+        this.reduceHealth(this.burnDamage);
+
+        // 1 second before next burn damage
+        setTimeout(() => {
+            this.burnDelay = true;
+        }, 1000)
+    }
+
     this.healthBar.updateHealth(this.health);
 
     // Check if the enemy has reached the end of the path
@@ -182,8 +198,7 @@ reduceHealth(damage) {
             this.healthBar.destroy();
         }   
         
-        // Destroy the enemy
-        
+        // Destroy the enem
         this.destroy();
     }
 }
