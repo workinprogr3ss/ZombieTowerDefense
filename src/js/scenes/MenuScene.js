@@ -1,5 +1,11 @@
+//Managers
 import AudioManager from '../managers/AudioManager.js';
+
+//Scene Functions
 import BaseScene from './BaseScene.js';
+
+//Utility Functions
+import { PreloadMenuGraphics } from '../utils/PreloadGraphics.js';
 
 class MenuScene extends BaseScene {
     
@@ -10,16 +16,8 @@ class MenuScene extends BaseScene {
     }
     
     preload() {
-        //Load Background Image
-        this.backgroundPreload();
-
-        this.load.image('title', 'src/assets/images/icons/TitleBackground.png');
-
-        //Load Buttons
-        this.load.spritesheet('newGameButton', 'src/assets/images/icons/newGameButton.png', {frameWidth: 128, frameHeight: 48});
-        this.load.spritesheet('loadGameButton', 'src/assets/images/icons/loadGameButton.png', {frameWidth: 128, frameHeight: 48});
-        this.load.spritesheet('settingsButton', 'src/assets/images/icons/settingsButton.png', {frameWidth: 128, frameHeight: 48});
-        this.load.spritesheet('creditsButton', 'src/assets/images/icons/creditsButton.png', {frameWidth: 128, frameHeight: 36});
+        //Load Menu Graphics
+        PreloadMenuGraphics(this);
 
         //Load Background Music
         this.audioManager.loadAudio()
@@ -35,13 +33,13 @@ class MenuScene extends BaseScene {
         const settingsButton = this.add.sprite(400, 480, 'settingsButton');
         const creditsButton = this.add.sprite(400, 530, 'creditsButton');
         
-        //Call to Set Button Interactions
-        this.setButtonInteractions(newGameButton, 'PreLevelSelectScene', null, 0, true, null);
-        this.setButtonInteractions(loadGameButton, 'LoadSaveScene', null, 0, true, null);
+        //Call to Set Button Interactions (button, scene, data, startingFrame, unlock, source, slot, audio)
+        this.setButtonInteractions(newGameButton, 'PreLevelSelectScene', null, 0, true, null, null , this.audioManager);
+        this.setButtonInteractions(loadGameButton, 'LoadSaveScene', null, 0, true, null, null, this.audioManager);
         this.setButtonInteractions(settingsButton, 'SettingsScene', null, 0, true, null);
         this.setButtonInteractions(creditsButton, 'CreditsScene', null, 0, true, null);
 
-        //Game Title
+        //Create Game Title
         this.add.image(400,300, 'title').setOrigin(0.5);
         
         //Create Default PlayerData Registry
@@ -54,8 +52,8 @@ class MenuScene extends BaseScene {
         });
 
         //Play Audio
-        this.audioManager.playBackgroundAudio();
-        //this.audioManager.playNewsAudio();
+        //this.audioManager.playBackgroundAudio();
+        this.audioManager.playNewsAudio();
     }
 }
 

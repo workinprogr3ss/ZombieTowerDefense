@@ -6,7 +6,10 @@ class LevelSelectScene extends BaseScene {
         super('LevelSelectScene');
     }
 
-    create(levelProgress) {
+    create(data) {
+        //Audio Manager to play upon return from Level Scenes
+        data.audioManager.playNewsAudio();
+
         //Create Background Image
         this.backgroundCreate();
         
@@ -14,24 +17,23 @@ class LevelSelectScene extends BaseScene {
         this.add.image(400, 300, 'levelSelectMenu').setOrigin(0.5);
 
         //Create Buttons
-        //const demoLevelButton = this.add.sprite(400, 200, 'demoLevelButton').setOrigin(0.5);
-        const levelOne = this.add.sprite(400, 250, 'levelOne').setOrigin(0.5);
-        const levelTwo = this.add.sprite(400, 300, 'levelTwo')
+        const levelOne = this.add.sprite(236, 256, 'levelOne').setOrigin(0.5);
+        const levelTwo = this.add.sprite(401, 256, 'levelTwo')
             .setOrigin(0.5)
-            .setFrame(levelProgress.levelTwoStartingFrame);
-        const levelThree = this.add.sprite(400, 350, 'levelThree')
+            .setFrame(data.levelTwoStartingFrame);
+        const levelThree = this.add.sprite(564, 256, 'levelThree')
             .setOrigin(0.5)
-            .setFrame(levelProgress.levelThreeStartingFrame);          
+            .setFrame(data.levelThreeStartingFrame);          
         const saveButton = this.add.sprite(460, 425, 'saveButton').setOrigin(0.5);
         const backButton = this.add.sprite(340, 425, 'backButton').setOrigin(0.5);
         
-        //Call to Set Button Interactions (button, scene, data, startingFrame, unlock, source)
-        //this.setButtonInteractions(demoLevelButton, 'DemoLevelScene', null, 0, true, null);
-        this.setButtonInteractions(levelOne, 'EasyLevelScene', null, 0, true, null);
-        this.setButtonInteractions(levelTwo, 'MediumLevelScene', null, levelProgress.levelTwoStartingFrame, levelProgress.levelTwoUnlock, null);
-        this.setButtonInteractions(levelThree, 'HardLevelScene', null, levelProgress.levelThreeStartingFrame, levelProgress.levelThreeUnlock, null);
+        //Call to Set Button Interactions (button, scene, data, startingFrame, unlock, source, slot, audio)
+        this.setButtonInteractions(levelOne, 'EasyLevelScene', null, 0, true, null, null, data.audioManager);
+        this.setButtonInteractions(levelTwo, 'MediumLevelScene', null, data.levelTwoStartingFrame, data.levelTwoUnlock, null, null, data.audioManager);
+        this.setButtonInteractions(levelThree, 'HardLevelScene', null, data.levelThreeStartingFrame, data.levelThreeUnlock, null, null, data.audioManager);
         this.setButtonInteractions(saveButton, 'SaveGameScene', null, 0, true, null);
         this.setButtonInteractions(backButton, 'MenuScene', null, 0, true, null);
+
     }
 }
 

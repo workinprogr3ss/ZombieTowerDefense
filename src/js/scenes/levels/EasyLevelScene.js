@@ -44,7 +44,10 @@ class EasyLevelScene extends Phaser.Scene {
         this.load.spritesheet('pauseButton', 'src/assets/images/icons/pauseButton.png', {frameWidth: 34, frameHeight: 34});
     }
 
-    create() {
+    create(audioManager) {
+        audioManager.stopBackgroundAudio();
+        audioManager.stopNewsAudio();
+
         // Create the map
         const map = this.make.tilemap({key: 'easymap'});
         const tileset = map.addTilesetImage('ZombieApocalypseTilesetReferenceFixed', 'ZombieApocalypseTilesetReferenceFixed');

@@ -1,4 +1,8 @@
+//Scene Functions
 import BaseScene from './BaseScene.js';
+
+//Utility Functions
+import { PreloadSaveGameGraphics } from '../utils/PreloadGraphics.js';
 
 class SaveGameScene extends BaseScene {
 
@@ -7,20 +11,8 @@ class SaveGameScene extends BaseScene {
     }
 
     preload() {
-        //Load Background Image
-        this.backgroundPreload();
-
-        //Load Menu Backgrounds and Buttons
-        this.load.image('SaveGameMenu', 'src/assets/images/icons/SaveGameMenu.png');
-        this.load.image('overrideMenu', 'src/assets/images/icons/overrideMenu.png');
-        this.load.spritesheet('yes', 'src/assets/images/icons/yes.png', {frameWidth: 80, frameHeight: 36});
-        this.load.spritesheet('no', 'src/assets/images/icons/no.png', {frameWidth: 80, frameHeight: 36});
-
-        //Load Save Slot Buttons
-        this.saveButtonPreload();
-
-        //Load Back Button
-        this.load.spritesheet('backButton', 'src/assets/images/icons/backButton.png', {frameWidth: 96, frameHeight: 36});
+        //Load Menu Graphics
+        PreloadSaveGameGraphics(this);
     }
 
     create() {
