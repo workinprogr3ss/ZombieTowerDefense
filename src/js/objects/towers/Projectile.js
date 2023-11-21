@@ -13,11 +13,10 @@ export default class Projectile extends Phaser.GameObjects.Sprite {
         scene.sys.displayList.add(this);
         scene.sys.updateList.add(this);
 
-        this.speed = 500;
+        this.speed = 1500;
     }
 
     fire(towerX, towerY, zombieX, zombieY) {
-        //console.log("fire")
 
         //Move projectile to the target
         this.scene.physics.moveTo(this, zombieX, zombieY, this.speed);
@@ -30,9 +29,11 @@ export default class Projectile extends Phaser.GameObjects.Sprite {
             //Stop Projectile
             this.body.stop();
             //Display Impact Animation
-            this.setFrame(1);
+            for (let i = 1; i < 4; i++) {
+                this.scene.time.delayedCall((50), () => this.setFrame(i));
+            }
             //Destroy Projectile
-            this.scene.time.delayedCall((50), () => this.destroy());
+            this.scene.time.delayedCall((100), () => this.destroy());
         });
 
     }

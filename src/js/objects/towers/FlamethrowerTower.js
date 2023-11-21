@@ -5,7 +5,7 @@ export default class FlamethrowerTower extends Tower {
     constructor(scene, x, y) {
         // (scene, x, y, texture, damage, range, speed)
         // speed is the delay between attacks in milliseconds
-        super(scene, x, y, 'machine_gun_1', 'machine_gun_projectile', 5, 80, 5000);
+        super(scene, x, y, 'flame_tower_1', 'flame_projectile', 5, 80, 5000);
 
         // Upgrade tower menu
         this.on('pointerdown', () => {
