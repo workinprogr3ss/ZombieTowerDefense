@@ -25,6 +25,8 @@ class EasyLevelScene extends Phaser.Scene {
         // Managers
         this.displayManager = new DisplayManager(this); // Display Manager
         this.audioManager = new AudioManager(this); // Audio Manager
+
+        this.popUpGroup = [];
     }
 
     //load the Demo_Level map
@@ -32,6 +34,13 @@ class EasyLevelScene extends Phaser.Scene {
         // Load the tilemap and tileset image
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
         this.load.tilemapTiledJSON('easymap', 'src/assets/maps/EasyLevel.json');
+
+        //Tower Menu
+        this.load.image('TowerMap', 'src/assets/images/icons/TowerMenu.png');
+        this.load.image('TowerMap_Sniper', 'src/assets/images/icons/TowerMenu_Sniper.png');
+        this.load.image('TowerMap_Missile', 'src/assets/images/icons/TowerMenu_Missile.png');
+        this.load.image('TowerMap_Flamethrower', 'src/assets/images/icons/TowerMenu_Flamethrower.png');
+        this.load.image('TowerMap_Cancel', 'src/assets/images/icons/TowerMenu_Cancel.png');
 
         // Load visual assets
         loadSpritesheets(this);
@@ -81,7 +90,7 @@ class EasyLevelScene extends Phaser.Scene {
 
         // Create the grid for pathfinding
         // 634 is non-walkable tile index (see DemoMapWithProps.json)
-        this.grid = new GridService(this, walkableLayer, 634); 
+        this.grid = new GridService(this, walkableLayer, [634, 322, 412, 366, 323]); 
         
         // Spawning Debugging
         //console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);

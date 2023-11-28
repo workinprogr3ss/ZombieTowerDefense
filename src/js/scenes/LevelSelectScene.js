@@ -33,7 +33,6 @@ class LevelSelectScene extends BaseScene {
         this.setButtonInteractions(levelThree, 'HardLevelScene', null, data.levelThreeStartingFrame, data.levelThreeUnlock, null, null, data.audioManager);
         this.setButtonInteractions(saveButton, 'SaveGameScene', null, 0, true, null);
         this.setButtonInteractions(backButton, 'MenuScene', null, 0, true, null);
-
     }
 }
 
