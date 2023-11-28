@@ -6,7 +6,7 @@ export default class GridService {
     this.grid = this.createGrid();
   }
 
-// Create the grid for A* pathfinding
+  // Create the grid for A* pathfinding
   createGrid() {
     let grid = [];
 
@@ -18,11 +18,12 @@ export default class GridService {
         grid[y] = [];
       }
 
-      grid[y][x] = tile.index === this.nonWalkableTileIndex ? 1 : 0; // 1 is non-walkable, 0 is walkable
+      //grid[y][x] = (tile.index === this.nonWalkableTileIndex ? 1 : 0); // 1 is non-walkable, 0 is walkable
+      grid[y][x] = (this.nonWalkableTileIndex.includes(tile.index) ? 1 : 0);
     });
-    
+
     // Debugging line
-    // console.log("Grid:", grid);
+    console.log("Grid:", grid);
     return grid;
   }
 

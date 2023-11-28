@@ -5,37 +5,42 @@ import FlamethrowerTower from "../../objects/towers/FlamethrowerTower.js"
 export function createHotSpot(object, scene, displayManager) {
 
     const tower = scene.add.sprite(object.x, object.y, 'hotspot').setOrigin(0.5);
+
+
     tower.setInteractive({cursor: 'pointer'});
     tower.on('pointerdown', () => {
-        //console.log(displayManager.playerCurrencyManager.currentCurrency)
-        tower.setVisible(false);
         const popUpMenu = scene.add.group();
+        scene.popUpGroup.push(popUpMenu);
+        
+        scene.popUpGroup.forEach(group => {
+            group.setVisible(false);
+        });
+
         popUpMenu.setVisible(false);
 
-        const menuBackground = scene.add.rectangle(object.x, object.y, 260, 120, 0x333333);
-        popUpMenu.add(menuBackground);
-        menuBackground.setDepth(0);
-        menuBackground.setAlpha(0.5);
+        //const menuBackground = scene.add.rectangle(object.x, object.y, 260, 120, 0x333333);
+        const TowerMenu = scene.add.image(object.x, object.y, 'TowerMap').setOrigin(0.5).setAlpha(0.7);
+        const TowerMenu_Sniper = scene.add.image(object.x - 112, object.y - 40, 'TowerMap_Sniper').setOrigin(0).setInteractive({cursor: 'pointer'}).setAlpha(0.7);
+        const TowerMenu_Missile = scene.add.image(object.x - 48, object.y - 40, 'TowerMap_Missile').setOrigin(0).setInteractive({cursor: 'pointer'}).setAlpha(0.7);
+        const TowerMenu_Flamethrower = scene.add.image(object.x + 16, object.y - 40, 'TowerMap_Flamethrower').setOrigin(0).setInteractive({cursor: 'pointer'}).setAlpha(0.7);
+        const TowerMenu_Cancel = scene.add.image(object.x + 80, object.y - 16, 'TowerMap_Cancel').setOrigin(0).setInteractive({cursor: 'pointer'}).setAlpha(0.7);
+        const Sniper_Cost = scene.add.text(object.x - 88, object.y + 24, '100', {fill: '#000000'}).setOrigin(0.5, 0.5);
+        const Missile_Cost = scene.add.text(object.x - 24, object.y + 24, '200', {fill: '#000000'}).setOrigin(0.5, 0.5);
+        const Flamethrower_Cost = scene.add.text(object.x + 40, object.y + 24, '150', {fill: '#000000'}).setOrigin(0.5, 0.5);
 
-        const menuItem1 = scene.add.text(object.x - 125, object.y - 55, 'Sniper Tower - $100', {fill: '#ffffff'});
-        const menuItem2 = scene.add.text(object.x - 125, object.y - 25, 'Missile Tower - $200', {fill: '#ffffff'});
-        const menuItem3 = scene.add.text(object.x - 125, object.y + 5, 'Flamethrower Tower - $150', {fill: '#ffffff'});
-        const menuExit = scene.add.text(object.x - 125, object.y + 35, "Cancel   Cancel   Cancel", {fill: '#ffffff'});
-
-        popUpMenu.add(menuItem1);
-        popUpMenu.add(menuItem2);
-        popUpMenu.add(menuItem3);
-        popUpMenu.add(menuExit);
-
-        menuItem1.setInteractive();
-        menuItem2.setInteractive();
-        menuItem3.setInteractive();
-        menuExit.setInteractive();
+        popUpMenu.add(TowerMenu);
+        popUpMenu.add(TowerMenu_Sniper);
+        popUpMenu.add(TowerMenu_Missile);
+        popUpMenu.add(TowerMenu_Flamethrower);
+        popUpMenu.add(TowerMenu_Cancel);
+        popUpMenu.add(Sniper_Cost);
+        popUpMenu.add(Missile_Cost);
+        popUpMenu.add(Flamethrower_Cost);
 
         popUpMenu.setVisible(true);
 
         //Sniper Tower
-        menuItem1.on('pointerdown', () => {
+        TowerMenu_Sniper.on('pointerdown', () => {
             if (displayManager.playerCurrencyManager.currentCurrency >= 100) {
                 tower.destroy();
                 const towerBase = scene.add.sprite(object.x, object.y, 'tower_base').setOrigin(0.5);
@@ -53,7 +58,7 @@ export function createHotSpot(object, scene, displayManager) {
         });
 
         //Missile Tower
-        menuItem2.on('pointerdown', () => {
+        TowerMenu_Missile.on('pointerdown', () => {
             if (displayManager.playerCurrencyManager.currentCurrency >= 200) {
                 tower.destroy();
                 const towerBase = scene.add.sprite(object.x, object.y, 'tower_base');
@@ -71,7 +76,7 @@ export function createHotSpot(object, scene, displayManager) {
         });
 
         //Flamethrower Tower
-        menuItem3.on('pointerdown', () => {
+        TowerMenu_Flamethrower.on('pointerdown', () => {
             if (displayManager.playerCurrencyManager.currentCurrency >= 150) {
                 tower.destroy();
                 const towerBase = scene.add.sprite(object.x, object.y, 'tower_base');
@@ -88,7 +93,7 @@ export function createHotSpot(object, scene, displayManager) {
             popUpMenu.setVisible(false);
         });
 
-        menuExit.on('pointerdown', () => {
+        TowerMenu_Cancel.on('pointerdown', () => {
             popUpMenu.setVisible(false);
             tower.setVisible(true);
         });
