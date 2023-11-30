@@ -25,6 +25,12 @@ class HardLevelScene extends Phaser.Scene {
         // Managers
         this.displayManager = new DisplayManager(this); // Display Manager
         this.audioManager = new AudioManager(this); // Audio Manager
+
+        //Group of Tower Menus
+        this.towerMenuGroup = []
+        
+        //Group of Upgrade Menus
+        this.upgradeMenuGroup = [];
     }
 
     //load the Hard map
@@ -83,7 +89,7 @@ class HardLevelScene extends Phaser.Scene {
         const endY = endTileY * 16;
 
         // Create the grid for pathfinding
-        this.grid = new GridService(this, walkableLayer, 545); 
+        this.grid = new GridService(this, walkableLayer, [545]); 
         
         // Spawning Debugging
         //console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);

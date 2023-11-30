@@ -29,7 +29,7 @@ class PauseScene extends Phaser.Scene {
         this.pauseButtonInteractions(this.exitButton, 'exitButton', data.context, data.scene);
     }
 
-    pauseButtonInteractions(button, source, context, scene) {
+    pauseButtonInteractions(button, source, context, sceneName) {
         button.on('pointerover', () => {
             button.setFrame(2);
         });
@@ -43,13 +43,13 @@ class PauseScene extends Phaser.Scene {
             button.on('pointerup', () => {
                 this.destroyButtons();
                 context.physics.resume();
-                context.scene.resume(scene);
+                context.scene.resume(sceneName);
             }); 
         } else if (source == 'restartButton') {
             button.on('pointerup', () => {
                 this.destroyButtons();
                 context.physics.resume();
-                context.scene.start(scene)
+                context.scene.start(sceneName);
             }); 
         } else {
             button.on('pointerup', () => {
