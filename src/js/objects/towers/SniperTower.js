@@ -4,58 +4,72 @@ export default class SniperTower extends Tower {
     constructor(scene, x, y) {
         //(scene, x, y, texture, damage, range, speed)
         // speed is the delay between attacks in milliseconds
-        super(scene, x, y, 'sniper_tower_1', 'sniper_projectile', 20, 100, 1000).setOrigin(0.5, 0.8);
+        super(scene, x, y, 'sniper_tower_1', 'sniper_projectile', 10, 150, 2500).setOrigin(0.5, 0.8);
 
         // Upgrade tower menu
         this.on('pointerdown', () => {
             this.setVisible(false);
             const popUpMenu = scene.add.group();
+            scene.upgradeMenuGroup.push(popUpMenu);
+
+            scene.upgradeMenuGroup.forEach(group => {
+                group.setVisible(false);
+            });
+
             popUpMenu.setVisible(false);
 
-            const menuBackground = scene.add.rectangle(this.x, this.y, 260, 120, 0x333333);
-            popUpMenu.add(menuBackground);
-            menuBackground.setDepth(0);
-            menuBackground.setAlpha(0.5);
+            //Upgrade Menu
+            const UpgradeMenu = scene.add.image(this.x, this.y, 'UpgradeMenu').setOrigin(0.5).setAlpha(0.6);
+            const Upgrade_Damage = scene.add.image(this.x - 120, this.y - 48, 'Upgrade_Damage').setOrigin(0).setAlpha(0.6).setInteractive({cursor: 'pointer'});
+            const Upgrade_AttackSpeed = scene.add.image(this.x - 120, this.y - 16, 'Upgrade_AttackSpeed').setOrigin(0).setAlpha(0.6).setInteractive({cursor: 'pointer'});
+            const Upgrade_Range = scene.add.image(this.x - 120, this.y  + 16, 'Upgrade_Range').setOrigin(0).setAlpha(0.6).setInteractive({cursor: 'pointer'});
+            const UpgradeMenu_Cancel = scene.add.image(this.x + 88, this.y - 16, 'UpgradeMenu_Cancel').setOrigin(0).setAlpha(0.6).setInteractive({cursor: 'pointer'});
 
-            const menuItem1 = scene.add.text(this.x - 125, this.y - 55, '+5 Damage - $50', {fill: '#ffffff'});
-            const menuItem2 = scene.add.text(this.x - 125, this.y - 25, '+20 Range - $50', {fill: '#ffffff'});
-            const menuItem3 = scene.add.text(this.x - 125, this.y + 5, '+100 Speed - $50', {fill: '#ffffff'});
-            const menuExit = scene.add.text(this.x - 125, this.y + 35, 'Cancel   Cancel   Cancel', {fill: '#ffffff'});
+            const upgrade_damage_text = scene.add.text(this.x - 80, this.y - 32, '+5 Damage', {fill: '#000000'}).setOrigin(0, 0.5);
+            const upgrade_attackSpeed_text = scene.add.text(this.x - 80, this.y, '+20 Range', {fill: '#000000'}).setOrigin(0, 0.5);
+            const upgrade_range_text = scene.add.text(this.x - 80, this.y + 32, '+100 Speed', {fill: '#000000'}).setOrigin(0, 0.5);
 
-            popUpMenu.add(menuItem1);
-            popUpMenu.add(menuItem2);
-            popUpMenu.add(menuItem3);
-            popUpMenu.add(menuExit);
-    
-            menuItem1.setInteractive();
-            menuItem2.setInteractive();
-            menuItem3.setInteractive();
-            menuExit.setInteractive();
-    
+            const upgrade_damage_cost = scene.add.text(this.x + 48, this.y - 32, '$50', {fill: '#000000'}).setOrigin(0.5);
+            const upgrade_attackSpeed_cost = scene.add.text(this.x + 48, this.y, '$100', {fill: '#000000'}).setOrigin(0.5);
+            const upgrade_range_cost = scene.add.text(this.x + 48, this.y + 32, '$150', {fill: '#000000'}).setOrigin(0.5);
+
+            popUpMenu.add(UpgradeMenu);
+            popUpMenu.add(Upgrade_Damage);
+            popUpMenu.add(Upgrade_AttackSpeed);
+            popUpMenu.add(Upgrade_Range);
+            popUpMenu.add(UpgradeMenu_Cancel);
+            popUpMenu.add(upgrade_damage_text);
+            popUpMenu.add(Upgrade_AttackSpeed);
+            popUpMenu.add(upgrade_attackSpeed_text);
+            popUpMenu.add(upgrade_range_text);
+            popUpMenu.add(upgrade_damage_cost);
+            popUpMenu.add(upgrade_attackSpeed_cost);
+            popUpMenu.add(upgrade_range_cost);
+            
             popUpMenu.setVisible(true);
 
             // Increase damage
-            menuItem1.on('pointerdown', () => {
+            Upgrade_Damage.on('pointerdown', () => {
                 this.damage += 5;
                 popUpMenu.setVisible(false);
                 this.setVisible(true);
             });
 
             // Increase range
-            menuItem2.on('pointerdown', () => {
+            Upgrade_AttackSpeed.on('pointerdown', () => {
                 this.range += 20;
                 popUpMenu.setVisible(false);
                 this.setVisible(true);
             });
 
             // Increase speed
-            menuItem3.on('pointerdown', () => {
+            Upgrade_Range.on('pointerdown', () => {
                 this.speed -= 100;
                 popUpMenu.setVisible(false);
                 this.setVisible(true);
             });
 
-            menuExit.on('pointerdown', () => {
+            UpgradeMenu_Cancel.on('pointerdown', () => {
                 popUpMenu.setVisible(false);
                 this.setVisible(true);
             });

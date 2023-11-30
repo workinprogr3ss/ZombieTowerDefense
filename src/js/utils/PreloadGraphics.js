@@ -12,6 +12,9 @@ export function PreloadMenuGraphics(scene) {
     //Background
     scene.load.tilemapTiledJSON('menuBackground', 'src/assets/maps/menuBackground.json');
     scene.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
+
+    //Background
+    scene.load.image('devButton', 'src/assets/images/icons/devButton.png');
 }
 
 export function PreloadLevelSelectGraphics(scene) {

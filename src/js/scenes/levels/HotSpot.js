@@ -10,20 +10,21 @@ export function createHotSpot(object, scene, displayManager) {
     tower.setInteractive({cursor: 'pointer'});
     tower.on('pointerdown', () => {
         const popUpMenu = scene.add.group();
-        scene.popUpGroup.push(popUpMenu);
+        scene.towerMenuGroup.push(popUpMenu);
         
-        scene.popUpGroup.forEach(group => {
-            group.setVisible(false);
-        });
-
+        if (scene.towerMenuGroup) {
+            scene.towerMenuGroup.forEach(group => {
+                group.setVisible(false);
+            });
+        }
         popUpMenu.setVisible(false);
 
         //const menuBackground = scene.add.rectangle(object.x, object.y, 260, 120, 0x333333);
-        const TowerMenu = scene.add.image(object.x, object.y, 'TowerMap').setOrigin(0.5).setAlpha(0.7);
-        const TowerMenu_Sniper = scene.add.image(object.x - 112, object.y - 40, 'TowerMap_Sniper').setOrigin(0).setInteractive({cursor: 'pointer'}).setAlpha(0.7);
-        const TowerMenu_Missile = scene.add.image(object.x - 48, object.y - 40, 'TowerMap_Missile').setOrigin(0).setInteractive({cursor: 'pointer'}).setAlpha(0.7);
-        const TowerMenu_Flamethrower = scene.add.image(object.x + 16, object.y - 40, 'TowerMap_Flamethrower').setOrigin(0).setInteractive({cursor: 'pointer'}).setAlpha(0.7);
-        const TowerMenu_Cancel = scene.add.image(object.x + 80, object.y - 16, 'TowerMap_Cancel').setOrigin(0).setInteractive({cursor: 'pointer'}).setAlpha(0.7);
+        const TowerMenu = scene.add.image(object.x, object.y, 'TowerMenu').setOrigin(0.5).setAlpha(0.7);
+        const TowerMenu_Sniper = scene.add.image(object.x - 112, object.y - 40, 'TowerMenu_Sniper').setOrigin(0).setInteractive({cursor: 'pointer'}).setAlpha(0.7);
+        const TowerMenu_Missile = scene.add.image(object.x - 48, object.y - 40, 'TowerMenu_Missile').setOrigin(0).setInteractive({cursor: 'pointer'}).setAlpha(0.7);
+        const TowerMenu_Flamethrower = scene.add.image(object.x + 16, object.y - 40, 'TowerMenu_Flamethrower').setOrigin(0).setInteractive({cursor: 'pointer'}).setAlpha(0.7);
+        const TowerMenu_Cancel = scene.add.image(object.x + 80, object.y - 16, 'TowerMenu_Cancel').setOrigin(0).setInteractive({cursor: 'pointer'}).setAlpha(0.7);
         const Sniper_Cost = scene.add.text(object.x - 88, object.y + 24, '100', {fill: '#000000'}).setOrigin(0.5, 0.5);
         const Missile_Cost = scene.add.text(object.x - 24, object.y + 24, '200', {fill: '#000000'}).setOrigin(0.5, 0.5);
         const Flamethrower_Cost = scene.add.text(object.x + 40, object.y + 24, '150', {fill: '#000000'}).setOrigin(0.5, 0.5);

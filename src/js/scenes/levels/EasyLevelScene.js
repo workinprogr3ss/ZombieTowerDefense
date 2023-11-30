@@ -26,7 +26,11 @@ class EasyLevelScene extends Phaser.Scene {
         this.displayManager = new DisplayManager(this); // Display Manager
         this.audioManager = new AudioManager(this); // Audio Manager
 
-        this.popUpGroup = [];
+        //Group of Tower Menus
+        this.towerMenuGroup = [];
+
+        //Group of Upgrade Menus
+        this.upgradeMenuGroup = [];
     }
 
     //load the Demo_Level map
@@ -36,11 +40,18 @@ class EasyLevelScene extends Phaser.Scene {
         this.load.tilemapTiledJSON('easymap', 'src/assets/maps/EasyLevel.json');
 
         //Tower Menu
-        this.load.image('TowerMap', 'src/assets/images/icons/TowerMenu.png');
-        this.load.image('TowerMap_Sniper', 'src/assets/images/icons/TowerMenu_Sniper.png');
-        this.load.image('TowerMap_Missile', 'src/assets/images/icons/TowerMenu_Missile.png');
-        this.load.image('TowerMap_Flamethrower', 'src/assets/images/icons/TowerMenu_Flamethrower.png');
-        this.load.image('TowerMap_Cancel', 'src/assets/images/icons/TowerMenu_Cancel.png');
+        this.load.image('TowerMenu', 'src/assets/images/icons/TowerMenu.png');
+        this.load.image('TowerMenu_Sniper', 'src/assets/images/icons/TowerMenu_Sniper.png');
+        this.load.image('TowerMenu_Missile', 'src/assets/images/icons/TowerMenu_Missile.png');
+        this.load.image('TowerMenu_Flamethrower', 'src/assets/images/icons/TowerMenu_Flamethrower.png');
+        this.load.image('TowerMenu_Cancel', 'src/assets/images/icons/TowerMenu_Cancel.png');
+
+        //Upgrade Menu
+        this.load.image('UpgradeMenu', 'src/assets/images/icons/UpgradeMenu.png');
+        this.load.image('Upgrade_Damage', 'src/assets/images/icons/UpgradeDamage.png');
+        this.load.image('Upgrade_AttackSpeed', 'src/assets/images/icons/UpgradeAttackSpeed.png');
+        this.load.image('Upgrade_Range', 'src/assets/images/icons/UpgradeRange.png');
+        this.load.image('UpgradeMenu_Cancel', 'src/assets/images/icons/TowerMenu_Cancel.png');
 
         // Load visual assets
         loadSpritesheets(this);
@@ -123,10 +134,12 @@ class EasyLevelScene extends Phaser.Scene {
         // Update the Wave Timer Manager
         this.displayManager.waveTimerManager.update(delta);
 
-        this.towers.forEach((tower) => {
-            tower.attack(this.zombies.children.entries);
-            tower.update();
-        });
+        if (this.zombies) {
+            this.towers.forEach((tower) => {
+                tower.attack(this.zombies.children.entries);
+                tower.update();
+            });
+        }
 
         // Debugging
         //console.log(this.zombies.children.entries)

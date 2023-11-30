@@ -41,6 +41,19 @@ class MenuScene extends BaseScene {
 
         //Create Game Title
         this.add.image(400,300, 'title').setOrigin(0.5);
+
+        //Add Dev Button
+        const devButton = this.add.image(0, 590, 'devButton').setOrigin(0).setInteractive({cursor: 'pointer'});
+        devButton.on('pointerup', () => {
+            localStorage.setItem(`saveSlot3`, JSON.stringify({
+                levelOne: true,
+                levelTwo: true,
+                levelThree: true,
+                saveSlot: 3,
+                completed: 3,
+                active: true
+            }))
+        });
         
         //Create Default PlayerData Registry
         this.registry.set('playerData', {

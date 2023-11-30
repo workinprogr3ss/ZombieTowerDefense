@@ -81,7 +81,7 @@ export default class DisplayManager {
         pauseButton.on('pointerdown', () => {pauseButton.setFrame(1)});
         pauseButton.on('pointerout', () => {pauseButton.setFrame(0)});
         pauseButton.on('pointerup', () => {
-            this.scene.scene.launch('PauseScene', {context: this.scene.context, scene: sceneName});
+            this.scene.scene.launch('PauseScene', {context: this.scene, scene: sceneName});
             this.scene.scene.bringToTop('PauseScene')
         });
 
