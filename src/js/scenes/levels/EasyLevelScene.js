@@ -52,6 +52,9 @@ class EasyLevelScene extends Phaser.Scene {
         this.load.image('Upgrade_AttackSpeed', 'src/assets/images/icons/UpgradeAttackSpeed.png');
         this.load.image('Upgrade_Range', 'src/assets/images/icons/UpgradeRange.png');
         this.load.image('UpgradeMenu_Cancel', 'src/assets/images/icons/TowerMenu_Cancel.png');
+        this.load.image('DamageIcon', 'src/assets/images/icons/damageIcon.png');
+        this.load.image('AttackSpeedIcon', 'src/assets/images/icons/attackSpeedIcon.png');
+        this.load.image('RangeIcon', 'src/assets/images/icons/rangeIcon.png');
 
         // Load visual assets
         loadSpritesheets(this);

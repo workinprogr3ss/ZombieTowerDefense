@@ -6,15 +6,21 @@ export default class SniperTower extends Tower {
         // speed is the delay between attacks in milliseconds
         super(scene, x, y, 'sniper_tower_1', 'sniper_projectile', 10, 150, 2500).setOrigin(0.5, 0.8);
 
+        this.damageUpgrade = 0;
+        this.attackSpeedUpgrade = 0;
+        this.rangeUpgrade = 0;
+
         // Upgrade tower menu
         this.on('pointerdown', () => {
-            this.setVisible(false);
             const popUpMenu = scene.add.group();
             scene.upgradeMenuGroup.push(popUpMenu);
 
-            scene.upgradeMenuGroup.forEach(group => {
-                group.setVisible(false);
-            });
+            if (scene.upgradeMenuGroup) {
+                console.log(scene.upgradeMenuGroup)
+                scene.upgradeMenuGroup.forEach(group => {
+                    group.setVisible(false);
+                });
+            }
 
             popUpMenu.setVisible(false);
 
@@ -52,33 +58,29 @@ export default class SniperTower extends Tower {
             Upgrade_Damage.on('pointerdown', () => {
                 this.damage += 5;
                 popUpMenu.setVisible(false);
-                this.setVisible(true);
+                scene.add.image(this.x + 24 + (this.damageUpgrade * 8), this.y - 16, 'DamageIcon').setOrigin(0.5).setScale(0.7);
+                this.damageUpgrade += 1;
             });
 
             // Increase range
             Upgrade_AttackSpeed.on('pointerdown', () => {
                 this.range += 20;
                 popUpMenu.setVisible(false);
-                this.setVisible(true);
+                scene.add.image(this.x + 24 + (this.attackSpeedUpgrade * 8), this.y, 'AttackSpeedIcon').setOrigin(0.5).setScale(0.6);
+                this.attackSpeedUpgrade += 1;
             });
 
             // Increase speed
             Upgrade_Range.on('pointerdown', () => {
                 this.speed -= 100;
                 popUpMenu.setVisible(false);
-                this.setVisible(true);
+                scene.add.image(this.x + 24 + (this.rangeUpgrade * 8), this.y + 16, 'RangeIcon').setOrigin(0.5).setScale(0.6);
+                this.rangeUpgrade += 1;
             });
 
             UpgradeMenu_Cancel.on('pointerdown', () => {
                 popUpMenu.setVisible(false);
-                this.setVisible(true);
             });
         });
     }
-
-    //destroyTower(scene) {
-    //    scene.events.off('update');
-    //    this.destroy();
-    //    console.log("TEST")
-    //}
 }

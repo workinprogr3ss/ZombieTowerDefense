@@ -7,9 +7,12 @@ export default class MissileTower extends Tower {
         // speed is the delay between attacks in milliseconds
         super(scene, x, y, 'missile_tower_1', 'missile_projectile', 25, 200, 5000);
 
+        this.damageUpgrade = 0;
+        this.attackSpeedUpgrade = 0;
+        this.rangeUpgrade = 0;
+
         // Upgrade tower menu
         this.on('pointerdown', () => {
-            this.setVisible(false);
             const popUpMenu = scene.add.group();
             scene.upgradeMenuGroup.push(popUpMenu);
 
@@ -53,26 +56,28 @@ export default class MissileTower extends Tower {
             Upgrade_Damage.on('pointerdown', () => {
                 this.damage += 5;
                 popUpMenu.setVisible(false);
-                this.setVisible(true);
+                scene.add.image(this.x + 24 + (this.damageUpgrade * 8), this.y - 16, 'DamageIcon').setOrigin(0.5).setScale(0.7);
+                this.damageUpgrade += 1;
             });
 
             // Increase range
             Upgrade_AttackSpeed.on('pointerdown', () => {
                 this.range += 10;
                 popUpMenu.setVisible(false);
-                this.setVisible(true);
+                scene.add.image(this.x + 24 + (this.attackSpeedUpgrade * 8), this.y, 'AttackSpeedIcon').setOrigin(0.5).setScale(0.6);
+                this.attackSpeedUpgrade += 1;
             });
 
             // Increase speed
             Upgrade_Range.on('pointerdown', () => {
                 this.speed -= 500;
                 popUpMenu.setVisible(false);
-                this.setVisible(true);
+                scene.add.image(this.x + 24 + (this.rangeUpgrade * 8), this.y + 16, 'RangeIcon').setOrigin(0.5).setScale(0.6);
+                this.rangeUpgrade += 1;
             });
 
             UpgradeMenu_Cancel.on('pointerdown', () => {
                 popUpMenu.setVisible(false);
-                this.setVisible(true);
             });
         });
     }

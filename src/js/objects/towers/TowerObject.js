@@ -22,9 +22,21 @@ export default class Tower extends Phaser.GameObjects.Sprite {
         // Shows tower range
         this.on('pointerover', () => {
             this.drawRange(scene);
+            this.damageIcon = scene.add.image(this.x - 24, this.y + 32, 'DamageIcon').setOrigin(0.5).setScale(0.7);
+            this.damageText = scene.add.text(this.x - 16, this.y + 32, this.damage).setOrigin(0, 0.5);
+            this.attackSpeedIcon = scene.add.image(this.x - 24, this.y + 48, 'AttackSpeedIcon').setOrigin(0.5).setScale(0.7);
+            this.attackSpeedText = scene.add.text(this.x - 16, this.y + 48, this.speed).setOrigin(0, 0.5);
+            this.rangeIcon = scene.add.image(this.x - 24, this.y + 64, 'RangeIcon').setOrigin(0.5).setScale(0.7);
+            this.rangeText = scene.add.text(this.x - 16, this.y + 64, this.range).setOrigin(0, 0.5);
         });
         this.on('pointerout', () => {
             this.rangeGraphics.destroy();
+            this.damageIcon.destroy();
+            this.damageText.destroy();
+            this.attackSpeedIcon.destroy();
+            this.attackSpeedText.destroy();
+            this.rangeIcon.destroy();
+            this.rangeText.destroy();
         });
     }
 
