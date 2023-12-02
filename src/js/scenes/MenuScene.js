@@ -54,6 +54,12 @@ class MenuScene extends BaseScene {
                 active: true
             }))
         });
+
+        //Game Over Scene Button
+        const gameOverButton = this.add.image(500, 590, 'gameOverButton').setOrigin(0).setInteractive({cursor: 'pointer'});
+        gameOverButton.on('pointerup', () => {
+            this.scene.start('GameOverScene');
+        });
         
         //Create Default PlayerData Registry
         this.registry.set('playerData', {

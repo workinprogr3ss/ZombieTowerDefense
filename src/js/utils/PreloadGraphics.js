@@ -15,6 +15,7 @@ export function PreloadMenuGraphics(scene) {
 
     //Background
     scene.load.image('devButton', 'src/assets/images/icons/devButton.png');
+    scene.load.image('gameOverButton', 'src/assets/images/icons/devButton.png');
 }
 
 export function PreloadLevelSelectGraphics(scene) {
@@ -136,4 +137,18 @@ export function PreloadOverrideGraphics(scene) {
     //Yes & No Buttons
     scene.load.spritesheet('yes', 'src/assets/images/icons/yes.png', {frameWidth: 80, frameHeight: 36});
     scene.load.spritesheet('no', 'src/assets/images/icons/no.png', {frameWidth: 80, frameHeight: 36});
+}
+
+export function PreloadGameOverGraphics(scene) {
+
+    //Game Over
+    scene.load.image('gameOver', 'src/assets/images/icons/GameOverBackground.png');
+
+    //Game Over Buttons
+    scene.load.spritesheet('exitButton', 'src/assets/images/icons/exitButton.png', {frameWidth: 64, frameHeight: 36});
+    scene.load.spritesheet('restartButton', 'src/assets/images/icons/restartButton.png', {frameWidth: 128, frameHeight: 35});
+  
+    //Background
+    scene.load.tilemapTiledJSON('gameOverBackground', 'src/assets/maps/gameOverBackground.json');
+    scene.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
 }
