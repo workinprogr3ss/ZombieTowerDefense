@@ -17,6 +17,10 @@ export default class SniperTower extends Tower {
         this.attackSpeedUpgradeNum = 0;
         this.rangeUpgradeNum = 0;
 
+        this.maxDamageUpgradeNum = 3;
+        this.maxAttackSpeedUpgradeNum = 3;
+        this.maxRangeUpgradeNum = 3;
+
         // Upgrade tower menu
         this.on('pointerdown', () => {
             const popUpMenu = scene.add.group();
@@ -63,26 +67,38 @@ export default class SniperTower extends Tower {
 
             // Increase damage
             Upgrade_Damage.on('pointerdown', () => {
-                this.damage += this.damageUpgradeVal;
+                if (this.damageUpgradeNum < this.maxDamageUpgradeNum && scene.displayManager.playerCurrencyManager.currentCurrency >= this.damageUpgradeCost) {
+                    this.damage += this.damageUpgradeVal;
+                    this.damageUpgradeNum += 1;
+                    scene.add.image(this.x + 24 + (this.damageUpgradeNum * 8), this.y - 16, 'DamageIcon').setOrigin(0.5).setScale(0.7).setDepth(0);
+                    scene.displayManager.playerCurrencyManager.currentCurrency -= this.damageUpgradeCost;
+                    scene.events.emit('updateCurrencyDisplay', scene.displayManager.playerCurrencyManager.currentCurrency);
+                }
                 popUpMenu.setVisible(false);
-                scene.add.image(this.x + 24 + (this.damageUpgradeNum * 8), this.y - 16, 'DamageIcon').setOrigin(0.5).setScale(0.7).setDepth(0);
-                this.damageUpgradeNum += 1;
+            });
+
+            // Increase speeds
+            Upgrade_AttackSpeed.on('pointerdown', () => {
+                if (this.attackSpeedUpgradeNum < this.maxAttackSpeedUpgradeNum && scene.displayManager.playerCurrencyManager.currentCurrency >= this.attackSpeedUpgradeCost) {
+                    this.speed -= this.attackSpeedUpgradeVal;
+                    this.attackSpeedUpgradeNum += 1;
+                    scene.add.image(this.x + 24 + (this.attackSpeedUpgradeNum * 8), this.y, 'AttackSpeedIcon').setOrigin(0.5).setScale(0.6).setDepth(0);
+                    scene.displayManager.playerCurrencyManager.currentCurrency -= this.attackSpeedUpgradeCost;
+                    scene.events.emit('updateCurrencyDisplay', scene.displayManager.playerCurrencyManager.currentCurrency);
+                }
+                popUpMenu.setVisible(false);
             });
 
             // Increase range
-            Upgrade_AttackSpeed.on('pointerdown', () => {
-                this.speed -= this.attackSpeedUpgradeVal;
-                popUpMenu.setVisible(false);
-                scene.add.image(this.x + 24 + (this.attackSpeedUpgradeNum * 8), this.y, 'AttackSpeedIcon').setOrigin(0.5).setScale(0.6).setDepth(0);
-                this.attackSpeedUpgradeNum += 1;
-            });
-
-            // Increase speed
             Upgrade_Range.on('pointerdown', () => {
-                this.range += this.rangeUpgradeVal;
+                if (this.rangeUpgradeNum < this.maxRangeUpgradeNum && scene.displayManager.playerCurrencyManager.currentCurrency >= this.rangeUpgradeCost) {
+                    this.range += this.rangeUpgradeVal;
+                    this.rangeUpgradeNum += 1;
+                    scene.add.image(this.x + 24 + (this.rangeUpgradeNum * 8), this.y + 16, 'RangeIcon').setOrigin(0.5).setScale(0.6).setDepth(0);
+                    scene.displayManager.playerCurrencyManager.currentCurrency -= this.rangeUpgradeCost;
+                    scene.events.emit('updateCurrencyDisplay', scene.displayManager.playerCurrencyManager.currentCurrency);
+                }
                 popUpMenu.setVisible(false);
-                scene.add.image(this.x + 24 + (this.rangeUpgradeNum * 8), this.y + 16, 'RangeIcon').setOrigin(0.5).setScale(0.6).setDepth(0);
-                this.rangeUpgradeNum += 1;
             });
 
             UpgradeMenu_Cancel.on('pointerdown', () => {
