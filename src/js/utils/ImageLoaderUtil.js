@@ -32,4 +32,6 @@ export function loadImages(scene) {
 
     // Load Player HUD
     scene.load.image('playerHUD', 'src/assets/images/icons/playerHUD.png');
+    scene.load.spritesheet('pauseButton', 'src/assets/images/icons/pauseButton.png', {frameWidth: 34, frameHeight: 34});
+    scene.load.image('nextWaveButton', 'src/assets/images/icons/nextWaveButton.png');
 }

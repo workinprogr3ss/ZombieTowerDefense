@@ -30,7 +30,7 @@ export default class WaveManager {
     this.endY = this.endTileY * 16;
 
     // Next Wave Button
-    this.nextWaveButton = scene.add.text(200, 575, 'Spawn Next Wave', { fill: '#000', fontSize: '22px' }).setInteractive({ useHandCursor: true}).setVisible(false).setOrigin(0, 0.5);
+    this.nextWaveButton = scene.add.image(325, 551, 'nextWaveButton').setInteractive({cursor: 'pointer'}).setOrigin(0);
     this.nextWaveButton.on('pointerdown', () => {
       this.startNextWave();
       this.scene.displayManager.waveTimerManager.resetTimer();
