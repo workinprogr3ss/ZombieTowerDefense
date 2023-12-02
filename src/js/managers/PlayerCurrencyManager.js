@@ -2,6 +2,7 @@ export default class PlayerCurrencyManager {
     constructor(scene) {
         this.scene = scene;
         this.currentCurrency = 0;
+        this.startingCurrency = 10000;
     }
 
     addCurrency(amount) {

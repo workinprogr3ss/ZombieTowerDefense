@@ -28,6 +28,14 @@ export default class WaveManager {
     this.startY = this.startTileY * 16;
     this.endX = this.endTileX * 16;
     this.endY = this.endTileY * 16;
+
+    // Next Wave Button
+    this.nextWaveButton = scene.add.text(200, 575, 'Spawn Next Wave', { fill: '#000', fontSize: '22px' }).setInteractive({ useHandCursor: true}).setVisible(false).setOrigin(0, 0.5);
+    this.nextWaveButton.on('pointerdown', () => {
+      this.startNextWave();
+      this.scene.displayManager.waveTimerManager.resetTimer();
+      this.nextWaveButton.setVisible(false);
+    });
   }
 
   initializeWaves(level) {
@@ -162,6 +170,13 @@ export default class WaveManager {
         {
           // Wave 10
           enemies: [
+            "walker",
+            "walker",
+            "runner",
+            "runner",
+            "tank",
+            "walker",
+            "walker",
             "walker",
             "walker",
             "runner",
@@ -638,8 +653,22 @@ export default class WaveManager {
   }
 
   update() {
+    // Wave Button
+    const waveComplete = this.waves[this.currentWave].enemies.length === 0 && this.scene.zombies.countActive(true) === 0;
+    const timeRemaining = this.scene.displayManager.waveTimerManager.waveTimer > 0;
+
+    if (waveComplete && timeRemaining) {
+      this.nextWaveButton.setVisible(true);
+    } else {
+      this.nextWaveButton.setVisible(false);
+    }
+
     // If we're past the last wave, do nothing
     if (this.currentWave >= this.waves.length) {
+      if (this.scene.zombies.countActive(true) === 0) {
+        // All enemies are dead, handle game completion
+        this.scene.scene.start("GameOverScene");
+      }
       return;
     }
 
@@ -654,8 +683,8 @@ export default class WaveManager {
     // If there are no more enemies to spawn and no active enemies left, the wave is complete
     //&& this.scene.zombies.countActive(true) === 0 ; for when there are no active enemies left
     if (
-      this.waves[this.currentWave].enemies.length === 0 &&
-      0 >= this.scene.displayManager.waveTimerManager.waveTimer
+      (this.waves[this.currentWave].enemies.length === 0 &&
+      0 >= this.scene.displayManager.waveTimerManager.waveTimer)
     ) {
       this.startNextWave();
       this.scene.displayManager.waveTimerManager.resetTimer();
