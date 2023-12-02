@@ -5,6 +5,7 @@ class GameOverScene extends Phaser.Scene {
 
     init(data) {
         this.level = data.level;
+        this.levelContext = data.scene
     }
 
     create() {
@@ -20,6 +21,8 @@ class GameOverScene extends Phaser.Scene {
   
       restartButton.on('pointerup', () => {
         // Restart the game here
+        this.levelContext.towerMenuGroup = [];
+        this.levelContext.upgradeMenuGroup = [];
         this.scene.start(this.level);
       });
   

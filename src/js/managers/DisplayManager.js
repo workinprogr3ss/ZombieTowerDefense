@@ -26,7 +26,7 @@ export default class DisplayManager {
     }
 
 
-    create(sceneName) {
+    create(sceneName, zombieObjects, towerObjects) {
 
         //Player HUD
         this.scene.add.image(0, 0, 'playerHUD').setOrigin(0);
@@ -81,7 +81,12 @@ export default class DisplayManager {
         pauseButton.on('pointerdown', () => {pauseButton.setFrame(1)});
         pauseButton.on('pointerout', () => {pauseButton.setFrame(0)});
         pauseButton.on('pointerup', () => {
-            this.scene.scene.launch('PauseScene', {context: this.scene, scene: sceneName});
+            this.scene.scene.launch('PauseScene', {
+                context: this.scene, 
+                scene: sceneName,
+                towers: towerObjects,
+                zombies: zombieObjects
+            });
             this.scene.scene.bringToTop('PauseScene')
         });
 

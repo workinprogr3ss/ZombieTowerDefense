@@ -68,6 +68,8 @@ class EasyLevelScene extends Phaser.Scene {
         audioManager.stopBackgroundAudio();
         audioManager.stopNewsAudio();
 
+        console.log("Level One")
+
         // Create the map
         const map = this.make.tilemap({key: 'easymap'});
         const tileset = map.addTilesetImage('ZombieApocalypseTilesetReferenceFixed', 'ZombieApocalypseTilesetReferenceFixed');
@@ -117,8 +119,10 @@ class EasyLevelScene extends Phaser.Scene {
         this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY, 1);
         //console.log("Wave Manager:", this.waveManager);
 
+        this.towers = this.physics.add.group();
+
         // Display Manager
-        this.displayManager.create('EasyLevelScene');
+        this.displayManager.create('EasyLevelScene', this.zombies, this.towers);
         this.displayManager.waveTimerManager.resetTimer();
     }
     
@@ -135,7 +139,7 @@ class EasyLevelScene extends Phaser.Scene {
         this.displayManager.waveTimerManager.update(delta);
 
         if (this.zombies) {
-            this.towers.forEach((tower) => {
+            this.towers.getChildren().forEach((tower) => {
                 tower.attack(this.zombies.children.entries);
                 tower.update();
             });

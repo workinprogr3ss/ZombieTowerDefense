@@ -10,7 +10,10 @@ export default class PlayerHealthManager {
         this.currentHealth = Math.max(this.currentHealth, 0); // Prevents health from going below 0
         this.updateHealthDisplay();
         if (this.currentHealth <= 0) {
-            this.scene.scene.start('GameOverScene', {level: this.scene.scene.key});
+            this.scene.scene.start('GameOverScene', {
+                level: this.scene.scene.key,
+                scene: this.scene
+            });
         }
     }
 

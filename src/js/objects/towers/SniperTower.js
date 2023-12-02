@@ -75,4 +75,10 @@ export default class SniperTower extends Tower {
             });
         });
     }
+
+    //destroyTower(scene) {
+    //    scene.events.off('update');
+    //    this.destroy();
+    //    console.log("TEST")
+    //}
 }
