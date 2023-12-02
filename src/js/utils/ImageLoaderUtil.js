@@ -13,9 +13,6 @@ export function loadImages(scene) {
     scene.load.spritesheet('missile_projectile', 'src/assets/images/towers/Missile.png', {frameWidth: 32, frameHeight: 32});
     scene.load.image('flame_projectile', 'src/assets/images/towers/Bullet_MG.png');
 
-    // Load Player HUD
-    scene.load.image('playerHUD', 'src/assets/images/icons/playerHUD.png');
-
     //Tower Menu
     scene.load.image('TowerMenu', 'src/assets/images/icons/TowerMenu.png');
     scene.load.image('TowerMenu_Sniper', 'src/assets/images/icons/TowerMenu_Sniper.png');
@@ -32,4 +29,7 @@ export function loadImages(scene) {
     scene.load.image('DamageIcon', 'src/assets/images/icons/damageIcon.png');
     scene.load.image('AttackSpeedIcon', 'src/assets/images/icons/attackSpeedIcon.png');
     scene.load.image('RangeIcon', 'src/assets/images/icons/rangeIcon.png');
+
+    // Load Player HUD
+    scene.load.image('playerHUD', 'src/assets/images/icons/playerHUD.png');
 }

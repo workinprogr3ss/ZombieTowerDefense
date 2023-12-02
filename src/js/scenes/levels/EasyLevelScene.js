@@ -38,7 +38,6 @@ class EasyLevelScene extends Phaser.Scene {
         // Load the tilemap and tileset image
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
         this.load.tilemapTiledJSON('easymap', 'src/assets/maps/EasyLevel.json');
-        
         // Load visual assets
         loadSpritesheets(this);
         loadImages(this);

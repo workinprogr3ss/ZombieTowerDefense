@@ -30,7 +30,7 @@ var config = {
         new GameOverScene,
         new CreditsScene,
         new PauseScene,
-        EasyLevelScene,
+        new EasyLevelScene,
         new MediumLevelScene,
         new HardLevelScene
     ],
