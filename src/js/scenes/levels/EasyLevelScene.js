@@ -39,23 +39,6 @@ class EasyLevelScene extends Phaser.Scene {
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
         this.load.tilemapTiledJSON('easymap', 'src/assets/maps/EasyLevel.json');
 
-        //Tower Menu
-        this.load.image('TowerMenu', 'src/assets/images/icons/TowerMenu.png');
-        this.load.image('TowerMenu_Sniper', 'src/assets/images/icons/TowerMenu_Sniper.png');
-        this.load.image('TowerMenu_Missile', 'src/assets/images/icons/TowerMenu_Missile.png');
-        this.load.image('TowerMenu_Flamethrower', 'src/assets/images/icons/TowerMenu_Flamethrower.png');
-        this.load.image('TowerMenu_Cancel', 'src/assets/images/icons/TowerMenu_Cancel.png');
-
-        //Upgrade Menu
-        this.load.image('UpgradeMenu', 'src/assets/images/icons/UpgradeMenu.png');
-        this.load.image('Upgrade_Damage', 'src/assets/images/icons/UpgradeDamage.png');
-        this.load.image('Upgrade_AttackSpeed', 'src/assets/images/icons/UpgradeAttackSpeed.png');
-        this.load.image('Upgrade_Range', 'src/assets/images/icons/UpgradeRange.png');
-        this.load.image('UpgradeMenu_Cancel', 'src/assets/images/icons/TowerMenu_Cancel.png');
-        this.load.image('DamageIcon', 'src/assets/images/icons/damageIcon.png');
-        this.load.image('AttackSpeedIcon', 'src/assets/images/icons/attackSpeedIcon.png');
-        this.load.image('RangeIcon', 'src/assets/images/icons/rangeIcon.png');
-
         // Load visual assets
         loadSpritesheets(this);
         loadImages(this);
