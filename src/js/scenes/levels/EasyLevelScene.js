@@ -51,7 +51,7 @@ class EasyLevelScene extends Phaser.Scene {
     }
 
     create(audioManager) {
-        audioManager.stopBackgroundAudio();
+        //audioManager.stopBackgroundAudio();
         audioManager.stopNewsAudio();
 
         console.log("Level One")

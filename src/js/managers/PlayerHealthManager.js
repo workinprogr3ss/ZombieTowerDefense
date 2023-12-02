@@ -1,7 +1,7 @@
 export default class PlayerHealthManager {
     constructor(scene) {
         this.scene = scene;
-        this.maxHealth = 100;
+        this.maxHealth = 1;
         this.currentHealth = this.maxHealth;
     }
 
