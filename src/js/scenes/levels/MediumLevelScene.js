@@ -118,12 +118,13 @@ class MediumLevelScene extends Phaser.Scene {
             zombie.update();
         });
 
-        // Update the wave manager
+        // Update the Wave Manager
         this.waveManager.update();
 
         // Update the Wave Timer Manager
         this.displayManager.waveTimerManager.update(delta);
 
+        // Update the towers
         if (this.zombies) {
             this.towers.getChildren().forEach((tower) => {
                 tower.attack(this.zombies.children.entries);

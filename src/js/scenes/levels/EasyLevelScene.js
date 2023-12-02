@@ -38,6 +38,7 @@ class EasyLevelScene extends Phaser.Scene {
         // Load the tilemap and tileset image
         this.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
         this.load.tilemapTiledJSON('easymap', 'src/assets/maps/EasyLevel.json');
+
         // Load visual assets
         loadSpritesheets(this);
         loadImages(this);
@@ -124,6 +125,7 @@ class EasyLevelScene extends Phaser.Scene {
         // Update the Wave Timer Manager
         this.displayManager.waveTimerManager.update(delta);
 
+        // Update the towers
         if (this.zombies) {
             this.towers.getChildren().forEach((tower) => {
                 tower.attack(this.zombies.children.entries);

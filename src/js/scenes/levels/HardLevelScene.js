@@ -119,7 +119,7 @@ class HardLevelScene extends Phaser.Scene {
             zombie.update();
         });
 
-        // Update the wave manager
+        // Update the Wave Manager
         this.waveManager.update();
 
         // Update the Wave Timer Manager
