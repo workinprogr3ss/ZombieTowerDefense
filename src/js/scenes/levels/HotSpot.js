@@ -6,7 +6,6 @@ export function createHotSpot(object, scene, displayManager) {
 
     const tower = scene.add.sprite(object.x, object.y, 'hotspot').setOrigin(0.5);
 
-
     tower.setInteractive({cursor: 'pointer'});
     tower.on('pointerdown', () => {
         const popUpMenu = scene.add.group();
@@ -48,7 +47,7 @@ export function createHotSpot(object, scene, displayManager) {
                 towerBase.setScale(0.15);
                 const sniperTower = new SniperTower(scene, object.x, object.y);
                 scene.add.existing(sniperTower);
-                scene.towers.push(sniperTower);
+                scene.towers.add(sniperTower);
                 sniperTower.setScale(0.15);
                 displayManager.playerCurrencyManager.reduceCurrency(100);
             }
@@ -66,7 +65,7 @@ export function createHotSpot(object, scene, displayManager) {
                 towerBase.setScale(0.15);
                 const missileTower = new MissileTower(scene, object.x, object.y);
                 scene.add.existing(missileTower);
-                scene.towers.push(missileTower);
+                scene.towers.add(missileTower);
                 missileTower.setScale(0.15);
                 displayManager.playerCurrencyManager.reduceCurrency(200);
             }
@@ -84,7 +83,7 @@ export function createHotSpot(object, scene, displayManager) {
                 towerBase.setScale(0.15);
                 const flamethrowerTower = new FlamethrowerTower(scene, object.x, object.y);
                 scene.add.existing(flamethrowerTower);
-                scene.towers.push(flamethrowerTower);
+                scene.towers.add(flamethrowerTower);
                 flamethrowerTower.setScale(0.2);
                 displayManager.playerCurrencyManager.reduceCurrency(150);
             }

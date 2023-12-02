@@ -52,6 +52,9 @@ class EasyLevelScene extends Phaser.Scene {
         this.load.image('Upgrade_AttackSpeed', 'src/assets/images/icons/UpgradeAttackSpeed.png');
         this.load.image('Upgrade_Range', 'src/assets/images/icons/UpgradeRange.png');
         this.load.image('UpgradeMenu_Cancel', 'src/assets/images/icons/TowerMenu_Cancel.png');
+        this.load.image('DamageIcon', 'src/assets/images/icons/damageIcon.png');
+        this.load.image('AttackSpeedIcon', 'src/assets/images/icons/attackSpeedIcon.png');
+        this.load.image('RangeIcon', 'src/assets/images/icons/rangeIcon.png');
 
         // Load visual assets
         loadSpritesheets(this);
@@ -67,6 +70,8 @@ class EasyLevelScene extends Phaser.Scene {
     create(audioManager) {
         audioManager.stopBackgroundAudio();
         audioManager.stopNewsAudio();
+
+        console.log("Level One")
 
         // Create the map
         const map = this.make.tilemap({key: 'easymap'});
@@ -117,8 +122,10 @@ class EasyLevelScene extends Phaser.Scene {
         this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY, 1);
         //console.log("Wave Manager:", this.waveManager);
 
+        this.towers = this.physics.add.group();
+
         // Display Manager
-        this.displayManager.create('EasyLevelScene');
+        this.displayManager.create('EasyLevelScene', this.zombies, this.towers);
         this.displayManager.waveTimerManager.resetTimer();
     }
     
@@ -135,7 +142,7 @@ class EasyLevelScene extends Phaser.Scene {
         this.displayManager.waveTimerManager.update(delta);
 
         if (this.zombies) {
-            this.towers.forEach((tower) => {
+            this.towers.getChildren().forEach((tower) => {
                 tower.attack(this.zombies.children.entries);
                 tower.update();
             });

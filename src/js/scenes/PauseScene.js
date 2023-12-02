@@ -19,17 +19,16 @@ class PauseScene extends Phaser.Scene {
         data.context.physics.pause();
         data.context.scene.pause();
         this.pauseMenu = this.add.image(400,300, 'pauseMenu');
-        //this.restartButton = this.add.sprite(400, 300, 'restartButton').setInteractive({cursor: 'pointer'}).setOrigin(0.5);
         this.resumeButton = this.add.sprite(400, 270, 'resumeButton').setInteractive({cursor: 'pointer'}).setOrigin(0.5);
         this.restartButton = this.add.sprite(400, 310, 'restartButton').setInteractive({cursor: 'pointer'}).setOrigin(0.5);
         this.exitButton = this.add.sprite(400, 350, 'exitButton').setInteractive({cursor: 'pointer'}).setOrigin(0.5);
 
-        this.pauseButtonInteractions(this.resumeButton, 'resumeButton', data.context, data.scene);
-        this.pauseButtonInteractions(this.restartButton, 'restartButton', data.context, data.scene);
-        this.pauseButtonInteractions(this.exitButton, 'exitButton', data.context, data.scene);
+        this.pauseButtonInteractions(this.resumeButton, 'resumeButton', data.context, data.scene, data.towers, data.zombies.children.entries);
+        this.pauseButtonInteractions(this.restartButton, 'restartButton', data.context, data.scene, data.towers, data.zombies.children.entries);
+        this.pauseButtonInteractions(this.exitButton, 'exitButton', data.context, data.scene, data.towers, data.zombies.children.entries);
     }
 
-    pauseButtonInteractions(button, source, context, sceneName) {
+    pauseButtonInteractions(button, source, context, sceneName, towerObjects, zombieObjects) {
         button.on('pointerover', () => {
             button.setFrame(2);
         });
@@ -49,12 +48,17 @@ class PauseScene extends Phaser.Scene {
             button.on('pointerup', () => {
                 this.destroyButtons();
                 context.physics.resume();
-                context.scene.start(sceneName);
+                context.events.off();
+                context.towerMenuGroup = [];
+                context.upgradeMenuGroup = [];
+                context.scene.restart();
             }); 
         } else {
             button.on('pointerup', () => {
                 this.destroyButtons();
                 context.physics.resume();
+                context.towerMenuGroup = [];
+                context.upgradeMenuGroup = [];
                 context.scene.start('LevelSelectScene')
             }); 
         }
