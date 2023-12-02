@@ -105,6 +105,7 @@ class EasyLevelScene extends Phaser.Scene {
         this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY, 1);
         //console.log("Wave Manager:", this.waveManager);
 
+        // Tower Container
         this.towers = this.physics.add.group();
 
         // Display Manager
@@ -124,6 +125,7 @@ class EasyLevelScene extends Phaser.Scene {
         // Update the Wave Timer Manager
         this.displayManager.waveTimerManager.update(delta);
 
+        // Update the towers
         if (this.zombies) {
             this.towers.getChildren().forEach((tower) => {
                 tower.attack(this.zombies.children.entries);

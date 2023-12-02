@@ -105,6 +105,7 @@ class HardLevelScene extends Phaser.Scene {
         this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY, 3);
         //console.log("Wave Manager:", this.waveManager);
 
+        // Tower Container
         this.towers = this.physics.add.group();
 
         // Display Manager
@@ -118,7 +119,7 @@ class HardLevelScene extends Phaser.Scene {
             zombie.update();
         });
 
-        // Update the wave manager
+        // Update the Wave Manager
         this.waveManager.update();
 
         // Update the Wave Timer Manager

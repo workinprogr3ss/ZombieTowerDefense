@@ -36,17 +36,35 @@ export default class WaveManager {
       return [
         {
           // Wave 1
-          enemies: ["walker", "walker", "walker", "walker", "walker"],
+          enemies: [
+            "walker", 
+            "walker", 
+            "walker", 
+            "walker", 
+            "walker"
+          ],
           spawnInterval: 1000, // 1 second
         },
         {
           // Wave 2
-          enemies: ["walker", "walker", "walker", "walker", "tank"],
+          enemies: [
+            "walker", 
+            "walker", 
+            "walker", 
+            "walker", 
+            "tank"
+          ],
           spawnInterval: 1000, // 1 second
         },
         {
           // Wave 3
-          enemies: ["walker", "walker", "runner", "runner", "tank"],
+          enemies: [
+            "walker", 
+            "walker", 
+            "runner", 
+            "runner", 
+            "tank"
+          ],
           spawnInterval: 1000, // 1 second
         },
         {
@@ -67,7 +85,13 @@ export default class WaveManager {
         },
         {
           // Wave 5
-          enemies: ["tank", "tank", "tank", "tank", "tank"],
+          enemies: [
+            "tank", 
+            "tank", 
+            "tank", 
+            "tank", 
+            "tank"
+          ],
           spawnInterval: 1000, // 1 second
         },
         {
@@ -154,17 +178,50 @@ export default class WaveManager {
       return [
         {
           // Wave 1
-          enemies: ["walker", "walker", "walker", "walker", "walker", "walker", "walker", "runner", "runner", "tank"],
+          enemies: [
+            "walker", 
+            "walker", 
+            "walker", 
+            "walker", 
+            "walker", 
+            "walker", 
+            "walker", 
+            "runner", 
+            "runner", 
+            "tank"
+          ],
           spawnInterval: 1000, // 1 second
         },
         {
           // Wave 2
-          enemies: ["walker", "walker", "walker", "walker", "tank", "walker", "walker", "tank", "walker", "walker"],
+          enemies: [
+            "walker", 
+            "walker", 
+            "walker", 
+            "walker", 
+            "tank", 
+            "walker", 
+            "walker", 
+            "tank", 
+            "walker", 
+            "walker"
+          ],
           spawnInterval: 1000, // 1 second
         },
         {
           // Wave 3
-          enemies: ["walker", "walker", "runner", "runner", "tank", "walker", "walker", "runner", "runner", "tank"],
+          enemies: [
+            "walker", 
+            "walker", 
+            "runner", 
+            "runner", 
+            "tank", 
+            "walker", 
+            "walker", 
+            "runner", 
+            "runner", 
+            "tank"
+          ],
           spawnInterval: 1000, // 1 second
         },
         {
@@ -195,7 +252,13 @@ export default class WaveManager {
         },
         {
           // Wave 5
-          enemies: ["tank", "tank", "tank", "tank", "tank"],
+          enemies: [
+            "tank", 
+            "tank", 
+            "tank", 
+            "tank", 
+            "tank"
+          ],
           spawnInterval: 1000, // 1 second
         },
         {
@@ -319,17 +382,50 @@ export default class WaveManager {
       return [
         {
           // Wave 1
-          enemies: ["walker", "walker", "walker", "walker", "walker", "walker", "walker", "runner", "runner", "tank"],
+          enemies: [
+            "walker", 
+            "walker", 
+            "walker", 
+            "walker", 
+            "walker", 
+            "walker", 
+            "walker", 
+            "runner", 
+            "runner", 
+            "tank"
+          ],
           spawnInterval: 1000, // 1 second
         },
         {
           // Wave 2
-          enemies: ["walker", "walker", "walker", "walker", "tank", "walker", "walker", "runner", "runner", "tank"],
+          enemies: [
+            "walker", 
+            "walker", 
+            "walker", 
+            "walker", 
+            "tank", 
+            "walker", 
+            "walker", 
+            "runner", 
+            "runner", 
+            "tank"
+          ],
           spawnInterval: 1000, // 1 second
         },
         {
           // Wave 3
-          enemies: ["walker", "walker", "runner", "runner", "tank", "walker", "walker", "runner", "runner", "tank"],
+          enemies: [
+            "walker", 
+            "walker", 
+            "runner", 
+            "runner", 
+            "tank", 
+            "walker", 
+            "walker", 
+            "runner", 
+            "runner", 
+            "tank"
+          ],
           spawnInterval: 1000, // 1 second
         },
         {
@@ -360,7 +456,13 @@ export default class WaveManager {
         },
         {
           // Wave 5
-          enemies: ["tank", "tank", "tank", "tank", "tank"],
+          enemies: [
+            "tank", 
+            "tank", 
+            "tank", 
+            "tank", 
+            "tank"
+          ],
           spawnInterval: 1000, // 1 second
         },
         {
