@@ -104,6 +104,9 @@ class MediumLevelScene extends Phaser.Scene {
         this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY, 2);
         //console.log("Wave Manager:", this.waveManager);
 
+        // Tower Container
+        this.towers = this.physics.add.group();
+
         // Display Manager
         this.displayManager.create('MediumLevelScene');
         this.displayManager.waveTimerManager.resetTimer()
@@ -121,12 +124,13 @@ class MediumLevelScene extends Phaser.Scene {
         // Update the Wave Timer Manager
         this.displayManager.waveTimerManager.update(delta);
 
-        this.towers.forEach((tower) => {
-            tower.attack(this.zombies.children.entries);
-            tower.update();
-        });
-
-
+        // Update the towers
+        if (this.zombies) {
+            this.towers.getChildren().forEach((tower) => {
+                tower.attack(this.zombies.children.entries);
+                tower.update();
+            });
+        }
         // Debugging
         //console.log(this.zombies.children.entries)
     }

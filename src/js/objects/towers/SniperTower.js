@@ -4,7 +4,7 @@ export default class SniperTower extends Tower {
     constructor(scene, x, y) {
         //(scene, x, y, texture, damage, range, speed)
         // speed is the delay between attacks in milliseconds
-        super(scene, x, y, 'sniper_tower_1', 'sniper_projectile', 10, 150, 2500).setOrigin(0.5, 0.8);
+        super(scene, x, y, 'sniper_tower_1', 'sniper_projectile', 45, 150, 2500).setOrigin(0.5, 0.8);
 
         this.damageUpgrade = 0;
         this.attackSpeedUpgrade = 0;

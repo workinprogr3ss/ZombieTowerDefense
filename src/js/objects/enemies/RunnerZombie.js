@@ -4,7 +4,7 @@ import Enemy from './EnemyObject.js';
 export default class RunnerZombie extends Enemy {
     constructor(scene, x, y, initalDirection) {
         //scene, x, y, texture, initialDirection, health, speed, damage, value
-        super(scene, x, y, 'runnerZombieRight', initalDirection, 50, 50, 5, 25);
+        super(scene, x, y, 'runnerZombieRight', initalDirection, 50, 50, 5, 10);
     }
 
     // Specialized methods

@@ -15,4 +15,21 @@ export function loadImages(scene) {
 
     // Load Player HUD
     scene.load.image('playerHUD', 'src/assets/images/icons/playerHUD.png');
+
+    //Tower Menu
+    scene.load.image('TowerMenu', 'src/assets/images/icons/TowerMenu.png');
+    scene.load.image('TowerMenu_Sniper', 'src/assets/images/icons/TowerMenu_Sniper.png');
+    scene.load.image('TowerMenu_Missile', 'src/assets/images/icons/TowerMenu_Missile.png');
+    scene.load.image('TowerMenu_Flamethrower', 'src/assets/images/icons/TowerMenu_Flamethrower.png');
+    scene.load.image('TowerMenu_Cancel', 'src/assets/images/icons/TowerMenu_Cancel.png');
+
+    //Upgrade Menu
+    scene.load.image('UpgradeMenu', 'src/assets/images/icons/UpgradeMenu.png');
+    scene.load.image('Upgrade_Damage', 'src/assets/images/icons/UpgradeDamage.png');
+    scene.load.image('Upgrade_AttackSpeed', 'src/assets/images/icons/UpgradeAttackSpeed.png');
+    scene.load.image('Upgrade_Range', 'src/assets/images/icons/UpgradeRange.png');
+    scene.load.image('UpgradeMenu_Cancel', 'src/assets/images/icons/TowerMenu_Cancel.png');
+    scene.load.image('DamageIcon', 'src/assets/images/icons/damageIcon.png');
+    scene.load.image('AttackSpeedIcon', 'src/assets/images/icons/attackSpeedIcon.png');
+    scene.load.image('RangeIcon', 'src/assets/images/icons/rangeIcon.png');
 }
