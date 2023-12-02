@@ -56,7 +56,7 @@ class LevelCompleteScene extends Phaser.Scene {
       // Start next level here
       this.levelContext.towerMenuGroup = [];
       this.levelContext.upgradeMenuGroup = [];
-      this.scene.start(this.level);
+      playNextLevel()
     });
 
     // Add a button to go back to the main menu
@@ -72,6 +72,15 @@ class LevelCompleteScene extends Phaser.Scene {
       // Go back to the main menu scene
       this.scene.start("MenuScene");
     });
+  }
+
+  playNextLevel() {
+    // Check current level and play the next level
+    if (this.level == "EasyLevelScene") {
+      this.scene.start("MediumLevelScene");
+    } else if (this.level == "MediumLevelScene") {
+      this.scene.start("HardLevelScene");
+    }
   }
 }
 
