@@ -6,3 +6,4 @@ export { PreloadLevelSelectGraphics } from "../utils/PreloadGraphics.js";
 export { PreloadSaveGameGraphics } from "../utils/PreloadGraphics.js";
 export { PreloadPauseGameGraphics } from "../utils/PreloadGraphics.js";
 export { PreloadOverrideGraphics } from "../utils/PreloadGraphics.js";
+export { PreloadGameOverGraphics } from "../utils/PreloadGraphics.js";
