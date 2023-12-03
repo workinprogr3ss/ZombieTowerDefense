@@ -5,7 +5,7 @@ export default class MissileTower extends Tower {
     constructor(scene, x, y, audioManager) {
         //(scene, x, y, texture, damage, range, speed)
         // speed is the delay between attacks in milliseconds
-        super(scene, x, y, 'missile_tower_1', 'missile_projectile', 50, 200, 5000, audioManager);
+        super(scene, x, y, 'missile_tower_1', 'missile_projectile', 45, 200, 5000, audioManager);
 
         this.audioManager = audioManager;
 
@@ -24,6 +24,24 @@ export default class MissileTower extends Tower {
         this.maxAttackSpeedUpgradeNum = 3;
         this.maxRangeUpgradeNum = 3;
 
+        // Store upgrade menu coordinates
+        this.upgradeMenuX = this.x;
+        this.upgradeMenuY = this.y;
+
+        // Adjust upgrade menu coordinates based on object position on screen so that it doesn't go off screen but do not move object
+        if (this.x < 100) {
+            this.upgradeMenuX = 125;
+        }
+        else if (this.x > 700) {
+            this.upgradeMenuX = 700;
+        }
+        if (this.y < 100) {
+            this.upgradeMenuY = 100;
+        }
+        else if (this.y > 500) {
+            this.upgradeMenuY = 500;
+        }
+
         // Upgrade tower menu
         this.on('pointerdown', () => {
             const popUpMenu = scene.add.group();
@@ -36,19 +54,19 @@ export default class MissileTower extends Tower {
             popUpMenu.setVisible(false);
 
             //Upgrade Menu
-            const UpgradeMenu = scene.add.image(this.x, this.y, 'UpgradeMenu').setOrigin(0.5).setAlpha(0.6).setDepth(3);
-            const Upgrade_Damage = scene.add.image(this.x - 120, this.y - 48, 'Upgrade_Damage').setOrigin(0).setAlpha(0.6).setInteractive({cursor: 'pointer'}).setDepth(3);
-            const Upgrade_AttackSpeed = scene.add.image(this.x - 120, this.y - 16, 'Upgrade_AttackSpeed').setOrigin(0).setAlpha(0.6).setInteractive({cursor: 'pointer'}).setDepth(3);
-            const Upgrade_Range = scene.add.image(this.x - 120, this.y  + 16, 'Upgrade_Range').setOrigin(0).setAlpha(0.6).setInteractive({cursor: 'pointer'}).setDepth(3);
-            const UpgradeMenu_Cancel = scene.add.image(this.x + 88, this.y - 16, 'UpgradeMenu_Cancel').setOrigin(0).setAlpha(0.6).setInteractive({cursor: 'pointer'}).setDepth(3);
+            const UpgradeMenu = scene.add.image(this.upgradeMenuX, this.upgradeMenuY, 'UpgradeMenu').setOrigin(0.5).setAlpha(0.6).setDepth(3);
+            const Upgrade_Damage = scene.add.image(this.upgradeMenuX - 120, this.upgradeMenuY - 48, 'Upgrade_Damage').setOrigin(0).setAlpha(0.6).setInteractive({cursor: 'pointer'}).setDepth(3);
+            const Upgrade_AttackSpeed = scene.add.image(this.upgradeMenuX - 120, this.upgradeMenuY - 16, 'Upgrade_AttackSpeed').setOrigin(0).setAlpha(0.6).setInteractive({cursor: 'pointer'}).setDepth(3);
+            const Upgrade_Range = scene.add.image(this.upgradeMenuX - 120, this.upgradeMenuY + 16, 'Upgrade_Range').setOrigin(0).setAlpha(0.6).setInteractive({cursor: 'pointer'}).setDepth(3);
+            const UpgradeMenu_Cancel = scene.add.image(this.upgradeMenuX + 88, this.upgradeMenuY - 16, 'UpgradeMenu_Cancel').setOrigin(0).setAlpha(0.6).setInteractive({cursor: 'pointer'}).setDepth(3);
 
-            const upgrade_damage_text = scene.add.text(this.x - 80, this.y - 32, `+${this.damageUpgradeVal} Damage`, {fill: '#000000'}).setOrigin(0, 0.5).setDepth(3);
-            const upgrade_attackSpeed_text = scene.add.text(this.x - 80, this.y, `+${this.attackSpeedUpgradeVal} Speed`, {fill: '#000000'}).setOrigin(0, 0.5).setDepth(3);
-            const upgrade_range_text = scene.add.text(this.x - 80, this.y + 32, `+${this.rangeUpgradeVal} Range`, {fill: '#000000'}).setOrigin(0, 0.5).setDepth(3);
+            const upgrade_damage_text = scene.add.text(this.upgradeMenuX - 80, this.upgradeMenuY - 32, `+${this.damageUpgradeVal} Damage`, {fill: '#000000'}).setOrigin(0, 0.5).setDepth(3);
+            const upgrade_attackSpeed_text = scene.add.text(this.upgradeMenuX - 80, this.upgradeMenuY, `+${this.attackSpeedUpgradeVal} Speed`, {fill: '#000000'}).setOrigin(0, 0.5).setDepth(3);
+            const upgrade_range_text = scene.add.text(this.upgradeMenuX - 80, this.upgradeMenuY + 32, `+${this.rangeUpgradeVal} Range`, {fill: '#000000'}).setOrigin(0, 0.5).setDepth(3);
 
-            const upgrade_damage_cost = scene.add.text(this.x + 48, this.y - 32, `$${this.damageUpgradeCost}`, {fill: '#000000'}).setOrigin(0.5).setDepth(3);
-            const upgrade_attackSpeed_cost = scene.add.text(this.x + 48, this.y, `$${this.attackSpeedUpgradeCost}`, {fill: '#000000'}).setOrigin(0.5).setDepth(3);
-            const upgrade_range_cost = scene.add.text(this.x + 48, this.y + 32, `$${this.rangeUpgradeCost}`, {fill: '#000000'}).setOrigin(0.5).setDepth(3);
+            const upgrade_damage_cost = scene.add.text(this.upgradeMenuX + 48, this.upgradeMenuY - 32, `$${this.damageUpgradeCost}`, {fill: '#000000'}).setOrigin(0.5).setDepth(3);
+            const upgrade_attackSpeed_cost = scene.add.text(this.upgradeMenuX + 48, this.upgradeMenuY, `$${this.attackSpeedUpgradeCost}`, {fill: '#000000'}).setOrigin(0.5).setDepth(3);
+            const upgrade_range_cost = scene.add.text(this.upgradeMenuX + 48, this.upgradeMenuY + 32, `$${this.rangeUpgradeCost}`, {fill: '#000000'}).setOrigin(0.5).setDepth(3);
 
             popUpMenu.add(UpgradeMenu);
             popUpMenu.add(Upgrade_Damage);
