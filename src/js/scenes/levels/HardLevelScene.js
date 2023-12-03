@@ -111,7 +111,7 @@ class HardLevelScene extends Phaser.Scene {
         this.towers = this.physics.add.group();
 
         // Display Manager
-        this.displayManager.create('HardLevelScene');
+        this.displayManager.create('HardLevelScene', this.zombies, this.towers);
         this.displayManager.waveTimerManager.resetTimer()
     }
     

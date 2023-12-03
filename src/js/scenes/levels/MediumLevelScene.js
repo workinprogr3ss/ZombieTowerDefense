@@ -111,7 +111,7 @@ class MediumLevelScene extends Phaser.Scene {
         this.towers = this.physics.add.group();
 
         // Display Manager
-        this.displayManager.create('MediumLevelScene');
+        this.displayManager.create('MediumLevelScene', this.zombies, this.towers);
         this.displayManager.waveTimerManager.resetTimer()
     }
     
