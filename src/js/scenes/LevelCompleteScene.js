@@ -77,9 +77,23 @@ class LevelCompleteScene extends Phaser.Scene {
   playNextLevel() {
     // Check current level and play the next level
     if (this.level == "EasyLevelScene") {
-      this.scene.start("MediumLevelScene");
+      this.scene.start("MediumLevelScene", { audioManager: this.audioManager});
+      this.registry.set('playerData', {
+        levelOne: true,
+        levelTwo: true,
+        levelThree: false,
+        saveSlot: null,
+        completed: 2
+      });
     } else if (this.level == "MediumLevelScene") {
-      this.scene.start("HardLevelScene");
+      this.scene.start("HardLevelScene", { audioManager: this.audioManager});
+      this.registry.set('playerData', {
+        levelOne: true,
+        levelTwo: true,
+        levelThree: true,
+        saveSlot: null,
+        completed: 3
+      });
     }
   }
 }

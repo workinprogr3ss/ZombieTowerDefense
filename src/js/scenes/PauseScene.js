@@ -59,7 +59,7 @@ class PauseScene extends Phaser.Scene {
                 context.physics.resume();
                 context.towerMenuGroup = [];
                 context.upgradeMenuGroup = [];
-                context.scene.start('LevelSelectScene')
+                context.scene.start('PreLevelSelectScene')
             }); 
         }
     }
