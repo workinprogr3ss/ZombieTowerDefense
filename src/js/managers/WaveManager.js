@@ -663,13 +663,18 @@ export default class WaveManager {
       this.nextWaveButton.setVisible(false);
     }
 
-    // If we're past the last wave, do nothing
-    if (this.currentWave >= this.waves.length) {
-      if (this.scene.zombies.countActive(true) === 0) {
-        // All enemies are dead, handle game completion
-        this.scene.scene.start("GameOverScene");
-      }
-      return;
+    // Level Complete Logic
+    const isLastWave = this.currentWave === this.waves.length - 1;
+    const allEnemiesDead = this.scene.zombies.countActive(true) === 0;
+    const lastWaveSpawned = this.waves[this.currentWave].enemies.length === 0;
+
+    if (isLastWave && allEnemiesDead && lastWaveSpawned) {
+      console.log("Level Complete")
+      this.scene.scene.start('LevelCompleteScene', {
+        level: this.scene.scene.key,
+        scene: this.scene,
+        audioManager: this.scene.audioManager
+      });
     }
 
     // If it's time to spawn the next enemy and there are enemies left in the current wave

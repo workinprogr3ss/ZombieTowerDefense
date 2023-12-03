@@ -6,6 +6,7 @@ class LevelCompleteScene extends Phaser.Scene {
   init(data) {
     this.level = data.level;
     this.levelContext = data.scene;
+    this.audioManager = data.audioManager;
   }
 
   create() {
@@ -21,7 +22,7 @@ class LevelCompleteScene extends Phaser.Scene {
       })
       .setOrigin(0.5);
     this.add
-      .text(this.scale.width / 2, this.scale.height / 2, "LEVEL COMPLETED", {
+      .text(this.scale.width / 2, this.scale.height / 2 + 60, "LEVEL COMPLETED", {
         fontSize: "48px",
         fill: "#fff",
       })
@@ -45,7 +46,7 @@ class LevelCompleteScene extends Phaser.Scene {
 
     // Add a button to progress to the next level
     let nextLevelButton = this.add
-      .text(this.scale.width / 2, this.scale.height / 2 + 120, "Next Level", {
+      .text(this.scale.width / 2, this.scale.height / 2 + 160, "Next Level", {
         fontSize: "32px",
         fill: "#0f0",
       })
@@ -56,12 +57,12 @@ class LevelCompleteScene extends Phaser.Scene {
       // Start next level here
       this.levelContext.towerMenuGroup = [];
       this.levelContext.upgradeMenuGroup = [];
-      playNextLevel()
+      this.playNextLevel()
     });
 
     // Add a button to go back to the main menu
     let mainMenuButton = this.add
-      .text(this.scale.width / 2, this.scale.height / 2 + 180, "Main Menu", {
+      .text(this.scale.width / 2, this.scale.height / 2 + 200, "Main Menu", {
         fontSize: "32px",
         fill: "#0f0",
       })
