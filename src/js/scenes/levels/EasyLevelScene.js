@@ -44,17 +44,19 @@ class EasyLevelScene extends Phaser.Scene {
         loadImages(this);
 
         // Load audio assets
-        this.audioManager.loadAudio();
+        //this.audioManager.loadAudio();
         
         // Pause Menu Items
         this.load.spritesheet('pauseButton', 'src/assets/images/icons/pauseButton.png', {frameWidth: 34, frameHeight: 34});
     }
 
     create(audioManager) {
-        //audioManager.stopBackgroundAudio();
+        // Set the audio manager
+        //this.audioManager = audioManager;
+        //this.audioManager.stopBackgroundAudio();
         audioManager.stopNewsAudio();
 
-        console.log("Level One")
+        //console.log("Level One")
 
         // Create the map
         const map = this.make.tilemap({key: 'easymap'});

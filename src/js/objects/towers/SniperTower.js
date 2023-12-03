@@ -27,7 +27,7 @@ export default class SniperTower extends Tower {
             scene.upgradeMenuGroup.push(popUpMenu);
 
             if (scene.upgradeMenuGroup) {
-                console.log(scene.upgradeMenuGroup)
+                //console.log(scene.upgradeMenuGroup)
                 scene.upgradeMenuGroup.forEach(group => {
                     group.setVisible(false);
                 });

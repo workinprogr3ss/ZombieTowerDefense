@@ -14,6 +14,7 @@ import GameOverScene from './js/scenes/GameOverScene.js';
 import EasyLevelScene from './js/scenes/levels/EasyLevelScene.js';
 import MediumLevelScene from './js/scenes/levels/MediumLevelScene.js';
 import HardLevelScene from './js/scenes/levels/HardLevelScene.js';
+import LevelCompleteScene from './js/scenes/LevelCompleteScene.js';
 
 var config = {
     type: Phaser.AUTO,
@@ -28,6 +29,7 @@ var config = {
         new OverrideScene,
         new SettingsScene,
         new GameOverScene,
+        new LevelCompleteScene,
         new CreditsScene,
         new PauseScene,
         new EasyLevelScene,
