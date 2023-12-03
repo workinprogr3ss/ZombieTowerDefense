@@ -5,7 +5,7 @@ export default class MissileTower extends Tower {
     constructor(scene, x, y, audioManager) {
         //(scene, x, y, texture, damage, range, speed)
         // speed is the delay between attacks in milliseconds
-        super(scene, x, y, 'missile_tower_1', 'missile_projectile', 45, 200, 5000, audioManager);
+        super(scene, x, y, 'missile_tower_1', 'missile_projectile', 50, 200, 5000, audioManager);
 
         this.audioManager = audioManager;
 
