@@ -44,15 +44,18 @@ class MediumLevelScene extends Phaser.Scene {
         loadImages(this);
 
         // Load audio assets
-        this.audioManager.loadAudio();
+        //this.audioManager.loadAudio();
     
         // Pause Menu Items
         this.load.spritesheet('pauseButton', 'src/assets/images/icons/pauseButton.png', {frameWidth: 34, frameHeight: 34});
     }
 
     create(audioManager) {
-        //audioManager.stopBackgroundAudio();
-        audioManager.stopNewsAudio();
+        // Set the audio manager
+        // This is broken for some reason with LevelComplete next level scene
+        //this.audioManager = audioManager;   
+        //this.audioManager.stopBackgroundAudio();
+        //audioManager.stopNewsAudio();
 
         // Create the map
         const map = this.make.tilemap({key: 'mediummap'});

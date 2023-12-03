@@ -51,8 +51,10 @@ class HardLevelScene extends Phaser.Scene {
     }
 
     create(audioManager) {
-        //audioManager.stopBackgroundAudio();
-        audioManager.stopNewsAudio();
+        // Set the audio manager
+        //this.audioManager = audioManager;
+        //this.audioManager.stopBackgroundAudio();
+        //audioManager.stopNewsAudio();
 
         // Create the map
         const map = this.make.tilemap({key: 'hardmap'});
