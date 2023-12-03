@@ -71,6 +71,8 @@ class LevelCompleteScene extends Phaser.Scene {
 
     mainMenuButton.on("pointerup", () => {
       // Go back to the main menu scene
+      this.levelContext.towerMenuGroup = [];
+      this.levelContext.upgradeMenuGroup = [];
       this.scene.start("MenuScene");
     });
   }
@@ -78,9 +80,23 @@ class LevelCompleteScene extends Phaser.Scene {
   playNextLevel() {
     // Check current level and play the next level
     if (this.level == "EasyLevelScene") {
-      this.scene.start("MediumLevelScene", { audioManager: this.audioManager});
+      this.scene.start("MediumLevelScene", this.audioManager);
+      this.registry.set('playerData', {
+        levelOne: true,
+        levelTwo: true,
+        levelThree: false,
+        saveSlot: null,
+        completed: 2
+      });
     } else if (this.level == "MediumLevelScene") {
-      this.scene.start("HardLevelScene", { audioManager: this.audioManager});
+      this.scene.start("HardLevelScene", this.audioManager);
+      this.registry.set('playerData', {
+        levelOne: true,
+        levelTwo: true,
+        levelThree: true,
+        saveSlot: null,
+        completed: 3
+      });
     }
   }
 }

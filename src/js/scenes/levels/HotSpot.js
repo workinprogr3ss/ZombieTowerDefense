@@ -2,7 +2,7 @@ import SniperTower from "../../objects/towers/SniperTower.js"
 import MissileTower from "../../objects/towers/MissileTower.js"
 import FlamethrowerTower from "../../objects/towers/FlamethrowerTower.js"
 
-export function createHotSpot(object, scene, displayManager) {
+export function createHotSpot(object, scene, displayManager, audioManager) {
 
     const tower = scene.add.sprite(object.x, object.y, 'hotspot').setOrigin(0.5);
 
@@ -44,7 +44,7 @@ export function createHotSpot(object, scene, displayManager) {
                 tower.destroy();
                 const towerBase = scene.add.sprite(object.x, object.y, 'tower_base').setOrigin(0.5);
                 towerBase.setScale(0.15);
-                const sniperTower = new SniperTower(scene, object.x, object.y).setDepth(1);
+                const sniperTower = new SniperTower(scene, object.x, object.y, audioManager).setDepth(1);
                 scene.add.existing(sniperTower);
                 scene.towers.add(sniperTower);
                 sniperTower.setScale(0.15);
@@ -62,7 +62,7 @@ export function createHotSpot(object, scene, displayManager) {
                 tower.destroy();
                 const towerBase = scene.add.sprite(object.x, object.y, 'tower_base');
                 towerBase.setScale(0.15);
-                const missileTower = new MissileTower(scene, object.x, object.y).setDepth(1);
+                const missileTower = new MissileTower(scene, object.x, object.y, audioManager).setDepth(1);
                 scene.add.existing(missileTower);
                 scene.towers.add(missileTower);
                 missileTower.setScale(0.15);
@@ -80,7 +80,7 @@ export function createHotSpot(object, scene, displayManager) {
                 tower.destroy();
                 const towerBase = scene.add.sprite(object.x, object.y, 'tower_base');
                 towerBase.setScale(0.15);
-                const flamethrowerTower = new FlamethrowerTower(scene, object.x, object.y).setDepth(1);
+                const flamethrowerTower = new FlamethrowerTower(scene, object.x, object.y, audioManager).setDepth(1);
                 scene.add.existing(flamethrowerTower);
                 scene.towers.add(flamethrowerTower);
                 flamethrowerTower.setScale(0.2);
