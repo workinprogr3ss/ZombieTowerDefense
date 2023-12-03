@@ -1,10 +1,10 @@
 import Tower from './TowerObject.js';
 
 export default class SniperTower extends Tower {
-    constructor(scene, x, y) {
+    constructor(scene, x, y, audioManager) {
         //(scene, x, y, texture, damage, range, speed)
         // speed is the delay between attacks in milliseconds
-        super(scene, x, y, 'sniper_tower_1', 'sniper_projectile', 40, 150, 2500).setOrigin(0.5, 0.8);
+        super(scene, x, y, 'sniper_tower_1', 'sniper_projectile', 40, 150, 2500, audioManager).setOrigin(0.5, 0.8);
 
         this.damageUpgradeVal = 5;
         this.damageUpgradeCost = 50;

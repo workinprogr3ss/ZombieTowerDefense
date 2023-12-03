@@ -1,8 +1,10 @@
 import Projectile from "./Projectile.js";
 
 export default class Tower extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, texture, projectileTexture, damage, range, speed) {
+    constructor(scene, x, y, texture, projectileTexture, damage, range, speed, audioManager) {
         super(scene, x, y, texture);
+
+        this.audioManager = audioManager;
 
         this.x = x;
         this.y = y;
@@ -69,8 +71,8 @@ export default class Tower extends Phaser.GameObjects.Sprite {
                 projectile.fire(this.x, this.y, closestZombie.x, closestZombie.y);
                 closestZombie.reduceHealth(this.damage);
                 // play audio
-                this.scene.audioManager.playTowerShootAudio(this.towerType);
-                this.scene.audioManager.playZombieHitAudio();
+                this.audioManager.playTowerShootAudio(this.towerType);
+                this.audioManager.playZombieHitAudio();
             }
 
             setTimeout(() => {

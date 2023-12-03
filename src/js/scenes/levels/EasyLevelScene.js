@@ -24,7 +24,7 @@ class EasyLevelScene extends Phaser.Scene {
 
         // Managers
         this.displayManager = new DisplayManager(this); // Display Manager
-        this.audioManager = new AudioManager(this); // Audio Manager
+        //this.audioManager = new AudioManager(this); // Audio Manager
 
         //Group of Tower Menus
         this.towerMenuGroup = [];
@@ -74,7 +74,7 @@ class EasyLevelScene extends Phaser.Scene {
         // Create Tower HotSpots
         const hotSpotLayer = map.getObjectLayer('HotSpot Layer');
         hotSpotLayer.objects.forEach(object => {
-            createHotSpot(object, this, this.displayManager);
+            createHotSpot(object, this, this.displayManager, audioManager);
         });
 
         // Tile Coordinates for pathfinding (in grid)
@@ -104,7 +104,7 @@ class EasyLevelScene extends Phaser.Scene {
 
         // Zombie Container
         this.zombies = this.physics.add.group(); // Zombie container
-        this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY, 1);
+        this.waveManager = new WaveManager(this, startTileX, startTileY, endTileX, endTileY, 1, audioManager);
         //console.log("Wave Manager:", this.waveManager);
 
         // Tower Container

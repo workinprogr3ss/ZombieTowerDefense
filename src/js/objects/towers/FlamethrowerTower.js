@@ -2,10 +2,12 @@ import Tower from './TowerObject.js';
 import Projectile from './Projectile.js';
 
 export default class FlamethrowerTower extends Tower {
-    constructor(scene, x, y) {
+    constructor(scene, x, y, audioManager) {
         // (scene, x, y, texture, damage, range, speed)
         // speed is the delay between attacks in milliseconds
-        super(scene, x, y, 'flame_tower_1', 'flame_projectile', 0.5, 100, 500);
+        super(scene, x, y, 'flame_tower_1', 'flame_projectile', 0.5, 100, 500, audioManager);
+
+        this.audioManager = audioManager;
 
         this.damageUpgradeVal = 5;
         this.damageUpgradeCost = 50;
@@ -120,8 +122,8 @@ export default class FlamethrowerTower extends Tower {
                 closestZombie.reduceHealth(this.damage);
 
                 // play audio
-                this.scene.audioManager.playTowerShootAudio(this.towerType);
-                this.scene.audioManager.playZombieHitAudio();
+                this.audioManager.playTowerShootAudio(this.towerType);
+                this.audioManager.playZombieHitAudio();
                 
                 // Gives zombie burn status
                 closestZombie.burn = true;

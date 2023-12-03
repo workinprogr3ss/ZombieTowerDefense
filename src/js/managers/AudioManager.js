@@ -9,6 +9,26 @@ export default class AudioManager {
         // News Audio
         this.newsAudio = null
         this.newsAudioPlaying = false
+
+        // Global Settings
+        this.backgroundAudioToggle;
+        this.soundEffectAudioToggle;
+    }
+
+    enableBackgroundAudio() {
+        this.backgroundAudioToggle = true;
+    }
+
+    enableSoundEffectAudio() {
+        this.soundEffectAudioToggle = true;
+    }
+
+    stopAllBackgroundAudio() {
+        this.backgroundAudioToggle = false;
+    }
+
+    stopAllSoundEffectAudio() {
+        this.soundEffectAudioToggle = false;
     }
 
     loadAudio() {
@@ -29,10 +49,12 @@ export default class AudioManager {
     }
     
     playBackgroundAudio(){
-        if (!this.backgroundAudioPlaying){
-            this.backgroundAudio = this.scene.sound.add('backgroundMusic', {loop:true})
-            this.backgroundAudio.play()
-            this.backgroundAudioPlaying = true
+        if (this.backgroundAudioToggle) {
+            if (!this.backgroundAudioPlaying){
+                this.backgroundAudio = this.scene.sound.add('backgroundMusic', {loop:true})
+                this.backgroundAudio.play()
+                this.backgroundAudioPlaying = true
+            }
         }
     }
 
@@ -44,10 +66,12 @@ export default class AudioManager {
     }
 
     playNewsAudio(){
-        if (!this.newsAudioPlaying) {
-            this.newsAudio = this.scene.sound.add('newsAudio', {loop:true})
-            this.newsAudio.play()
-            this.newsAudioPlaying = true
+        if (this.backgroundAudioToggle) {
+            if (!this.newsAudioPlaying) {
+                this.newsAudio = this.scene.sound.add('newsAudio', {loop:true})
+                this.newsAudio.play()
+                this.newsAudioPlaying = true
+            }            
         }
     }
 
@@ -60,58 +84,76 @@ export default class AudioManager {
 
     // Zombies
     playZombieAudio(zombieType){
-        if (zombieType == 'walker'){
-            this.playWalkerZombieAudio()
-        }
-        else if (zombieType == 'tank'){
-            this.playTankZombieAudio()
-        }
-        else if (zombieType == 'runner'){
-            this.playRunnerZombieAudio()
+        if (this.soundEffectAudioToggle) {
+            if (zombieType == 'walker'){
+                this.playWalkerZombieAudio()
+            }
+            else if (zombieType == 'tank'){
+                this.playTankZombieAudio()
+            }
+            else if (zombieType == 'runner'){
+                this.playRunnerZombieAudio()
+            }
         }
     }
 
     playWalkerZombieAudio(){
-        this.scene.sound.play('walkerZombie')
+        if (this.soundEffectAudioToggle) {
+            this.scene.sound.play('walkerZombie')
+        }
     }
 
     playTankZombieAudio(){
-        this.scene.sound.play('tankZombie')
+        if (this.soundEffectAudioToggle) {
+            this.scene.sound.play('tankZombie')
+        }
     }
 
     playRunnerZombieAudio(){
-        this.scene.sound.play('runnerZombie')
+        if (this.soundEffectAudioToggle) {
+            this.scene.sound.play('runnerZombie')
+        }
     }
 
     playZombieHitAudio(){
-        this.scene.sound.play('zombieHit')
+        if (this.soundEffectAudioToggle) {
+            this.scene.sound.play('zombieHit')
+        }
     }
 
     // Towers
     playTowerShootAudio(towerType){
-        if (towerType == 'sniper'){
-            this.playSniperShootAudio()
+        if (this.soundEffectAudioToggle) {
+            if (towerType == 'sniper'){
+                this.playSniperShootAudio()
+            }
+            else if (towerType == 'missile'){
+                this.playMissileShootAudio()
+            }
+            else if (towerType == 'flame'){
+                this.playFlameShootAudio()
+            }
         }
-        else if (towerType == 'missile'){
-            this.playMissileShootAudio()
-        }
-        else if (towerType == 'flame'){
-            this.playFlameShootAudio()
-        }
-    }
+    }   
 
     playSniperShootAudio(){
-        //console.log("play sniper audio")
-        this.scene.sound.play('sniperShoot')
+        if (this.soundEffectAudioToggle) {
+            //console.log("play sniper audio")
+            this.scene.sound.play('sniperShoot')
+        }
     }
 
     playMissileShootAudio(){
-        //console.log("play missile audio")
-        this.scene.sound.play('missileShoot')
+        if (this.soundEffectAudioToggle) {
+            //console.log("play missile audio")
+            this.scene.sound.play('missileShoot')
+        }
     }
 
     playFlameShootAudio(){
-        //console.log("play flame audio")
-        this.scene.sound.play('flameShoot')
+        if (this.soundEffectAudioToggle) {
+            //console.log("play flame audio")
+            this.scene.sound.play('flameShoot')
+        }
     }
 }

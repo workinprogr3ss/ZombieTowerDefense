@@ -5,7 +5,7 @@ import TankZombie from "../objects/enemies/TankZombie.js";
 import SpitterZombie from "../objects/enemies/SpitterZombie.js";
 
 export default class WaveManager {
-  constructor(scene, startTileX, startTileY, endTileX, endTileY, level) {
+  constructor(scene, startTileX, startTileY, endTileX, endTileY, level, audioManager) {
     this.scene = scene;
     this.currentWave = 0;
     this.nextSpawnTime = 0;
@@ -36,6 +36,8 @@ export default class WaveManager {
       this.scene.displayManager.waveTimerManager.resetTimer();
       this.nextWaveButton.setVisible(false);
     });
+
+    this.audioManager = audioManager;
   }
 
   initializeWaves(level) {
@@ -53,140 +55,140 @@ export default class WaveManager {
           ],
           spawnInterval: 1000, // 1 second
         },
-        {
-          // Wave 2
-          enemies: [
-            "walker", 
-            "walker", 
-            "walker", 
-            "walker", 
-            "tank"
-          ],
-          spawnInterval: 1000, // 1 second
-        },
-        {
-          // Wave 3
-          enemies: [
-            "walker", 
-            "walker", 
-            "runner", 
-            "runner", 
-            "tank"
-          ],
-          spawnInterval: 1000, // 1 second
-        },
-        {
-          // Wave 4
-          enemies: [
-            "runner",
-            "runner",
-            "runner",
-            "runner",
-            "runner",
-            "runner",
-            "runner",
-            "runner",
-            "runner",
-            "runner",
-          ],
-          spawnInterval: 1000, // 1 second
-        },
-        {
-          // Wave 5
-          enemies: [
-            "tank", 
-            "tank", 
-            "tank", 
-            "tank", 
-            "tank"
-          ],
-          spawnInterval: 1000, // 1 second
-        },
-        {
-          // Wave 6
-          enemies: [
-            "walker",
-            "walker",
-            "walker",
-            "walker",
-            "walker",
-            "walker",
-            "walker",
-            "walker",
-            "walker",
-            "walker",
-          ],
-          spawnInterval: 1000, // 1 second
-        },
-        {
-          // Wave 7
-          enemies: [
-            "walker",
-            "walker",
-            "runner",
-            "runner",
-            "walker",
-            "walker",
-            "walker",
-            "walker",
-            "runner",
-            "runner",
-          ],
-          spawnInterval: 1000, // 1 second
-        },
-        {
-          // Wave 8
-          enemies: [
-            "tank",
-            "tank",
-            "tank",
-            "tank",
-            "tank",
-            "runner",
-            "runner",
-            "runner",
-            "runner",
-            "runner",
-            "runner",
-          ],
-          spawnInterval: 1000, // 1 second
-        },
-        {
-          // Wave 9
-          enemies: [
-            "walker",
-            "walker",
-            "runner",
-            "runner",
-            "tank",
-            "walker",
-            "walker",
-            "runner",
-            "runner",
-            "tank",
-          ],
-          spawnInterval: 1000, // 1 second
-        },
-        {
-          // Wave 10
-          enemies: [
-            "walker",
-            "walker",
-            "runner",
-            "runner",
-            "tank",
-            "walker",
-            "walker",
-            "walker",
-            "walker",
-            "runner",
-            "runner",
-            "tank",
-            "walker",
-            "walker",
-          ],
-          spawnInterval: 1000, // 1 second
-        },
+        //{
+        //  // Wave 2
+        //  enemies: [
+        //    "walker", 
+        //    "walker", 
+        //    "walker", 
+        //    "walker", 
+        //    "tank"
+        //  ],
+        //  spawnInterval: 1000, // 1 second
+        //},
+        //{
+        //  // Wave 3
+        //  enemies: [
+        //    "walker", 
+        //    "walker", 
+        //    "runner", 
+        //    "runner", 
+        //    "tank"
+        //  ],
+        //  spawnInterval: 1000, // 1 second
+        //},
+        //{
+        //  // Wave 4
+        //  enemies: [
+        //    "runner",
+        //    "runner",
+        //    "runner",
+        //    "runner",
+        //    "runner",
+        //    "runner",
+        //    "runner",
+        //    "runner",
+        //    "runner",
+        //    "runner",
+        //  ],
+        //  spawnInterval: 1000, // 1 second
+        //},
+        //{
+        //  // Wave 5
+        //  enemies: [
+        //    "tank", 
+        //    "tank", 
+        //    "tank", 
+        //    "tank", 
+        //    "tank"
+        //  ],
+        //  spawnInterval: 1000, // 1 second
+        //},
+        //{
+        //  // Wave 6
+        //  enemies: [
+        //    "walker",
+        //    "walker",
+        //    "walker",
+        //    "walker",
+        //    "walker",
+        //    "walker",
+        //    "walker",
+        //    "walker",
+        //    "walker",
+        //    "walker",
+        //  ],
+        //  spawnInterval: 1000, // 1 second
+        //},
+        //{
+        //  // Wave 7
+        //  enemies: [
+        //    "walker",
+        //    "walker",
+        //    "runner",
+        //    "runner",
+        //    "walker",
+        //    "walker",
+        //    "walker",
+        //    "walker",
+        //    "runner",
+        //    "runner",
+        //  ],
+        //  spawnInterval: 1000, // 1 second
+        //},
+        //{
+        //  // Wave 8
+        //  enemies: [
+        //    "tank",
+        //    "tank",
+        //    "tank",
+        //    "tank",
+        //    "tank",
+        //    "runner",
+        //    "runner",
+        //    "runner",
+        //    "runner",
+        //    "runner",
+        //    "runner",
+        //  ],
+        //  spawnInterval: 1000, // 1 second
+        //},
+        //{
+        //  // Wave 9
+        //  enemies: [
+        //    "walker",
+        //    "walker",
+        //    "runner",
+        //    "runner",
+        //    "tank",
+        //    "walker",
+        //    "walker",
+        //    "runner",
+        //    "runner",
+        //    "tank",
+        //  ],
+        //  spawnInterval: 1000, // 1 second
+        //},
+        //{
+        //  // Wave 10
+        //  enemies: [
+        //    "walker",
+        //    "walker",
+        //    "runner",
+        //    "runner",
+        //    "tank",
+        //    "walker",
+        //    "walker",
+        //    "walker",
+        //    "walker",
+        //    "runner",
+        //    "runner",
+        //    "tank",
+        //    "walker",
+        //    "walker",
+        //  ],
+        //  spawnInterval: 1000, // 1 second
+        //},
       ];
     }
     if (level == 2) {
@@ -642,7 +644,7 @@ export default class WaveManager {
     this.scene.zombies.add(enemy);
 
     // Play the spawn sound
-    this.scene.audioManager.playZombieAudio(enemyType);
+    this.audioManager.playZombieAudio(enemyType);
 
     // Add the enemy to the enemy count
     //this.scene.displayManager.enemyCountManager.addEnemy(1);
@@ -673,7 +675,7 @@ export default class WaveManager {
       this.scene.scene.start('LevelCompleteScene', {
         level: this.scene.scene.key,
         scene: this.scene,
-        audioManager: this.scene.audioManager
+        audioManager: this.audioManager
       });
     }
 

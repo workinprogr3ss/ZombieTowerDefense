@@ -35,18 +35,27 @@ class BaseScene extends Phaser.Scene {
                 this.saveSlot1 = JSON.parse(localStorage.getItem('saveSlot1'));
                 this.slot1Text = `${this.saveSlot1.completed}/3`
             }
+        } else {
+            this.slot1Text = '-';
+            this.saveSlot1 = {};
         }
         if (JSON.parse(localStorage.getItem('saveSlot2')) != null) {
             if (JSON.parse(localStorage.getItem('saveSlot2')).active) {
                 this.saveSlot2 = JSON.parse(localStorage.getItem('saveSlot2'));
                 this.slot2Text = `${this.saveSlot2.completed}/3`
             }
+        } else {
+            this.slot2Text = '-';
+            this.saveSlot2 = {};
         }
         if (JSON.parse(localStorage.getItem('saveSlot3')) != null) {
             if (JSON.parse(localStorage.getItem('saveSlot3')).active) {
                 this.saveSlot3 = JSON.parse(localStorage.getItem('saveSlot3'));
                 this.slot3Text = `${this.saveSlot3.completed}/3`
             }
+        } else {
+            this.slot3Text = '-';
+            this.saveSlot3 = {};
         }
     }
 

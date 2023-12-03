@@ -7,8 +7,9 @@ import BaseScene from './BaseScene.js';
 //Utility Functions
 import { PreloadMenuGraphics } from '../utils/PreloadGraphics.js';
 
+let initialCreate = true;
+
 class MenuScene extends BaseScene {
-    
     constructor() {
         super('MenuScene');
 
@@ -36,15 +37,15 @@ class MenuScene extends BaseScene {
         //Call to Set Button Interactions (button, scene, data, startingFrame, unlock, source, slot, audio)
         this.setButtonInteractions(newGameButton, 'PreLevelSelectScene', null, 0, true, null, null , this.audioManager);
         this.setButtonInteractions(loadGameButton, 'LoadSaveScene', null, 0, true, null, null, this.audioManager);
-        this.setButtonInteractions(settingsButton, 'SettingsScene', null, 0, true, null);
+        this.setButtonInteractions(settingsButton, 'SettingsScene', null, 0, true, null, null, this.audioManager);
         this.setButtonInteractions(creditsButton, 'CreditsScene', null, 0, true, null);
 
         //Create Game Title
         this.add.image(400,300, 'title').setOrigin(0.5);
 
         //Add Dev Button
-        const devButton = this.add.image(0, 590, 'devButton').setOrigin(0).setInteractive({cursor: 'pointer'});
-        devButton.on('pointerup', () => {
+        const unlockSaveButton = this.add.image(0, 590, 'devButton').setOrigin(0).setInteractive({cursor: 'pointer'});
+        unlockSaveButton.on('pointerup', () => {
             localStorage.setItem(`saveSlot3`, JSON.stringify({
                 levelOne: true,
                 levelTwo: true,
@@ -55,8 +56,16 @@ class MenuScene extends BaseScene {
             }))
         });
 
+        //Add Dev Button
+        const deleteSaveButton = this.add.image(16, 590, 'devButton').setOrigin(0).setInteractive({cursor: 'pointer'});
+        deleteSaveButton.on('pointerup', () => {
+            localStorage.removeItem(`saveSlot1`);
+            localStorage.removeItem(`saveSlot2`);
+            localStorage.removeItem(`saveSlot3`);
+        });
+
         //Game Over Scene Button
-        const gameOverButton = this.add.image(500, 590, 'gameOverButton').setOrigin(0).setInteractive({cursor: 'pointer'});
+        const gameOverButton = this.add.image(500, 590, 'devButton').setOrigin(0).setInteractive({cursor: 'pointer'});
         gameOverButton.on('pointerup', () => {
             this.scene.start('GameOverScene');
         });
@@ -70,7 +79,13 @@ class MenuScene extends BaseScene {
             completed: 1
         });
 
-        //Play Audio
+        if (initialCreate) {
+            this.audioManager.enableBackgroundAudio();
+            this.audioManager.enableSoundEffectAudio();  
+            initialCreate = false;
+        }
+
+        //Play Audio        
         this.audioManager.playBackgroundAudio();
         this.audioManager.playNewsAudio();
     }

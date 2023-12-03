@@ -13,9 +13,8 @@ export function PreloadMenuGraphics(scene) {
     scene.load.tilemapTiledJSON('menuBackground', 'src/assets/maps/menuBackground.json');
     scene.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
 
-    //Background
+    //Dev Buttons
     scene.load.image('devButton', 'src/assets/images/icons/devButton.png');
-    scene.load.image('gameOverButton', 'src/assets/images/icons/devButton.png');
 }
 
 export function PreloadLevelSelectGraphics(scene) {
@@ -91,6 +90,9 @@ export function PreloadSettingsGraphics(scene) {
     //Background
     scene.load.tilemapTiledJSON('menuBackground', 'src/assets/maps/menuBackground.json');
     scene.load.image('ZombieApocalypseTilesetReferenceFixed', 'src/assets/images/tilesets/ZombieApocalypseTilesetReferenceFixed.png');
+
+    //ToggleButton
+    scene.load.spritesheet('toggle', 'src/assets/images/icons/checkBox.png', {frameWidth: 32, frameHeight: 32})
 
     //Back Button
     scene.load.spritesheet('backButton', 'src/assets/images/icons/backButton.png', {frameWidth: 96, frameHeight: 36});
