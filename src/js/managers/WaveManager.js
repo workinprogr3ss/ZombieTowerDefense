@@ -658,7 +658,8 @@ export default class WaveManager {
     //    this.endTileY
     //  ); // uses tile coordinates
     //}
-
+    
+    enemy = new enemyClass(this.scene, this.startX, this.startY); // uses global coordinates
     enemy.calculatePath(
         this.startTileX,
         this.startTileY,
