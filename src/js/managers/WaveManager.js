@@ -4,6 +4,9 @@ import RunnerZombie from "../objects/enemies/RunnerZombie.js";
 import TankZombie from "../objects/enemies/TankZombie.js";
 import SpitterZombie from "../objects/enemies/SpitterZombie.js";
 
+import HealthBar from '../objects/HealthBar.js';
+
+
 export default class WaveManager {
   constructor(scene, startTileX, startTileY, endTileX, endTileY, level, audioManager) {
     this.level = level;
@@ -428,7 +431,11 @@ export default class WaveManager {
             "walker", 
             "walker", 
             "walker", 
-            "walker", 
+            "walker",
+            "walker",
+            "walker",
+            "runner",
+            "runner",
             "tank",
           ],
           spawnInterval: 1000, // 1 second
@@ -436,11 +443,20 @@ export default class WaveManager {
         {
           // Wave 3
           enemies: [
+            "tank",
+            "tank",
             "walker", 
             "walker", 
             "runner", 
             "runner", 
-            "tank", 
+            "tank",
+            "runner", 
+            "runner", 
+            "tank",
+            "walker", 
+            "walker",
+            "walker", 
+            "walker",
           ],
           spawnInterval: 1000, // 1 second
         },
@@ -457,19 +473,43 @@ export default class WaveManager {
             "runner",
             "runner",
             "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
           ],
-          spawnInterval: 1000, // 1 second
+          spawnInterval: 500, // 1 second
         },
         {
           // Wave 5
           enemies: [
-            "walker", 
-            "walker", 
-            "walker", 
             "tank", 
             "tank",
             "runner",
-            "runner"
+            "runner",
+            "walker", 
+            "walker", 
+            "walker",
+            "tank", 
+            "tank",
+            "walker", 
+            "walker", 
+            "walker", 
+            "runner",
+            "runner",
           ],
           spawnInterval: 1000, // 1 second
         },
@@ -490,18 +530,17 @@ export default class WaveManager {
             "walker",
             "runner",
             "runner",
-            "walker",
-            "walker",
-            "walker",
-            "walker",
-            "runner",
-            "runner",
           ],
           spawnInterval: 1000, // 1 second
         },
         {
           // Wave 7
           enemies: [
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "tank",
             "walker",
             "walker",
             "runner",
@@ -521,7 +560,13 @@ export default class WaveManager {
             "walker",
             "walker",
             "runner",
-            "runner"
+            "runner",
+            "walker",
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "tank",
           ],
           spawnInterval: 1000, // 1 second
         },
@@ -549,13 +594,15 @@ export default class WaveManager {
             "tank",
             "tank",
             "runner",
-            "runner"
           ],
           spawnInterval: 1000, // 1 second
         },
         {
           // Wave 9
           enemies: [
+            "tank",
+            "tank",
+            "tank",
             "walker",
             "walker",
             "runner",
@@ -598,9 +645,265 @@ export default class WaveManager {
             "runner",
             "tank",
             "walker",
-            "walker"
           ],
           spawnInterval: 1000, // 1 second
+        },
+        {
+          // Wave 11
+          enemies: [
+            "walker",
+            "walker",
+            "runner",
+            "runner",
+            "tank",
+            "walker",
+            "walker",
+            "runner",
+            "runner",
+            "tank",
+            "walker",
+            "walker",
+            "runner",
+            "runner",
+            "tank",
+          ],
+          spawnInterval: 750, // 1 second
+        },
+        {
+          // Wave 12
+          enemies: [
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+          ],
+          spawnInterval: 1000, // 1 second
+        },
+        {
+          // Wave 13
+          enemies: [
+            "tank",
+            "tank",
+            "walker",
+            "walker",
+            "walker",
+            "walker",
+            "tank",
+            "tank",
+            "walker",
+            "walker",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "walker",
+            "walker",
+            "runner",
+            "runner",
+          ],
+          spawnInterval: 750, // 1 second
+        },
+        {
+          // Wave 14
+          enemies: [
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "walker",
+            "walker",
+            "walker",
+            "walker",
+          ],
+          spawnInterval: 750, // 1 second
+        },
+        {
+          // Wave 15
+          enemies: [
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "walker",
+            "walker",
+            "walker",
+            "walker",
+          ],
+          spawnInterval: 750, // 1 second
+        },
+        {
+          // Wave 16
+          enemies: [
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner"   
+          ],
+          spawnInterval: 500, // 1 second
+        },
+        {
+          // Wave 17
+          enemies: [
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "walker",
+            "walker",
+            "tank",
+            "tank",
+            "runner",
+            "runner",
+            "tank",
+            "walker",
+            "walker",
+            "runner",
+            "runner",
+            "tank",
+            "walker",
+            "walker",
+            "runner",
+            "runner",
+          ],
+          spawnInterval: 500, // 1 second
+        },
+        {
+          // Wave 18
+          enemies: [
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner" 
+          ],
+          spawnInterval: 500, // 1 second
+        },
+        {
+          // Wave 19
+          enemies: [
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "walker",
+            "walker",
+            "tank",
+            "tank",
+            "runner",
+            "runner",
+            "tank",
+            "walker",
+            "walker",
+            "runner",
+            "runner",
+            "tank",
+            "walker",
+            "walker",
+            "runner",
+            "runner",
+          ],
+          spawnInterval: 500, // 1 second
+        },
+        {
+          // Wave 20
+          enemies: [
+            "tank",
+            "tank",
+            "walker",
+            "walker",
+            "walker",
+            "walker",
+            "walker",
+            "walker",
+            "tank",
+            "tank",
+            "tank",
+            "walker",
+            "walker",
+            "tank",
+            "tank",
+            "tank",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner"
+          ],
+          spawnInterval: 500, // 1 second
         },
       ];
     }
@@ -654,6 +957,7 @@ export default class WaveManager {
     //  ); // uses tile coordinates
     //}
     
+
     enemy = new enemyClass(this.scene, this.startX, this.startY); // uses global coordinates
     enemy.calculatePath(
         this.startTileX,
@@ -661,6 +965,24 @@ export default class WaveManager {
         this.endTileX,
         this.endTileY
     );
+    
+    const enemyInitialHealth = enemy.health;
+    let percentageIncrease = .1
+    // Make hard level harder
+    if (this.level == 3) {
+      if (this.currentWave <= 10) {
+        percentageIncrease = .2
+      } else if (this.currentWave <= 15) {
+        percentageIncrease = 1
+      } else if (this.currentWave <= 20) {
+        percentageIncrease = 2
+      }
+      enemy.health = enemyInitialHealth + (percentageIncrease * enemyInitialHealth);
+      enemy.healthBar.destroy();
+      enemy.healthBar = new HealthBar(this.scene, this.x - 10, this.y - 20, enemy.health);
+      enemy.healthBar.updateHealth(enemy.health);
+    }
+
     // Add the enemy to the scene
     this.scene.zombies.add(enemy);
 
