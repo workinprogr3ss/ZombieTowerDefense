@@ -205,9 +205,9 @@ export default class WaveManager {
             "walker", 
             "walker", 
             "walker", 
-            "walker", 
-            "walker", 
-            "walker", 
+            "walker",  
+            "walker",
+            "walker",
           ],
           spawnInterval: 1000, // 1 second
         },
@@ -908,8 +908,7 @@ export default class WaveManager {
 
   // Method to add wave reward to player currency
   addWaveReward() {
-    let reward = (this.level - 1) * 25;
-    this.scene.displayManager.playerCurrencyManager.addCurrency(reward);
+    this.scene.displayManager.playerCurrencyManager.addCurrency(25);
   }
 
   spawnEnemy() {

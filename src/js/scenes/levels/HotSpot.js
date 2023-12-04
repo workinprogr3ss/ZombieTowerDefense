@@ -43,8 +43,8 @@ export function createHotSpot(object, scene, displayManager, audioManager) {
         const TowerMenu_Flamethrower = scene.add.image(towerMenuX + 16, towerMenuY - 40, 'TowerMenu_Flamethrower').setOrigin(0).setInteractive({cursor: 'pointer'}).setAlpha(0.7).setDepth(4);
         const TowerMenu_Cancel = scene.add.image(towerMenuX + 80, towerMenuY - 16, 'TowerMenu_Cancel').setOrigin(0).setInteractive({cursor: 'pointer'}).setAlpha(0.7).setDepth(4);
         const Sniper_Cost = scene.add.text(towerMenuX - 88, towerMenuY + 24, '100', {fill: '#000000'}).setOrigin(0.5, 0.5).setDepth(4);
-        const Missile_Cost = scene.add.text(towerMenuX - 24, towerMenuY + 24, '200', {fill: '#000000'}).setOrigin(0.5, 0.5).setDepth(4);
-        const Flamethrower_Cost = scene.add.text(towerMenuX + 40, towerMenuY + 24, '150', {fill: '#000000'}).setOrigin(0.5, 0.5).setDepth(4);
+        const Missile_Cost = scene.add.text(towerMenuX - 24, towerMenuY + 24, '150', {fill: '#000000'}).setOrigin(0.5, 0.5).setDepth(4);
+        const Flamethrower_Cost = scene.add.text(towerMenuX + 40, towerMenuY + 24, '125', {fill: '#000000'}).setOrigin(0.5, 0.5).setDepth(4);
 
         popUpMenu.add(TowerMenu);
         popUpMenu.add(TowerMenu_Sniper);
@@ -77,7 +77,7 @@ export function createHotSpot(object, scene, displayManager, audioManager) {
 
         //Missile Tower
         TowerMenu_Missile.on('pointerdown', () => {
-            if (displayManager.playerCurrencyManager.currentCurrency >= 200) {
+            if (displayManager.playerCurrencyManager.currentCurrency >= 150) {
                 tower.destroy();
                 const towerBase = scene.add.sprite(object.x, object.y, 'tower_base');
                 towerBase.setScale(0.15);
@@ -85,7 +85,7 @@ export function createHotSpot(object, scene, displayManager, audioManager) {
                 scene.add.existing(missileTower);
                 scene.towers.add(missileTower);
                 missileTower.setScale(0.15);
-                displayManager.playerCurrencyManager.reduceCurrency(200);
+                displayManager.playerCurrencyManager.reduceCurrency(150);
             }
             else {
                 tower.setVisible(true);
@@ -95,7 +95,7 @@ export function createHotSpot(object, scene, displayManager, audioManager) {
 
         //Flamethrower Tower
         TowerMenu_Flamethrower.on('pointerdown', () => {
-            if (displayManager.playerCurrencyManager.currentCurrency >= 150) {
+            if (displayManager.playerCurrencyManager.currentCurrency >= 125) {
                 tower.destroy();
                 const towerBase = scene.add.sprite(object.x, object.y, 'tower_base');
                 towerBase.setScale(0.15);
@@ -103,7 +103,7 @@ export function createHotSpot(object, scene, displayManager, audioManager) {
                 scene.add.existing(flamethrowerTower);
                 scene.towers.add(flamethrowerTower);
                 flamethrowerTower.setScale(0.2);
-                displayManager.playerCurrencyManager.reduceCurrency(150);
+                displayManager.playerCurrencyManager.reduceCurrency(125);
             }
             else {
                 tower.setVisible(true);
