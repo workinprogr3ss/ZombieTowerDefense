@@ -16,7 +16,6 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.state = 'normal'; // or 'damaged' or 'dead'
         
         // Tracks burn damage
-        this.burn = false;
         this.burnDamage = 0;
         this.burnDelay = true;
 
@@ -145,9 +144,10 @@ update() {
     this.healthBar.y = this.y - 20;
 
     // Burn damage
-    if (this.burnDelay && this.burn) {
+    if (this.burnDelay && this.burnDamage > 0) {
         this.burnDelay = false;
-        this.reduceHealth(this.burnDamage);
+        this.burnDamage -= 5;
+        this.reduceHealth(5);
 
         // 1 second before next burn damage
         setTimeout(() => {

@@ -5,16 +5,16 @@ export default class MissileTower extends Tower {
     constructor(scene, x, y, audioManager) {
         //(scene, x, y, texture, damage, range, speed)
         // speed is the delay between attacks in milliseconds
-        super(scene, x, y, 'missile_tower_1', 'missile_projectile', 50, 200, 5000, audioManager);
+        super(scene, x, y, 'missile_tower_1', 'missile_projectile', 35, 200, 5000, audioManager);
 
         this.audioManager = audioManager;
 
         this.damageUpgradeVal = 5;
-        this.damageUpgradeCost = 50;
+        this.damageUpgradeCost = 100;
         this.attackSpeedUpgradeVal = 500;
         this.attackSpeedUpgradeCost = 150;
         this.rangeUpgradeVal = 20;
-        this.rangeUpgradeCost = 100;
+        this.rangeUpgradeCost = 50;
 
         this.damageUpgradeNum = 0;
         this.attackSpeedUpgradeNum = 0;
