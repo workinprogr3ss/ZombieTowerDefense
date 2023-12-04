@@ -12,7 +12,7 @@ export default class FlamethrowerTower extends Tower {
         this.damageUpgradeVal = 10;
         this.damageUpgradeCost = 100;
         this.attackSpeedUpgradeVal = 300;
-        this.attackSpeedUpgradeCost = 150;
+        this.attackSpeedUpgradeCost = 75;
         this.rangeUpgradeVal = 20;
         this.rangeUpgradeCost = 50;
 
