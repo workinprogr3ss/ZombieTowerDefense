@@ -4,6 +4,9 @@ import RunnerZombie from "../objects/enemies/RunnerZombie.js";
 import TankZombie from "../objects/enemies/TankZombie.js";
 import SpitterZombie from "../objects/enemies/SpitterZombie.js";
 
+import HealthBar from '../objects/HealthBar.js';
+
+
 export default class WaveManager {
   constructor(scene, startTileX, startTileY, endTileX, endTileY, level, audioManager) {
     this.level = level;
@@ -717,15 +720,40 @@ export default class WaveManager {
             "tank",
             "tank",
             "runner",
-            "runner"
-          
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "walker",
+            "walker",
+            "walker",
+            "walker",
           ],
           spawnInterval: 750, // 1 second
         },
         {
           // Wave 15
           enemies: [
-            
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "walker",
+            "walker",
+            "walker",
+            "walker",
           ],
           spawnInterval: 750, // 1 second
         },
@@ -758,28 +786,104 @@ export default class WaveManager {
         {
           // Wave 17
           enemies: [
-            
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner",
+            "runner"  
           ],
           spawnInterval: 500, // 1 second
         },
         {
           // Wave 18
           enemies: [
-            
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "walker",
+            "walker",
+            "tank",
+            "tank",
+            "runner",
+            "runner",
+            "tank",
+            "walker",
+            "walker",
+            "runner",
+            "runner",
+            "tank",
+            "walker",
+            "walker",
+            "runner",
+            "runner",
           ],
           spawnInterval: 500, // 1 second
         },
         {
           // Wave 19
           enemies: [
-            
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "walker",
+            "walker",
+            "tank",
+            "tank",
+            "runner",
+            "runner",
+            "tank",
+            "walker",
+            "walker",
+            "runner",
+            "runner",
+            "tank",
+            "walker",
+            "walker",
+            "runner",
+            "runner",
           ],
           spawnInterval: 500, // 1 second
         },
         {
           // Wave 20
           enemies: [
-            
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "walker",
+            "walker",
+            "tank",
+            "tank",
+            "runner",
+            "runner",
+            "tank",
+            "walker",
+            "walker",
+            "runner",
+            "runner",
+            "tank",
+            "walker",
+            "walker",
+            "runner",
+            "runner",
           ],
           spawnInterval: 500, // 1 second
         },
@@ -790,7 +894,7 @@ export default class WaveManager {
   startNextWave() {
     // Increment the wave counter if we're not past the last wave
     if (this.currentWave < this.waves.length - 1) {
-      if (this.level > 1) {
+      if (this.level > 1 && this.level < 3) {
         this.addWaveReward();
       }
       this.currentWave++;
@@ -836,6 +940,7 @@ export default class WaveManager {
     //  ); // uses tile coordinates
     //}
     
+
     enemy = new enemyClass(this.scene, this.startX, this.startY); // uses global coordinates
     enemy.calculatePath(
         this.startTileX,
@@ -843,6 +948,16 @@ export default class WaveManager {
         this.endTileX,
         this.endTileY
     );
+
+    // Make hard level harder
+    //if (this.level == 3) {
+    //  const enemyInitialHealth = enemy.health;
+    //  enemy.health = enemyInitialHealth + 5;
+    //  enemy.healthBar.destroy();
+    //  enemy.healthBar = new HealthBar(this.scene, this.x - 10, this.y - 20, enemy.health);
+    //  enemy.healthBar.updateHealth(enemy.health);
+    //}
+
     // Add the enemy to the scene
     this.scene.zombies.add(enemy);
 
