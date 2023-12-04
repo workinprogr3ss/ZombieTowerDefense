@@ -5,16 +5,16 @@ export default class FlamethrowerTower extends Tower {
     constructor(scene, x, y, audioManager) {
         // (scene, x, y, texture, damage, range, speed)
         // speed is the delay between attacks in milliseconds
-        super(scene, x, y, 'flame_tower_1', 'flame_projectile', 0.5, 100, 500, audioManager);
+        super(scene, x, y, 'flame_tower_1', 'flame_projectile', 30, 100, 2000, audioManager);
 
         this.audioManager = audioManager;
 
-        this.damageUpgradeVal = 5;
-        this.damageUpgradeCost = 50;
-        this.attackSpeedUpgradeVal = 500;
+        this.damageUpgradeVal = 10;
+        this.damageUpgradeCost = 100;
+        this.attackSpeedUpgradeVal = 300;
         this.attackSpeedUpgradeCost = 150;
         this.rangeUpgradeVal = 20;
-        this.rangeUpgradeCost = 100;
+        this.rangeUpgradeCost = 50;
 
         this.damageUpgradeNum = 0;
         this.attackSpeedUpgradeNum = 0;
@@ -119,15 +119,22 @@ export default class FlamethrowerTower extends Tower {
             if (closestZombie) {
                 let projectile = new Projectile(this.scene, this.x, this.y, closestZombie.x, closestZombie.y, this.projectileTexture);
                 projectile.fire(this.x, this.y, closestZombie.x, closestZombie.y);
-                closestZombie.reduceHealth(this.damage);
+                closestZombie.reduceHealth(5);
 
                 // play audio
                 this.audioManager.playTowerShootAudio(this.towerType);
                 this.audioManager.playZombieHitAudio();
                 
-                // Gives zombie burn status
-                closestZombie.burn = true;
-                closestZombie.burnDamage = this.damage;
+                // Apply burn damage to zombies
+                if (closestZombie.zombieType == "walkerZombie") {
+                    closestZombie.burnDamage += this.damage;
+                }
+                else if (closestZombie.zombieType == "runnerZombie") {
+                    closestZombie.burnDamage += this.damage / 2;
+                }
+                else if (closestZombie.zombieType = "tankZombie") {
+                    closestZombie.burnDamage += this.damage / 0.4;
+                }
             }
 
             setTimeout(() => {

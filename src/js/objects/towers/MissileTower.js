@@ -10,11 +10,11 @@ export default class MissileTower extends Tower {
         this.audioManager = audioManager;
 
         this.damageUpgradeVal = 5;
-        this.damageUpgradeCost = 50;
+        this.damageUpgradeCost = 100;
         this.attackSpeedUpgradeVal = 500;
         this.attackSpeedUpgradeCost = 150;
         this.rangeUpgradeVal = 20;
-        this.rangeUpgradeCost = 100;
+        this.rangeUpgradeCost = 50;
 
         this.damageUpgradeNum = 0;
         this.attackSpeedUpgradeNum = 0;

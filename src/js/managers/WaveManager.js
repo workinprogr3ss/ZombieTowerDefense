@@ -6,6 +6,7 @@ import SpitterZombie from "../objects/enemies/SpitterZombie.js";
 
 export default class WaveManager {
   constructor(scene, startTileX, startTileY, endTileX, endTileY, level, audioManager) {
+    this.level = level;
     this.scene = scene;
     this.currentWave = 0;
     this.nextSpawnTime = 0;
@@ -618,6 +619,9 @@ export default class WaveManager {
   startNextWave() {
     // Increment the wave counter if we're not past the last wave
     if (this.currentWave < this.waves.length - 1) {
+      if (this.level > 1) {
+        this.addWaveReward();
+      }
       this.currentWave++;
       this.nextSpawnTime = this.scene.time.now; // Reset the spawn timer for the new wave
       //this.lastWaveEndTime = this.scene.time.now; // Update the end time of the wave
@@ -625,6 +629,12 @@ export default class WaveManager {
     } else {
       // All waves are complete, handle game completion
     }
+  }
+
+  // Method to add wave reward to player currency
+  addWaveReward() {
+    let reward = (this.level - 1) * 100;
+    this.scene.displayManager.playerCurrencyManager.addCurrency(reward);
   }
 
   spawnEnemy() {
