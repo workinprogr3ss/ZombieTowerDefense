@@ -23,7 +23,9 @@ export default class HealthBar {
         this.bar.fillStyle(0xffffff);
         this.bar.fillRect(this.x + 2, this.y + 2, 16, 4);
 
-        if (this.value < 30) {
+        this.thirtyPercent = this.maxValue * 0.3;
+
+        if (this.value < this.thirtyPercent) {
             this.bar.fillStyle(0xff0000);
         }
         else {  

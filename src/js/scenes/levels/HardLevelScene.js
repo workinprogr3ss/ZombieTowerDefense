@@ -44,7 +44,7 @@ class HardLevelScene extends Phaser.Scene {
         loadImages(this);
 
         // Load audio assets
-        this.audioManager.loadAudio();
+        //this.audioManager.loadAudio();
         
         // Pause Menu Items
         this.load.spritesheet('pauseButton', 'src/assets/images/icons/pauseButton.png', {frameWidth: 34, frameHeight: 34});
