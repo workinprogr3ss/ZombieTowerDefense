@@ -34,4 +34,10 @@ export function loadImages(scene) {
     scene.load.image('playerHUD', 'src/assets/images/icons/playerHUD.png');
     scene.load.spritesheet('pauseButton', 'src/assets/images/icons/pauseButton.png', {frameWidth: 34, frameHeight: 34});
     scene.load.image('nextWaveButton', 'src/assets/images/icons/nextWaveButton.png');
+
+    // Level Complete 
+    scene.load.image('levelCompleteBackground', 'src/assets/images/icons/LevelCompleteBackground.png')
+    scene.load.spritesheet('restartButton', 'src/assets/images/icons/restartButton.png', {frameWidth: 128, frameHeight: 35});
+    scene.load.spritesheet('nextLevelButton', 'src/assets/images/icons/nextLevelButton.png', {frameWidth: 128, frameHeight: 35});
+    scene.load.spritesheet('exitButton', 'src/assets/images/icons/exitButton.png', {frameWidth: 64, frameHeight: 36});
 }
