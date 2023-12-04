@@ -251,29 +251,7 @@
          "draworder":"topdown",
          "id":4,
          "name":"HotSpot Layer",
-         "objects":[
-                {
-                 "height":30,
-                 "id":16,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30,
-                 "x":256,
-                 "y":64
-                }, 
-                {
-                 "height":30,
-                 "id":17,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30,
-                 "x":112,
-                 "y":16
-                }, 
+         "objects":[  
                 {
                  "height":30,
                  "id":19,
@@ -287,17 +265,6 @@
                 }, 
                 {
                  "height":30,
-                 "id":20,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30,
-                 "x":320,
-                 "y":96
-                }, 
-                {
-                 "height":30,
                  "id":22,
                  "name":"",
                  "rotation":0,
@@ -306,29 +273,7 @@
                  "width":30,
                  "x":225.265,
                  "y":307.01
-                }, 
-                {
-                 "height":30,
-                 "id":23,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30,
-                 "x":432,
-                 "y":112
-                }, 
-                {
-                 "height":30,
-                 "id":24,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30,
-                 "x":464,
-                 "y":16
-                }, 
+                },  
                 {
                  "height":30,
                  "id":25,
@@ -364,17 +309,6 @@
                 }, 
                 {
                  "height":30,
-                 "id":28,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30,
-                 "x":672,
-                 "y":304
-                }, 
-                {
-                 "height":30,
                  "id":29,
                  "name":"",
                  "rotation":0,
@@ -383,17 +317,6 @@
                  "width":30,
                  "x":672,
                  "y":368
-                }, 
-                {
-                 "height":30,
-                 "id":30,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30,
-                 "x":704,
-                 "y":192
                 }, 
                 {
                  "height":30,
@@ -438,29 +361,8 @@
                  "width":30,
                  "x":352,
                  "y":560
-                }, 
-                {
-                 "height":30,
-                 "id":35,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30,
-                 "x":80,
-                 "y":352
-                }, 
-                {
-                 "height":30,
-                 "id":36,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30,
-                 "x":96,
-                 "y":528
-                }],
+                }
+                ],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
