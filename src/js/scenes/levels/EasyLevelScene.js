@@ -91,7 +91,7 @@ class EasyLevelScene extends Phaser.Scene {
 
         // Create the grid for pathfinding
         // 634 is non-walkable tile index (see DemoMapWithProps.json)
-        this.grid = new GridService(this, walkableLayer, [634, 322, 412, 366, 323]); 
+        this.grid = new GridService(this, walkableLayer, [634, 322, 411, 412, 366, 323]); 
         
         // Spawning Debugging
         //console.log(`Starting zombie at tile (${startTileX}, ${startTileY})`);

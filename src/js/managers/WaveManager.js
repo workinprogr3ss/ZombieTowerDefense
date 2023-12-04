@@ -192,10 +192,12 @@ export default class WaveManager {
         },
       ];
     }
+    // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     if (level == 2) {
       return [
         {
           // Wave 1
+          // Walkers: 10, $200
           enemies: [
             "walker", 
             "walker", 
@@ -204,43 +206,57 @@ export default class WaveManager {
             "walker", 
             "walker", 
             "walker", 
-            "runner", 
-            "runner", 
-            "tank"
+            "walker", 
+            "walker", 
+            "walker", 
           ],
           spawnInterval: 1000, // 1 second
         },
         {
           // Wave 2
+          // Walkers: 10, $200
+          // Runners: 5,  $50
           enemies: [
             "walker", 
             "walker", 
             "walker", 
             "walker", 
-            "tank", 
+            "walker",
+            "runner",  
+            "walker",
+            "runner",  
             "walker", 
-            "walker", 
-            "tank", 
-            "walker", 
-            "walker"
+            "walker",
+            "runner",  
+            "walker",
+            "runner",  
+            "walker",
+            "runner",  
           ],
           spawnInterval: 1000, // 1 second
         },
         {
           // Wave 3
+          // Tanks: 5, $250
+          // Runners: 10,  $100
           enemies: [
-            "walker", 
-            "walker", 
-            "runner", 
-            "runner", 
-            "tank", 
-            "walker", 
-            "walker", 
-            "runner", 
-            "runner", 
-            "tank"
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "tank",
+            "runner",  
+            "runner",  
+            "runner",  
+            "runner",  
+            "runner",  
+            "runner",  
+            "runner",  
+            "runner",  
+            "runner",  
+            "runner",  
           ],
-          spawnInterval: 1000, // 1 second
+          spawnInterval: 2000, // 2 seconds
         },
         {
           // Wave 4
@@ -396,6 +412,7 @@ export default class WaveManager {
         },
       ];
     }
+    // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     if (level == 3) {
       return [
         {
@@ -616,29 +633,47 @@ export default class WaveManager {
 
   spawnEnemy() {
     // Get the next enemy to spawn
-    // console.log("Spawning enemy");
     const enemyType = this.waves[this.currentWave].enemies.shift();
     const enemyClass = this.zombies[enemyType];
-    const enemy = new enemyClass(this.scene, this.startX, this.startY); // uses global coordinates
-    enemy.calculatePath(
-      this.startTileX,
-      this.startTileY,
-      this.endTileX,
-      this.endTileY
-    ); // uses tile coordinates
+    let enemy; 
 
+    // Level 2 Alternate Spawning Options
+    //if (this.level == 2 && this.currentWave == 4) {
+    //  enemy = new enemyClass(this.scene, 480, 560); // uses global coordinates
+    //  enemy.calculatePath(
+    //    30,
+    //    35,
+    //    this.endTileX,
+    //    this.endTileY
+    //  ); // uses tile coordinates
+    //} 
+//
+    //// Default Spawning Option
+    //else {
+    //  enemy = new enemyClass(this.scene, this.startX, this.startY); // uses global coordinates
+    //  enemy.calculatePath(
+    //    this.startTileX,
+    //    this.startTileY,
+    //    this.endTileX,
+    //    this.endTileY
+    //  ); // uses tile coordinates
+    //}
+    
+    enemy = new enemyClass(this.scene, this.startX, this.startY); // uses global coordinates
+    enemy.calculatePath(
+        this.startTileX,
+        this.startTileY,
+        this.endTileX,
+        this.endTileY
+    );
     // Add the enemy to the scene
     this.scene.zombies.add(enemy);
 
     // Play the spawn sound
     this.audioManager.playZombieAudio(enemyType);
 
-    // Add the enemy to the enemy count
-    //this.scene.displayManager.enemyCountManager.addEnemy(1);
-
     // Set the time for the next spawn
-    this.nextSpawnTime =
-      this.scene.time.now + this.waves[this.currentWave].spawnInterval;
+    this.nextSpawnTime = this.scene.time.now + this.waves[this.currentWave].spawnInterval;
   }
 
   update() {

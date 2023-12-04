@@ -91,10 +91,13 @@ setDirection(direction) {
     // console.log("New animation key:", newAnimKey)
 
     // Only change the animation if the direction has actually changed
+
     if (this.currentDirection !== direction) {
         // Only play the animation if it's not already playing
-        if (this.anims.currentAnim.key !== newAnimKey){
-            this.anims.play(newAnimKey, true);
+        if (this.anims) {
+            if (this.anims.currentAnim.key !== newAnimKey){
+                this.anims.play(newAnimKey, true);
+            }
         }
         // Update the current direction
         this.currentDirection = direction;
@@ -163,8 +166,10 @@ update() {
     }
     // Check if the enemy has reached its next target position
     if (Phaser.Math.Distance.Between(this.x, this.y, this.nextX, this.nextY) < 1) {
-        this.body.stop();
-        this.followPath();
+        if (this.body) {
+            this.body.stop();
+            this.followPath();
+        }
     } else {
         // Determine the direction based on the current velocity or the difference between the current and next positions
         const deltaX = this.nextX - this.x;
@@ -190,6 +195,7 @@ reduceHealth(damage) {
     this.health -= damage;
     this.healthBar.updateHealth(this.health);
     if (this.health <= 0) {
+
         // Add value to player currency
         this.addValue();
         
@@ -198,7 +204,7 @@ reduceHealth(damage) {
             this.healthBar.destroy();
         }   
         
-        // Destroy the enem
+        // Destroy the enemy
         this.destroy();
     }
 }
