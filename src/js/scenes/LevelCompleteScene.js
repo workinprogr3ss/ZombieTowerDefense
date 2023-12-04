@@ -1,6 +1,11 @@
 class LevelCompleteScene extends Phaser.Scene {
   constructor() {
     super({ key: "LevelCompleteScene" });
+
+    this.levelCompleteMenu = null;
+    this.restartButton = null;
+    this.nextLevelButton = null;
+    this.exitButton = null;
   }
 
   init(data) {
@@ -10,94 +15,97 @@ class LevelCompleteScene extends Phaser.Scene {
   }
 
   create() {
-    // Debugging
-    console.log(this.levelContext)
-    console.log(this.level)
+    this.levelContext.physics.pause();
+    this.levelContext.scene.pause();
 
-    // Add level complete text
-    this.add
-      .text(this.scale.width / 2, this.scale.height / 2, "CONGRATULATIONS", {
-        fontSize: "48px",
-        fill: "#fff",
-      })
-      .setOrigin(0.5);
-    this.add
-      .text(this.scale.width / 2, this.scale.height / 2 + 60, "LEVEL COMPLETED", {
-        fontSize: "48px",
-        fill: "#fff",
-      })
-      .setOrigin(0.5);
+    this.levelCompleteMenu = this.add.image(400, 300, 'levelCompleteBackground');
+    this.restartButton = this.add.sprite(400, 370, 'restartButton');
+    this.nextLevelButton = this.add.sprite(400, 410, 'nextLevelButton');
+    this.exitButton = this.add.sprite(400, 450, 'exitButton');
 
-    // Add a button to restart the game
-    let restartButton = this.add
-      .text(this.scale.width / 2, this.scale.height / 2 + 120, "Play Again", {
-        fontSize: "32px",
-        fill: "#0f0",
-      })
-      .setOrigin(0.5);
-    restartButton.setInteractive();
+    this.buttonInteractions(this.restartButton, 'restartButton');
+    this.buttonInteractions(this.nextLevelButton, 'nextLevelButton');
+    this.buttonInteractions(this.exitButton, 'exitButton');
+  }
 
-    restartButton.on("pointerup", () => {
-      // Restart the level here
-      this.levelContext.towerMenuGroup = [];
-      this.levelContext.upgradeMenuGroup = [];
-      this.scene.start(this.level);
+  buttonInteractions(button, source) {
+    button.setInteractive({cursor: 'pointer'}).setOrigin(0.5);
+    button.on('pointerover', () => {
+      button.setFrame(2);
     });
-
-    // Add a button to progress to the next level
-    let nextLevelButton = this.add
-      .text(this.scale.width / 2, this.scale.height / 2 + 160, "Next Level", {
-        fontSize: "32px",
-        fill: "#0f0",
-      })
-      .setOrigin(0.5);
-    nextLevelButton.setInteractive();
-
-    nextLevelButton.on("pointerup", () => {
-      // Start next level here
-      this.levelContext.towerMenuGroup = [];
-      this.levelContext.upgradeMenuGroup = [];
-      this.playNextLevel()
+    button.on('pointerdown', () => {
+        button.setFrame(1);
     });
+    button.on('pointerout', () => {
+        button.setFrame(0);
+    });
+    if (source == 'restartButton') {
+      button.on('pointerup', () => {
+        this.destroyButtons();
+        this.levelContext.towerMenuGroup = [];
+        this.levelContext.upgradeMenuGroup = [];
+        if (this.level == "EasyLevelScene") {
+          this.unlockMediumLevel();
+        } else if (this.level == "MediumLevelScene") {
+          this.unlockHardLevel();
+        }
+        this.scene.start(this.level);
+      }); 
+    } else if (source == 'nextLevelButton') {
+      if (this.level != "HardLevelScene") {
+        button.on('pointerup', () => {
+          this.destroyButtons();
+          this.levelContext.towerMenuGroup = [];
+          this.levelContext.upgradeMenuGroup = [];
+          this.playNextLevel()
+        }); 
+      }
+    } else {
+      button.on('pointerup', () => {
+          this.destroyButtons();
+          this.levelContext.towerMenuGroup = [];
+          this.levelContext.upgradeMenuGroup = [];
+          this.levelContext.scene.start('PreLevelSelectScene');
+      }); 
+    }
+  };
 
-    // Add a button to go back to the main menu
-    let mainMenuButton = this.add
-      .text(this.scale.width / 2, this.scale.height / 2 + 200, "Main Menu", {
-        fontSize: "32px",
-        fill: "#0f0",
-      })
-      .setOrigin(0.5);
-    mainMenuButton.setInteractive();
+  unlockMediumLevel() {
+    this.registry.set('playerData', {
+      levelOne: true,
+      levelTwo: true,
+      levelThree: false,
+      saveSlot: null,
+      completed: 2
+    });
+  }
 
-    mainMenuButton.on("pointerup", () => {
-      // Go back to the main menu scene
-      this.levelContext.towerMenuGroup = [];
-      this.levelContext.upgradeMenuGroup = [];
-      this.scene.start("MenuScene");
+  unlockHardLevel() {
+    this.registry.set('playerData', {
+      levelOne: true,
+      levelTwo: true,
+      levelThree: true,
+      saveSlot: null,
+      completed: 3
     });
   }
 
   playNextLevel() {
     // Check current level and play the next level
     if (this.level == "EasyLevelScene") {
-      this.scene.start("MediumLevelScene", this.audioManager);
-      this.registry.set('playerData', {
-        levelOne: true,
-        levelTwo: true,
-        levelThree: false,
-        saveSlot: null,
-        completed: 2
-      });
+      this.unlockMediumLevel();
+      this.levelContext.scene.start("MediumLevelScene", this.audioManager);
     } else if (this.level == "MediumLevelScene") {
-      this.scene.start("HardLevelScene", this.audioManager);
-      this.registry.set('playerData', {
-        levelOne: true,
-        levelTwo: true,
-        levelThree: true,
-        saveSlot: null,
-        completed: 3
-      });
+      this.unlockHardLevel();
+      this.levelContext.scene.start("HardLevelScene", this.audioManager);
     }
+  }
+
+  destroyButtons() {
+    this.levelCompleteMenu.destroy();
+    this.restartButton.destroy();
+    this.nextLevelButton.destroy();
+    this.exitButton.destroy();
   }
 }
 

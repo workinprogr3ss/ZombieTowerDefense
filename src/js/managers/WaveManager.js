@@ -49,10 +49,6 @@ export default class WaveManager {
           // Wave 1
           enemies: [
             "walker", 
-            "walker", 
-            "walker", 
-            "walker", 
-            "walker"
           ],
           spawnInterval: 1000, // 1 second
         },
@@ -693,12 +689,12 @@ export default class WaveManager {
     const lastWaveSpawned = this.waves[this.currentWave].enemies.length === 0;
 
     if (isLastWave && allEnemiesDead && lastWaveSpawned) {
-      console.log("Level Complete")
-      this.scene.scene.start('LevelCompleteScene', {
+      this.scene.scene.launch('LevelCompleteScene', {
         level: this.scene.scene.key,
         scene: this.scene,
         audioManager: this.audioManager
       });
+      this.scene.scene.bringToTop('LevelCompleteScene')
     }
 
     // If it's time to spawn the next enemy and there are enemies left in the current wave
