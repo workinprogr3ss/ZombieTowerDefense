@@ -11,7 +11,7 @@ export function loadImages(scene) {
     // Load Projectiles
     scene.load.spritesheet('sniper_projectile', 'src/assets/images/towers/Sniper_Bullet.png', {frameWidth: 32, frameHeight: 32});
     scene.load.spritesheet('missile_projectile', 'src/assets/images/towers/Missile.png', {frameWidth: 32, frameHeight: 32});
-    scene.load.image('flame_projectile', 'src/assets/images/towers/Bullet_MG.png');
+    scene.load.spritesheet('flame_projectile', 'src/assets/images/towers/Bullet_MG.png', {frameWidth: 48, frameHeight: 48});
 
     //Tower Menu
     scene.load.image('TowerMenu', 'src/assets/images/icons/TowerMenu.png');
