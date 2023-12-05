@@ -63,6 +63,8 @@ class GameOverScene extends Phaser.Scene {
   
       //Return to Main Menu
       exitButton.on('pointerup', () => {
+        this.levelContext.towerMenuGroup = [];
+        this.levelContext.upgradeMenuGroup = [];
         this.scene.start('MenuScene');
       });
 
