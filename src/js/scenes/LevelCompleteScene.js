@@ -80,27 +80,33 @@ class LevelCompleteScene extends Phaser.Scene {
   };
 
   unlockMediumLevel() {
-    this.registry.set('playerData', {
-      levelOne: true,
-      levelOneCompleted: true,
-      levelTwo: true,
-      levelTwoCompleted: false,
-      levelThree: false,
-      levelThreeCompleted: false,
-      saveSlot: null,
-    });
+    //Only unlock if not yet completed
+    if (!this.registry.get('playerData').levelTwoCompleted) {
+      this.registry.set('playerData', {
+        levelOne: true,
+        levelOneCompleted: true,
+        levelTwo: true,
+        levelTwoCompleted: false,
+        levelThree: false,
+        levelThreeCompleted: false,
+        saveSlot: null,
+      });
+    }
   }
 
   unlockHardLevel() {
-    this.registry.set('playerData', {
-      levelOne: true,
-      levelOneCompleted: true,
-      levelTwo: true,
-      levelTwoCompleted: true,
-      levelThree: true,
-      levelThreeCompleted: false,
-      saveSlot: null,
-    });
+    //Only unlock if not yet completed
+    if (!this.registry.get('playerData').levelThreeCompleted) {
+      this.registry.set('playerData', {
+        levelOne: true,
+        levelOneCompleted: true,
+        levelTwo: true,
+        levelTwoCompleted: true,
+        levelThree: true,
+        levelThreeCompleted: false,
+        saveSlot: null,
+      });
+    }
   }
 
   completeHardLevel() {

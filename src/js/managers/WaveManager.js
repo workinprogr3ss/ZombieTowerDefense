@@ -54,6 +54,9 @@ export default class WaveManager {
           // Wave 1
           enemies: [
             "walker", 
+            "walker", 
+            "walker", 
+            "walker", 
           ],
           spawnInterval: 1000, // 1 second
         },
