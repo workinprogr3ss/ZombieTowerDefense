@@ -91,7 +91,6 @@ setDirection(direction) {
     // console.log("New animation key:", newAnimKey)
 
     // Only change the animation if the direction has actually changed
-
     if (this.currentDirection !== direction) {
         // Only play the animation if it's not already playing
         if (this.anims) {
@@ -124,6 +123,7 @@ calculatePath(startX, startY, targetX, targetY) {
 
 // Method to move the enemy along a path
 followPath() {
+    // Check if there is a path to follow
     if (!this.path || this.path.length === 0) {
         //console.log("No path provided for enemy to move.");
         return;
@@ -158,6 +158,7 @@ update() {
         }, 1000)
     }
 
+    // Update the health bar
     this.healthBar.updateHealth(this.health);
 
     // Check if the enemy has reached the end of the path
@@ -233,7 +234,4 @@ reachedEnd() {
     }
     return false;
 }
-
-// Add more methods here...
-
 }

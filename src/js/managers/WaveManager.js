@@ -4,6 +4,7 @@ import RunnerZombie from "../objects/enemies/RunnerZombie.js";
 import TankZombie from "../objects/enemies/TankZombie.js";
 import SpitterZombie from "../objects/enemies/SpitterZombie.js";
 
+// User Interface Objects
 import HealthBar from '../objects/HealthBar.js';
 
 
@@ -41,6 +42,7 @@ export default class WaveManager {
       this.nextWaveButton.setVisible(false);
     });
 
+    // Audio Manager
     this.audioManager = audioManager;
   }
 
@@ -912,15 +914,13 @@ export default class WaveManager {
   startNextWave() {
     // Increment the wave counter if we're not past the last wave
     if (this.currentWave < this.waves.length - 1) {
+      // Add wave reward to player currency. Is not enables for the first level.
       if (this.level > 1) {
         this.addWaveReward();
       }
       this.currentWave++;
       this.nextSpawnTime = this.scene.time.now; // Reset the spawn timer for the new wave
-      //this.lastWaveEndTime = this.scene.time.now; // Update the end time of the wave
       this.scene.displayManager.waveTimerManager.resetTimer(); // Reset the wave timer
-    } else {
-      // All waves are complete, handle game completion
     }
   }
 
@@ -935,29 +935,7 @@ export default class WaveManager {
     const enemyClass = this.zombies[enemyType];
     let enemy; 
 
-    // Level 2 Alternate Spawning Options
-    //if (this.level == 2 && this.currentWave == 4) {
-    //  enemy = new enemyClass(this.scene, 480, 560); // uses global coordinates
-    //  enemy.calculatePath(
-    //    30,
-    //    35,
-    //    this.endTileX,
-    //    this.endTileY
-    //  ); // uses tile coordinates
-    //} 
-//
-    //// Default Spawning Option
-    //else {
-    //  enemy = new enemyClass(this.scene, this.startX, this.startY); // uses global coordinates
-    //  enemy.calculatePath(
-    //    this.startTileX,
-    //    this.startTileY,
-    //    this.endTileX,
-    //    this.endTileY
-    //  ); // uses tile coordinates
-    //}
-    
-
+    // Create the enemy
     enemy = new enemyClass(this.scene, this.startX, this.startY); // uses global coordinates
     enemy.calculatePath(
         this.startTileX,
@@ -966,9 +944,9 @@ export default class WaveManager {
         this.endTileY
     );
     
+    // Make hard level harder by increasing the enemy health after wave 10, 15, and 20
     const enemyInitialHealth = enemy.health;
     let percentageIncrease = .1
-    // Make hard level harder
     if (this.level == 3) {
       if (this.currentWave <= 10) {
         percentageIncrease = .2
@@ -994,10 +972,11 @@ export default class WaveManager {
   }
 
   update() {
-    // Wave Button
+    // Wave Button Logic
     const waveComplete = this.waves[this.currentWave].enemies.length === 0 && this.scene.zombies.countActive(true) === 0;
     const timeRemaining = this.scene.displayManager.waveTimerManager.waveTimer > 0;
 
+    // If the wave is complete and there is time remaining, show the next wave button
     if (waveComplete && timeRemaining) {
       this.nextWaveButton.setVisible(true);
     } else {
@@ -1009,6 +988,7 @@ export default class WaveManager {
     const allEnemiesDead = this.scene.zombies.countActive(true) === 0;
     const lastWaveSpawned = this.waves[this.currentWave].enemies.length === 0;
 
+    // If it's the last wave and all enemies are dead, launch the level complete scene
     if (isLastWave && allEnemiesDead && lastWaveSpawned) {
       this.scene.scene.launch('LevelCompleteScene', {
         level: this.scene.scene.key,
@@ -1026,8 +1006,7 @@ export default class WaveManager {
       this.spawnEnemy();
     }
 
-    // If there are no more enemies to spawn and no active enemies left, the wave is complete
-    //&& this.scene.zombies.countActive(true) === 0 ; for when there are no active enemies left
+    // If there are no more enemies to spawn and wave timer is complete, the wave is complete so start the next wave.
     if (
       (this.waves[this.currentWave].enemies.length === 0 &&
       0 >= this.scene.displayManager.waveTimerManager.waveTimer)

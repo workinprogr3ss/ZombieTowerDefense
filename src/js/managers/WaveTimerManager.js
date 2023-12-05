@@ -23,7 +23,7 @@ export default class WaveTimerManager {
     }
 
     update(delta) {
-        // Decrease teh waveTimer based on the delta time
+        // Decrease the waveTimer based on the delta time of the scene
         if (this.waveTimer > 0) {
             this.waveTimer -= delta / 1000;
             this.updateWaveTimerDisplay();

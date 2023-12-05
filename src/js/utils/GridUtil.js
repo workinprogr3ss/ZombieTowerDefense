@@ -19,6 +19,7 @@ export default class GridService {
       }
 
       //grid[y][x] = (tile.index === this.nonWalkableTileIndex ? 1 : 0); // 1 is non-walkable, 0 is walkable
+      // Function below is the same as above but accounts for multiple non-walkable tiles
       grid[y][x] = (this.nonWalkableTileIndex.includes(tile.index) ? 1 : 0);
     });
 

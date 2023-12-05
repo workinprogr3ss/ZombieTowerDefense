@@ -6,7 +6,4 @@ export default class SpitterZombie extends Enemy {
         // scene, x, y, texture, initialDirection, health, speed, damage, value
         super(scene, x, y, 'spitterZombieRight', initalDirection, 100, 40, 15, 150);
     }
-
-    // Specialized methods
-
 }
