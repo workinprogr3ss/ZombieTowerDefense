@@ -80,8 +80,11 @@ class BaseScene extends Phaser.Scene {
                 if (source == 'loadScene') {
                     this.registry.set('playerData', {
                         levelOne: data.levelOne,
+                        levelOneCompleted: data.levelOneCompleted,
                         levelTwo: data.levelTwo,
+                        levelTwoCompleted: data.levelTwoCompleted,
                         levelThree: data.levelThree,
+                        levelThreeCompleted: data.levelThreeCompleted,
                         saveSlot: data.saveSlot,
                         completed: data.completed,
                     });
@@ -97,8 +100,11 @@ class BaseScene extends Phaser.Scene {
                     }
                     localStorage.setItem(`saveSlot${slot}`, JSON.stringify({
                         levelOne: this.registry.get('playerData').levelOne,
+                        levelOneCompleted: this.registry.get('playerData').levelOneCompleted,
                         levelTwo: this.registry.get('playerData').levelTwo,
+                        levelTwoCompleted: this.registry.get('playerData').levelTwoCompleted,
                         levelThree: this.registry.get('playerData').levelThree,
+                        levelThreeCompleted: this.registry.get('playerData').levelThreeCompleted,
                         saveSlot: slot,
                         completed: this.countCompleted(),
                         active: true
@@ -112,13 +118,13 @@ class BaseScene extends Phaser.Scene {
     
     countCompleted() {
         let comp = 0
-        if (this.registry.get('playerData').levelOne) {
+        if (this.registry.get('playerData').levelOneCompleted) {
             comp += 1
         }
-        if (this.registry.get('playerData').levelTwo) {
+        if (this.registry.get('playerData').levelTwoCompleted) {
             comp += 1
         }
-        if (this.registry.get('playerData').levelThree) {
+        if (this.registry.get('playerData').levelThreeCompleted) {
             comp += 1
         }
         return comp

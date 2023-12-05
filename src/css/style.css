@@ -171,6 +171,15 @@ td {
 /* Classes 
 /*----------------------------------------------------------------------------------*/
 
+.tooltip {
+    opacity: 0.6;
+    font-size: 18px;
+    visibility: hidden;
+    position: absolute;
+}
+
+/*-----------------------------------------*/
+
 .sectionHeader {
     margin-left: 10%;
     font-size: 24px;

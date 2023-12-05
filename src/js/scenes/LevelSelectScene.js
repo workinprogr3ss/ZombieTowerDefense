@@ -34,6 +34,18 @@ class LevelSelectScene extends BaseScene {
         this.setButtonInteractions(saveButton, 'SaveGameScene', null, 0, true, null);
         this.setButtonInteractions(backButton, 'MenuScene', null, 0, true, null);
     }
+
+    update() {
+        if (this.registry.get('playerData').levelOneCompleted) {
+            this.add.image(236, 256, 'levelCompleted').setOrigin(0.5).setDepth(2);
+        }
+        if (this.registry.get('playerData').levelTwoCompleted) {
+            this.add.image(401, 256, 'levelCompleted').setOrigin(0.5).setDepth(2);
+        }
+        if (this.registry.get('playerData').levelThreeCompleted) {
+            this.add.image(564, 256, 'levelCompleted').setOrigin(0.5).setDepth(2);
+        }
+    }
 }
 
 export default LevelSelectScene;

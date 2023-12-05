@@ -48,8 +48,11 @@ class MenuScene extends BaseScene {
         unlockSaveButton.on('pointerup', () => {
             localStorage.setItem(`saveSlot3`, JSON.stringify({
                 levelOne: true,
+                levelOneCompleted: true,
                 levelTwo: true,
+                levelTwoCompleted: true,
                 levelThree: true,
+                levelThreeCompleted: true,
                 saveSlot: 3,
                 completed: 3,
                 active: true
@@ -73,10 +76,13 @@ class MenuScene extends BaseScene {
         //Create Default PlayerData Registry
         this.registry.set('playerData', {
             levelOne: true,
+            levelOneCompleted: false,
             levelTwo: false,
+            levelTwoCompleted: false,
             levelThree: false,
+            levelThreeCompleted: false,
             saveSlot: null,
-            completed: 1
+            completed: 0
         });
 
         if (initialCreate) {
