@@ -61,8 +61,11 @@ class OverrideScene extends BaseScene {
             } else {
                 localStorage.setItem(`saveSlot${slot}`, JSON.stringify({
                     levelOne: this.registry.get('playerData').levelOne,
+                    levelOneCompleted: this.registry.get('playerData').levelOneCompleted,
                     levelTwo: this.registry.get('playerData').levelTwo,
+                    levelTwoCompleted: this.registry.get('playerData').levelTwoCompleted,
                     levelThree: this.registry.get('playerData').levelThree,
+                    levelThreeCompleted: this.registry.get('playerData').levelThreeCompleted,
                     saveSlot: slot,
                     completed: this.countCompleted(),
                     active: true

@@ -19,9 +19,9 @@ class LevelCompleteScene extends Phaser.Scene {
     this.levelContext.scene.pause();
 
     this.levelCompleteMenu = this.add.image(400, 300, 'levelCompleteBackground');
-    this.restartButton = this.add.sprite(400, 370, 'restartButton');
-    this.nextLevelButton = this.add.sprite(400, 410, 'nextLevelButton');
-    this.exitButton = this.add.sprite(400, 450, 'exitButton');
+    this.restartButton = this.add.sprite(400, 340, 'restartButton');
+    this.nextLevelButton = this.add.sprite(400, 380, 'nextLevelButton');
+    this.exitButton = this.add.sprite(400, 420, 'exitButton');
 
     this.buttonInteractions(this.restartButton, 'restartButton');
     this.buttonInteractions(this.nextLevelButton, 'nextLevelButton');
@@ -48,6 +48,8 @@ class LevelCompleteScene extends Phaser.Scene {
           this.unlockMediumLevel();
         } else if (this.level == "MediumLevelScene") {
           this.unlockHardLevel();
+        } else if (this.level == "HardLevelScene") {
+          this.completeHardLevel();
         }
         this.scene.start(this.level);
       }); 
@@ -59,10 +61,17 @@ class LevelCompleteScene extends Phaser.Scene {
           this.levelContext.upgradeMenuGroup = [];
           this.playNextLevel()
         }); 
-      }
+      } 
     } else {
       button.on('pointerup', () => {
           this.destroyButtons();
+          if (this.level == "EasyLevelScene") {
+            this.unlockMediumLevel();
+          } else if (this.level == "MediumLevelScene") {
+            this.unlockHardLevel();
+          } else if (this.level == "HardLevelScene") {
+            this.completeHardLevel();
+          }
           this.levelContext.towerMenuGroup = [];
           this.levelContext.upgradeMenuGroup = [];
           this.levelContext.scene.start('PreLevelSelectScene');
@@ -73,20 +82,36 @@ class LevelCompleteScene extends Phaser.Scene {
   unlockMediumLevel() {
     this.registry.set('playerData', {
       levelOne: true,
+      levelOneCompleted: true,
       levelTwo: true,
+      levelTwoCompleted: false,
       levelThree: false,
+      levelThreeCompleted: false,
       saveSlot: null,
-      completed: 2
     });
   }
 
   unlockHardLevel() {
     this.registry.set('playerData', {
       levelOne: true,
+      levelOneCompleted: true,
       levelTwo: true,
+      levelTwoCompleted: true,
       levelThree: true,
+      levelThreeCompleted: false,
       saveSlot: null,
-      completed: 3
+    });
+  }
+
+  completeHardLevel() {
+    this.registry.set('playerData', {
+      levelOne: true,
+      levelOneCompleted: true,
+      levelTwo: true,
+      levelTwoCompleted: true,
+      levelThree: true,
+      levelThreeCompleted: true,
+      saveSlot: null,
     });
   }
 

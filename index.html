@@ -39,9 +39,17 @@
                         <span class="devRole">Graphics & Engine Developer</span>
                     </div>
                     <div class="socials">
-                        <img src="src\assets\images\icons\mail.png">
-                        <img src="src\assets\images\icons\linkedin.png">
-                        <img src="src\assets\images\icons\github.png">
+                        <span onclick="
+                            navigator.clipboard.writeText('nguynath@oregonstate.edu');
+                            document.getElementById('tooltip1').style.visibility = 'visible';
+                            setTimeout(function() {
+                                document.getElementById('tooltip1').style.visibility = 'hidden'
+                            }, 1000);
+                            ">
+                            <img src="src\assets\images\icons\mail.png">
+                        </span>
+                        <div id="tooltip1" class="tooltip">Email Copied to Clipboard!</div>
+                        <a href="https://github.com/Nguynath"><img src="src\assets\images\icons\github.png"></a>
                     </div>
                 </td>
             </tr>
@@ -53,7 +61,16 @@
                         <span class="devRole">AI Developer</span>
                     </div>
                     <div class="socials">
-                        <a href="mailto:booritct@oregonstate.edu"><img src="src\assets\images\icons\mail.png"></a>
+                        <span onclick="
+                            navigator.clipboard.writeText('booritct@oregonstate.edu');
+                            document.getElementById('tooltip2').style.visibility = 'visible';
+                            setTimeout(function() {
+                                document.getElementById('tooltip2').style.visibility = 'hidden'
+                            }, 1000);
+                            ">
+                            <img src="src\assets\images\icons\mail.png">
+                        </span>
+                        <div id="tooltip2" class="tooltip">Email Copied to Clipboard!</div>
                         <a href="https://www.linkedin.com/in/trey-booritch-00232a210"><img src="src\assets\images\icons\linkedin.png"></a>
                         <a href="https://github.com/treyboo3"><img src="src\assets\images\icons\github.png"></a>
                     </div>
@@ -67,9 +84,17 @@
                         <span class="devRole">Units & Balance Developer</span>
                     </div>
                     <div class="socials">
-                        <img src="src\assets\images\icons\mail.png">
-                        <img src="src\assets\images\icons\linkedin.png">
-                        <img src="src\assets\images\icons\github.png">
+                        <span onclick="
+                            navigator.clipboard.writeText('lirand@oregonstate.edu');
+                            document.getElementById('tooltip3').style.visibility = 'visible';
+                            setTimeout(function() {
+                                document.getElementById('tooltip3').style.visibility = 'hidden'
+                            }, 1000);
+                            ">
+                            <img src="src\assets\images\icons\mail.png">
+                        </span>
+                        <div id="tooltip3" class="tooltip">Email Copied to Clipboard!</div>
+                        <a href="https://github.com/Rads201"><img src="src\assets\images\icons\github.png"></a>
                     </div>
                 </td>
             </tr>
@@ -86,7 +111,7 @@
             <li>Game must be single player.</li>
             <li>Game must allow at least different types of individual towers to be constructed that serve some purpose on a 2D board of level.</li>
             <li>There must be at least 3 different boards or levels.</li>
-            <li>Enemy units will enter the play field and attempt to achieve some objective. Towers will attempt to stop the enemy units from copmleting this objective in order to win.</li>
+            <li>Enemy units will enter the play field and attempt to achieve some objective. Towers will attempt to stop the enemy units from completing this objective in order to win.</li>
             <li>There must be at least 10 waves of enemies that enter the board or level.</li>
             <li>There must be at least 3 different types of enemy units.</li>
             <li>Each defeated enemy should provide some sort of benefit to the player.</li>
@@ -94,7 +119,7 @@
             <li>An individual game screen, or board must be winnable, with reasonable to serious effort/skill, within 10 minutes.</li>
             <li>A new player should not be able to beat the game.</li>
             <li>Game must be played using the Google Chrome browser.</li>
-            <li>Game must be hosted somehwere for testing purposes.</li>
+            <li>Game must be hosted somewhere for testing purposes.</li>
             <li>Usage of game libraries, frameworks, and toolkits is allowed as well as general purpose libraries.</li>
             <li>Do not use Adobe Flash.</li>
             <li>Do not use Javascript alert() popups.</li>

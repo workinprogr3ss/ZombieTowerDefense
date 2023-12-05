@@ -31,6 +31,9 @@ export function PreloadLevelSelectGraphics(scene) {
     scene.load.spritesheet('levelTwo', 'src/assets/images/icons/levelTwo.png', {frameWidth: 57, frameHeight: 55});
     scene.load.spritesheet('levelThree', 'src/assets/images/icons/levelThree.png', {frameWidth: 57, frameHeight: 55});
 
+    //Level Complete
+    scene.load.image('levelCompleted', 'src/assets/images/icons/levelCompleted.png');
+
     //Save Button
     scene.load.spritesheet('saveButton', 'src/assets/images/icons/saveButton.png', {frameWidth: 96, frameHeight: 36});
 
