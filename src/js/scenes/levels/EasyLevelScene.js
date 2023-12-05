@@ -24,7 +24,6 @@ class EasyLevelScene extends Phaser.Scene {
 
         // Managers
         this.displayManager = new DisplayManager(this); // Display Manager
-        //this.audioManager = new AudioManager(this); // Audio Manager
 
         //Group of Tower Menus
         this.towerMenuGroup = [];
@@ -43,9 +42,6 @@ class EasyLevelScene extends Phaser.Scene {
         loadSpritesheets(this);
         loadImages(this);
 
-        // Load audio assets
-        //this.audioManager.loadAudio();
-        
         // Pause Menu Items
         this.load.spritesheet('pauseButton', 'src/assets/images/icons/pauseButton.png', {frameWidth: 34, frameHeight: 34});
     }
@@ -56,7 +52,7 @@ class EasyLevelScene extends Phaser.Scene {
         //this.audioManager.stopBackgroundAudio();
         audioManager.stopNewsAudio();
 
-        //console.log("Level One")
+        //console.log("Created Level One")
 
         // Create the map
         const map = this.make.tilemap({key: 'easymap'});
@@ -90,7 +86,7 @@ class EasyLevelScene extends Phaser.Scene {
         const endY = endTileY * 16;
 
         // Create the grid for pathfinding
-        // 634 is non-walkable tile index (see DemoMapWithProps.json)
+        // Num Array is non-walkable tile indexes (see DemoMapWithProps.json)
         this.grid = new GridService(this, walkableLayer, [634, 322, 411, 412, 366, 323]); 
         
         // Spawning Debugging

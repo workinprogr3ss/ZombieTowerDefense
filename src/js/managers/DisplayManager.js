@@ -1,8 +1,9 @@
 import PlayerHealthManager from "../managers/PlayerHealthManager.js";
 import PlayerCurrencyManager from "../managers/PlayerCurrencyManager.js";
-//import EnemyCountManager from "../managers/EnemyCountManager.js";
 import WaveTimerManager from "../managers/WaveTimerManager.js";
 import ScoreManager from "../managers/ScoreManager.js";
+
+//import EnemyCountManager from "../managers/EnemyCountManager.js";
 
 export default class DisplayManager {
     constructor (scene) {

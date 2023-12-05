@@ -24,7 +24,6 @@ class HardLevelScene extends Phaser.Scene {
 
         // Managers
         this.displayManager = new DisplayManager(this); // Display Manager
-        //this.audioManager = new AudioManager(this); // Audio Manager
 
         //Group of Tower Menus
         this.towerMenuGroup = []
@@ -43,9 +42,6 @@ class HardLevelScene extends Phaser.Scene {
         loadSpritesheets(this);
         loadImages(this);
 
-        // Load audio assets
-        //this.audioManager.loadAudio();
-        
         // Pause Menu Items
         this.load.spritesheet('pauseButton', 'src/assets/images/icons/pauseButton.png', {frameWidth: 34, frameHeight: 34});
     }
@@ -55,6 +51,8 @@ class HardLevelScene extends Phaser.Scene {
         //this.audioManager = audioManager;
         //this.audioManager.stopBackgroundAudio();
         //audioManager.stopNewsAudio();
+
+        //console.log("Created Level Three")
 
         // Create the map
         const map = this.make.tilemap({key: 'hardmap'});
@@ -91,6 +89,7 @@ class HardLevelScene extends Phaser.Scene {
         const endY = endTileY * 16;
 
         // Create the grid for pathfinding
+        // Num Array is non-walkable tile indexes (see DemoMapWithProps.json)
         this.grid = new GridService(this, walkableLayer, [545]); 
         
         // Spawning Debugging

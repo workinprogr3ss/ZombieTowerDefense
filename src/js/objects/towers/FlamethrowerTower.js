@@ -9,6 +9,7 @@ export default class FlamethrowerTower extends Tower {
 
         this.audioManager = audioManager;
 
+        // Tower upgrade values
         this.damageUpgradeVal = 10;
         this.damageUpgradeCost = 100;
         this.attackSpeedUpgradeVal = 300;
@@ -16,6 +17,7 @@ export default class FlamethrowerTower extends Tower {
         this.rangeUpgradeVal = 20;
         this.rangeUpgradeCost = 50;
 
+        // Tower upgrade trackers and max upgrade numbers
         this.damageUpgradeNum = 0;
         this.attackSpeedUpgradeNum = 0;
         this.rangeUpgradeNum = 0;

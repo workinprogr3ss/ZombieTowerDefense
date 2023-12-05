@@ -6,6 +6,7 @@ export default class Tower extends Phaser.GameObjects.Sprite {
 
         this.audioManager = audioManager;
 
+        // Tower stats
         this.x = x;
         this.y = y;
         this.damage = damage || 100;
@@ -13,6 +14,7 @@ export default class Tower extends Phaser.GameObjects.Sprite {
         this.speed = speed || 5000;
         this.canAttack = true;
 
+        // Tower range graphics and projectile texture
         this.rangeGraphics;
         this.projectileTexture = projectileTexture;
         this.towerType = this.checkTowerType();
@@ -51,7 +53,7 @@ export default class Tower extends Phaser.GameObjects.Sprite {
         // Make the range transluscent 
         this.rangeGraphics.setAlpha(0.1);
     }
-
+    
     enemyInRange(zombie) {
         const distance = Phaser.Math.Distance.Between(this.x, this.y, zombie.x, zombie.y);
         return distance <= this.range;

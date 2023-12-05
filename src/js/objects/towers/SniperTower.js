@@ -6,6 +6,7 @@ export default class SniperTower extends Tower {
         // speed is the delay between attacks in milliseconds
         super(scene, x, y, 'sniper_tower_1', 'sniper_projectile', 40, 150, 2500, audioManager).setOrigin(0.5, 0.8);
 
+        // Tower upgrade values
         this.damageUpgradeVal = 10;
         this.damageUpgradeCost = 100;
         this.attackSpeedUpgradeVal = 500;
@@ -13,6 +14,7 @@ export default class SniperTower extends Tower {
         this.rangeUpgradeVal = 20;
         this.rangeUpgradeCost = 50;
 
+        // Tower upgrade trackers and max upgrade numbers
         this.damageUpgradeNum = 0;
         this.attackSpeedUpgradeNum = 0;
         this.rangeUpgradeNum = 0;
